@@ -38,6 +38,11 @@ class _MainPageState extends State<MainPage> {
             _selectedIndex = index;
           });
         },
+        items: [
+          BottomNavigationBarItem(
+
+          ),
+        ],
       ),
     );
   }
