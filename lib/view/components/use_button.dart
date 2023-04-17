@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:readme_app/style/colours.dart';
-import 'package:readme_app/style/dimens.dart';
+import 'package:readme_app/core/constants/colours.dart';
+import 'package:readme_app/core/constants/dimens.dart';
 
 class UseButton extends StatefulWidget {
   final String title;

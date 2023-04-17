@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:readme_app/style/move.dart';
+import 'package:readme_app/core/constants/move.dart';
+
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 

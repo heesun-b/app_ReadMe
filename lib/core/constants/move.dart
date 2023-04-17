@@ -1,8 +1,7 @@
 
-import 'dart:js';
-
 import 'package:flutter/material.dart';
-import 'package:readme_app/page/main_page.dart';
+import 'package:readme_app/view/page/main/main_page/main_page.dart';
+
 
 class Move {
   static String categoryPage = "/category";

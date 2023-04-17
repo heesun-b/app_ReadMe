@@ -1,8 +1,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:readme_app/common/use_icons.dart';
-import 'package:readme_app/style/colours.dart';
+
+import 'package:readme_app/core/constants/colours.dart';
+import 'package:readme_app/core/constants/use_icons.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
