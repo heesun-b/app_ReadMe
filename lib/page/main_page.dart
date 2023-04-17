@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:readme_app/common/use_icons.dart';
 import 'package:readme_app/style/colours.dart';
 
 class MainPage extends StatefulWidget {
@@ -40,7 +41,24 @@ class _MainPageState extends State<MainPage> {
         },
         items: [
           BottomNavigationBarItem(
-
+            icon: UseIcons.category,
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: UseIcons.search,
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: UseIcons.home,
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: UseIcons.box,
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: UseIcons.userinfo,
+            label: "",
           ),
         ],
       ),
