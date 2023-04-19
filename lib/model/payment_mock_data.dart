@@ -1,37 +1,32 @@
-class CartMockData {
+class PaymentMockData {
   final String image;
   final String title;
-  final String author;
   final String store;
-  final String score;
   final int price;
-  bool ischecked;
+  final String day;
 
-  CartMockData(
+  PaymentMockData(
       {required this.image,
       required this.title,
-      required this.author,
       required this.store,
-      required this.score,
       required this.price,
-      this.ischecked = false});
+       required this.day
+      });
 }
 
-List<CartMockData> cartList = [
-  CartMockData(
+List<PaymentMockData> paymentList = [
+  PaymentMockData(
       image: "book.jpg",
       title: "1984",
-      author: "조지 오웰",
       store: "그린",
-      score: "4.5",
       price: 15000,
-      ischecked: false),
-  CartMockData(
+      day : "2023.04.19"
+  ),
+  PaymentMockData(
       image: "book2.jpg",
       title: "물고기는 존재하지 않는다",
-      author: "룰루 밀러",
       store: "그린",
-      score: "4.0",
       price: 12000,
-      ischecked: false),
+      day : "2023.04.19"
+      ),
 ];

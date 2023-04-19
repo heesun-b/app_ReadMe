@@ -172,7 +172,7 @@ class _CartPageBodyState extends State<CartPageBody> {
                             style: TextStyle(fontWeight: FontWeight.w600),
                           ),
                         ),
-                        Text("${getCount()}개"),
+                        Text("${getCount()}권"),
                       ],
                     ),
                     SizedBox(height: 10,),
@@ -224,9 +224,7 @@ class _CartPageBodyState extends State<CartPageBody> {
                   ],
                 ),
               ),
-              Container(
-                  padding: EdgeInsets.all(10),
-                  child: UseButton(title: "결제하기", buttonPressed: () {})),
+      
             ],
           ),
         ],

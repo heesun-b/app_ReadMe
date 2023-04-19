@@ -5,6 +5,8 @@ class Colours {
   static const Color app_main = Color(0xFFFFD662);
   static const Color dark_app_main = Color(0xFFFFD662);
 
+  static const Color app_sub_blue = Color(0xFF0065FF);
+
   static const Color app_sub_white= Color(0xFFFFFFFF);
   static const Color dark_app_sub_white= Color(0xFF000000);
 
