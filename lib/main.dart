@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/move.dart';
 
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(primaryColor: Colours.app_main, fontFamily: 'NanumGothic',),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       initialRoute: Move.mainPage,
