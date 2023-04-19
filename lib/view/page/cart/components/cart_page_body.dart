@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
@@ -24,6 +25,7 @@ class _CartPageBodyState extends State<CartPageBody> {
         .map((e) => e.price)
         .toList()
         .fold(0, (a, b) => a + b);
+
     return sum;
   }
 
@@ -38,6 +40,11 @@ class _CartPageBodyState extends State<CartPageBody> {
     } else {
       cartList.forEach((element) => element.ischecked = false);
     }
+  }
+
+  String priceFormat(int price) {
+    var newPrice = NumberFormat('###,###,###,### 원');
+    return newPrice.format(price);
   }
 
   @override
@@ -177,7 +184,7 @@ class _CartPageBodyState extends State<CartPageBody> {
                           child: Text("총 상품금액",
                               style: TextStyle(fontWeight: FontWeight.w600)),
                         ),
-                        Text("${getSum()} 원",),
+                        Text(priceFormat(getSum())),
                       ],
                     ),
                     SizedBox(height: 10,),
