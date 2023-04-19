@@ -7,6 +7,7 @@ import 'package:readme_app/view/page/main/main_page/main_page.dart';
 import 'package:readme_app/view/page/search/search_page/search_page.dart';
 import 'package:readme_app/view/page/storage/storage_page/storage_page.dart';
 import 'package:readme_app/view/page/user/user_page/user_page.dart';
+import 'package:readme_app/view/page/payment/payment_page.dart';
 
 
 class Move {
@@ -17,11 +18,13 @@ class Move {
   static String userPage = "/user";
   static String navigationBar = "/navigation";
   static String cartPage = "/cart";
-  static String alarm = "/alarm";
-
-
-
+  static String paymentPage = "/payment";
+  static String alarmPage = "/alarm";
 }
+
+
+
+
 
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
@@ -33,5 +36,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.navigationBar: (context) => HomeNavigationBar(),
    // Move.alarmPage: (context) => AlarmPage(),
     Move.cartPage : (context) => CartPage(),
+    Move.paymentPage : (context) => PaymentPage(),
   };
 }

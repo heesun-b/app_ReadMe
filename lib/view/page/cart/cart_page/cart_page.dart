@@ -43,6 +43,23 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton:  Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            width: double.infinity,
+            child: FloatingActionButton(
+                backgroundColor: Colours.app_sub_black,
+                shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)
+                ),
+                onPressed: () {
+                  // 나중에 추가!!!!
+                },
+                child: Text("결제하기", style: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp20),)
+            ),
+          ),
+        ),
       backgroundColor: Colours.app_sub_white,
       appBar: AppBar(
         title: Text(
@@ -56,11 +73,14 @@ class _CartPageState extends State<CartPage> {
         leading: Row(
           children: [
             HsStyleIcons.back,
-            HsStyleIcons.homeFill,
+            IconButton(onPressed: (){
+              Navigator.pushNamed(context, "/main");
+            }, icon: HsStyleIcons.homeFill)
           ],
         ),
         leadingWidth: 100,
         backgroundColor: Colours.app_sub_white,
+
       ),
       body: CartPageBody(),
     );
