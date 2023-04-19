@@ -1,9 +1,11 @@
+import 'dart:ui';
 
-
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 import 'package:readme_app/core/constants/colours.dart';
-import 'package:readme_app/core/constants/use_icons.dart';
+import 'package:readme_app/core/constants/dimens.dart';
+import 'package:readme_app/core/constants/yh_style_icons.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -12,57 +14,179 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
-  int _selectedIndex = 0;
+final List<String> imgList = [
+  "assets/images/book1.png",
+  "assets/images/book2.png",
+  "assets/images/book3.png",
+];
 
+
+int _selectedButtonIndex = 0;
+
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: [
-          Center(child: Text("카테고리페이지")),
-          Center(child: Text("검색페이지")),
-          Center(child: Text("메인페이지")),
-          Center(child: Text("보관함페이지")),
-          Center(child: Text("마이페이지")),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        currentIndex: _selectedIndex,
-        backgroundColor: Colours.app_sub_white,
-        selectedItemColor: Colours.app_main,
-        unselectedItemColor: Colours.app_sub_black,
-        onTap:(index){
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: UseIcons.category,
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: UseIcons.search,
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: UseIcons.home,
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: UseIcons.box,
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: UseIcons.userinfo,
-            label: "",
-          ),
-        ],
+      appBar: _buildAppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildAdScreen(),
+            _buildMainListBar(),
+          ],
+        ),
       ),
     );
   }
+
+  Container _buildMainListBar() {
+    return Container(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(
+                          fontSize: Dimens.font_sp20,
+                          fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _selectedButtonIndex = 0;
+                      });
+                    },
+                    child: Text(
+                      "전체",
+                      style: TextStyle(
+                        color: _selectedButtonIndex == 0 ? Colours.app_main : Colours.app_sub_black,
+                        fontSize: Dimens.font_sp20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(
+                          fontSize: Dimens.font_sp20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _selectedButtonIndex = 1;
+                      });
+                    },
+                    child: Text(
+                      "베스트셀러",
+                      style: TextStyle(
+                        color: _selectedButtonIndex == 1 ? Colours.app_main : Colours.app_sub_black,
+                        fontSize: Dimens.font_sp20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(
+                          fontSize: Dimens.font_sp20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _selectedButtonIndex = 2;
+                      });
+                    },
+                    child: Text(
+                      "추천",
+                      style: TextStyle(
+                        color: _selectedButtonIndex == 2 ? Colours.app_main : Colours.app_sub_black,
+                        fontSize: Dimens.font_sp20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(
+                          fontSize: Dimens.font_sp20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _selectedButtonIndex = 3;
+                      });
+                    },
+                    child: Text(
+                      "신간",
+                      style: TextStyle(
+                        color: _selectedButtonIndex == 3 ? Colours.app_main : Colours.app_sub_black,
+                        fontSize: Dimens.font_sp20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+  }
+
+  Container _buildAdScreen() {
+    return Container(
+      height: 450,
+      width: double.infinity,
+      child: Swiper(
+        controller: SwiperController(),
+        pagination: SwiperPagination(),
+        itemCount: imgList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Stack(
+            children: [
+              ImageFiltered(
+                imageFilter: ImageFilter.blur(sigmaX: 40, sigmaY: 10),
+                child: Image.asset(imgList[index], fit: BoxFit.cover),
+              ),
+              Container(
+                height: 450,
+                width: 500,
+                child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Image.asset(imgList[index]),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+AppBar _buildAppBar() {
+  return AppBar(
+    backgroundColor: Colours.app_sub_white,
+    leading: IconButton(
+      icon: Image.asset(
+        "assets/images/img.png",
+      ),
+      onPressed: () {},
+    ),
+    actions: [
+      IconButton(
+        icon: UseIcons.alarm,
+        onPressed: () {
+          //Move.AlarmPage();
+        },
+      ),
+      IconButton(
+          icon: UseIcons.cart,
+          onPressed: () {
+            //Move.CartPage();
+          })
+    ],
+  );
 }
