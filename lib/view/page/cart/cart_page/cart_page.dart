@@ -56,7 +56,9 @@ class _CartPageState extends State<CartPage> {
         leading: Row(
           children: [
             HsStyleIcons.back,
-            HsStyleIcons.homeFill,
+            IconButton(onPressed: (){
+              Navigator.pushNamed(context, "/main");
+            }, icon: HsStyleIcons.homeFill)
           ],
         ),
         leadingWidth: 100,
