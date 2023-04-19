@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
 class UseIcons {
-
   // 방향
   static const Icon back = Icon(CupertinoIcons.back);
+  static const Icon backFill = Icon(CupertinoIcons.arrowtriangle_left_fill);
   static const Icon next = Icon(CupertinoIcons.arrow_right);
+  static const Icon nextFill = Icon(CupertinoIcons.arrowtriangle_right_fill);
   static const Icon up = Icon(CupertinoIcons.arrow_up_circle);
   static const Icon down = Icon(CupertinoIcons.down_arrow);
 
@@ -12,6 +13,9 @@ class UseIcons {
   static const Icon cart = Icon(CupertinoIcons.cart);
   static const Icon heart = Icon(CupertinoIcons.heart);
   static const Icon heartFill = Icon(CupertinoIcons.heart_fill);
+  static const Icon delete = Icon(CupertinoIcons.multiply);
+  static const Icon star = Icon(CupertinoIcons.star_fill);
+
 
   //알람
   static const Icon alarm = Icon(CupertinoIcons.bell_fill);
@@ -19,13 +23,14 @@ class UseIcons {
 
   //바텀 네비게이터
   static const Icon home = Icon(CupertinoIcons.home);
+  static const Icon homeFill = Icon(CupertinoIcons.house_fill);
   static const Icon search = Icon(CupertinoIcons.search);
   static const Icon category = Icon(CupertinoIcons.bars);
   static const Icon userinfo = Icon(CupertinoIcons.person_fill);
   static const Icon box = Icon(CupertinoIcons.archivebox);
 
 
-  static const Icon add = Icon(CupertinoIcons.bag_badge_plus);
+  static const Icon add = Icon(CupertinoIcons.add);
 
 
   //회원정보 

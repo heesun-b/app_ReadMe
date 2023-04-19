@@ -18,14 +18,14 @@ class _useButtonState extends State<UseButton> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width,
+      height: 60,
       child: ElevatedButton(
         onPressed: widget.buttonPressed,
         child: Text(widget.title),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colours.app_main,
+          backgroundColor: Colours.app_sub_black,
           foregroundColor: Colours.app_sub_white,
-          padding: EdgeInsets.symmetric(vertical: 20),
-            textStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp30),
+            textStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp20),
         ),
       ),
     );
