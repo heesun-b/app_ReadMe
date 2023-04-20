@@ -22,7 +22,6 @@ class Move {
   static String paymentPage = "/payment";
   static String alarmPage = "/alarm";
   static String membershipPage = "/membership";
-
 }
 
 

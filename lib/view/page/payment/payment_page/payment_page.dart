@@ -4,6 +4,7 @@ import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/view/page/payment/payment_page/components/payment_page_body.dart';
+import 'package:readme_app/view/page/payment/payment_page/components/payment_page_body_membership.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   borderRadius: BorderRadius.circular(20)
               ),
             onPressed: () {
-              // 나중에 추가!!!!
+              Navigator.pushNamed(context, "/main");
             },
             child: Text("완료", style: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp20),)
           ),
@@ -63,7 +64,7 @@ class _PaymentPageState extends State<PaymentPage> {
         leadingWidth: 100,
         backgroundColor: Colours.app_sub_white,
       ),
-      body: PaymentPageBody(),
+      body: PaymentPageBodyMembership(),
     );
   }
 }
