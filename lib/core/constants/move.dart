@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:readme_app/view/components/home_navigation_bar.dart';
 import 'package:readme_app/view/page/cart/cart_page/cart_page.dart';
@@ -9,6 +8,8 @@ import 'package:readme_app/view/page/payment/payment_page/payment_page.dart';
 import 'package:readme_app/view/page/search/search_page/search_page.dart';
 import 'package:readme_app/view/page/storage/storage_page/storage_page.dart';
 import 'package:readme_app/view/page/user/user_page/user_page.dart';
+
+import '../../view/page/book_viwer/book_viwer_page/book_viwer_page.dart';
 
 
 class Move {
@@ -22,6 +23,7 @@ class Move {
   static String paymentPage = "/payment";
   static String alarmPage = "/alarm";
   static String membershipPage = "/membership";
+  static String bookViwerPage = "/viwer";
 }
 
 
@@ -37,8 +39,10 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.userPage: (context) => UserPage(),
     Move.navigationBar: (context) => HomeNavigationBar(),
     Move.paymentPage: (context) => PaymentPage(),
-   // Move.alarmPage: (context) => AlarmPage(),
+    // Move.alarmPage: (context) => AlarmPage(),
     Move.cartPage : (context) => CartPage(),
+    Move.paymentPage : (context) => PaymentPage(),
+    Move.bookViwerPage : (context) => BookViwerPage(),
     Move.membershipPage : (context) => MembershipPage(),
   };
 }
