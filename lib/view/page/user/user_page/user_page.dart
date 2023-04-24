@@ -4,9 +4,14 @@ import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/use_icons.dart';
 import 'package:readme_app/view/components/use_button.dart';
 
-class UserPage extends StatelessWidget {
+class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
 
+  @override
+  State<UserPage> createState() => _UserPageState();
+}
+
+class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -16,7 +21,7 @@ class UserPage extends StatelessWidget {
             children: [
               _logout(),
               _header(),
-              _membershipInfoCard(),
+              _membershipInfoCard(context),
               _mainButton(),
               _subButton(),
               _bottomInfo(),
@@ -230,7 +235,7 @@ class UserPage extends StatelessWidget {
     );
   }
 
-  Widget _membershipInfoCard() {
+  Widget _membershipInfoCard(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Container(
@@ -279,7 +284,32 @@ class UserPage extends StatelessWidget {
                       width: 10,
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(context: context, builder: (context) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          scrollable: false,
+                          title: Text("스탠다드 구독권이란?"),
+                          content: SizedBox(
+                            height: 90,
+                            child: Column(
+                              children: [
+                                Text("월 9,900원으로 ReadMe의 전체 도서를 열람할 수 있는 정기 구독권입니다."),
+                                SizedBox(height: 10,),
+                                Text("최초 결제일 기준으로 매달 자동 결제가 되어 편리하게 사용 가능합니다."),
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(onPressed: (){
+                              Navigator.pop(context, '확인');
+                            }, child: Text("확인"))
+                          ],
+                        );
+                        },);
+                      },
                       icon: UseIcons.questionMark,
                       iconSize: 15,
                       padding: EdgeInsets.zero,
