@@ -11,10 +11,11 @@ class ReviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _reviewPageAppbar(context),
-      body: ReviewPageBody(),
+      body: SingleChildScrollView(
+        child: ReviewPageBody(),
+      ),
     );
   }
-
 
   AppBar _reviewPageAppbar(BuildContext context) {
     return AppBar(

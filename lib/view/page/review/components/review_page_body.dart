@@ -9,7 +9,7 @@ class ReviewPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: List.generate(3, (index) {
+      children: List.generate(10, (index) {
         return Padding(
           padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
           child: _reviewTile(context),
