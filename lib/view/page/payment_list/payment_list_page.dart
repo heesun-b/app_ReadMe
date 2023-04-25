@@ -4,6 +4,7 @@ import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/view/page/payment_list/components/payment_list_body.dart';
 
+// UserPage에 연결해야 함
 class PaymentListPage extends StatefulWidget {
   const PaymentListPage({Key? key}) : super(key: key);
 
