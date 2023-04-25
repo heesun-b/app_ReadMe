@@ -30,7 +30,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -260,7 +260,7 @@ class _MainPageState extends State<MainPage> {
   }
 }
 
-AppBar _buildAppBar() {
+AppBar _buildAppBar(BuildContext context) {
   return AppBar(
     backgroundColor: Colours.app_sub_white,
     leading: IconButton(
@@ -273,7 +273,7 @@ AppBar _buildAppBar() {
       IconButton(
         icon: YhIcons.alarm,
         onPressed: () {
-          //Move.AlarmPage();
+          Navigator.pushNamed(context, "/alarm");
         },
       ),
       IconButton(

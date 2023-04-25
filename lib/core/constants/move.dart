@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readme_app/view/components/home_navigation_bar.dart';
+import 'package:readme_app/view/page/alarm/alarm_page/alarm_page.dart';
 import 'package:readme_app/view/page/cart/cart_page/cart_page.dart';
 import 'package:readme_app/view/page/category/category_page/category_page.dart';
 import 'package:readme_app/view/page/main/main_page/main_page.dart';
@@ -39,7 +40,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.userPage: (context) => UserPage(),
     Move.navigationBar: (context) => HomeNavigationBar(),
     Move.paymentPage: (context) => PaymentPage(),
-    // Move.alarmPage: (context) => AlarmPage(),
+    Move.alarmPage: (context) => AlarmPage(),
     Move.cartPage : (context) => CartPage(),
     Move.paymentPage : (context) => PaymentPage(),
     Move.bookViwerPage : (context) => BookViwerPage(),

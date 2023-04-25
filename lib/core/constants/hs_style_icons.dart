@@ -10,4 +10,5 @@ class HsStyleIcons {
   static const Icon nextFill = Icon(CupertinoIcons.arrowtriangle_right_fill);
   static const Icon backFill = Icon(CupertinoIcons.arrowtriangle_left_fill);
   static const Icon add = Icon(CupertinoIcons.add, size: 60);
+  static const Icon megaphone = Icon(CupertinoIcons.speaker_2_fill);
 }
