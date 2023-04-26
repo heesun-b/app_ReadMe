@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 
-import '../../../../core/constants/jh_style_button.dart';
+import 'jh_style_button.dart';
 import '../../../../core/constants/jh_style_icons.dart';
 import '../../../../core/constants/move.dart';
 import '../../../components/use_button.dart';
