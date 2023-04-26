@@ -133,16 +133,17 @@ class _PaymentPageBodyState extends State<PaymentPageBody> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text("총 금액 ", style: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp18),),
-                  Text("${priceFormat(getSum())}", style: TextStyle(fontSize: Dimens.font_sp18),),
+                  Text("총 금액 ", style: TextStyle(fontWeight: FontWeight.w700,
+                      fontSize: Dimens.font_sp18),),
+                  Text("${priceFormat(getSum())}",
+                    style: TextStyle(fontSize: Dimens.font_sp18),),
                 ],
               ),
               SizedBox(height: 100,),
             ],
           ),
         ));
-
-
+  }
   Widget _dateInfo() {
     return Row(
               children: [
