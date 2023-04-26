@@ -38,121 +38,109 @@ class _PaymentPageBodyState extends State<PaymentPageBody> {
               _dateInfo(),
               SizedBox(height: 10,),
               Column(
-                children: _bookTile(),
+                children: List.generate(paymentList.length, (index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Color(0xFFD9D9D9))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              "assets/images/${paymentList[index].image}",
+                              width: 100,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        "도서명",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: Dimens.font_sp16),
+                                      ),
+                                      width: 50,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      width: 130,
+                                      child: Text("${paymentList[index].title}",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: Dimens.font_sp16)),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      child: Text(
+                                        "출판사",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: Dimens.font_sp16),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text("그린아카데미",
+                                        style: TextStyle(
+                                            fontSize: Dimens.font_sp16)),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 70,
+                                      child: Text(
+                                        "결제 금액",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: Dimens.font_sp16),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(priceFormat(paymentList[index].price),
+                                        style: TextStyle(
+                                            fontSize: Dimens.font_sp16)),
+                                  ],
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }),
               ),
               Divider(thickness: 1,),
-              _totalPrice(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text("총 금액 ", style: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp18),),
+                  Text("${priceFormat(getSum())}", style: TextStyle(fontSize: Dimens.font_sp18),),
+                ],
+              ),
               SizedBox(height: 100,),
             ],
           ),
         ));
-  }
-
-  Widget _totalPrice() {
-    return Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text("총 금액 ", style: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp18),),
-                Text("${priceFormat(getSum())}", style: TextStyle(fontSize: Dimens.font_sp18),),
-              ],
-            );
-  }
-
-  List<Widget> _bookTile() {
-    return List.generate(paymentList.length, (index) {
-                return  Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Color(0xFFD9D9D9))),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            "assets/images/${paymentList[index].image}",
-                            width: 100,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    child: Text(
-                                      "도서명",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: Dimens.font_sp16),
-                                    ),
-                                    width: 50,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    width: 130,
-                                    child: Text("${paymentList[index].title}",
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontSize: Dimens.font_sp16)),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 50,
-                                    child: Text(
-                                      "출판사",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: Dimens.font_sp16),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text("그린아카데미",
-                                      style: TextStyle(
-                                          fontSize: Dimens.font_sp16)),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 70,
-                                    child: Text(
-                                      "결제 금액",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: Dimens.font_sp16),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(priceFormat(paymentList[index].price),
-                                      style: TextStyle(
-                                          fontSize: Dimens.font_sp16)),
-                                ],
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              });
-  }
-
-
-
 
 
   Widget _dateInfo() {
