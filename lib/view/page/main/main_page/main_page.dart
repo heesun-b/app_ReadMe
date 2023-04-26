@@ -279,7 +279,7 @@ AppBar _buildAppBar(BuildContext context) {
       IconButton(
           icon: YhIcons.cart,
           onPressed: () {
-            //Move.CartPage();
+            // Navigator.pushNamed(context, "/cart");
           })
     ],
   );
