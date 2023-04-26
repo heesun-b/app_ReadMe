@@ -25,7 +25,7 @@ class _useButtonState extends State<UseButton> {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colours.app_sub_black,
           foregroundColor: Colours.app_sub_white,
-            textStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp20),
+            textStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp18),
         ),
       ),
     );
