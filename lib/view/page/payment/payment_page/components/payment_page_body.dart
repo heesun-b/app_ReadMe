@@ -35,28 +35,7 @@ class _PaymentPageBodyState extends State<PaymentPageBody> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Text(
-                    "2023.04.19",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: Dimens.font_sp20,
-                        color: Colours.app_sub_black),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    "(결제)",
-                    style: TextStyle(
-                        fontSize: Dimens.font_sp14, color: Colours.app_sub_black),
-                  ),
-                  Spacer(),
-                  Text("총 ${paymentList.length}건", style: TextStyle(
-                      fontSize: Dimens.font_sp14, color: Colours.app_sub_blue))
-                ],
-              ),
+              _dateInfo(),
               SizedBox(height: 10,),
               Column(
                 children: List.generate(paymentList.length, (index) {
@@ -162,5 +141,30 @@ class _PaymentPageBodyState extends State<PaymentPageBody> {
             ],
           ),
         ));
+
+
+  Widget _dateInfo() {
+    return Row(
+              children: [
+                Text(
+                  "2023.04.19",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: Dimens.font_sp20,
+                      color: Colours.app_sub_black),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "(결제)",
+                  style: TextStyle(
+                      fontSize: Dimens.font_sp14, color: Colours.app_sub_black),
+                ),
+                Spacer(),
+                Text("총 ${paymentList.length}건", style: TextStyle(
+                    fontSize: Dimens.font_sp14, color: Colours.app_sub_blue))
+              ],
+            );
   }
 }
