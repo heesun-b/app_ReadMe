@@ -15,8 +15,6 @@ class QuestionListPage extends StatelessWidget {
   }
 
 
-
-
   AppBar _questionListAppbar(BuildContext context) {
     return AppBar(
       elevation: 2,
