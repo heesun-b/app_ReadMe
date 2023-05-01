@@ -173,6 +173,7 @@ class BookTile {
   bool isHart;
   double star;
 
-  BookTile(this.id, this.path, this.title, this.author, this.store, this.price, this.isHart,
+  BookTile(this.id, this.path, this.title, this.author, this.store, this.price,
+      this.isHart,
       this.star);
 }
