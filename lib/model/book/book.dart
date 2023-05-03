@@ -3,6 +3,7 @@ import 'package:readme_app/model/file_info/file_dto.dart';
 import 'package:readme_app/model/publisher/publisher.dart';
 import 'package:readme_app/model/small_category/small_category.dart';
 
+// 필수
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 

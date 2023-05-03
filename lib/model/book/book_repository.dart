@@ -5,6 +5,8 @@ import 'package:logger/logger.dart';
 import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
+import 'package:readme_app/model/book/book.dart';
+import 'package:readme_app/model/cart_mock_data.dart';
 import 'package:readme_app/view/page/main/main_page/main_page_view_model.dart';
 
 class BookRepository {
@@ -16,10 +18,14 @@ class BookRepository {
 
   BookRepository._single();
 
+   List<CartMockData> findCartList() {
+    return cartList;
+  }
+
   Future<ResponseDTO> getBanner() async {
     try {
       Response response =
-          await dio.get("http://43.200.163.130:8080/books?page=0&size=3");
+      await dio.get("http://43.200.163.130:8080/books?page=0&size=3");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
       MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
@@ -33,7 +39,7 @@ class BookRepository {
 
   Future<ResponseDTO> mainList(BookSearchType type) async {
     String endPoint =
-        type == BookSearchType.best ? "/best-sellers" : "/${type.name}";
+    type == BookSearchType.best ? "/best-sellers" : "/${type.name}";
     if (type.name == "total" || type.name == "latest") {
       endPoint = "";
     }
@@ -54,7 +60,7 @@ class BookRepository {
 
   Future<ResponseDTO> searchMainListPage(int page, BookSearchType type) async {
     String endPoint =
-        type == BookSearchType.best ? "/best-sellers" : "/${type.name}";
+    type == BookSearchType.best ? "/best-sellers" : "/${type.name}";
     if (type.name == "total" || type.name == "latest") {
       endPoint = "";
     }

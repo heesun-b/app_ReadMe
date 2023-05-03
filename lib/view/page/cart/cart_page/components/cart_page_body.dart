@@ -1,32 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:readme_app/controller/cart_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/model/cart_mock_data.dart';
 import 'package:readme_app/view/components/use_button.dart';
+import 'package:readme_app/view/page/cart/cart_page/cart_page_view_model.dart';
 
-class CartPageBody extends StatefulWidget {
+class CartPageBody extends ConsumerWidget {
   CartPageBody({Key? key}) : super(key: key);
 
-  @override
-  State<CartPageBody> createState() => _CartPageBodyState();
-}
 
-class _CartPageBodyState extends State<CartPageBody> {
+
+  List<CartMockData> cartBooks = [];
   bool isAllChecked = false;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    CartPageModel? model = ref.watch(cartPageProvider);
+
+    if(model != null) {
+      cartBooks = model!.cartBooks;
+      isAllChecked = model!.isAllChecked;
+    }
+
+
     return SingleChildScrollView(
       child: Column(
         children: [
-          _hsCheckBox(),
+          _hsCheckBox(context, ref),
           Container(
             height: 10,
             color: Colours.app_sub_grey,
           ),
-          _paymentInfo(),
+          _paymentInfo(ref),
           SizedBox(
             height: 100,
           ),
@@ -35,7 +44,7 @@ class _CartPageBodyState extends State<CartPageBody> {
     );
   }
 
-  Widget _paymentInfo() {
+  Widget _paymentInfo(WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -91,7 +100,7 @@ class _CartPageBodyState extends State<CartPageBody> {
     );
   }
 
-  Widget _hsCheckBox() {
+  Widget _hsCheckBox(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         Row(
@@ -100,10 +109,11 @@ class _CartPageBodyState extends State<CartPageBody> {
                 activeColor: Colours.app_sub_black,
                 value: isAllChecked,
                 onChanged: (value) {
-                  setState(() {
                     isAllChecked = value!;
-                    allChecked(value);
-                  });
+                    // allChecked(value);
+                    // TODO
+                  ref.read(cartPageProvider.notifier).changeAllChecked(value);
+                  // allChecked(value);
                 }),
             Text(
               "전체 선택",
@@ -115,14 +125,14 @@ class _CartPageBodyState extends State<CartPageBody> {
           thickness: 5,
           height: 1,
         ),
-        _bookListTile(),
+        _bookListTile(context, ref),
       ],
     );
   }
 
-  Widget _bookListTile() {
+  Widget _bookListTile(BuildContext context, WidgetRef ref) {
     return Column(
-      children: List.generate(cartList.length, (index) {
+      children: List.generate(cartBooks.length, (index) {
         return Container(
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
@@ -134,11 +144,10 @@ class _CartPageBodyState extends State<CartPageBody> {
             children: [
               Checkbox(
                 activeColor: Colours.app_sub_black,
-                value: cartList[index].ischecked,
+                value: cartBooks[index].ischecked,
                 onChanged: (value) {
-                  setState(() {
-                    cartList[index].ischecked = value!;
-                  });
+                  // ref.read(cartPageProvider.notifier).changedOneCheck(value, index);
+                  // changeChecked(value, index);
                 },
               ),
               SizedBox(width: 8,),
@@ -149,8 +158,8 @@ class _CartPageBodyState extends State<CartPageBody> {
                     child: Container(
                       width: 80,
                       height: 110,
-                      child: Image.asset(
-                        "assets/images/${cartList[index].image}",
+                      child: Image.network(
+                        "${cartBooks[index].image}",
                         fit: BoxFit.fitHeight,
                       ),
                     ),
@@ -164,7 +173,7 @@ class _CartPageBodyState extends State<CartPageBody> {
                     children: [
                       Container(
                         child: Text(
-                          "${cartList[index].title}",
+                          "${cartBooks[index].title}",
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 17,
@@ -175,14 +184,14 @@ class _CartPageBodyState extends State<CartPageBody> {
                         width: 190,
                       ),
                       Text(
-                          "${cartList[index].author} | ${cartList[index].store}"),
+                          "${cartBooks[index].author} | ${cartBooks[index].store}"),
                       Row(
                         children: [
                           HsStyleIcons.star,
-                          Text("${cartList[index].score}"),
+                          Text("${cartBooks[index].score}"),
                         ],
                       ),
-                      Text("소장가 ${cartList[index].price}"),
+                      Text("소장가 ${cartBooks[index].price}"),
                     ],
                   ),
                 ],
@@ -196,8 +205,9 @@ class _CartPageBodyState extends State<CartPageBody> {
     );
   }
 
+
   int getSum() {
-    int sum = cartList
+    int sum = cartBooks
         .where((element) => element.ischecked)
         .map((e) => e.price)
         .toList()
@@ -207,16 +217,20 @@ class _CartPageBodyState extends State<CartPageBody> {
   }
 
   int getCount() {
-    int count = cartList.where((element) => element.ischecked).toList().length;
+    int count = cartBooks.where((element) => element.ischecked).toList().length;
     return count;
   }
 
   allChecked(value) {
     if (value == true) {
-      cartList.forEach((element) => element.ischecked = true);
+      cartBooks.forEach((element) => element.ischecked = true);
     } else {
-      cartList.forEach((element) => element.ischecked = false);
+      cartBooks.forEach((element) => element.ischecked = false);
     }
+  }
+
+  changeChecked(value, int index) {
+    cartBooks[index].ischecked = value;
   }
 
   String priceFormat(int price) {
