@@ -146,7 +146,7 @@ class CartPageBody extends ConsumerWidget {
                 activeColor: Colours.app_sub_black,
                 value: cartBooks[index].ischecked,
                 onChanged: (value) {
-                  // ref.read(cartPageProvider.notifier).changedOneCheck(value, index);
+                  ref.read(cartPageProvider.notifier).changedOneCheck(value, index);
                   // changeChecked(value, index);
                 },
               ),

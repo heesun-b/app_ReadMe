@@ -21,31 +21,18 @@ Book _$BookFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Book {
   int get id => throw _privateConstructorUsedError;
-  set id(int value) => throw _privateConstructorUsedError;
   Publisher get publisher => throw _privateConstructorUsedError;
-  set publisher(Publisher value) => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  set title(String value) => throw _privateConstructorUsedError;
   String get author => throw _privateConstructorUsedError;
-  set author(String value) => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
-  set price(int value) => throw _privateConstructorUsedError;
   String get introduction => throw _privateConstructorUsedError;
-  set introduction(String value) => throw _privateConstructorUsedError;
   BigCategory get bigCategory => throw _privateConstructorUsedError;
-  set bigCategory(BigCategory value) => throw _privateConstructorUsedError;
   SmallCategory get smallCategory => throw _privateConstructorUsedError;
-  set smallCategory(SmallCategory value) => throw _privateConstructorUsedError;
   String get authorInfo => throw _privateConstructorUsedError;
-  set authorInfo(String value) => throw _privateConstructorUsedError;
   bool get isHeart => throw _privateConstructorUsedError;
-  set isHeart(bool value) => throw _privateConstructorUsedError;
   double get stars => throw _privateConstructorUsedError;
-  set stars(double value) => throw _privateConstructorUsedError;
   FileDTO get epubFile => throw _privateConstructorUsedError;
-  set epubFile(FileDTO value) => throw _privateConstructorUsedError;
   FileDTO get coverFile => throw _privateConstructorUsedError;
-  set coverFile(FileDTO value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -337,31 +324,31 @@ class _$_Book with DiagnosticableTreeMixin implements _Book {
   factory _$_Book.fromJson(Map<String, dynamic> json) => _$$_BookFromJson(json);
 
   @override
-  int id;
+  final int id;
   @override
-  Publisher publisher;
+  final Publisher publisher;
   @override
-  String title;
+  final String title;
   @override
-  String author;
+  final String author;
   @override
-  int price;
+  final int price;
   @override
-  String introduction;
+  final String introduction;
   @override
-  BigCategory bigCategory;
+  final BigCategory bigCategory;
   @override
-  SmallCategory smallCategory;
+  final SmallCategory smallCategory;
   @override
-  String authorInfo;
+  final String authorInfo;
   @override
-  bool isHeart;
+  final bool isHeart;
   @override
-  double stars;
+  final double stars;
   @override
-  FileDTO epubFile;
+  final FileDTO epubFile;
   @override
-  FileDTO coverFile;
+  final FileDTO coverFile;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -388,6 +375,51 @@ class _$_Book with DiagnosticableTreeMixin implements _Book {
       ..add(DiagnosticsProperty('coverFile', coverFile));
   }
 
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Book &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.publisher, publisher) ||
+                other.publisher == publisher) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.author, author) || other.author == author) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.introduction, introduction) ||
+                other.introduction == introduction) &&
+            (identical(other.bigCategory, bigCategory) ||
+                other.bigCategory == bigCategory) &&
+            (identical(other.smallCategory, smallCategory) ||
+                other.smallCategory == smallCategory) &&
+            (identical(other.authorInfo, authorInfo) ||
+                other.authorInfo == authorInfo) &&
+            (identical(other.isHeart, isHeart) || other.isHeart == isHeart) &&
+            (identical(other.stars, stars) || other.stars == stars) &&
+            (identical(other.epubFile, epubFile) ||
+                other.epubFile == epubFile) &&
+            (identical(other.coverFile, coverFile) ||
+                other.coverFile == coverFile));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      publisher,
+      title,
+      author,
+      price,
+      introduction,
+      bigCategory,
+      smallCategory,
+      authorInfo,
+      isHeart,
+      stars,
+      epubFile,
+      coverFile);
+
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
@@ -404,61 +436,48 @@ class _$_Book with DiagnosticableTreeMixin implements _Book {
 
 abstract class _Book implements Book {
   factory _Book(
-      {required int id,
-      required Publisher publisher,
-      required String title,
-      required String author,
-      required int price,
-      required String introduction,
-      required BigCategory bigCategory,
-      required SmallCategory smallCategory,
-      required String authorInfo,
-      required bool isHeart,
-      required double stars,
-      required FileDTO epubFile,
-      required FileDTO coverFile}) = _$_Book;
+      {required final int id,
+      required final Publisher publisher,
+      required final String title,
+      required final String author,
+      required final int price,
+      required final String introduction,
+      required final BigCategory bigCategory,
+      required final SmallCategory smallCategory,
+      required final String authorInfo,
+      required final bool isHeart,
+      required final double stars,
+      required final FileDTO epubFile,
+      required final FileDTO coverFile}) = _$_Book;
 
   factory _Book.fromJson(Map<String, dynamic> json) = _$_Book.fromJson;
 
   @override
   int get id;
-  set id(int value);
   @override
   Publisher get publisher;
-  set publisher(Publisher value);
   @override
   String get title;
-  set title(String value);
   @override
   String get author;
-  set author(String value);
   @override
   int get price;
-  set price(int value);
   @override
   String get introduction;
-  set introduction(String value);
   @override
   BigCategory get bigCategory;
-  set bigCategory(BigCategory value);
   @override
   SmallCategory get smallCategory;
-  set smallCategory(SmallCategory value);
   @override
   String get authorInfo;
-  set authorInfo(String value);
   @override
   bool get isHeart;
-  set isHeart(bool value);
   @override
   double get stars;
-  set stars(double value);
   @override
   FileDTO get epubFile;
-  set epubFile(FileDTO value);
   @override
   FileDTO get coverFile;
-  set coverFile(FileDTO value);
   @override
   @JsonKey(ignore: true)
   _$$_BookCopyWith<_$_Book> get copyWith => throw _privateConstructorUsedError;
