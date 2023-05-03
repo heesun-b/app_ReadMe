@@ -17,18 +17,31 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MainPageModel {
   int get totalPage => throw _privateConstructorUsedError;
+  set totalPage(int value) => throw _privateConstructorUsedError;
   int get bestPage => throw _privateConstructorUsedError;
+  set bestPage(int value) => throw _privateConstructorUsedError;
   int get recommendPage => throw _privateConstructorUsedError;
+  set recommendPage(int value) => throw _privateConstructorUsedError;
   int get latestPage => throw _privateConstructorUsedError;
+  set latestPage(int value) => throw _privateConstructorUsedError;
   bool get isTotalLast => throw _privateConstructorUsedError;
+  set isTotalLast(bool value) => throw _privateConstructorUsedError;
   bool get isBestLast => throw _privateConstructorUsedError;
+  set isBestLast(bool value) => throw _privateConstructorUsedError;
   bool get isRecommendLast => throw _privateConstructorUsedError;
+  set isRecommendLast(bool value) => throw _privateConstructorUsedError;
   bool get isLatestLast => throw _privateConstructorUsedError;
+  set isLatestLast(bool value) => throw _privateConstructorUsedError;
   List<String> get bookBanners => throw _privateConstructorUsedError;
+  set bookBanners(List<String> value) => throw _privateConstructorUsedError;
   List<Book> get totalBooks => throw _privateConstructorUsedError;
+  set totalBooks(List<Book> value) => throw _privateConstructorUsedError;
   List<Book> get bestBooks => throw _privateConstructorUsedError;
+  set bestBooks(List<Book> value) => throw _privateConstructorUsedError;
   List<Book> get recommendBooks => throw _privateConstructorUsedError;
+  set recommendBooks(List<Book> value) => throw _privateConstructorUsedError;
   List<Book> get latestBooks => throw _privateConstructorUsedError;
+  set latestBooks(List<Book> value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainPageModelCopyWith<MainPageModel> get copyWith =>
@@ -224,23 +237,23 @@ class __$$_MainPageModelCopyWithImpl<$Res>
           : isLatestLast // ignore: cast_nullable_to_non_nullable
               as bool,
       bookBanners: null == bookBanners
-          ? _value._bookBanners
+          ? _value.bookBanners
           : bookBanners // ignore: cast_nullable_to_non_nullable
               as List<String>,
       totalBooks: null == totalBooks
-          ? _value._totalBooks
+          ? _value.totalBooks
           : totalBooks // ignore: cast_nullable_to_non_nullable
               as List<Book>,
       bestBooks: null == bestBooks
-          ? _value._bestBooks
+          ? _value.bestBooks
           : bestBooks // ignore: cast_nullable_to_non_nullable
               as List<Book>,
       recommendBooks: null == recommendBooks
-          ? _value._recommendBooks
+          ? _value.recommendBooks
           : recommendBooks // ignore: cast_nullable_to_non_nullable
               as List<Book>,
       latestBooks: null == latestBooks
-          ? _value._latestBooks
+          ? _value.latestBooks
           : latestBooks // ignore: cast_nullable_to_non_nullable
               as List<Book>,
     ));
@@ -250,7 +263,7 @@ class __$$_MainPageModelCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
-  const _$_MainPageModel(
+  _$_MainPageModel(
       {required this.totalPage,
       required this.bestPage,
       required this.recommendPage,
@@ -259,72 +272,38 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
       required this.isBestLast,
       required this.isRecommendLast,
       required this.isLatestLast,
-      required final List<String> bookBanners,
-      required final List<Book> totalBooks,
-      required final List<Book> bestBooks,
-      required final List<Book> recommendBooks,
-      required final List<Book> latestBooks})
-      : _bookBanners = bookBanners,
-        _totalBooks = totalBooks,
-        _bestBooks = bestBooks,
-        _recommendBooks = recommendBooks,
-        _latestBooks = latestBooks;
+      required this.bookBanners,
+      required this.totalBooks,
+      required this.bestBooks,
+      required this.recommendBooks,
+      required this.latestBooks});
 
   @override
-  final int totalPage;
+  int totalPage;
   @override
-  final int bestPage;
+  int bestPage;
   @override
-  final int recommendPage;
+  int recommendPage;
   @override
-  final int latestPage;
+  int latestPage;
   @override
-  final bool isTotalLast;
+  bool isTotalLast;
   @override
-  final bool isBestLast;
+  bool isBestLast;
   @override
-  final bool isRecommendLast;
+  bool isRecommendLast;
   @override
-  final bool isLatestLast;
-  final List<String> _bookBanners;
+  bool isLatestLast;
   @override
-  List<String> get bookBanners {
-    if (_bookBanners is EqualUnmodifiableListView) return _bookBanners;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bookBanners);
-  }
-
-  final List<Book> _totalBooks;
+  List<String> bookBanners;
   @override
-  List<Book> get totalBooks {
-    if (_totalBooks is EqualUnmodifiableListView) return _totalBooks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_totalBooks);
-  }
-
-  final List<Book> _bestBooks;
+  List<Book> totalBooks;
   @override
-  List<Book> get bestBooks {
-    if (_bestBooks is EqualUnmodifiableListView) return _bestBooks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bestBooks);
-  }
-
-  final List<Book> _recommendBooks;
+  List<Book> bestBooks;
   @override
-  List<Book> get recommendBooks {
-    if (_recommendBooks is EqualUnmodifiableListView) return _recommendBooks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_recommendBooks);
-  }
-
-  final List<Book> _latestBooks;
+  List<Book> recommendBooks;
   @override
-  List<Book> get latestBooks {
-    if (_latestBooks is EqualUnmodifiableListView) return _latestBooks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_latestBooks);
-  }
+  List<Book> latestBooks;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -351,56 +330,6 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
       ..add(DiagnosticsProperty('latestBooks', latestBooks));
   }
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_MainPageModel &&
-            (identical(other.totalPage, totalPage) ||
-                other.totalPage == totalPage) &&
-            (identical(other.bestPage, bestPage) ||
-                other.bestPage == bestPage) &&
-            (identical(other.recommendPage, recommendPage) ||
-                other.recommendPage == recommendPage) &&
-            (identical(other.latestPage, latestPage) ||
-                other.latestPage == latestPage) &&
-            (identical(other.isTotalLast, isTotalLast) ||
-                other.isTotalLast == isTotalLast) &&
-            (identical(other.isBestLast, isBestLast) ||
-                other.isBestLast == isBestLast) &&
-            (identical(other.isRecommendLast, isRecommendLast) ||
-                other.isRecommendLast == isRecommendLast) &&
-            (identical(other.isLatestLast, isLatestLast) ||
-                other.isLatestLast == isLatestLast) &&
-            const DeepCollectionEquality()
-                .equals(other._bookBanners, _bookBanners) &&
-            const DeepCollectionEquality()
-                .equals(other._totalBooks, _totalBooks) &&
-            const DeepCollectionEquality()
-                .equals(other._bestBooks, _bestBooks) &&
-            const DeepCollectionEquality()
-                .equals(other._recommendBooks, _recommendBooks) &&
-            const DeepCollectionEquality()
-                .equals(other._latestBooks, _latestBooks));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      totalPage,
-      bestPage,
-      recommendPage,
-      latestPage,
-      isTotalLast,
-      isBestLast,
-      isRecommendLast,
-      isLatestLast,
-      const DeepCollectionEquality().hash(_bookBanners),
-      const DeepCollectionEquality().hash(_totalBooks),
-      const DeepCollectionEquality().hash(_bestBooks),
-      const DeepCollectionEquality().hash(_recommendBooks),
-      const DeepCollectionEquality().hash(_latestBooks));
-
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
@@ -409,47 +338,60 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
 }
 
 abstract class _MainPageModel implements MainPageModel {
-  const factory _MainPageModel(
-      {required final int totalPage,
-      required final int bestPage,
-      required final int recommendPage,
-      required final int latestPage,
-      required final bool isTotalLast,
-      required final bool isBestLast,
-      required final bool isRecommendLast,
-      required final bool isLatestLast,
-      required final List<String> bookBanners,
-      required final List<Book> totalBooks,
-      required final List<Book> bestBooks,
-      required final List<Book> recommendBooks,
-      required final List<Book> latestBooks}) = _$_MainPageModel;
+  factory _MainPageModel(
+      {required int totalPage,
+      required int bestPage,
+      required int recommendPage,
+      required int latestPage,
+      required bool isTotalLast,
+      required bool isBestLast,
+      required bool isRecommendLast,
+      required bool isLatestLast,
+      required List<String> bookBanners,
+      required List<Book> totalBooks,
+      required List<Book> bestBooks,
+      required List<Book> recommendBooks,
+      required List<Book> latestBooks}) = _$_MainPageModel;
 
   @override
   int get totalPage;
+  set totalPage(int value);
   @override
   int get bestPage;
+  set bestPage(int value);
   @override
   int get recommendPage;
+  set recommendPage(int value);
   @override
   int get latestPage;
+  set latestPage(int value);
   @override
   bool get isTotalLast;
+  set isTotalLast(bool value);
   @override
   bool get isBestLast;
+  set isBestLast(bool value);
   @override
   bool get isRecommendLast;
+  set isRecommendLast(bool value);
   @override
   bool get isLatestLast;
+  set isLatestLast(bool value);
   @override
   List<String> get bookBanners;
+  set bookBanners(List<String> value);
   @override
   List<Book> get totalBooks;
+  set totalBooks(List<Book> value);
   @override
   List<Book> get bestBooks;
+  set bestBooks(List<Book> value);
   @override
   List<Book> get recommendBooks;
+  set recommendBooks(List<Book> value);
   @override
   List<Book> get latestBooks;
+  set latestBooks(List<Book> value);
   @override
   @JsonKey(ignore: true)
   _$$_MainPageModelCopyWith<_$_MainPageModel> get copyWith =>

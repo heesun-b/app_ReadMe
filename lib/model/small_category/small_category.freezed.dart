@@ -21,7 +21,9 @@ SmallCategory _$SmallCategoryFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SmallCategory {
   int get id => throw _privateConstructorUsedError;
+  set id(int value) => throw _privateConstructorUsedError;
   String get smallCategory => throw _privateConstructorUsedError;
+  set smallCategory(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -108,15 +110,15 @@ class __$$_SmallCategoryCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SmallCategory with DiagnosticableTreeMixin implements _SmallCategory {
-  const _$_SmallCategory({required this.id, required this.smallCategory});
+  _$_SmallCategory({required this.id, required this.smallCategory});
 
   factory _$_SmallCategory.fromJson(Map<String, dynamic> json) =>
       _$$_SmallCategoryFromJson(json);
 
   @override
-  final int id;
+  int id;
   @override
-  final String smallCategory;
+  String smallCategory;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -131,20 +133,6 @@ class _$_SmallCategory with DiagnosticableTreeMixin implements _SmallCategory {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('smallCategory', smallCategory));
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SmallCategory &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.smallCategory, smallCategory) ||
-                other.smallCategory == smallCategory));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, smallCategory);
 
   @JsonKey(ignore: true)
   @override
@@ -161,17 +149,18 @@ class _$_SmallCategory with DiagnosticableTreeMixin implements _SmallCategory {
 }
 
 abstract class _SmallCategory implements SmallCategory {
-  const factory _SmallCategory(
-      {required final int id,
-      required final String smallCategory}) = _$_SmallCategory;
+  factory _SmallCategory({required int id, required String smallCategory}) =
+      _$_SmallCategory;
 
   factory _SmallCategory.fromJson(Map<String, dynamic> json) =
       _$_SmallCategory.fromJson;
 
   @override
   int get id;
+  set id(int value);
   @override
   String get smallCategory;
+  set smallCategory(String value);
   @override
   @JsonKey(ignore: true)
   _$$_SmallCategoryCopyWith<_$_SmallCategory> get copyWith =>

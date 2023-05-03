@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:readme_app/dto/response_dto.dart';
+import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/model/book/book_repository.dart';
-import 'package:readme_app/dto/mainDTO.dart';
+import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -51,7 +51,7 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
     // Banner Start // Why pageable ?
     List<String> banners = [];
     bannerDTO.content
-        ?.forEach((element) => banners.add(element.coverFile.fileUrl));
+        .forEach((element) => banners.add(element.coverFile.fileUrl));
     mainPageModel.bookBanners.addAll(banners);
     // Banner End
 
@@ -93,26 +93,42 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
 
   void pageSearch(BookSearchType type, MainDTO mainDTO, int page) {
     if (type == BookSearchType.total) {
-      // TODO 물어보기
-      // List<Book>? totalBooks = mainDTO.content;
-      // List<Book> newTotalBooks = [...state!.totalBooks];
-      // newTotalBooks.addAll(totalBooks as List<Book>);
+
+      List<Book> totalBooks = mainDTO.content;
+      List<Book> newTotalBooks = [...state!.totalBooks];
+      newTotalBooks.addAll(totalBooks as List<Book>);
+
       state = state!.copyWith(
-          totalBooks: mainDTO.content as List<Book>,
+          totalBooks: newTotalBooks,
           isTotalLast: mainDTO.last,
           totalPage: page);
 
     } else if (type == BookSearchType.best) {
+
+      List<Book> bestBooks = mainDTO.content;
+      List<Book> newBestBooks = [...state!.bestBooks];
+      newBestBooks.addAll(bestBooks as List<Book>);
+
       state = state!.copyWith(
-          bestBooks : mainDTO.content as List<Book> , isBestLast: mainDTO.last, bestPage: page);
+          bestBooks : newBestBooks , isBestLast: mainDTO.last, bestPage: page);
 
     } else if (type == BookSearchType.recommends) {
+
+      List<Book> recommendsBooks = mainDTO.content;
+      List<Book> newRecommendsBooks = [...state!.recommendBooks];
+      newRecommendsBooks.addAll(recommendsBooks as List<Book>);
+
       state = state!.copyWith(
-          recommendBooks: mainDTO.content as List<Book> , isRecommendLast: mainDTO.last, recommendPage: page);
+          recommendBooks:newRecommendsBooks , isRecommendLast: mainDTO.last, recommendPage: page);
 
     } else if (type == BookSearchType.latest) {
+
+      List<Book> latestBooks = mainDTO.content;
+      List<Book> newLatestBooks = [...state!.latestBooks];
+      newLatestBooks.addAll(latestBooks as List<Book>);
+
       state = state!.copyWith(
-          latestBooks : mainDTO.content as List<Book>, isLatestLast: mainDTO.last, latestPage: page);
+          latestBooks : newLatestBooks, isLatestLast: mainDTO.last, latestPage: page);
     }
   }
 }
@@ -124,9 +140,9 @@ final mainPageProvider =
   },
 );
 
-@freezed
+@unfreezed
 class MainPageModel with _$MainPageModel {
-  const factory MainPageModel({
+   factory MainPageModel({
     required int totalPage,
     required int bestPage,
     required int recommendPage,

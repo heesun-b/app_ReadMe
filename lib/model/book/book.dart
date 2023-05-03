@@ -13,9 +13,9 @@ part 'book.g.dart';
 // 실행
 // flutter pub run build_runner build
 
-@freezed
+@unfreezed
 class Book with _$Book {
-  const factory Book({
+  factory Book({
     required int id,
     required Publisher publisher,
     required String title,

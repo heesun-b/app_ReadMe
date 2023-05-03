@@ -1,0 +1,3 @@
+class CartPageModel {
+  List<Book>
+}
