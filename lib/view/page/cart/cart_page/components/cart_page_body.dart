@@ -13,8 +13,6 @@ import 'package:readme_app/view/page/cart/cart_page/cart_page_view_model.dart';
 class CartPageBody extends ConsumerWidget {
   CartPageBody({Key? key}) : super(key: key);
 
-
-
   List<UseCartDTO> cartBooks = [];
   bool isAllChecked = false;
 
@@ -27,8 +25,18 @@ class CartPageBody extends ConsumerWidget {
       isAllChecked = model!.isAllChecked;
     }
 
+    final _scrollController = ScrollController();
+    bool _isVisible = false;
+
+    @override
+    void initState() {
+      _scrollController.addListener(() {
+        print("스크롤위치");
+      });
+    }
 
     return SingleChildScrollView(
+      controller: _scrollController,
       child: Column(
         children: [
           _hsCheckBox(context, ref),
@@ -238,3 +246,5 @@ class CartPageBody extends ConsumerWidget {
     return newPrice.format(price);
   }
 }
+
+final isVisibleProvider = StateProvider<bool>((ref) => false);

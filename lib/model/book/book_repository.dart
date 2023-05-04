@@ -1,14 +1,8 @@
-import 'dart:math';
-
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
 import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/dto/cart_dto/cart_dto.dart';
-import 'package:readme_app/dto/cart_dto/cart_dto_list.dart';
 import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
-import 'package:readme_app/model/book/book.dart';
-import 'package:readme_app/model/cart_mock_data.dart';
 import 'package:readme_app/view/page/main/main_page/main_page_view_model.dart';
 
 class BookRepository {
@@ -20,13 +14,12 @@ class BookRepository {
 
   BookRepository._single();
 
-  Future <ResponseDTO> findCartList() async {
+  Future<ResponseDTO> findCartList() async {
     try {
-      Response response = await dio.get(
-          "http://43.200.163.130:8080/carts/1/users");
+      // TODO user_id 부분 추후에 변경
+      Response response =
+          await dio.get("http://43.200.163.130:8080/carts/1/users");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      // print("체크: ${responseDTO.data.runtimeType}");  List<dynamic>
-
 
       List<CartDTO> cartList = [];
       for (var cartBook in responseDTO.data) {
@@ -45,7 +38,7 @@ class BookRepository {
   Future<ResponseDTO> getBanner() async {
     try {
       Response response =
-      await dio.get("http://43.200.163.130:8080/books?page=0&size=3");
+          await dio.get("http://43.200.163.130:8080/books?page=0&size=3");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
       MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
@@ -59,14 +52,13 @@ class BookRepository {
 
   Future<ResponseDTO> mainList(BookSearchType type) async {
     String endPoint =
-    type == BookSearchType.best ? "/best-sellers" : "/${type.name}";
+        type == BookSearchType.best ? "/best-sellers" : "/${type.name}";
     if (type.name == "total" || type.name == "latest") {
       endPoint = "";
     }
     try {
       Response response = await dio
           .get("http://43.200.163.130:8080/books$endPoint?page=0&size=10");
-
 
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
@@ -80,7 +72,7 @@ class BookRepository {
 
   Future<ResponseDTO> searchMainListPage(int page, BookSearchType type) async {
     String endPoint =
-    type == BookSearchType.best ? "/best-sellers" : "/${type.name}";
+        type == BookSearchType.best ? "/best-sellers" : "/${type.name}";
     if (type.name == "total" || type.name == "latest") {
       endPoint = "";
     }
@@ -96,9 +88,13 @@ class BookRepository {
     }
   }
 
-
-  Future <void> deleteCartBook(int id) async {
-    // await dio.delete("/")
+  Future<ResponseDTO> deleteCartBook(int id) async {
+    try {
+      Response response = await dio.delete("/carts", data: {"cartId": id});
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(code: -1, msg: "실패 : ${e}");
+    }
   }
-
 }

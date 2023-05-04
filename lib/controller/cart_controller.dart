@@ -15,7 +15,8 @@ class CartController {
   CartController(this.ref);
 
   Future<void> deleteCartBook (int id) async {
-    await BookRepository().deleteCartBook(id);
+    ResponseDTO responseDTO = await BookRepository().deleteCartBook(id);
+    ref.read(cartPageProvider.notifier).delete(id);
   }
 
 

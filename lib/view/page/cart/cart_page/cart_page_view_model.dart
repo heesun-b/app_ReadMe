@@ -93,6 +93,11 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
       state = state!.copyWith(cartBooks: state!.cartBooks, isAllChecked: falseCount == 0 ? true : false);
     }
   }
+
+  void delete(int id) {
+    List<UseCartDTO> newCartList = state!.cartBooks.where((e) => e.cartDTO.id != id).toList();
+    state = state!.copyWith(cartBooks: newCartList);
+  }
 }
 
 final cartPageProvider =
