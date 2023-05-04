@@ -9,11 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/http.dart';
+import 'package:readme_app/dto/cart_dto/cart_dto.dart';
+import 'package:readme_app/model/cart_mock_data.dart';
 
 class BootPayDefault extends StatefulWidget {
- final dio = Dio();
 
-   BootPayDefault({Key? key}) : super(key: key);
+  List<CartDTO> cartBookList;
+
+   BootPayDefault({required this.cartBookList, Key? key}) : super(key: key);
 
   @override
   State<BootPayDefault> createState() => _BootPayDefaultState();
@@ -113,22 +116,35 @@ class _BootPayDefaultState extends State<BootPayDefault> {
   Payload getPayload(BuildContext context) {
     Payload payload = Payload();
 
-    Item item1 = Item();
-    item1.name = "1984"; // 주문정보에 담길 상품명
-    item1.qty = 1; // 해당 상품의 주문 수량
-    item1.id = "1"; // 해당 상품의 고유 키
-    item1.price = 500; // 상품의 가격
+    List<Item> itemList = [];
+
+    List.generate(widget.cartBookList.length, (index) {
+      Item item= Item();
+      item.name = widget.cartBookList[index].book.title;
+      item.qty = 1;
+      item.price = widget.cartBookList[index].book.price.toDouble();
+      //TODO id 어떻게 할지 물어보기
+      item.id = widget.cartBookList[index].book.id.toString();
+      itemList.add(item);
+    });
 
     // payload.webApplicationId = webApplicationId; // web application id
     payload.androidApplicationId =
         androidApplicationId; // android application id
     // payload.iosApplicationId = iosApplicationId; // ios application id
 
+    payload.items = itemList;
     payload.pg = '다날';
     payload.method = '카드';
     // payload.methods = ['card', 'phone', 'vbank', 'bank', 'kakao'];
-    payload.orderName = "1984"; //결제할 상품명
-    payload.price = item1.price; //정기결제시 0 혹은 주석
+    payload.orderName = "도서 개별 결제"; //결제할 상품명
+
+    // todo 수정하기
+    double totalPrice = itemList.map((e) => e.price).toList().fold(0, (a, b) => a + b);
+
+
+
+    payload.price =; //정기결제시 0 혹은 주석
 
       // payload.orderId = DateTime.now()
       //     .millisecondsSinceEpoch
