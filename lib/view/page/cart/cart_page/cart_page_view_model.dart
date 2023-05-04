@@ -1,12 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:readme_app/dto/cart_dto/cart_dto.dart';
+import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
-import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/model/book/book_repository.dart';
 import 'package:readme_app/model/cart_mock_data.dart';
-
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
 
 // 파일명
 part 'cart_page_view_model.freezed.dart';
@@ -17,8 +16,7 @@ class CartPageModel with _$CartPageModel {
     required bool isAllChecked,
     required int totalPrice,
     required int totalCount,
-    //TODO 추후에 객체 변경
-    required List<CartMockData> cartBooks,
+    required List<UseCartDTO> cartBooks,
   }) = _CartPageModel;
 }
 
@@ -26,26 +24,34 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
   CartPageViewModel(super.state);
 
   void notifyInit() async {
-    CartPageModel cartMockModel = CartPageModel(
+    CartPageModel initCartBooks = CartPageModel(
         totalPrice: 0, totalCount: 0, cartBooks: [], isAllChecked: false);
     // TODO 추후에 객체 변경 AND jwt 혹은 user_id 추가 필요
-    List<CartMockData> cartMockList = await BookRepository().findCartList();
-    cartMockModel.cartBooks = cartMockList;
-    state = cartMockModel;
+    ResponseDTO responseDTO = await BookRepository().findCartList();
+    List<CartDTO> cartDTOList = responseDTO.data;
+    List<UseCartDTO> useCartList =[];
+
+    cartDTOList.forEach((element) {
+      UseCartDTO useCartDTO = UseCartDTO(cartDTO: element, isChecked: false);
+      useCartList.add(useCartDTO);
+    });
+
+    initCartBooks.cartBooks = useCartList;
+    state = initCartBooks;
   }
 
   void changeAllChecked(value) {
-    List<CartMockData> newList = [];
+    List<UseCartDTO> newList = [];
 
     if (value == true) {
       state!.cartBooks.forEach((e) {
-        e.ischecked = true;
+        e.isChecked = true;
         newList.add(e);
         state = state!.copyWith(cartBooks: newList, isAllChecked: true);
       });
     } else {
       state!.cartBooks.forEach((e) {
-        e.ischecked = false;
+        e.isChecked = false;
         newList.add(e);
         state = state!.copyWith(cartBooks: newList, isAllChecked: false);
       });
@@ -53,40 +59,37 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
   }
 
   void changedOneCheck(value, int index) {
-    List<CartMockData> newList = [];
+    List<UseCartDTO> newList = [];
     int falseCount = 0;
 
     if (value == true) {
       for(int i = 0; i < state!.cartBooks.length; i ++) {
         if(i == index) {
-          state!.cartBooks[index].ischecked = true;
+          state!.cartBooks[index].isChecked = true;
         }
         newList.add(state!.cartBooks[i]);
       }
-
       state!.cartBooks.forEach((element) {
-        if (element.ischecked == false) {
+        if (element.isChecked == false) {
           falseCount++;
         }
       });
       state = state!.copyWith(cartBooks: state!.cartBooks, isAllChecked: falseCount == 0 ? true : false);
 
     } else {
-
       for(int i = 0; i < state!.cartBooks.length; i ++) {
         if(i == index) {
-          state!.cartBooks[index].ischecked = false;
+          state!.cartBooks[index].isChecked = false;
         }
         newList.add(state!.cartBooks[i]);
       }
-
       state = state!.copyWith(cartBooks: state!.cartBooks);
       state!.cartBooks.forEach((element) {
-        if (element.ischecked == false) {
+        if (element.isChecked == false) {
           falseCount++;
         }
       });
-      state!.cartBooks[index].ischecked = false;
+      state!.cartBooks[index].isChecked = false;
       state = state!.copyWith(cartBooks: state!.cartBooks, isAllChecked: falseCount == 0 ? true : false);
     }
   }

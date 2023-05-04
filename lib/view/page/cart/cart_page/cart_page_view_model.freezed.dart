@@ -21,11 +21,9 @@ mixin _$CartPageModel {
   int get totalPrice => throw _privateConstructorUsedError;
   set totalPrice(int value) => throw _privateConstructorUsedError;
   int get totalCount => throw _privateConstructorUsedError;
-  set totalCount(int value) =>
-      throw _privateConstructorUsedError; //TODO 추후에 객체 변경
-  List<CartMockData> get cartBooks =>
-      throw _privateConstructorUsedError; //TODO 추후에 객체 변경
-  set cartBooks(List<CartMockData> value) => throw _privateConstructorUsedError;
+  set totalCount(int value) => throw _privateConstructorUsedError;
+  List<UseCartDTO> get cartBooks => throw _privateConstructorUsedError;
+  set cartBooks(List<UseCartDTO> value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CartPageModelCopyWith<CartPageModel> get copyWith =>
@@ -42,7 +40,7 @@ abstract class $CartPageModelCopyWith<$Res> {
       {bool isAllChecked,
       int totalPrice,
       int totalCount,
-      List<CartMockData> cartBooks});
+      List<UseCartDTO> cartBooks});
 }
 
 /// @nodoc
@@ -79,7 +77,7 @@ class _$CartPageModelCopyWithImpl<$Res, $Val extends CartPageModel>
       cartBooks: null == cartBooks
           ? _value.cartBooks
           : cartBooks // ignore: cast_nullable_to_non_nullable
-              as List<CartMockData>,
+              as List<UseCartDTO>,
     ) as $Val);
   }
 }
@@ -96,7 +94,7 @@ abstract class _$$_CartPageModelCopyWith<$Res>
       {bool isAllChecked,
       int totalPrice,
       int totalCount,
-      List<CartMockData> cartBooks});
+      List<UseCartDTO> cartBooks});
 }
 
 /// @nodoc
@@ -131,7 +129,7 @@ class __$$_CartPageModelCopyWithImpl<$Res>
       cartBooks: null == cartBooks
           ? _value.cartBooks
           : cartBooks // ignore: cast_nullable_to_non_nullable
-              as List<CartMockData>,
+              as List<UseCartDTO>,
     ));
   }
 }
@@ -151,9 +149,8 @@ class _$_CartPageModel with DiagnosticableTreeMixin implements _CartPageModel {
   int totalPrice;
   @override
   int totalCount;
-//TODO 추후에 객체 변경
   @override
-  List<CartMockData> cartBooks;
+  List<UseCartDTO> cartBooks;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -183,7 +180,7 @@ abstract class _CartPageModel implements CartPageModel {
       {required bool isAllChecked,
       required int totalPrice,
       required int totalCount,
-      required List<CartMockData> cartBooks}) = _$_CartPageModel;
+      required List<UseCartDTO> cartBooks}) = _$_CartPageModel;
 
   @override
   bool get isAllChecked;
@@ -194,9 +191,9 @@ abstract class _CartPageModel implements CartPageModel {
   @override
   int get totalCount;
   set totalCount(int value);
-  @override //TODO 추후에 객체 변경
-  List<CartMockData> get cartBooks; //TODO 추후에 객체 변경
-  set cartBooks(List<CartMockData> value);
+  @override
+  List<UseCartDTO> get cartBooks;
+  set cartBooks(List<UseCartDTO> value);
   @override
   @JsonKey(ignore: true)
   _$$_CartPageModelCopyWith<_$_CartPageModel> get copyWith =>

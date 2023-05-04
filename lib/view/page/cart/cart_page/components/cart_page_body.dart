@@ -5,6 +5,7 @@ import 'package:readme_app/controller/cart_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
+import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/model/cart_mock_data.dart';
 import 'package:readme_app/view/components/use_button.dart';
 import 'package:readme_app/view/page/cart/cart_page/cart_page_view_model.dart';
@@ -14,7 +15,7 @@ class CartPageBody extends ConsumerWidget {
 
 
 
-  List<CartMockData> cartBooks = [];
+  List<UseCartDTO> cartBooks = [];
   bool isAllChecked = false;
 
   @override
@@ -110,10 +111,7 @@ class CartPageBody extends ConsumerWidget {
                 value: isAllChecked,
                 onChanged: (value) {
                     isAllChecked = value!;
-                    // allChecked(value);
-                    // TODO
                   ref.read(cartPageProvider.notifier).changeAllChecked(value);
-                  // allChecked(value);
                 }),
             Text(
               "전체 선택",
@@ -144,7 +142,7 @@ class CartPageBody extends ConsumerWidget {
             children: [
               Checkbox(
                 activeColor: Colours.app_sub_black,
-                value: cartBooks[index].ischecked,
+                value: cartBooks[index].isChecked,
                 onChanged: (value) {
                   ref.read(cartPageProvider.notifier).changedOneCheck(value, index);
                   // changeChecked(value, index);
@@ -159,7 +157,7 @@ class CartPageBody extends ConsumerWidget {
                       width: 80,
                       height: 110,
                       child: Image.network(
-                        "${cartBooks[index].image}",
+                        "${cartBooks[index].cartDTO.book.coverFile.fileUrl}",
                         fit: BoxFit.fitHeight,
                       ),
                     ),
@@ -173,7 +171,7 @@ class CartPageBody extends ConsumerWidget {
                     children: [
                       Container(
                         child: Text(
-                          "${cartBooks[index].title}",
+                          "${cartBooks[index].cartDTO.book.title}",
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 17,
@@ -184,20 +182,22 @@ class CartPageBody extends ConsumerWidget {
                         width: 190,
                       ),
                       Text(
-                          "${cartBooks[index].author} | ${cartBooks[index].store}"),
+                          "${cartBooks[index].cartDTO.book.author} | ${cartBooks[index].cartDTO.book.publisher.businessName}"),
                       Row(
                         children: [
                           HsStyleIcons.star,
-                          Text("${cartBooks[index].score}"),
+                          Text("${cartBooks[index].cartDTO.book.stars}"),
                         ],
                       ),
-                      Text("소장가 ${cartBooks[index].price}"),
+                      Text("소장가 ${priceFormat(cartBooks[index].cartDTO.book.price)}"),
                     ],
                   ),
                 ],
               ),
               Spacer(),
-              IconButton(onPressed: () {}, icon: HsStyleIcons.delete)
+              IconButton(onPressed: () {
+                ref.read(cartControllerProvider).deleteCartBook(cartBooks[index].cartDTO.id);
+              }, icon: HsStyleIcons.delete)
             ],
           ),
         );
@@ -205,11 +205,10 @@ class CartPageBody extends ConsumerWidget {
     );
   }
 
-
   int getSum() {
     int sum = cartBooks
-        .where((element) => element.ischecked)
-        .map((e) => e.price)
+        .where((element) => element.isChecked)
+        .map((e) => e.cartDTO.book.price)
         .toList()
         .fold(0, (a, b) => a + b);
 
@@ -217,21 +216,22 @@ class CartPageBody extends ConsumerWidget {
   }
 
   int getCount() {
-    int count = cartBooks.where((element) => element.ischecked).toList().length;
+    int count = cartBooks.where((element) => element.isChecked).toList().length;
     return count;
   }
 
   allChecked(value) {
     if (value == true) {
-      cartBooks.forEach((element) => element.ischecked = true);
+      cartBooks.forEach((element) => element.isChecked = true);
     } else {
-      cartBooks.forEach((element) => element.ischecked = false);
+      cartBooks.forEach((element) => element.isChecked = false);
     }
   }
 
   changeChecked(value, int index) {
-    cartBooks[index].ischecked = value;
+    cartBooks[index].isChecked = value;
   }
+
 
   String priceFormat(int price) {
     var newPrice = NumberFormat('###,###,###,### 원');
