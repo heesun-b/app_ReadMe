@@ -32,13 +32,6 @@ class Book with _$Book {
     required FileDTO coverFile
   }) = _Book;
 
-  factory Book.fromJson(Map<String, Object?> json) {
-    try {
-      return _$BookFromJson(json);
-    } catch (e) {
-      print(e);
-    }
-    return _$BookFromJson(json);
-  }
+  factory Book.fromJson(Map<String, Object?> json) => _$BookFromJson(json);
 
 }

@@ -18,13 +18,8 @@ class User with _$User {
       required bool isAutoPayment,
       required String joinTime}) = _User;
 
-  factory User.fromJson(Map<String, Object?> json) {
-    try {
-      return _$UserFromJson(json);
-    } catch (e) {
-      print(e);
-    }
-    return _$UserFromJson(json);
+  factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
 
-  }
+
+
 }
