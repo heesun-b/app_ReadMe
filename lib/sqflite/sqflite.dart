@@ -2,6 +2,7 @@ import 'package:readme_app/dto/meta_dto/meta_dto.dart';
 import 'package:readme_app/model/small_category/small_category.dart';
 import 'package:readme_app/model/user/user.dart';
 import 'package:readme_app/sqflite/model/big_category/big_category.dart';
+import 'package:readme_app/sqflite/table/main_tab.dart';
 import 'package:readme_app/sqflite/table/notice_type_wrapper.dart';
 import 'package:readme_app/sqflite/table/payment_tab.dart';
 import 'package:readme_app/sqflite/table/storage_box_tab.dart';
@@ -96,14 +97,14 @@ class MySqfliteInit {
     return [];
   }
 
-  static Future<List<StorageBoxTab>> getMainTabs() async {
+  static Future<List<MainTab>> getMainTabs() async {
     if (_db == null) {
       return [];
     }
     List<Map> maps = await _db!.query(TableName.mainTab);
     if (maps.isNotEmpty) {
       var mainTabList = maps
-          .map((e) => StorageBoxTab.fromJson(e as Map<String, dynamic>))
+          .map((e) => MainTab.fromJson(e as Map<String, dynamic>))
           .toList();
       return mainTabList;
     }

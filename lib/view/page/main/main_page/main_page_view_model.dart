@@ -7,17 +7,25 @@ import 'package:readme_app/model/book/book_repository.dart';
 import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:readme_app/sqflite/sqflite.dart';
+import 'package:readme_app/sqflite/table/main_tab.dart';
+
 
 // 파일명
 part 'main_page_view_model.freezed.dart';
 
+
+
 enum BookSearchType { total, best, recommends, latest }
+List<MainTab> mainTabs = [];
 
 // Controller에서 값을 받은뒤 reponse를 화면 model로 변경하는 작업 (로직)
 class MainPageViewModel extends StateNotifier<MainPageModel?> {
   MainPageViewModel(super.state);
 
   void notifyInit() async {
+    mainTabs = await MySqfliteInit.getMainTabs();
+
     MainPageModel mainPageModel = MainPageModel(
         totalPage: 0,
         bestPage: 0,
@@ -32,7 +40,7 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
         bestBooks: [],
         recommendBooks: [],
         latestBooks: []);
-
+// todo sqflite 값으로 대체하기
     ResponseDTO totalResponse =
         await BookRepository().mainList(BookSearchType.total);
     ResponseDTO bestResponse =
