@@ -51,7 +51,7 @@ class CartPage extends ConsumerWidget {
                   ),
                 ),
               ),
-              BootPayDefault(cartList),
+              BootPayDefault(cartBookList: cartList),
             ],
           )),
       backgroundColor: Colours.app_sub_white,

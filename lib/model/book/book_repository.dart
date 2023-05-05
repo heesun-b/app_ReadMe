@@ -18,7 +18,7 @@ class BookRepository {
     try {
       // TODO user_id 부분 추후에 변경
       Response response =
-          await dio.get("http://43.200.163.130:8080/carts/1/users");
+          await dio.get("http://52.78.109.74:8080/carts/1/users");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
       List<CartDTO> cartList = [];
@@ -38,7 +38,7 @@ class BookRepository {
   Future<ResponseDTO> getBanner() async {
     try {
       Response response =
-          await dio.get("http://43.200.163.130:8080/books?page=0&size=3");
+          await dio.get("http://52.78.109.74:8080/books?page=0&size=3");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
       MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
@@ -58,7 +58,7 @@ class BookRepository {
     }
     try {
       Response response = await dio
-          .get("http://43.200.163.130:8080/books$endPoint?page=0&size=10");
+          .get("http://52.78.109.74:8080/books$endPoint?page=0&size=10");
 
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
@@ -78,7 +78,7 @@ class BookRepository {
     }
     try {
       Response response = await dio
-          .get("http://43.200.163.130:8080/books$endPoint?page=$page&size=10");
+          .get("http://52.78.109.74:8080/books$endPoint?page=$page&size=10");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
       responseDTO.data = mainDTO;
@@ -90,10 +90,22 @@ class BookRepository {
 
   Future<ResponseDTO> deleteCartBook(int id) async {
     try {
-      Response response = await dio.delete("/carts", data: {"cartId": id});
+      Response response = await dio.delete("http://52.78.109.74:8080/carts/$id");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       return responseDTO;
     } catch (e) {
+      return ResponseDTO(code: -1, msg: "실패 : ${e}");
+    }
+  }
+
+  Future<ResponseDTO> addCart(int bookId, int userId) async {
+    try{
+      Response response = await dio.post("http://52.78.109.74:8080/carts", data: {"userId" : userId, "bookId" : bookId});
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      CartDTO cartDTO = CartDTO.fromJson(responseDTO.data);
+      responseDTO.data = cartDTO;
+      return responseDTO;
+    } catch(e) {
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
     }
   }

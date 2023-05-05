@@ -4,6 +4,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/controller/book_controller.dart';
+import 'package:readme_app/controller/cart_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
@@ -113,7 +114,25 @@ class MainBook extends ConsumerWidget {
                             padding: EdgeInsets.zero,
                             constraints: BoxConstraints(),
                             onPressed: () {
-                              Navigator.pushNamed(context, "/cart");
+                              ref.read(cartControllerProvider).insert(book!.id);
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text("장바구니 담기 완료"),
+                                  content: const Text("장바구니로 이동하시겠습니까?"),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text('취소'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.pushNamed(context, "/cart"),
+                                      child: const Text('확인'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                              // Navigator.pushNamed(context, "/cart");
                             },
                             icon: YhIcons.cart2,
                           ),

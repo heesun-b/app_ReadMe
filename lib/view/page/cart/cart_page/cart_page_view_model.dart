@@ -29,7 +29,7 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
     // TODO 추후에 객체 변경 AND jwt 혹은 user_id 추가 필요
     ResponseDTO responseDTO = await BookRepository().findCartList();
     List<CartDTO> cartDTOList = responseDTO.data;
-    List<UseCartDTO> useCartList =[];
+    List<UseCartDTO> useCartList = [];
 
     cartDTOList.forEach((element) {
       UseCartDTO useCartDTO = UseCartDTO(cartDTO: element, isChecked: false);
@@ -63,8 +63,8 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
     int falseCount = 0;
 
     if (value == true) {
-      for(int i = 0; i < state!.cartBooks.length; i ++) {
-        if(i == index) {
+      for (int i = 0; i < state!.cartBooks.length; i++) {
+        if (i == index) {
           state!.cartBooks[index].isChecked = true;
         }
         newList.add(state!.cartBooks[i]);
@@ -74,11 +74,12 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
           falseCount++;
         }
       });
-      state = state!.copyWith(cartBooks: state!.cartBooks, isAllChecked: falseCount == 0 ? true : false);
-
+      state = state!.copyWith(
+          cartBooks: state!.cartBooks,
+          isAllChecked: falseCount == 0 ? true : false);
     } else {
-      for(int i = 0; i < state!.cartBooks.length; i ++) {
-        if(i == index) {
+      for (int i = 0; i < state!.cartBooks.length; i++) {
+        if (i == index) {
           state!.cartBooks[index].isChecked = false;
         }
         newList.add(state!.cartBooks[i]);
@@ -90,13 +91,23 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
         }
       });
       state!.cartBooks[index].isChecked = false;
-      state = state!.copyWith(cartBooks: state!.cartBooks, isAllChecked: falseCount == 0 ? true : false);
+      state = state!.copyWith(
+          cartBooks: state!.cartBooks,
+          isAllChecked: falseCount == 0 ? true : false);
     }
   }
 
   void delete(int id) {
-    List<UseCartDTO> newCartList = state!.cartBooks.where((e) => e.cartDTO.id != id).toList();
+    List<UseCartDTO> newCartList =
+        state!.cartBooks.where((e) => e.cartDTO.id != id).toList();
     state = state!.copyWith(cartBooks: newCartList);
+  }
+
+  void insert(CartDTO cartDTO) {
+    UseCartDTO useCartDTO = UseCartDTO(cartDTO: cartDTO, isChecked: false);
+    List<UseCartDTO> newUseCartList = [...state!.cartBooks];
+    newUseCartList.add(useCartDTO);
+    state = state!.copyWith(cartBooks: newUseCartList, isAllChecked: false);
   }
 }
 

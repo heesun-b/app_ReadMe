@@ -26,8 +26,6 @@ class CartPageBody extends ConsumerWidget {
       isAllChecked = model!.isAllChecked;
     }
 
-
-
     return SingleChildScrollView(
       controller: scrollController,
       child: Column(
@@ -76,7 +74,7 @@ class CartPageBody extends ConsumerWidget {
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
-                  Text("${getCount()}권"),
+                  Text("${getCount()} 권"),
                 ],
               ),
               SizedBox(

@@ -19,5 +19,10 @@ class CartController {
     ref.read(cartPageProvider.notifier).delete(id);
   }
 
+  Future<void> insert (int bookId) async {
+    // TODO userid 바꾸기
+    ResponseDTO responseDTO = await BookRepository().addCart(bookId, 1);
+    ref.read(cartPageProvider.notifier).insert(responseDTO.data);
+  }
 
 }

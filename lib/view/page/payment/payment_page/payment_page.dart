@@ -64,7 +64,7 @@ class _PaymentPageState extends State<PaymentPage> {
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
                 onPressed: () {
-                  Navigator.pushNamed(context, "/main");
+                  Navigator.pushNamed(context, "/navigation");
                 },
                 icon: HsStyleIcons.homeFill,)
           ],

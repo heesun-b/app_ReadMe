@@ -3,20 +3,17 @@ import 'package:bootpay/model/extra.dart';
 import 'package:bootpay/model/item.dart';
 import 'package:bootpay/model/payload.dart';
 import 'package:bootpay/model/user.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
-import 'package:readme_app/core/constants/http.dart';
-import 'package:readme_app/dto/cart_dto/cart_dto.dart';
-import 'package:readme_app/model/cart_mock_data.dart';
+import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 
 class BootPayDefault extends StatefulWidget {
 
-  List<CartDTO> cartBookList;
+  List<UseCartDTO> cartBookList;
 
-   BootPayDefault({required this.cartBookList, Key? key}) : super(key: key);
+  BootPayDefault({required this.cartBookList, Key? key}) : super(key: key);
 
   @override
   State<BootPayDefault> createState() => _BootPayDefaultState();
@@ -31,14 +28,6 @@ class _BootPayDefaultState extends State<BootPayDefault> {
   String webApplicationId = '6440b2c4755e27001de57d57';
   String androidApplicationId = '6440b2c4755e27001de57d58';
   String iosApplicationId = '6440b2c4755e27001de57d59';
-
-  // String get applicationId {
-  //   return Bootpay().applicationId(
-  //       webApplicationId,
-  //       androidApplicationId,
-  //       iosApplicationId
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -100,14 +89,13 @@ class _BootPayDefaultState extends State<BootPayDefault> {
             return false; 후에 서버에서 결제승인 수행
          */
         Bootpay().transactionConfirm();
-
         return false;
       },
       onDone: (String data) {
-         // dio.post("http://43.200.163.130:8070/payments/callback",
-         //    options: Options(
-         //      contentType: "application/json; charset=utf-8"
-         //    ));
+        // dio.post("http://43.200.163.130:8070/payments/callback",
+        //    options: Options(
+        //      contentType: "application/json; charset=utf-8"
+        //    ));
         print('------- onDone: $data');
       },
     );
@@ -119,38 +107,36 @@ class _BootPayDefaultState extends State<BootPayDefault> {
     List<Item> itemList = [];
 
     List.generate(widget.cartBookList.length, (index) {
-      Item item= Item();
-      item.name = widget.cartBookList[index].book.title;
+      Item item = Item();
+      item.name = widget.cartBookList[index].cartDTO.book.title;
       item.qty = 1;
-      item.price = widget.cartBookList[index].book.price.toDouble();
+      item.price = widget.cartBookList[index].cartDTO.book.price.toDouble();
       //TODO id 어떻게 할지 물어보기
-      item.id = widget.cartBookList[index].book.id.toString();
+      item.id = widget.cartBookList[index].cartDTO.book.id.toString();
       itemList.add(item);
     });
 
-    // payload.webApplicationId = webApplicationId; // web application id
+
     payload.androidApplicationId =
         androidApplicationId; // android application id
-    // payload.iosApplicationId = iosApplicationId; // ios application id
 
     payload.items = itemList;
     payload.pg = '다날';
     payload.method = '카드';
-    // payload.methods = ['card', 'phone', 'vbank', 'bank', 'kakao'];
     payload.orderName = "도서 개별 결제"; //결제할 상품명
 
-    // todo 수정하기
-    double totalPrice = itemList.map((e) => e.price).toList().fold(0, (a, b) => a + b);
+    var totalPrice = itemList.map((e) => e.price!.toInt()).toList().reduce((a, b) => a + b);
+    payload.price = totalPrice.toDouble(); //정기결제시 0 혹은 주석
 
+    // payload.orderId = DateTime.now()
+    //     .millisecondsSinceEpoch
+    //     .toString();
 
-
-    payload.price =; //정기결제시 0 혹은 주석
-
-      // payload.orderId = DateTime.now()
-      //     .millisecondsSinceEpoch
-      //     .toString();
-    payload.orderId = DateTime.now().microsecondsSinceEpoch.toString();
     //주문번호, 개발사에서 고유값으로 지정해야함
+    payload.orderId = DateTime
+        .now()
+        .microsecondsSinceEpoch
+        .toString();
 
     // payload.metadata = {
     //   "callbackParam1" : "value12",
@@ -158,24 +144,14 @@ class _BootPayDefaultState extends State<BootPayDefault> {
     //   "callbackParam3" : "value56",
     //   "callbackParam4" : "value78",
     // }; // 전달할 파라미터, 결제 후 되돌려 주는 값
-    // payload.items = itemList; // 상품정보 배열
 
     User user = User(); // 구매자 정보
-    // user.username = "장희선";
+
     user.email = "ssar@nate.com";
     user.id = '1';
-    // user.area = "서울";
-    // user.phone = "010-2299-9793";
-    // user.addr = '서울시 동작구 상도로 222';
-    //
-    Extra extra = Extra(); // 결제 옵션
-    // extra.appScheme = 'bootpayFlutterExample';
-    extra.separatelyConfirmed = true;
-    // extra.cardQuota = '3';
-    // // extra.openType = 'popup';
 
-    // extra.carrier = "SKT,KT,LGT"; //본인인증 시 고정할 통신사명
-    // extra.ageLimit = 20; // 본인인증시 제한할 최소 나이 ex) 20 -> 20살 이상만 인증이 가능
+    Extra extra = Extra(); // 결제 옵션
+    extra.separatelyConfirmed = true;
 
     payload.user = user;
     payload.extra = extra;
