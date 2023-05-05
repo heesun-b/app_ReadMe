@@ -22,6 +22,7 @@ BigCategory _$BigCategoryFromJson(Map<String, dynamic> json) {
 mixin _$BigCategory {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  List<SmallCategory> get smallCategory => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $BigCategoryCopyWith<$Res> {
           BigCategory value, $Res Function(BigCategory) then) =
       _$BigCategoryCopyWithImpl<$Res, BigCategory>;
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, List<SmallCategory> smallCategory});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$BigCategoryCopyWithImpl<$Res, $Val extends BigCategory>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? smallCategory = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -63,6 +65,10 @@ class _$BigCategoryCopyWithImpl<$Res, $Val extends BigCategory>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      smallCategory: null == smallCategory
+          ? _value.smallCategory
+          : smallCategory // ignore: cast_nullable_to_non_nullable
+              as List<SmallCategory>,
     ) as $Val);
   }
 }
@@ -75,7 +81,7 @@ abstract class _$$_BigCategoryCopyWith<$Res>
       __$$_BigCategoryCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, List<SmallCategory> smallCategory});
 }
 
 /// @nodoc
@@ -91,6 +97,7 @@ class __$$_BigCategoryCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? smallCategory = null,
   }) {
     return _then(_$_BigCategory(
       id: null == id
@@ -101,6 +108,10 @@ class __$$_BigCategoryCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      smallCategory: null == smallCategory
+          ? _value._smallCategory
+          : smallCategory // ignore: cast_nullable_to_non_nullable
+              as List<SmallCategory>,
     ));
   }
 }
@@ -108,7 +119,11 @@ class __$$_BigCategoryCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
-  const _$_BigCategory({required this.id, required this.name});
+  const _$_BigCategory(
+      {required this.id,
+      required this.name,
+      required final List<SmallCategory> smallCategory})
+      : _smallCategory = smallCategory;
 
   factory _$_BigCategory.fromJson(Map<String, dynamic> json) =>
       _$$_BigCategoryFromJson(json);
@@ -117,10 +132,17 @@ class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
   final int id;
   @override
   final String name;
+  final List<SmallCategory> _smallCategory;
+  @override
+  List<SmallCategory> get smallCategory {
+    if (_smallCategory is EqualUnmodifiableListView) return _smallCategory;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_smallCategory);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BigCategory(id: $id, name: $name)';
+    return 'BigCategory(id: $id, name: $name, smallCategory: $smallCategory)';
   }
 
   @override
@@ -129,7 +151,8 @@ class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
     properties
       ..add(DiagnosticsProperty('type', 'BigCategory'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name));
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('smallCategory', smallCategory));
   }
 
   @override
@@ -138,12 +161,15 @@ class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
         (other.runtimeType == runtimeType &&
             other is _$_BigCategory &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality()
+                .equals(other._smallCategory, _smallCategory));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name,
+      const DeepCollectionEquality().hash(_smallCategory));
 
   @JsonKey(ignore: true)
   @override
@@ -161,7 +187,9 @@ class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
 
 abstract class _BigCategory implements BigCategory {
   const factory _BigCategory(
-      {required final int id, required final String name}) = _$_BigCategory;
+      {required final int id,
+      required final String name,
+      required final List<SmallCategory> smallCategory}) = _$_BigCategory;
 
   factory _BigCategory.fromJson(Map<String, dynamic> json) =
       _$_BigCategory.fromJson;
@@ -170,6 +198,8 @@ abstract class _BigCategory implements BigCategory {
   int get id;
   @override
   String get name;
+  @override
+  List<SmallCategory> get smallCategory;
   @override
   @JsonKey(ignore: true)
   _$$_BigCategoryCopyWith<_$_BigCategory> get copyWith =>

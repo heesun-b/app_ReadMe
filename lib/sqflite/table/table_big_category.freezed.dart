@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'big_category.dart';
+part of 'table_big_category.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,34 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-BigCategory _$BigCategoryFromJson(Map<String, dynamic> json) {
-  return _BigCategory.fromJson(json);
+TableBigCategory _$TableBigCategoryFromJson(Map<String, dynamic> json) {
+  return _TableBigCategory.fromJson(json);
 }
 
 /// @nodoc
-mixin _$BigCategory {
+mixin _$TableBigCategory {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $BigCategoryCopyWith<BigCategory> get copyWith =>
+  $TableBigCategoryCopyWith<TableBigCategory> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BigCategoryCopyWith<$Res> {
-  factory $BigCategoryCopyWith(
-          BigCategory value, $Res Function(BigCategory) then) =
-      _$BigCategoryCopyWithImpl<$Res, BigCategory>;
+abstract class $TableBigCategoryCopyWith<$Res> {
+  factory $TableBigCategoryCopyWith(
+          TableBigCategory value, $Res Function(TableBigCategory) then) =
+      _$TableBigCategoryCopyWithImpl<$Res, TableBigCategory>;
   @useResult
   $Res call({int id, String name});
 }
 
 /// @nodoc
-class _$BigCategoryCopyWithImpl<$Res, $Val extends BigCategory>
-    implements $BigCategoryCopyWith<$Res> {
-  _$BigCategoryCopyWithImpl(this._value, this._then);
+class _$TableBigCategoryCopyWithImpl<$Res, $Val extends TableBigCategory>
+    implements $TableBigCategoryCopyWith<$Res> {
+  _$TableBigCategoryCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -68,22 +68,22 @@ class _$BigCategoryCopyWithImpl<$Res, $Val extends BigCategory>
 }
 
 /// @nodoc
-abstract class _$$_BigCategoryCopyWith<$Res>
-    implements $BigCategoryCopyWith<$Res> {
-  factory _$$_BigCategoryCopyWith(
-          _$_BigCategory value, $Res Function(_$_BigCategory) then) =
-      __$$_BigCategoryCopyWithImpl<$Res>;
+abstract class _$$_TableBigCategoryCopyWith<$Res>
+    implements $TableBigCategoryCopyWith<$Res> {
+  factory _$$_TableBigCategoryCopyWith(
+          _$_TableBigCategory value, $Res Function(_$_TableBigCategory) then) =
+      __$$_TableBigCategoryCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, String name});
 }
 
 /// @nodoc
-class __$$_BigCategoryCopyWithImpl<$Res>
-    extends _$BigCategoryCopyWithImpl<$Res, _$_BigCategory>
-    implements _$$_BigCategoryCopyWith<$Res> {
-  __$$_BigCategoryCopyWithImpl(
-      _$_BigCategory _value, $Res Function(_$_BigCategory) _then)
+class __$$_TableBigCategoryCopyWithImpl<$Res>
+    extends _$TableBigCategoryCopyWithImpl<$Res, _$_TableBigCategory>
+    implements _$$_TableBigCategoryCopyWith<$Res> {
+  __$$_TableBigCategoryCopyWithImpl(
+      _$_TableBigCategory _value, $Res Function(_$_TableBigCategory) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_BigCategoryCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_BigCategory(
+    return _then(_$_TableBigCategory(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -107,11 +107,13 @@ class __$$_BigCategoryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
-  const _$_BigCategory({required this.id, required this.name});
+class _$_TableBigCategory
+    with DiagnosticableTreeMixin
+    implements _TableBigCategory {
+  _$_TableBigCategory({required this.id, required this.name});
 
-  factory _$_BigCategory.fromJson(Map<String, dynamic> json) =>
-      _$$_BigCategoryFromJson(json);
+  factory _$_TableBigCategory.fromJson(Map<String, dynamic> json) =>
+      _$$_TableBigCategoryFromJson(json);
 
   @override
   final int id;
@@ -120,14 +122,14 @@ class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BigCategory(id: $id, name: $name)';
+    return 'TableBigCategory(id: $id, name: $name)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'BigCategory'))
+      ..add(DiagnosticsProperty('type', 'TableBigCategory'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name));
   }
@@ -136,7 +138,7 @@ class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BigCategory &&
+            other is _$_TableBigCategory &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -148,23 +150,24 @@ class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BigCategoryCopyWith<_$_BigCategory> get copyWith =>
-      __$$_BigCategoryCopyWithImpl<_$_BigCategory>(this, _$identity);
+  _$$_TableBigCategoryCopyWith<_$_TableBigCategory> get copyWith =>
+      __$$_TableBigCategoryCopyWithImpl<_$_TableBigCategory>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BigCategoryToJson(
+    return _$$_TableBigCategoryToJson(
       this,
     );
   }
 }
 
-abstract class _BigCategory implements BigCategory {
-  const factory _BigCategory(
-      {required final int id, required final String name}) = _$_BigCategory;
+abstract class _TableBigCategory implements TableBigCategory {
+  factory _TableBigCategory(
+      {required final int id,
+      required final String name}) = _$_TableBigCategory;
 
-  factory _BigCategory.fromJson(Map<String, dynamic> json) =
-      _$_BigCategory.fromJson;
+  factory _TableBigCategory.fromJson(Map<String, dynamic> json) =
+      _$_TableBigCategory.fromJson;
 
   @override
   int get id;
@@ -172,6 +175,6 @@ abstract class _BigCategory implements BigCategory {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_BigCategoryCopyWith<_$_BigCategory> get copyWith =>
+  _$$_TableBigCategoryCopyWith<_$_TableBigCategory> get copyWith =>
       throw _privateConstructorUsedError;
 }

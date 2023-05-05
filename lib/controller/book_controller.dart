@@ -31,6 +31,9 @@ class BookController {
       MainDTO mainDTO = responseDTO.data;
       ref.read(mainPageProvider.notifier).pageSearch(type, mainDTO, page);
       isDuplication = false;
+
+      // Fail 처리 싹 해야함
+
     }
   }
 

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'big_category.dart';
+part of 'payment_tab.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,34 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-BigCategory _$BigCategoryFromJson(Map<String, dynamic> json) {
-  return _BigCategory.fromJson(json);
+PaymentTab _$PaymentTabFromJson(Map<String, dynamic> json) {
+  return _PaymentTab.fromJson(json);
 }
 
 /// @nodoc
-mixin _$BigCategory {
-  int get id => throw _privateConstructorUsedError;
+mixin _$PaymentTab {
+  String get requestName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $BigCategoryCopyWith<BigCategory> get copyWith =>
+  $PaymentTabCopyWith<PaymentTab> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BigCategoryCopyWith<$Res> {
-  factory $BigCategoryCopyWith(
-          BigCategory value, $Res Function(BigCategory) then) =
-      _$BigCategoryCopyWithImpl<$Res, BigCategory>;
+abstract class $PaymentTabCopyWith<$Res> {
+  factory $PaymentTabCopyWith(
+          PaymentTab value, $Res Function(PaymentTab) then) =
+      _$PaymentTabCopyWithImpl<$Res, PaymentTab>;
   @useResult
-  $Res call({int id, String name});
+  $Res call({String requestName, String name});
 }
 
 /// @nodoc
-class _$BigCategoryCopyWithImpl<$Res, $Val extends BigCategory>
-    implements $BigCategoryCopyWith<$Res> {
-  _$BigCategoryCopyWithImpl(this._value, this._then);
+class _$PaymentTabCopyWithImpl<$Res, $Val extends PaymentTab>
+    implements $PaymentTabCopyWith<$Res> {
+  _$PaymentTabCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -51,14 +51,14 @@ class _$BigCategoryCopyWithImpl<$Res, $Val extends BigCategory>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? requestName = null,
     Object? name = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
+      requestName: null == requestName
+          ? _value.requestName
+          : requestName // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -68,35 +68,35 @@ class _$BigCategoryCopyWithImpl<$Res, $Val extends BigCategory>
 }
 
 /// @nodoc
-abstract class _$$_BigCategoryCopyWith<$Res>
-    implements $BigCategoryCopyWith<$Res> {
-  factory _$$_BigCategoryCopyWith(
-          _$_BigCategory value, $Res Function(_$_BigCategory) then) =
-      __$$_BigCategoryCopyWithImpl<$Res>;
+abstract class _$$_PaymentTabCopyWith<$Res>
+    implements $PaymentTabCopyWith<$Res> {
+  factory _$$_PaymentTabCopyWith(
+          _$_PaymentTab value, $Res Function(_$_PaymentTab) then) =
+      __$$_PaymentTabCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name});
+  $Res call({String requestName, String name});
 }
 
 /// @nodoc
-class __$$_BigCategoryCopyWithImpl<$Res>
-    extends _$BigCategoryCopyWithImpl<$Res, _$_BigCategory>
-    implements _$$_BigCategoryCopyWith<$Res> {
-  __$$_BigCategoryCopyWithImpl(
-      _$_BigCategory _value, $Res Function(_$_BigCategory) _then)
+class __$$_PaymentTabCopyWithImpl<$Res>
+    extends _$PaymentTabCopyWithImpl<$Res, _$_PaymentTab>
+    implements _$$_PaymentTabCopyWith<$Res> {
+  __$$_PaymentTabCopyWithImpl(
+      _$_PaymentTab _value, $Res Function(_$_PaymentTab) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? requestName = null,
     Object? name = null,
   }) {
-    return _then(_$_BigCategory(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
+    return _then(_$_PaymentTab(
+      requestName: null == requestName
+          ? _value.requestName
+          : requestName // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -107,28 +107,28 @@ class __$$_BigCategoryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
-  const _$_BigCategory({required this.id, required this.name});
+class _$_PaymentTab with DiagnosticableTreeMixin implements _PaymentTab {
+  _$_PaymentTab({required this.requestName, required this.name});
 
-  factory _$_BigCategory.fromJson(Map<String, dynamic> json) =>
-      _$$_BigCategoryFromJson(json);
+  factory _$_PaymentTab.fromJson(Map<String, dynamic> json) =>
+      _$$_PaymentTabFromJson(json);
 
   @override
-  final int id;
+  final String requestName;
   @override
   final String name;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BigCategory(id: $id, name: $name)';
+    return 'PaymentTab(requestName: $requestName, name: $name)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'BigCategory'))
-      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('type', 'PaymentTab'))
+      ..add(DiagnosticsProperty('requestName', requestName))
       ..add(DiagnosticsProperty('name', name));
   }
 
@@ -136,42 +136,44 @@ class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BigCategory &&
-            (identical(other.id, id) || other.id == id) &&
+            other is _$_PaymentTab &&
+            (identical(other.requestName, requestName) ||
+                other.requestName == requestName) &&
             (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, requestName, name);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BigCategoryCopyWith<_$_BigCategory> get copyWith =>
-      __$$_BigCategoryCopyWithImpl<_$_BigCategory>(this, _$identity);
+  _$$_PaymentTabCopyWith<_$_PaymentTab> get copyWith =>
+      __$$_PaymentTabCopyWithImpl<_$_PaymentTab>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BigCategoryToJson(
+    return _$$_PaymentTabToJson(
       this,
     );
   }
 }
 
-abstract class _BigCategory implements BigCategory {
-  const factory _BigCategory(
-      {required final int id, required final String name}) = _$_BigCategory;
+abstract class _PaymentTab implements PaymentTab {
+  factory _PaymentTab(
+      {required final String requestName,
+      required final String name}) = _$_PaymentTab;
 
-  factory _BigCategory.fromJson(Map<String, dynamic> json) =
-      _$_BigCategory.fromJson;
+  factory _PaymentTab.fromJson(Map<String, dynamic> json) =
+      _$_PaymentTab.fromJson;
 
   @override
-  int get id;
+  String get requestName;
   @override
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_BigCategoryCopyWith<_$_BigCategory> get copyWith =>
+  _$$_PaymentTabCopyWith<_$_PaymentTab> get copyWith =>
       throw _privateConstructorUsedError;
 }

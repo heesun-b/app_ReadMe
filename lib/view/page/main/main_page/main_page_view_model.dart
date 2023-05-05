@@ -42,6 +42,7 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
     // ResponseDTO latestResponse = await BookRepository().mainList(BookSearchType.latest);
     ResponseDTO bannerList = await BookRepository().getBanner();
 
+
     MainDTO totalMainDTO = totalResponse.data;
     MainDTO bestMainDTO = bestResponse.data;
     MainDTO recommendMainDTO = recommendResponse.data;

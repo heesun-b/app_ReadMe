@@ -22,8 +22,8 @@ SmallCategory _$SmallCategoryFromJson(Map<String, dynamic> json) {
 mixin _$SmallCategory {
   int get id => throw _privateConstructorUsedError;
   set id(int value) => throw _privateConstructorUsedError;
-  String get smallCategory => throw _privateConstructorUsedError;
-  set smallCategory(String value) => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  set name(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $SmallCategoryCopyWith<$Res> {
           SmallCategory value, $Res Function(SmallCategory) then) =
       _$SmallCategoryCopyWithImpl<$Res, SmallCategory>;
   @useResult
-  $Res call({int id, String smallCategory});
+  $Res call({int id, String name});
 }
 
 /// @nodoc
@@ -54,16 +54,16 @@ class _$SmallCategoryCopyWithImpl<$Res, $Val extends SmallCategory>
   @override
   $Res call({
     Object? id = null,
-    Object? smallCategory = null,
+    Object? name = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      smallCategory: null == smallCategory
-          ? _value.smallCategory
-          : smallCategory // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -77,7 +77,7 @@ abstract class _$$_SmallCategoryCopyWith<$Res>
       __$$_SmallCategoryCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String smallCategory});
+  $Res call({int id, String name});
 }
 
 /// @nodoc
@@ -92,16 +92,16 @@ class __$$_SmallCategoryCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? smallCategory = null,
+    Object? name = null,
   }) {
     return _then(_$_SmallCategory(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      smallCategory: null == smallCategory
-          ? _value.smallCategory
-          : smallCategory // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -110,7 +110,7 @@ class __$$_SmallCategoryCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SmallCategory with DiagnosticableTreeMixin implements _SmallCategory {
-  _$_SmallCategory({required this.id, required this.smallCategory});
+  _$_SmallCategory({required this.id, required this.name});
 
   factory _$_SmallCategory.fromJson(Map<String, dynamic> json) =>
       _$$_SmallCategoryFromJson(json);
@@ -118,11 +118,11 @@ class _$_SmallCategory with DiagnosticableTreeMixin implements _SmallCategory {
   @override
   int id;
   @override
-  String smallCategory;
+  String name;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SmallCategory(id: $id, smallCategory: $smallCategory)';
+    return 'SmallCategory(id: $id, name: $name)';
   }
 
   @override
@@ -131,7 +131,7 @@ class _$_SmallCategory with DiagnosticableTreeMixin implements _SmallCategory {
     properties
       ..add(DiagnosticsProperty('type', 'SmallCategory'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('smallCategory', smallCategory));
+      ..add(DiagnosticsProperty('name', name));
   }
 
   @JsonKey(ignore: true)
@@ -149,7 +149,7 @@ class _$_SmallCategory with DiagnosticableTreeMixin implements _SmallCategory {
 }
 
 abstract class _SmallCategory implements SmallCategory {
-  factory _SmallCategory({required int id, required String smallCategory}) =
+  factory _SmallCategory({required int id, required String name}) =
       _$_SmallCategory;
 
   factory _SmallCategory.fromJson(Map<String, dynamic> json) =
@@ -159,8 +159,8 @@ abstract class _SmallCategory implements SmallCategory {
   int get id;
   set id(int value);
   @override
-  String get smallCategory;
-  set smallCategory(String value);
+  String get name;
+  set name(String value);
   @override
   @JsonKey(ignore: true)
   _$$_SmallCategoryCopyWith<_$_SmallCategory> get copyWith =>

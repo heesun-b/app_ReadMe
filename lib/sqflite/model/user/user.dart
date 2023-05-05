@@ -14,6 +14,7 @@ class User with _$User {
   factory User(
       {required int id,
       required String username,
+        required MembershipPayment membershipPaymentNoneUserDTO,
       required String role,
       required bool isMembership,
       required bool isAutoPayment,

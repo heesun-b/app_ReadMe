@@ -14,7 +14,7 @@ part 'small_category.g.dart';
 class SmallCategory with _$SmallCategory {
    factory SmallCategory({
     required int id,
-    required String smallCategory
+    required String name
   }) = _SmallCategory;
 
 
