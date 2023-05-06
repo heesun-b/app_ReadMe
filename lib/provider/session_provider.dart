@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:readme_app/core/constants/http.dart';
+import 'package:readme_app/core/constants/secure_storage.dart';
 import 'package:readme_app/model/user/user.dart';
 
 final sessionProvider = Provider<SessionUser>((ref) {
@@ -22,7 +22,6 @@ class SessionUser {
     this.user = null;
     this.jwt = null;
     this.isLogin = false;
-    await secureStorage.delete(key: "jwt");
-    Logger().d("세션 종료 및 디바이스 JWT 삭제");
+    await SecureStorage.clear();
   }
 }

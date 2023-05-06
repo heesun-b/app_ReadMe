@@ -100,8 +100,8 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
             // 'image': item.image,
             // },);
           },
-          child: Image.asset(
-            "assets/images/${item.image}",
+          child: Image.network(
+            "${item.image}",
             fit: BoxFit.cover,
           ),
         );
@@ -128,8 +128,8 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Row(
                   children: [
-                    Image.asset(
-                      "assets/images/${cartList[index].image}",
+                    Image.network(
+                      "${cartList[index].image}",
                       width: 100,
                       height: 150,
                     ),
