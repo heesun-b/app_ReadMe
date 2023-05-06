@@ -198,12 +198,14 @@ class MySqfliteInit {
       _db!.insert(TableName.bigCategory,
           {'id': bigCategory.id, 'name': bigCategory.name});
 
-      for (var smallCategory in bigCategory.smallCategory) {
-        _db!.insert(TableName.smallCategory, {
-          'id': smallCategory.id,
-          'name': smallCategory.name,
-          'bigCategoryId': bigCategory.id
-        });
+      if(bigCategory.smallCategory != null) {
+        for (var smallCategory in bigCategory.smallCategory!) {
+          _db!.insert(TableName.smallCategory, {
+            'id': smallCategory.id,
+            'name': smallCategory.name,
+            'bigCategoryId': bigCategory.id
+          });
+        }
       }
     }
 

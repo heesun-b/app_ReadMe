@@ -4,6 +4,7 @@ import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/main.dart';
 import 'package:readme_app/model/book/book_repository.dart';
 import 'package:readme_app/provider/session_provider.dart';
+import 'package:readme_app/view/page/category/category_page/category_page_view_model.dart';
 import 'package:readme_app/view/page/main/main_page/main_page_view_model.dart';
 
 final bookControllerProvider = Provider<BookController>((ref) {
@@ -19,22 +20,47 @@ class BookController {
   BookController(this.ref);
 
   Future<void> pageSearch(
-      BookSearchType type,
-      int page
+      String name,
+      int page,
+      String requestName
   ) async {
     if (!isDuplication) {
       isDuplication = true;
       // 통신 할때 await
       // responseDTO.data = responseBookList
       // responseDTO.data.page.isLast = false
-      ResponseDTO responseDTO =  await BookRepository().searchMainListPage(page, type);
+      ResponseDTO responseDTO =  await BookRepository().searchMainListPage(page, requestName);
       MainDTO mainDTO = responseDTO.data;
-      ref.read(mainPageProvider.notifier).pageSearch(type, mainDTO, page);
+      ref.read(mainPageProvider.notifier).pageSearch(name, mainDTO, page);
       isDuplication = false;
 
       // Fail 처리 싹 해야함
 
     }
   }
+
+
+  Future<void> pageCategorySearch(
+      int page, int bigCategory,
+      {int? smallCategory}
+  ) async {
+    if (!isDuplication) {
+      isDuplication = true;
+      // 통신 할때 await
+      // responseDTO.data = responseBookList
+      // responseDTO.data.page.isLast = false
+      ResponseDTO responseDTO =  await BookRepository().searchMainListPage(page, "all", bigCategory: bigCategory, smallCategory: smallCategory);
+      MainDTO mainDTO = responseDTO.data;
+      ref.read(categoryPageProvider.notifier).pageSearch(mainDTO, page, bigCategory, smallCategory: smallCategory);
+      isDuplication = false;
+
+      // Fail 처리 싹 해야함
+
+    }
+  }
+
+
+
+
 
 }

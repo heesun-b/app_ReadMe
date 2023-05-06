@@ -22,7 +22,7 @@ BigCategory _$BigCategoryFromJson(Map<String, dynamic> json) {
 mixin _$BigCategory {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<SmallCategory> get smallCategory => throw _privateConstructorUsedError;
+  List<SmallCategory>? get smallCategory => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $BigCategoryCopyWith<$Res> {
           BigCategory value, $Res Function(BigCategory) then) =
       _$BigCategoryCopyWithImpl<$Res, BigCategory>;
   @useResult
-  $Res call({int id, String name, List<SmallCategory> smallCategory});
+  $Res call({int id, String name, List<SmallCategory>? smallCategory});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$BigCategoryCopyWithImpl<$Res, $Val extends BigCategory>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? smallCategory = null,
+    Object? smallCategory = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -65,10 +65,10 @@ class _$BigCategoryCopyWithImpl<$Res, $Val extends BigCategory>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      smallCategory: null == smallCategory
+      smallCategory: freezed == smallCategory
           ? _value.smallCategory
           : smallCategory // ignore: cast_nullable_to_non_nullable
-              as List<SmallCategory>,
+              as List<SmallCategory>?,
     ) as $Val);
   }
 }
@@ -81,7 +81,7 @@ abstract class _$$_BigCategoryCopyWith<$Res>
       __$$_BigCategoryCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, List<SmallCategory> smallCategory});
+  $Res call({int id, String name, List<SmallCategory>? smallCategory});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$_BigCategoryCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? smallCategory = null,
+    Object? smallCategory = freezed,
   }) {
     return _then(_$_BigCategory(
       id: null == id
@@ -108,10 +108,10 @@ class __$$_BigCategoryCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      smallCategory: null == smallCategory
+      smallCategory: freezed == smallCategory
           ? _value._smallCategory
           : smallCategory // ignore: cast_nullable_to_non_nullable
-              as List<SmallCategory>,
+              as List<SmallCategory>?,
     ));
   }
 }
@@ -122,7 +122,7 @@ class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
   const _$_BigCategory(
       {required this.id,
       required this.name,
-      required final List<SmallCategory> smallCategory})
+      final List<SmallCategory>? smallCategory})
       : _smallCategory = smallCategory;
 
   factory _$_BigCategory.fromJson(Map<String, dynamic> json) =>
@@ -132,12 +132,14 @@ class _$_BigCategory with DiagnosticableTreeMixin implements _BigCategory {
   final int id;
   @override
   final String name;
-  final List<SmallCategory> _smallCategory;
+  final List<SmallCategory>? _smallCategory;
   @override
-  List<SmallCategory> get smallCategory {
+  List<SmallCategory>? get smallCategory {
+    final value = _smallCategory;
+    if (value == null) return null;
     if (_smallCategory is EqualUnmodifiableListView) return _smallCategory;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_smallCategory);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -189,7 +191,7 @@ abstract class _BigCategory implements BigCategory {
   const factory _BigCategory(
       {required final int id,
       required final String name,
-      required final List<SmallCategory> smallCategory}) = _$_BigCategory;
+      final List<SmallCategory>? smallCategory}) = _$_BigCategory;
 
   factory _BigCategory.fromJson(Map<String, dynamic> json) =
       _$_BigCategory.fromJson;
@@ -199,7 +201,7 @@ abstract class _BigCategory implements BigCategory {
   @override
   String get name;
   @override
-  List<SmallCategory> get smallCategory;
+  List<SmallCategory>? get smallCategory;
   @override
   @JsonKey(ignore: true)
   _$$_BigCategoryCopyWith<_$_BigCategory> get copyWith =>

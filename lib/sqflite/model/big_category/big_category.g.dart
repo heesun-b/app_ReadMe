@@ -10,8 +10,8 @@ _$_BigCategory _$$_BigCategoryFromJson(Map<String, dynamic> json) =>
     _$_BigCategory(
       id: json['id'] as int,
       name: json['name'] as String,
-      smallCategory: (json['smallCategory'] as List<dynamic>)
-          .map((e) => SmallCategory.fromJson(e as Map<String, dynamic>))
+      smallCategory: (json['smallCategory'] as List<dynamic>?)
+          ?.map((e) => SmallCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

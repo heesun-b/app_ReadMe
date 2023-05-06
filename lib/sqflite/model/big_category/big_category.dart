@@ -15,7 +15,7 @@ class BigCategory with _$BigCategory {
   const factory BigCategory({
     required int id,
     required String name,
-    required List<SmallCategory> smallCategory,
+     List<SmallCategory>? smallCategory,
   }) = _BigCategory;
 
   factory BigCategory.fromJson(Map<String, Object?> json) => _$BigCategoryFromJson(json);

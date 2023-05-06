@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/dto/cart_dto/cart_dto.dart';
@@ -19,6 +21,7 @@ class BookRepository {
       // TODO user_id 부분 추후에 변경
       Response response =
           await MyHttp.get().get("/carts/1/users");
+      log(response.data.toString());
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
       List<CartDTO> cartList = [];
@@ -31,61 +34,48 @@ class BookRepository {
 
       return responseDTO;
     } catch (e) {
+      print(e.toString());
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
     }
   }
 
-  Future<ResponseDTO> getBanner() async {
+  Future<ResponseDTO> mainList(String requestName, {int? bigCategory, int? smallCategory}) async {
+    String endPoint = getEndPoint(requestName, bigCategory, smallCategory);
     try {
-      Response response =
-          await MyHttp.get().get("/books?page=0&size=3");
+      Response response = await MyHttp.get().get("/books$endPoint&page=0&size=10");
+      print(response.data);
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-
       MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
       responseDTO.data = mainDTO;
       return responseDTO;
     } catch (e) {
-      // print(e);
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
     }
   }
 
-  Future<ResponseDTO> mainList(BookSearchType type) async {
-    String endPoint =
-        type == BookSearchType.best ? "/best-sellers" : "/${type.name}";
-    if (type.name == "total" || type.name == "latest") {
-      endPoint = "";
-    }
+  Future<ResponseDTO> searchMainListPage(int page, String requestName, {int? bigCategory, int? smallCategory}) async {
+    String endPoint = getEndPoint(requestName, bigCategory, smallCategory);
     try {
       Response response = await MyHttp.get()
-          .get("/books$endPoint?page=0&size=10");
-
+          .get("/books$endPoint&page=$page&size=10");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
       responseDTO.data = mainDTO;
-
       return responseDTO;
     } catch (e) {
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
     }
   }
 
-  Future<ResponseDTO> searchMainListPage(int page, BookSearchType type) async {
-    String endPoint =
-        type == BookSearchType.best ? "/best-sellers" : "/${type.name}";
-    if (type.name == "total" || type.name == "latest") {
-      endPoint = "";
+  String getEndPoint(String requestName, int? bigCategory, int? smallCategory) {
+    String endPoint = "?status=$requestName";
+    if (bigCategory != null) {
+      endPoint += "&bigCategoryId=$bigCategory";
     }
-    try {
-      Response response = await MyHttp.get()
-          .get("/books$endPoint?page=$page&size=10");
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
-      responseDTO.data = mainDTO;
-      return responseDTO;
-    } catch (e) {
-      return ResponseDTO(code: -1, msg: "실패 : ${e}");
+    if (smallCategory != null) {
+      endPoint += "&smallCategoryId=$smallCategory";
     }
+    return endPoint;
   }
 
   Future<ResponseDTO> deleteCartBook(int id) async {

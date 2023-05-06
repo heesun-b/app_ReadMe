@@ -16,6 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainPageModel {
+  bool get isLoading => throw _privateConstructorUsedError;
+  set isLoading(bool value) => throw _privateConstructorUsedError;
   int get totalPage => throw _privateConstructorUsedError;
   set totalPage(int value) => throw _privateConstructorUsedError;
   int get bestPage => throw _privateConstructorUsedError;
@@ -42,6 +44,8 @@ mixin _$MainPageModel {
   set recommendBooks(List<Book> value) => throw _privateConstructorUsedError;
   List<Book> get latestBooks => throw _privateConstructorUsedError;
   set latestBooks(List<Book> value) => throw _privateConstructorUsedError;
+  List<MainTab> get mainTabs => throw _privateConstructorUsedError;
+  set mainTabs(List<MainTab> value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainPageModelCopyWith<MainPageModel> get copyWith =>
@@ -55,7 +59,8 @@ abstract class $MainPageModelCopyWith<$Res> {
       _$MainPageModelCopyWithImpl<$Res, MainPageModel>;
   @useResult
   $Res call(
-      {int totalPage,
+      {bool isLoading,
+      int totalPage,
       int bestPage,
       int recommendPage,
       int latestPage,
@@ -67,7 +72,8 @@ abstract class $MainPageModelCopyWith<$Res> {
       List<Book> totalBooks,
       List<Book> bestBooks,
       List<Book> recommendBooks,
-      List<Book> latestBooks});
+      List<Book> latestBooks,
+      List<MainTab> mainTabs});
 }
 
 /// @nodoc
@@ -83,6 +89,7 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? totalPage = null,
     Object? bestPage = null,
     Object? recommendPage = null,
@@ -96,8 +103,13 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
     Object? bestBooks = null,
     Object? recommendBooks = null,
     Object? latestBooks = null,
+    Object? mainTabs = null,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       totalPage: null == totalPage
           ? _value.totalPage
           : totalPage // ignore: cast_nullable_to_non_nullable
@@ -150,6 +162,10 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
           ? _value.latestBooks
           : latestBooks // ignore: cast_nullable_to_non_nullable
               as List<Book>,
+      mainTabs: null == mainTabs
+          ? _value.mainTabs
+          : mainTabs // ignore: cast_nullable_to_non_nullable
+              as List<MainTab>,
     ) as $Val);
   }
 }
@@ -163,7 +179,8 @@ abstract class _$$_MainPageModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int totalPage,
+      {bool isLoading,
+      int totalPage,
       int bestPage,
       int recommendPage,
       int latestPage,
@@ -175,7 +192,8 @@ abstract class _$$_MainPageModelCopyWith<$Res>
       List<Book> totalBooks,
       List<Book> bestBooks,
       List<Book> recommendBooks,
-      List<Book> latestBooks});
+      List<Book> latestBooks,
+      List<MainTab> mainTabs});
 }
 
 /// @nodoc
@@ -189,6 +207,7 @@ class __$$_MainPageModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? totalPage = null,
     Object? bestPage = null,
     Object? recommendPage = null,
@@ -202,8 +221,13 @@ class __$$_MainPageModelCopyWithImpl<$Res>
     Object? bestBooks = null,
     Object? recommendBooks = null,
     Object? latestBooks = null,
+    Object? mainTabs = null,
   }) {
     return _then(_$_MainPageModel(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       totalPage: null == totalPage
           ? _value.totalPage
           : totalPage // ignore: cast_nullable_to_non_nullable
@@ -256,6 +280,10 @@ class __$$_MainPageModelCopyWithImpl<$Res>
           ? _value.latestBooks
           : latestBooks // ignore: cast_nullable_to_non_nullable
               as List<Book>,
+      mainTabs: null == mainTabs
+          ? _value.mainTabs
+          : mainTabs // ignore: cast_nullable_to_non_nullable
+              as List<MainTab>,
     ));
   }
 }
@@ -264,7 +292,8 @@ class __$$_MainPageModelCopyWithImpl<$Res>
 
 class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
   _$_MainPageModel(
-      {required this.totalPage,
+      {required this.isLoading,
+      required this.totalPage,
       required this.bestPage,
       required this.recommendPage,
       required this.latestPage,
@@ -276,8 +305,11 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
       required this.totalBooks,
       required this.bestBooks,
       required this.recommendBooks,
-      required this.latestBooks});
+      required this.latestBooks,
+      required this.mainTabs});
 
+  @override
+  bool isLoading;
   @override
   int totalPage;
   @override
@@ -304,10 +336,12 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
   List<Book> recommendBooks;
   @override
   List<Book> latestBooks;
+  @override
+  List<MainTab> mainTabs;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MainPageModel(totalPage: $totalPage, bestPage: $bestPage, recommendPage: $recommendPage, latestPage: $latestPage, isTotalLast: $isTotalLast, isBestLast: $isBestLast, isRecommendLast: $isRecommendLast, isLatestLast: $isLatestLast, bookBanners: $bookBanners, totalBooks: $totalBooks, bestBooks: $bestBooks, recommendBooks: $recommendBooks, latestBooks: $latestBooks)';
+    return 'MainPageModel(isLoading: $isLoading, totalPage: $totalPage, bestPage: $bestPage, recommendPage: $recommendPage, latestPage: $latestPage, isTotalLast: $isTotalLast, isBestLast: $isBestLast, isRecommendLast: $isRecommendLast, isLatestLast: $isLatestLast, bookBanners: $bookBanners, totalBooks: $totalBooks, bestBooks: $bestBooks, recommendBooks: $recommendBooks, latestBooks: $latestBooks, mainTabs: $mainTabs)';
   }
 
   @override
@@ -315,6 +349,7 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'MainPageModel'))
+      ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('totalPage', totalPage))
       ..add(DiagnosticsProperty('bestPage', bestPage))
       ..add(DiagnosticsProperty('recommendPage', recommendPage))
@@ -327,7 +362,8 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
       ..add(DiagnosticsProperty('totalBooks', totalBooks))
       ..add(DiagnosticsProperty('bestBooks', bestBooks))
       ..add(DiagnosticsProperty('recommendBooks', recommendBooks))
-      ..add(DiagnosticsProperty('latestBooks', latestBooks));
+      ..add(DiagnosticsProperty('latestBooks', latestBooks))
+      ..add(DiagnosticsProperty('mainTabs', mainTabs));
   }
 
   @JsonKey(ignore: true)
@@ -339,7 +375,8 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
 
 abstract class _MainPageModel implements MainPageModel {
   factory _MainPageModel(
-      {required int totalPage,
+      {required bool isLoading,
+      required int totalPage,
       required int bestPage,
       required int recommendPage,
       required int latestPage,
@@ -351,8 +388,12 @@ abstract class _MainPageModel implements MainPageModel {
       required List<Book> totalBooks,
       required List<Book> bestBooks,
       required List<Book> recommendBooks,
-      required List<Book> latestBooks}) = _$_MainPageModel;
+      required List<Book> latestBooks,
+      required List<MainTab> mainTabs}) = _$_MainPageModel;
 
+  @override
+  bool get isLoading;
+  set isLoading(bool value);
   @override
   int get totalPage;
   set totalPage(int value);
@@ -392,6 +433,9 @@ abstract class _MainPageModel implements MainPageModel {
   @override
   List<Book> get latestBooks;
   set latestBooks(List<Book> value);
+  @override
+  List<MainTab> get mainTabs;
+  set mainTabs(List<MainTab> value);
   @override
   @JsonKey(ignore: true)
   _$$_MainPageModelCopyWith<_$_MainPageModel> get copyWith =>
