@@ -44,8 +44,8 @@ mixin _$MainPageModel {
   set recommendBooks(List<Book> value) => throw _privateConstructorUsedError;
   List<Book> get latestBooks => throw _privateConstructorUsedError;
   set latestBooks(List<Book> value) => throw _privateConstructorUsedError;
-  List<MainTab> get mainTabs => throw _privateConstructorUsedError;
-  set mainTabs(List<MainTab> value) => throw _privateConstructorUsedError;
+  List<TableMainTab> get mainTabs => throw _privateConstructorUsedError;
+  set mainTabs(List<TableMainTab> value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainPageModelCopyWith<MainPageModel> get copyWith =>
@@ -73,7 +73,7 @@ abstract class $MainPageModelCopyWith<$Res> {
       List<Book> bestBooks,
       List<Book> recommendBooks,
       List<Book> latestBooks,
-      List<MainTab> mainTabs});
+      List<TableMainTab> mainTabs});
 }
 
 /// @nodoc
@@ -165,7 +165,7 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
       mainTabs: null == mainTabs
           ? _value.mainTabs
           : mainTabs // ignore: cast_nullable_to_non_nullable
-              as List<MainTab>,
+              as List<TableMainTab>,
     ) as $Val);
   }
 }
@@ -193,7 +193,7 @@ abstract class _$$_MainPageModelCopyWith<$Res>
       List<Book> bestBooks,
       List<Book> recommendBooks,
       List<Book> latestBooks,
-      List<MainTab> mainTabs});
+      List<TableMainTab> mainTabs});
 }
 
 /// @nodoc
@@ -283,7 +283,7 @@ class __$$_MainPageModelCopyWithImpl<$Res>
       mainTabs: null == mainTabs
           ? _value.mainTabs
           : mainTabs // ignore: cast_nullable_to_non_nullable
-              as List<MainTab>,
+              as List<TableMainTab>,
     ));
   }
 }
@@ -337,7 +337,7 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
   @override
   List<Book> latestBooks;
   @override
-  List<MainTab> mainTabs;
+  List<TableMainTab> mainTabs;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -389,7 +389,7 @@ abstract class _MainPageModel implements MainPageModel {
       required List<Book> bestBooks,
       required List<Book> recommendBooks,
       required List<Book> latestBooks,
-      required List<MainTab> mainTabs}) = _$_MainPageModel;
+      required List<TableMainTab> mainTabs}) = _$_MainPageModel;
 
   @override
   bool get isLoading;
@@ -434,8 +434,8 @@ abstract class _MainPageModel implements MainPageModel {
   List<Book> get latestBooks;
   set latestBooks(List<Book> value);
   @override
-  List<MainTab> get mainTabs;
-  set mainTabs(List<MainTab> value);
+  List<TableMainTab> get mainTabs;
+  set mainTabs(List<TableMainTab> value);
   @override
   @JsonKey(ignore: true)
   _$$_MainPageModelCopyWith<_$_MainPageModel> get copyWith =>

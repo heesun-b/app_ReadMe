@@ -25,6 +25,7 @@ _$_MetaDTO _$$_MetaDTOFromJson(Map<String, dynamic> json) => _$_MetaDTO(
       notificationTypes: (json['notificationTypes'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      jwt: json['jwt'] as String?,
     );
 
 Map<String, dynamic> _$$_MetaDTOToJson(_$_MetaDTO instance) =>
@@ -35,6 +36,7 @@ Map<String, dynamic> _$$_MetaDTOToJson(_$_MetaDTO instance) =>
       'mainTabs': instance.mainTabs,
       'paymentTabs': instance.paymentTabs,
       'notificationTypes': instance.notificationTypes,
+      'jwt': instance.jwt,
     };
 
 _$_CommonDTO _$$_CommonDTOFromJson(Map<String, dynamic> json) => _$_CommonDTO(

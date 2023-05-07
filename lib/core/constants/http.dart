@@ -30,6 +30,11 @@ class MyHttp {
       ));
   }
 
+  static Future<Dio> getCommon() async {
+    String? jwtToken = await SecureStorage.get(SecureStorageEnum.jwtToken);
+    return jwtToken != null ? getSecurity() : Future(() => get());
+  }
+
   static Future<bool> refresh (Function function) async {
 
     // AccessToken [만료 기간이 짧다] -> header -> 403
