@@ -18,15 +18,8 @@ class MainPage extends ConsumerWidget {
     MainPageModel? model = ref.watch(mainPageProvider);
 
     return DefaultTabController(
-      length: 4,
-      child: model?.isLoading ?? true
-          ? Container(
-            color: Colours.app_main,
-            child: Center (
-              child: LoadingAnimationWidget.staggeredDotsWave(color: Colors.white, size: 50.0), // 로딩 표시에 사용되는 CircularProgressIndicator 위젯
-            ),
-          )
-          : NestedScrollView(
+      length: model?.mainTabs.length ?? 1,
+      child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             SliverAppBar(

@@ -11,7 +11,7 @@ import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/core/constants/secure_storage.dart';
 import 'package:readme_app/core/constants/secure_storage_enum.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
-import 'package:readme_app/dto/user_info_dto/user_info_dto.dart';
+import 'package:readme_app/dto/user_memebership_info_dto/user_membership_info_dto.dart';
 import 'package:readme_app/main.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 
@@ -50,7 +50,7 @@ class UserRepository {
 
       /// 4.사용자 id토큰 가져오기
       final idToken = await currentUser?.getIdToken();
-      log("Firebase Token: $idToken");
+      // log("Firebase Token: $idToken");
 
 
       /// 5. id토큰을 스프링 서버로 전달
@@ -59,12 +59,13 @@ class UserRepository {
 
       /// 6.스프링 서버로 부터 받은 토큰을 앱 서버로 전달
       final jwtToken = response.headers.value('Authorization');
-
+      // print("체크 $jwtToken");
 
       /// 7.앱에서 사용자 토큰 저장
       if (jwtToken != null) {
         SecureStorage.setKey(SecureStorageEnum.jwtToken, jwtToken);
       }
+
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
       return responseDTO;
@@ -101,11 +102,12 @@ class UserRepository {
      try {
       Dio dio = await MyHttp.getSecurity();
       Response response = await dio.get("/users/my");
+
       if (response.statusCode == 401 || response.statusCode == 403) {
         return ResponseDTO(code: 401, msg: "인증 실패입니다.");
       } else if (response.statusCode == 200) {
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-        responseDTO.data = UserInfoDTO.fromJson(responseDTO.data);
+        responseDTO.data = UserMembershipInfoDTO.fromJson(responseDTO.data);
         return responseDTO;
       } else {
         return ResponseDTO(code: response.statusCode, msg: response.statusMessage);

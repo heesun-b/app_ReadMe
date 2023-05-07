@@ -22,8 +22,7 @@ class CategoryPageModel with _$CategoryPageModel {
     required List<BigCategory> categoryTabs,
     required List<Book> books,
   required int page,
-  required bool isLast,
-    required bool isLoading,
+  required bool isLast
   }) = _CategoryPageModel;
 }
 //
@@ -51,7 +50,7 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
 
   void notifyInit() async {
 
-    CategoryPageModel books = CategoryPageModel(books: [] , page: 0, isLast: false, categoryTabs: [], bigCategoryId: 0, smallCategoryId: 0, isLoading: true);
+    CategoryPageModel books = CategoryPageModel(books: [] , page: 0, isLast: false, categoryTabs: [], bigCategoryId: 0, smallCategoryId: 0);
 
     List<BigCategory> sqlCategoryTabs =  await MySqfliteInit.getBigCategoryList();
     List<BigCategory> categoryTabs = [];
@@ -66,10 +65,6 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
 
     books =  books.copyWith(books: total.content , page: 0, isLast: total.last, categoryTabs: categoryTabs);
 
-    Future.delayed(const Duration(seconds: 2), () {
-      state = books.copyWith(isLoading: false);
-    });
-
    state = books;
   }
 
@@ -77,11 +72,11 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
   void categorySearch(int bigCategory, {int? smallCategory}) async {
     ResponseDTO responseDTO = await BookRepository().mainList("all", bigCategory: bigCategory, smallCategory: smallCategory);
     MainDTO total = responseDTO.data;
-    state = state!.copyWith(books: total.content , page: 0, isLast: total.last, categoryTabs: state!.categoryTabs, bigCategoryId: bigCategory, smallCategoryId: smallCategory ?? 0, isLoading: false);
+    state = state!.copyWith(books: total.content , page: 0, isLast: total.last, categoryTabs: state!.categoryTabs, bigCategoryId: bigCategory, smallCategoryId: smallCategory ?? 0);
   }
 
   void pageSearch(MainDTO mainDTO, int page, int bigCategory, {int? smallCategory}) async {
-    state = state!.copyWith(books: [...state!.books, ...mainDTO.content] , page: page, isLast: mainDTO.last, categoryTabs: state!.categoryTabs, bigCategoryId: bigCategory, smallCategoryId: smallCategory ?? 0, isLoading: false);
+    state = state!.copyWith(books: [...state!.books, ...mainDTO.content] , page: page, isLast: mainDTO.last, categoryTabs: state!.categoryTabs, bigCategoryId: bigCategory, smallCategoryId: smallCategory ?? 0);
   }
 
   void bigCategoryIdSelect(int bigCategoryId) {

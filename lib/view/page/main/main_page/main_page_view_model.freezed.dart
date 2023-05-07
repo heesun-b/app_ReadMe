@@ -16,8 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainPageModel {
-  bool get isLoading => throw _privateConstructorUsedError;
-  set isLoading(bool value) => throw _privateConstructorUsedError;
   int get totalPage => throw _privateConstructorUsedError;
   set totalPage(int value) => throw _privateConstructorUsedError;
   int get bestPage => throw _privateConstructorUsedError;
@@ -59,8 +57,7 @@ abstract class $MainPageModelCopyWith<$Res> {
       _$MainPageModelCopyWithImpl<$Res, MainPageModel>;
   @useResult
   $Res call(
-      {bool isLoading,
-      int totalPage,
+      {int totalPage,
       int bestPage,
       int recommendPage,
       int latestPage,
@@ -89,7 +86,6 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
     Object? totalPage = null,
     Object? bestPage = null,
     Object? recommendPage = null,
@@ -106,10 +102,6 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
     Object? mainTabs = null,
   }) {
     return _then(_value.copyWith(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       totalPage: null == totalPage
           ? _value.totalPage
           : totalPage // ignore: cast_nullable_to_non_nullable
@@ -179,8 +171,7 @@ abstract class _$$_MainPageModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading,
-      int totalPage,
+      {int totalPage,
       int bestPage,
       int recommendPage,
       int latestPage,
@@ -207,7 +198,6 @@ class __$$_MainPageModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
     Object? totalPage = null,
     Object? bestPage = null,
     Object? recommendPage = null,
@@ -224,10 +214,6 @@ class __$$_MainPageModelCopyWithImpl<$Res>
     Object? mainTabs = null,
   }) {
     return _then(_$_MainPageModel(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
       totalPage: null == totalPage
           ? _value.totalPage
           : totalPage // ignore: cast_nullable_to_non_nullable
@@ -292,8 +278,7 @@ class __$$_MainPageModelCopyWithImpl<$Res>
 
 class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
   _$_MainPageModel(
-      {required this.isLoading,
-      required this.totalPage,
+      {required this.totalPage,
       required this.bestPage,
       required this.recommendPage,
       required this.latestPage,
@@ -308,8 +293,6 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
       required this.latestBooks,
       required this.mainTabs});
 
-  @override
-  bool isLoading;
   @override
   int totalPage;
   @override
@@ -341,7 +324,7 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MainPageModel(isLoading: $isLoading, totalPage: $totalPage, bestPage: $bestPage, recommendPage: $recommendPage, latestPage: $latestPage, isTotalLast: $isTotalLast, isBestLast: $isBestLast, isRecommendLast: $isRecommendLast, isLatestLast: $isLatestLast, bookBanners: $bookBanners, totalBooks: $totalBooks, bestBooks: $bestBooks, recommendBooks: $recommendBooks, latestBooks: $latestBooks, mainTabs: $mainTabs)';
+    return 'MainPageModel(totalPage: $totalPage, bestPage: $bestPage, recommendPage: $recommendPage, latestPage: $latestPage, isTotalLast: $isTotalLast, isBestLast: $isBestLast, isRecommendLast: $isRecommendLast, isLatestLast: $isLatestLast, bookBanners: $bookBanners, totalBooks: $totalBooks, bestBooks: $bestBooks, recommendBooks: $recommendBooks, latestBooks: $latestBooks, mainTabs: $mainTabs)';
   }
 
   @override
@@ -349,7 +332,6 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'MainPageModel'))
-      ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('totalPage', totalPage))
       ..add(DiagnosticsProperty('bestPage', bestPage))
       ..add(DiagnosticsProperty('recommendPage', recommendPage))
@@ -375,8 +357,7 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
 
 abstract class _MainPageModel implements MainPageModel {
   factory _MainPageModel(
-      {required bool isLoading,
-      required int totalPage,
+      {required int totalPage,
       required int bestPage,
       required int recommendPage,
       required int latestPage,
@@ -391,9 +372,6 @@ abstract class _MainPageModel implements MainPageModel {
       required List<Book> latestBooks,
       required List<TableMainTab> mainTabs}) = _$_MainPageModel;
 
-  @override
-  bool get isLoading;
-  set isLoading(bool value);
   @override
   int get totalPage;
   set totalPage(int value);
