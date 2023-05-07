@@ -16,14 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserPageModel {
-  UserInfoDTO? get userInfoDTO => throw _privateConstructorUsedError;
-  set userInfoDTO(UserInfoDTO? value) => throw _privateConstructorUsedError;
-  String? get username => throw _privateConstructorUsedError;
-  set username(String? value) => throw _privateConstructorUsedError;
-  String? get role => throw _privateConstructorUsedError;
-  set role(String? value) => throw _privateConstructorUsedError;
-  int? get id => throw _privateConstructorUsedError;
-  set id(int? value) => throw _privateConstructorUsedError;
+  UserMembershipInfoDTO? get userMembershipInfoDTO =>
+      throw _privateConstructorUsedError;
+  set userMembershipInfoDTO(UserMembershipInfoDTO? value) =>
+      throw _privateConstructorUsedError;
+  TableUser? get user => throw _privateConstructorUsedError;
+  set user(TableUser? value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserPageModelCopyWith<UserPageModel> get copyWith =>
@@ -36,10 +34,9 @@ abstract class $UserPageModelCopyWith<$Res> {
           UserPageModel value, $Res Function(UserPageModel) then) =
       _$UserPageModelCopyWithImpl<$Res, UserPageModel>;
   @useResult
-  $Res call(
-      {UserInfoDTO? userInfoDTO, String? username, String? role, int? id});
+  $Res call({UserMembershipInfoDTO? userMembershipInfoDTO, TableUser? user});
 
-  $UserInfoDTOCopyWith<$Res>? get userInfoDTO;
+  $UserMembershipInfoDTOCopyWith<$Res>? get userMembershipInfoDTO;
 }
 
 /// @nodoc
@@ -55,40 +52,31 @@ class _$UserPageModelCopyWithImpl<$Res, $Val extends UserPageModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userInfoDTO = freezed,
-    Object? username = freezed,
-    Object? role = freezed,
-    Object? id = freezed,
+    Object? userMembershipInfoDTO = freezed,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
-      userInfoDTO: freezed == userInfoDTO
-          ? _value.userInfoDTO
-          : userInfoDTO // ignore: cast_nullable_to_non_nullable
-              as UserInfoDTO?,
-      username: freezed == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String?,
-      role: freezed == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as String?,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+      userMembershipInfoDTO: freezed == userMembershipInfoDTO
+          ? _value.userMembershipInfoDTO
+          : userMembershipInfoDTO // ignore: cast_nullable_to_non_nullable
+              as UserMembershipInfoDTO?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as TableUser?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserInfoDTOCopyWith<$Res>? get userInfoDTO {
-    if (_value.userInfoDTO == null) {
+  $UserMembershipInfoDTOCopyWith<$Res>? get userMembershipInfoDTO {
+    if (_value.userMembershipInfoDTO == null) {
       return null;
     }
 
-    return $UserInfoDTOCopyWith<$Res>(_value.userInfoDTO!, (value) {
-      return _then(_value.copyWith(userInfoDTO: value) as $Val);
+    return $UserMembershipInfoDTOCopyWith<$Res>(_value.userMembershipInfoDTO!,
+        (value) {
+      return _then(_value.copyWith(userMembershipInfoDTO: value) as $Val);
     });
   }
 }
@@ -101,11 +89,10 @@ abstract class _$$_UserPageModelCopyWith<$Res>
       __$$_UserPageModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {UserInfoDTO? userInfoDTO, String? username, String? role, int? id});
+  $Res call({UserMembershipInfoDTO? userMembershipInfoDTO, TableUser? user});
 
   @override
-  $UserInfoDTOCopyWith<$Res>? get userInfoDTO;
+  $UserMembershipInfoDTOCopyWith<$Res>? get userMembershipInfoDTO;
 }
 
 /// @nodoc
@@ -119,28 +106,18 @@ class __$$_UserPageModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userInfoDTO = freezed,
-    Object? username = freezed,
-    Object? role = freezed,
-    Object? id = freezed,
+    Object? userMembershipInfoDTO = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$_UserPageModel(
-      userInfoDTO: freezed == userInfoDTO
-          ? _value.userInfoDTO
-          : userInfoDTO // ignore: cast_nullable_to_non_nullable
-              as UserInfoDTO?,
-      username: freezed == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String?,
-      role: freezed == role
-          ? _value.role
-          : role // ignore: cast_nullable_to_non_nullable
-              as String?,
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+      userMembershipInfoDTO: freezed == userMembershipInfoDTO
+          ? _value.userMembershipInfoDTO
+          : userMembershipInfoDTO // ignore: cast_nullable_to_non_nullable
+              as UserMembershipInfoDTO?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as TableUser?,
     ));
   }
 }
@@ -148,20 +125,16 @@ class __$$_UserPageModelCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UserPageModel implements _UserPageModel {
-  _$_UserPageModel({this.userInfoDTO, this.username, this.role, this.id});
+  _$_UserPageModel({this.userMembershipInfoDTO, this.user});
 
   @override
-  UserInfoDTO? userInfoDTO;
+  UserMembershipInfoDTO? userMembershipInfoDTO;
   @override
-  String? username;
-  @override
-  String? role;
-  @override
-  int? id;
+  TableUser? user;
 
   @override
   String toString() {
-    return 'UserPageModel(userInfoDTO: $userInfoDTO, username: $username, role: $role, id: $id)';
+    return 'UserPageModel(userMembershipInfoDTO: $userMembershipInfoDTO, user: $user)';
   }
 
   @JsonKey(ignore: true)
@@ -173,23 +146,15 @@ class _$_UserPageModel implements _UserPageModel {
 
 abstract class _UserPageModel implements UserPageModel {
   factory _UserPageModel(
-      {UserInfoDTO? userInfoDTO,
-      String? username,
-      String? role,
-      int? id}) = _$_UserPageModel;
+      {UserMembershipInfoDTO? userMembershipInfoDTO,
+      TableUser? user}) = _$_UserPageModel;
 
   @override
-  UserInfoDTO? get userInfoDTO;
-  set userInfoDTO(UserInfoDTO? value);
+  UserMembershipInfoDTO? get userMembershipInfoDTO;
+  set userMembershipInfoDTO(UserMembershipInfoDTO? value);
   @override
-  String? get username;
-  set username(String? value);
-  @override
-  String? get role;
-  set role(String? value);
-  @override
-  int? get id;
-  set id(int? value);
+  TableUser? get user;
+  set user(TableUser? value);
   @override
   @JsonKey(ignore: true)
   _$$_UserPageModelCopyWith<_$_UserPageModel> get copyWith =>

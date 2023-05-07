@@ -15,7 +15,7 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 2,
+      initialIndex: 0,
       length: 4,
       child: Scaffold(
         appBar: AppBar(

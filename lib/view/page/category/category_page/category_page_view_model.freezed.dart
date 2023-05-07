@@ -29,8 +29,6 @@ mixin _$CategoryPageModel {
   set page(int value) => throw _privateConstructorUsedError;
   bool get isLast => throw _privateConstructorUsedError;
   set isLast(bool value) => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
-  set isLoading(bool value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoryPageModelCopyWith<CategoryPageModel> get copyWith =>
@@ -49,8 +47,7 @@ abstract class $CategoryPageModelCopyWith<$Res> {
       List<BigCategory> categoryTabs,
       List<Book> books,
       int page,
-      bool isLast,
-      bool isLoading});
+      bool isLast});
 }
 
 /// @nodoc
@@ -72,7 +69,6 @@ class _$CategoryPageModelCopyWithImpl<$Res, $Val extends CategoryPageModel>
     Object? books = null,
     Object? page = null,
     Object? isLast = null,
-    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       bigCategoryId: null == bigCategoryId
@@ -99,10 +95,6 @@ class _$CategoryPageModelCopyWithImpl<$Res, $Val extends CategoryPageModel>
           ? _value.isLast
           : isLast // ignore: cast_nullable_to_non_nullable
               as bool,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -121,8 +113,7 @@ abstract class _$$_CategoryPageModelCopyWith<$Res>
       List<BigCategory> categoryTabs,
       List<Book> books,
       int page,
-      bool isLast,
-      bool isLoading});
+      bool isLast});
 }
 
 /// @nodoc
@@ -142,7 +133,6 @@ class __$$_CategoryPageModelCopyWithImpl<$Res>
     Object? books = null,
     Object? page = null,
     Object? isLast = null,
-    Object? isLoading = null,
   }) {
     return _then(_$_CategoryPageModel(
       bigCategoryId: null == bigCategoryId
@@ -169,10 +159,6 @@ class __$$_CategoryPageModelCopyWithImpl<$Res>
           ? _value.isLast
           : isLast // ignore: cast_nullable_to_non_nullable
               as bool,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -188,8 +174,7 @@ class _$_CategoryPageModel
       required this.categoryTabs,
       required this.books,
       required this.page,
-      required this.isLast,
-      required this.isLoading});
+      required this.isLast});
 
   @override
   int bigCategoryId;
@@ -203,12 +188,10 @@ class _$_CategoryPageModel
   int page;
   @override
   bool isLast;
-  @override
-  bool isLoading;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CategoryPageModel(bigCategoryId: $bigCategoryId, smallCategoryId: $smallCategoryId, categoryTabs: $categoryTabs, books: $books, page: $page, isLast: $isLast, isLoading: $isLoading)';
+    return 'CategoryPageModel(bigCategoryId: $bigCategoryId, smallCategoryId: $smallCategoryId, categoryTabs: $categoryTabs, books: $books, page: $page, isLast: $isLast)';
   }
 
   @override
@@ -221,8 +204,7 @@ class _$_CategoryPageModel
       ..add(DiagnosticsProperty('categoryTabs', categoryTabs))
       ..add(DiagnosticsProperty('books', books))
       ..add(DiagnosticsProperty('page', page))
-      ..add(DiagnosticsProperty('isLast', isLast))
-      ..add(DiagnosticsProperty('isLoading', isLoading));
+      ..add(DiagnosticsProperty('isLast', isLast));
   }
 
   @JsonKey(ignore: true)
@@ -240,8 +222,7 @@ abstract class _CategoryPageModel implements CategoryPageModel {
       required List<BigCategory> categoryTabs,
       required List<Book> books,
       required int page,
-      required bool isLast,
-      required bool isLoading}) = _$_CategoryPageModel;
+      required bool isLast}) = _$_CategoryPageModel;
 
   @override
   int get bigCategoryId;
@@ -261,9 +242,6 @@ abstract class _CategoryPageModel implements CategoryPageModel {
   @override
   bool get isLast;
   set isLast(bool value);
-  @override
-  bool get isLoading;
-  set isLoading(bool value);
   @override
   @JsonKey(ignore: true)
   _$$_CategoryPageModelCopyWith<_$_CategoryPageModel> get copyWith =>

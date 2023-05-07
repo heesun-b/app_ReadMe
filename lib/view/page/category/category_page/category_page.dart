@@ -15,14 +15,7 @@ class CategoryPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     CategoryPageModel? model = ref.watch(categoryPageProvider);
 
-    return model?.isLoading ?? true
-        ? Container(
-      color: Colours.app_main,
-      child: Center (
-        child: LoadingAnimationWidget.staggeredDotsWave(color: Colors.white, size: 50.0), // 로딩 표시에 사용되는 CircularProgressIndicator 위젯
-      ),
-    )
-        :Scaffold(
+    return Scaffold(
       backgroundColor: Colours.app_sub_white,
       appBar: PreferredSize(
         preferredSize:  Size.fromHeight(kToolbarHeight),
