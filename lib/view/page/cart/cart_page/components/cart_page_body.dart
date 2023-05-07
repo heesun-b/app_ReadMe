@@ -148,50 +148,56 @@ class CartPageBody extends ConsumerWidget {
                 },
               ),
               SizedBox(width: 8,),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 25.0),
-                    child: Container(
-                      width: 80,
-                      height: 110,
-                      child: Image.network(
-                        "${cartBooks[index].cartDTO.book.coverFile.fileUrl}",
-                        fit: BoxFit.fitHeight,
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, "/bookDetail", arguments: {
+                  'bookId': cartBooks[index].cartDTO.book.id},);
+                },
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 25.0),
+                      child: Container(
+                        width: 80,
+                        height: 110,
+                        child: Image.network(
+                          "${cartBooks[index].cartDTO.book.coverFile.fileUrl}",
+                          fit: BoxFit.fitHeight,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Text(
-                          "${cartBooks[index].cartDTO.book.title}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 17,
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Text(
+                            "${cartBooks[index].cartDTO.book.title}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 17,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
                           ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
+                          width: 190,
                         ),
-                        width: 190,
-                      ),
-                      Text(
-                          "${cartBooks[index].cartDTO.book.author} | ${cartBooks[index].cartDTO.book.publisher.businessName}"),
-                      Row(
-                        children: [
-                          HsStyleIcons.star,
-                          Text("${cartBooks[index].cartDTO.book.stars}"),
-                        ],
-                      ),
-                      Text("소장가 ${priceFormat(cartBooks[index].cartDTO.book.price)}"),
-                    ],
-                  ),
-                ],
+                        Text(
+                            "${cartBooks[index].cartDTO.book.author} | ${cartBooks[index].cartDTO.book.publisher.businessName}"),
+                        Row(
+                          children: [
+                            HsStyleIcons.star,
+                            Text("${cartBooks[index].cartDTO.book.stars}"),
+                          ],
+                        ),
+                        Text("소장가 ${priceFormat(cartBooks[index].cartDTO.book.price)}"),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               Spacer(),
               IconButton(onPressed: () {

@@ -17,7 +17,7 @@ class HomeNavigationBar extends StatefulWidget {
   State<HomeNavigationBar> createState() => _HomeNavigationBarState();
 }
 
-class _HomeNavigationBarState extends State<HomeNavigationBar>  with AutomaticKeepAliveClientMixin{
+class _HomeNavigationBarState extends State<HomeNavigationBar>{
 
   int _selectedIndex = 0;
 
@@ -32,7 +32,7 @@ class _HomeNavigationBarState extends State<HomeNavigationBar>  with AutomaticKe
       case 3:
         return ContentBoxPage();
       case 4:
-        return UserPage();
+        return  UserPage();
       default:
         return Container();
     }
@@ -42,7 +42,15 @@ class _HomeNavigationBarState extends State<HomeNavigationBar>  with AutomaticKe
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: _buildScreen(_selectedIndex),
+        child: IndexedStack(
+          index: _selectedIndex,
+          children: [
+            CategoryPage(),
+            SearchListPage(),
+            MainPage(),
+            ContentBoxPage(),
+            UserPage()
+          ]),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,

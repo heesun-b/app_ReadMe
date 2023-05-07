@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:readme_app/core/constants/secure_storage.dart';
+import 'package:readme_app/sqflite/sqflite.dart';
+import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/view/components/home_navigation_bar.dart';
 import 'package:readme_app/view/page/alarm/alarm_page/alarm_page.dart';
 import 'package:readme_app/view/page/auth/login_page/login_page.dart';
@@ -46,13 +49,23 @@ class Move {
 
 }
 
-Map<String, Widget Function(BuildContext)> getRouters() {
+Map<String, Widget Function(BuildContext)> getRouters(){
   return {
     Move.categoryPage: (context) => CategoryPage(),
     Move.searchListPage: (context) => SearchListPage(),
     Move.mainPage: (context) => MainPage(),
     Move.userPage: (context) => UserPage(),
-    Move.navigationBar: (context) => HomeNavigationBar(),
+    Move.navigationBar: (context) {
+      return HomeNavigationBar(
+          // [
+          //   CategoryPage(),
+          //   SearchListPage(),
+          //   MainPage(),
+          //   ContentBoxPage(),
+          //   UserPage(),
+          // ]
+      );
+    },
     Move.alarmPage: (context) => AlarmPage(),
     Move.paymentPage: (context) => PaymentPage(),
     Move.cartPage: (context) => CartPage(),

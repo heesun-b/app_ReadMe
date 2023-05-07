@@ -97,10 +97,11 @@ class MySqfliteInit {
      return maps
           .map((e) => TablePaymentTab.fromJson(e as Map<String, dynamic>))
           .toList();
-
     }
     return [];
   }
+
+
 
   static Future<List<TableMainTab>> getMainTabs() async {
     if (_db == null) {
@@ -250,7 +251,10 @@ class MySqfliteInit {
           {'id': metaDTO.user!.id, 'username': metaDTO.user!.username,
           'role' : metaDTO.user!.role, 'isMembership' : metaDTO.user!.isMembership, 'isAutoPayment' : metaDTO.user!.isAutoPayment});
     }
+  }
 
+  static Future deleteUser() async {
+    await _db!.delete(TableName.user);
   }
 }
 

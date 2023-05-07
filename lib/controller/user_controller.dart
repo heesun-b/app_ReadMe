@@ -37,7 +37,9 @@ class UserController {
         await MySqfliteInit.insertUser(user);
         Navigator.pushNamed(mContext!, Move.navigationBar);
       } else {
-        ScaffoldMessenger.of(mContext!).showSnackBar(const SnackBar(content: Text("회원 정보 조회 실패")));
+        ScaffoldMessenger.of(mContext!).showSnackBar(
+            SnackBar(content: Text(responseUserDTO.msg ?? "회원 정보 조회 실패"))
+        );
       }
     }else{
       ScaffoldMessenger.of(mContext!).showSnackBar(const SnackBar(content: Text("회원가입 실패")));

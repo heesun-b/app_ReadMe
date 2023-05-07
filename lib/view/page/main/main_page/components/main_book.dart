@@ -8,6 +8,8 @@ import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/model/book/book.dart';
+import 'package:readme_app/sqflite/sqflite.dart';
+import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/view/components/use_button.dart';
 import 'package:readme_app/view/page/main/main_page/main_page_view_model.dart';
 
@@ -26,6 +28,7 @@ class MainBook extends ConsumerWidget {
     MainPageModel? model = ref.watch(mainPageProvider);
     bool isLast = false;
     int page = 0;
+    var tableUser = MySqfliteInit.getUser();
 
     Book? book;
     if (name == "전체") {
@@ -50,7 +53,7 @@ class MainBook extends ConsumerWidget {
       children: [
         InkWell(
           onTap: () {
-            Navigator.pushNamed(context, "/bookDetail");
+            Navigator.pushNamed(context, "/bookDetail", arguments: {'id': book?.id ?? 0});
           },
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -115,23 +118,6 @@ class MainBook extends ConsumerWidget {
                             constraints: const BoxConstraints(),
                             onPressed: () {
                               ref.read(cartControllerProvider).insert(book!.id);
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                  title: const Text("장바구니 담기 완료"),
-                                  content: const Text("장바구니로 이동하시겠습니까?"),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: const Text('취소'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pushNamed(context, "/cart"),
-                                      child: const Text('확인'),
-                                    ),
-                                  ],
-                                ),
-                              );
                               // Navigator.pushNamed(context, "/cart");
                             },
                             icon: YhIcons.cart2,
