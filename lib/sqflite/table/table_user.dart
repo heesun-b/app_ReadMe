@@ -5,12 +5,19 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 
 class TableUser {
+
+  int id;
+  String username;
+  String role;
+  bool isMembership;
+  bool isAutoPayment;
+
   TableUser({
-    required int id,
-    required String username,
-    required String role,
-    required bool isMembership,
-    required bool isAutoPayment,
+    required this.id,
+    required this.username,
+    required this.role,
+    required this.isMembership,
+    required this.isAutoPayment,
   });
 
 

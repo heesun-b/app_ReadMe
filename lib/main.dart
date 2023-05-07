@@ -20,7 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  SecureStorage.clear();
+  await SecureStorage.clear();
 
   Widget failWidget = const MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -42,9 +42,9 @@ void main() async {
         if (metaDTO.jwt != null && metaDTO.jwt != "") {
           SecureStorage.setKey(SecureStorageEnum.jwtToken, metaDTO.jwt!);
         }
-
+        await MySqfliteInit.deleteUser();
         runApp(
-          const ProviderScope(
+          ProviderScope(
             child: MyApp(),
           ),
         );
@@ -67,7 +67,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+  MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {

@@ -20,8 +20,9 @@ class BookRepository {
   Future<ResponseDTO> findCartList() async {
     try {
       // TODO user_id 부분 추후에 변경
+      Dio dio = await MyHttp.getCommon();
       Response response =
-          await MyHttp.get().get("/carts/1/users");
+          await dio.get("/carts/1/users");
       log(response.data.toString());
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
@@ -44,11 +45,14 @@ class BookRepository {
     String endPoint = getEndPoint(requestName, bigCategory, smallCategory);
     try {
       Response response = await MyHttp.get().get("/books$endPoint&page=0&size=10");
-      print(response.data);
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
-      responseDTO.data = mainDTO;
-      return responseDTO;
+      if(response.statusCode == 200) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
+        responseDTO.data = mainDTO;
+        return responseDTO;
+      } else {
+        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
+      }
     } catch (e) {
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
     }
@@ -59,10 +63,14 @@ class BookRepository {
     try {
       Response response = await MyHttp.get()
           .get("/books$endPoint&page=$page&size=10");
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
-      responseDTO.data = mainDTO;
-      return responseDTO;
+      if(response.statusCode == 200) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
+        responseDTO.data = mainDTO;
+        return responseDTO;
+      } else {
+        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
+      }
     } catch (e) {
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
     }
@@ -82,20 +90,33 @@ class BookRepository {
   Future<ResponseDTO> deleteCartBook(int id) async {
     try {
       Response response = await MyHttp.get().delete("/carts/$id");
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      return responseDTO;
+      if(response.statusCode == 401 ||response.statusCode == 403 ) {
+        return ResponseDTO(code: 401, msg: response.statusMessage);
+      } else if (response.statusCode == 200) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        return responseDTO;
+      } else {
+        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
+      }
     } catch (e) {
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
     }
   }
 
-  Future<ResponseDTO> addCart(int bookId, int userId) async {
+  Future<ResponseDTO> addCart(int bookId) async {
     try{
-      Response response = await MyHttp.get().post("/carts", data: {"userId" : userId, "bookId" : bookId});
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      CartDTO cartDTO = CartDTO.fromJson(responseDTO.data);
-      responseDTO.data = cartDTO;
-      return responseDTO;
+      Dio dio = await MyHttp.getSecurity();
+      Response response = await dio.post("/carts", data: {"bookId" : bookId});
+      if(response.statusCode == 401 || response.statusCode == 403) {
+        return ResponseDTO(code: 401, msg: response.statusMessage);
+      } else if (response.statusCode == 200 ) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        CartDTO cartDTO = CartDTO.fromJson(responseDTO.data);
+        responseDTO.data = cartDTO;
+        return responseDTO;
+      } else {
+        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
+      }
     } catch(e) {
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
     }
