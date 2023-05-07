@@ -76,7 +76,7 @@ class UserRepository {
       Dio dio =  await MyHttp.getSecurity();
       Response response = await dio.get("/users"); // 스프링에서 만든 join 로직에 요청
       return ResponseDTO.fromJson(response.data);
-    }catch(e){
+    } catch (e){
       print("User 로그 $e");
       return ResponseDTO(code: -1, msg: "구글 로그인 실패");
     }

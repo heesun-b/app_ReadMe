@@ -58,7 +58,10 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.cartPage: (context) => CartPage(),
     Move.bookDetailPage: (context) => BookDetailPage(),
     // Move.modalButtonSheet: (context) => ModalButtonSheet(),
-    Move.bookViewerPage: (context) => BookViewerPage(),
+    Move.bookViewerPage: (context) {
+      final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      return BookViewerPage(arguments);
+    },
     Move.membershipPage: (context) => MembershipPage(),
     Move.reviewPage: (context) => ReviewPage(),
     Move.paymentListPage: (context) => PaymentListPage(),

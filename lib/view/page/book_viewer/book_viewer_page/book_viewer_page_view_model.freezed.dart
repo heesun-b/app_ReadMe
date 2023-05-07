@@ -37,6 +37,9 @@ mixin _$BookViewerPageModel {
   set fontSize(double value) => throw _privateConstructorUsedError;
   TableUser? get user => throw _privateConstructorUsedError;
   set user(TableUser? value) => throw _privateConstructorUsedError;
+  EpubController get epubReaderController => throw _privateConstructorUsedError;
+  set epubReaderController(EpubController value) =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookViewerPageModelCopyWith<BookViewerPageModel> get copyWith =>
@@ -59,7 +62,8 @@ abstract class $BookViewerPageModelCopyWith<$Res> {
       bool isShowAppBarAndBottomSheet,
       double currentSliderValue,
       double fontSize,
-      TableUser? user});
+      TableUser? user,
+      EpubController epubReaderController});
 }
 
 /// @nodoc
@@ -85,6 +89,7 @@ class _$BookViewerPageModelCopyWithImpl<$Res, $Val extends BookViewerPageModel>
     Object? currentSliderValue = null,
     Object? fontSize = null,
     Object? user = freezed,
+    Object? epubReaderController = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -127,6 +132,10 @@ class _$BookViewerPageModelCopyWithImpl<$Res, $Val extends BookViewerPageModel>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as TableUser?,
+      epubReaderController: null == epubReaderController
+          ? _value.epubReaderController
+          : epubReaderController // ignore: cast_nullable_to_non_nullable
+              as EpubController,
     ) as $Val);
   }
 }
@@ -149,7 +158,8 @@ abstract class _$$_BookViewerPageModelCopyWith<$Res>
       bool isShowAppBarAndBottomSheet,
       double currentSliderValue,
       double fontSize,
-      TableUser? user});
+      TableUser? user,
+      EpubController epubReaderController});
 }
 
 /// @nodoc
@@ -173,6 +183,7 @@ class __$$_BookViewerPageModelCopyWithImpl<$Res>
     Object? currentSliderValue = null,
     Object? fontSize = null,
     Object? user = freezed,
+    Object? epubReaderController = null,
   }) {
     return _then(_$_BookViewerPageModel(
       title: null == title
@@ -215,6 +226,10 @@ class __$$_BookViewerPageModelCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as TableUser?,
+      epubReaderController: null == epubReaderController
+          ? _value.epubReaderController
+          : epubReaderController // ignore: cast_nullable_to_non_nullable
+              as EpubController,
     ));
   }
 }
@@ -232,7 +247,8 @@ class _$_BookViewerPageModel implements _BookViewerPageModel {
       required this.isShowAppBarAndBottomSheet,
       required this.currentSliderValue,
       required this.fontSize,
-      this.user});
+      this.user,
+      required this.epubReaderController});
 
   @override
   String title;
@@ -254,10 +270,12 @@ class _$_BookViewerPageModel implements _BookViewerPageModel {
   double fontSize;
   @override
   TableUser? user;
+  @override
+  EpubController epubReaderController;
 
   @override
   String toString() {
-    return 'BookViewerPageModel(title: $title, epubFilePath: $epubFilePath, coverFilePath: $coverFilePath, price: $price, isHeart: $isHeart, isBookMark: $isBookMark, isShowAppBarAndBottomSheet: $isShowAppBarAndBottomSheet, currentSliderValue: $currentSliderValue, fontSize: $fontSize, user: $user)';
+    return 'BookViewerPageModel(title: $title, epubFilePath: $epubFilePath, coverFilePath: $coverFilePath, price: $price, isHeart: $isHeart, isBookMark: $isBookMark, isShowAppBarAndBottomSheet: $isShowAppBarAndBottomSheet, currentSliderValue: $currentSliderValue, fontSize: $fontSize, user: $user, epubReaderController: $epubReaderController)';
   }
 
   @JsonKey(ignore: true)
@@ -279,7 +297,8 @@ abstract class _BookViewerPageModel implements BookViewerPageModel {
       required bool isShowAppBarAndBottomSheet,
       required double currentSliderValue,
       required double fontSize,
-      TableUser? user}) = _$_BookViewerPageModel;
+      TableUser? user,
+      required EpubController epubReaderController}) = _$_BookViewerPageModel;
 
   @override
   String get title;
@@ -311,6 +330,9 @@ abstract class _BookViewerPageModel implements BookViewerPageModel {
   @override
   TableUser? get user;
   set user(TableUser? value);
+  @override
+  EpubController get epubReaderController;
+  set epubReaderController(EpubController value);
   @override
   @JsonKey(ignore: true)
   _$$_BookViewerPageModelCopyWith<_$_BookViewerPageModel> get copyWith =>

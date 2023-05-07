@@ -733,7 +733,7 @@ class _BookDetailPageState extends State<BookDetailPage>
           top: 530,
             child: InkWell(
               onTap: (){
-                Navigator.pushNamed(context, "/viewer", arguments: {"bookDetail" : bookDetail});
+                Navigator.pushNamed(context, Move.bookViewerPage, arguments: {"bookDetail" : bookDetail});
               },
               child: Container(
           padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),

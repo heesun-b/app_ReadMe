@@ -1,30 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:readme_app/core/constants/colours.dart';
+import 'package:readme_app/core/constants/jh_style_icons.dart';
+import 'package:readme_app/util/epub/src/ui/epub_view.dart';
 import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page_view_model.dart';
 import 'package:readme_app/view/page/book_viewer/components/book_drawer_no_membership.dart';
-import '../../../../core/constants/colours.dart';
-import '../../../../core/constants/jh_style_icons.dart';
-import '../../../../util/epub/src/helpers/epub_document.dart';
-import '../../../../util/epub/src/ui/epub_view.dart';
 import '../components/book_drawer.dart';
 
 class BookViewerPage extends ConsumerWidget {
-  BookViewerPage({Key? key}) : super(key: key);
 
+  BookViewerPage(this.bookDetailData, {Key? key}) : super(key: key);
+  Map<String, dynamic> bookDetailData;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 
   @override
   Widget build(BuildContext context, WidgetRef ref)   {
-    BookViewerPageModel? model = ref.watch(bookViewerPageProvider);
-    final epubReaderController =  EpubController(
-        document: EpubDocument.openAsset(model!.epubFilePath));
+    BookViewerPageModel? model = ref.watch(bookViewerPageProvider(bookDetailData));
 
     return  Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: model.isShowAppBarAndBottomSheet
-            ? AppBar(
+        appBar: model?.isShowAppBarAndBottomSheet ?? false ? AppBar(
           centerTitle: true,
           leading: IconButton(
             icon: JHicons.back,
@@ -47,12 +44,12 @@ class BookViewerPage extends ConsumerWidget {
         )
             : null,
         key: _scaffoldKey,
-        endDrawer: model.user == null
+        endDrawer: model?.user == null
             ? BookDrawerNoMembership()
             : BookDrawer(),
         body: GestureDetector(
           onTap: () {
-            ref.read(bookViewerPageProvider.notifier).changeIsShowAppBarAndBottomSheet(model.isShowAppBarAndBottomSheet ? false : true);
+            ref.read(bookViewerPageProvider(bookDetailData).notifier).changeIsShowAppBarAndBottomSheet(model?.isShowAppBarAndBottomSheet ?? false ? false : true);
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -66,7 +63,8 @@ class BookViewerPage extends ConsumerWidget {
                   child: Container(
                     child: Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: buildEpubView(epubReaderController as BuildContext,ref)),
+                        // child: buildEpubView(epubReaderController as BuildContext, ref)),
+                        child: buildEpubView(model?.epubReaderController, ref)),
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                   ),
@@ -82,7 +80,7 @@ class BookViewerPage extends ConsumerWidget {
 
   Widget buildBottomSheet(BuildContext context, WidgetRef ref) {
     return Visibility(
-      visible: ref.read(bookViewerPageProvider)!.isShowAppBarAndBottomSheet,
+      visible: ref.read(bookViewerPageProvider(bookDetailData))!.isShowAppBarAndBottomSheet,
       child: BottomSheet(
         onClosing: () {},
         builder: (context) {
@@ -105,12 +103,12 @@ class BookViewerPage extends ConsumerWidget {
                             thumbColor: Colours.app_main,
                             inactiveColor: Colours.app_sub_grey,
                             activeColor: Colours.app_main,
-                            value: ref.read(bookViewerPageProvider)!.currentSliderValue,
+                            value: ref.read(bookViewerPageProvider(bookDetailData))!.currentSliderValue,
                             max: 100,
                             divisions: 100,
-                            label: ref.read(bookViewerPageProvider)!.currentSliderValue.round().toString(),
+                            label: ref.read(bookViewerPageProvider(bookDetailData))!.currentSliderValue.round().toString(),
                             onChanged: (double value) {
-                                ref.read(bookViewerPageProvider)!.currentSliderValue = value;
+                                ref.read(bookViewerPageProvider(bookDetailData))!.currentSliderValue = value;
                             },
                           ),
                         ),
@@ -160,7 +158,7 @@ class BookViewerPage extends ConsumerWidget {
         options: DefaultBuilderOptions(
           textStyle: TextStyle(
             height: 1.25,
-            fontSize: ref.read(bookViewerPageProvider)?.fontSize,
+            fontSize: ref.read(bookViewerPageProvider(bookDetailData))?.fontSize,
             color: Colors.black87,
             fontFamily: "NanumGothic",
           ),
@@ -171,7 +169,7 @@ class BookViewerPage extends ConsumerWidget {
 
   Widget buildBookmark(WidgetRef ref) {
     return Visibility(
-      visible: ref.read(bookViewerPageProvider)!.isBookMark,
+      visible: ref.read(bookViewerPageProvider(bookDetailData))!.isBookMark,
       child: Padding(
         padding: const EdgeInsets.only(right: 20),
         child: Align(
