@@ -26,6 +26,7 @@ mixin _$MetaDTO {
   List<CommonDTO> get mainTabs => throw _privateConstructorUsedError;
   List<CommonDTO> get paymentTabs => throw _privateConstructorUsedError;
   List<String> get notificationTypes => throw _privateConstructorUsedError;
+  String? get jwt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,9 +44,8 @@ abstract class $MetaDTOCopyWith<$Res> {
       List<CommonDTO> storageBoxTabs,
       List<CommonDTO> mainTabs,
       List<CommonDTO> paymentTabs,
-      List<String> notificationTypes});
-
-  $UserCopyWith<$Res>? get user;
+      List<String> notificationTypes,
+      String? jwt});
 }
 
 /// @nodoc
@@ -67,6 +67,7 @@ class _$MetaDTOCopyWithImpl<$Res, $Val extends MetaDTO>
     Object? mainTabs = null,
     Object? paymentTabs = null,
     Object? notificationTypes = null,
+    Object? jwt = freezed,
   }) {
     return _then(_value.copyWith(
       bigCategory: null == bigCategory
@@ -93,19 +94,11 @@ class _$MetaDTOCopyWithImpl<$Res, $Val extends MetaDTO>
           ? _value.notificationTypes
           : notificationTypes // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      jwt: freezed == jwt
+          ? _value.jwt
+          : jwt // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res>? get user {
-    if (_value.user == null) {
-      return null;
-    }
-
-    return $UserCopyWith<$Res>(_value.user!, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
   }
 }
 
@@ -122,10 +115,8 @@ abstract class _$$_MetaDTOCopyWith<$Res> implements $MetaDTOCopyWith<$Res> {
       List<CommonDTO> storageBoxTabs,
       List<CommonDTO> mainTabs,
       List<CommonDTO> paymentTabs,
-      List<String> notificationTypes});
-
-  @override
-  $UserCopyWith<$Res>? get user;
+      List<String> notificationTypes,
+      String? jwt});
 }
 
 /// @nodoc
@@ -144,6 +135,7 @@ class __$$_MetaDTOCopyWithImpl<$Res>
     Object? mainTabs = null,
     Object? paymentTabs = null,
     Object? notificationTypes = null,
+    Object? jwt = freezed,
   }) {
     return _then(_$_MetaDTO(
       bigCategory: null == bigCategory
@@ -170,6 +162,10 @@ class __$$_MetaDTOCopyWithImpl<$Res>
           ? _value._notificationTypes
           : notificationTypes // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      jwt: freezed == jwt
+          ? _value.jwt
+          : jwt // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -183,7 +179,8 @@ class _$_MetaDTO with DiagnosticableTreeMixin implements _MetaDTO {
       required final List<CommonDTO> storageBoxTabs,
       required final List<CommonDTO> mainTabs,
       required final List<CommonDTO> paymentTabs,
-      required final List<String> notificationTypes})
+      required final List<String> notificationTypes,
+      this.jwt})
       : _bigCategory = bigCategory,
         _storageBoxTabs = storageBoxTabs,
         _mainTabs = mainTabs,
@@ -237,8 +234,11 @@ class _$_MetaDTO with DiagnosticableTreeMixin implements _MetaDTO {
   }
 
   @override
+  final String? jwt;
+
+  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MetaDTO(bigCategory: $bigCategory, user: $user, storageBoxTabs: $storageBoxTabs, mainTabs: $mainTabs, paymentTabs: $paymentTabs, notificationTypes: $notificationTypes)';
+    return 'MetaDTO(bigCategory: $bigCategory, user: $user, storageBoxTabs: $storageBoxTabs, mainTabs: $mainTabs, paymentTabs: $paymentTabs, notificationTypes: $notificationTypes, jwt: $jwt)';
   }
 
   @override
@@ -251,7 +251,8 @@ class _$_MetaDTO with DiagnosticableTreeMixin implements _MetaDTO {
       ..add(DiagnosticsProperty('storageBoxTabs', storageBoxTabs))
       ..add(DiagnosticsProperty('mainTabs', mainTabs))
       ..add(DiagnosticsProperty('paymentTabs', paymentTabs))
-      ..add(DiagnosticsProperty('notificationTypes', notificationTypes));
+      ..add(DiagnosticsProperty('notificationTypes', notificationTypes))
+      ..add(DiagnosticsProperty('jwt', jwt));
   }
 
   @override
@@ -268,7 +269,8 @@ class _$_MetaDTO with DiagnosticableTreeMixin implements _MetaDTO {
             const DeepCollectionEquality()
                 .equals(other._paymentTabs, _paymentTabs) &&
             const DeepCollectionEquality()
-                .equals(other._notificationTypes, _notificationTypes));
+                .equals(other._notificationTypes, _notificationTypes) &&
+            (identical(other.jwt, jwt) || other.jwt == jwt));
   }
 
   @JsonKey(ignore: true)
@@ -280,7 +282,8 @@ class _$_MetaDTO with DiagnosticableTreeMixin implements _MetaDTO {
       const DeepCollectionEquality().hash(_storageBoxTabs),
       const DeepCollectionEquality().hash(_mainTabs),
       const DeepCollectionEquality().hash(_paymentTabs),
-      const DeepCollectionEquality().hash(_notificationTypes));
+      const DeepCollectionEquality().hash(_notificationTypes),
+      jwt);
 
   @JsonKey(ignore: true)
   @override
@@ -303,7 +306,8 @@ abstract class _MetaDTO implements MetaDTO {
       required final List<CommonDTO> storageBoxTabs,
       required final List<CommonDTO> mainTabs,
       required final List<CommonDTO> paymentTabs,
-      required final List<String> notificationTypes}) = _$_MetaDTO;
+      required final List<String> notificationTypes,
+      final String? jwt}) = _$_MetaDTO;
 
   factory _MetaDTO.fromJson(Map<String, dynamic> json) = _$_MetaDTO.fromJson;
 
@@ -319,6 +323,8 @@ abstract class _MetaDTO implements MetaDTO {
   List<CommonDTO> get paymentTabs;
   @override
   List<String> get notificationTypes;
+  @override
+  String? get jwt;
   @override
   @JsonKey(ignore: true)
   _$$_MetaDTOCopyWith<_$_MetaDTO> get copyWith =>

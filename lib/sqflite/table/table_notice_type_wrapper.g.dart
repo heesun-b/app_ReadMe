@@ -1,18 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'notice_type_wrapper.dart';
+part of 'table_notice_type_wrapper.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_NoticeTypeWrapper _$$_NoticeTypeWrapperFromJson(Map<String, dynamic> json) =>
-    _$_NoticeTypeWrapper(
+_$_TableNoticeTypeWrapper _$$_TableNoticeTypeWrapperFromJson(
+        Map<String, dynamic> json) =>
+    _$_TableNoticeTypeWrapper(
       noticeType: json['noticeType'] as String,
     );
 
-Map<String, dynamic> _$$_NoticeTypeWrapperToJson(
-        _$_NoticeTypeWrapper instance) =>
+Map<String, dynamic> _$$_TableNoticeTypeWrapperToJson(
+        _$_TableNoticeTypeWrapper instance) =>
     <String, dynamic>{
       'noticeType': instance.noticeType,
     };

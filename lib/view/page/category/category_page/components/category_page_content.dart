@@ -18,6 +18,7 @@ class CategoryPageContent extends ConsumerWidget {
 
    CategoryPageContent({required this.bigCategoryId, Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 

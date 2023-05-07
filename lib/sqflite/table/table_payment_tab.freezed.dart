@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'payment_tab.dart';
+part of 'table_payment_tab.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,34 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PaymentTab _$PaymentTabFromJson(Map<String, dynamic> json) {
-  return _PaymentTab.fromJson(json);
+TablePaymentTab _$TablePaymentTabFromJson(Map<String, dynamic> json) {
+  return _TablePaymentTab.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PaymentTab {
+mixin _$TablePaymentTab {
   String get requestName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PaymentTabCopyWith<PaymentTab> get copyWith =>
+  $TablePaymentTabCopyWith<TablePaymentTab> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PaymentTabCopyWith<$Res> {
-  factory $PaymentTabCopyWith(
-          PaymentTab value, $Res Function(PaymentTab) then) =
-      _$PaymentTabCopyWithImpl<$Res, PaymentTab>;
+abstract class $TablePaymentTabCopyWith<$Res> {
+  factory $TablePaymentTabCopyWith(
+          TablePaymentTab value, $Res Function(TablePaymentTab) then) =
+      _$TablePaymentTabCopyWithImpl<$Res, TablePaymentTab>;
   @useResult
   $Res call({String requestName, String name});
 }
 
 /// @nodoc
-class _$PaymentTabCopyWithImpl<$Res, $Val extends PaymentTab>
-    implements $PaymentTabCopyWith<$Res> {
-  _$PaymentTabCopyWithImpl(this._value, this._then);
+class _$TablePaymentTabCopyWithImpl<$Res, $Val extends TablePaymentTab>
+    implements $TablePaymentTabCopyWith<$Res> {
+  _$TablePaymentTabCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -68,22 +68,22 @@ class _$PaymentTabCopyWithImpl<$Res, $Val extends PaymentTab>
 }
 
 /// @nodoc
-abstract class _$$_PaymentTabCopyWith<$Res>
-    implements $PaymentTabCopyWith<$Res> {
-  factory _$$_PaymentTabCopyWith(
-          _$_PaymentTab value, $Res Function(_$_PaymentTab) then) =
-      __$$_PaymentTabCopyWithImpl<$Res>;
+abstract class _$$_TablePaymentTabCopyWith<$Res>
+    implements $TablePaymentTabCopyWith<$Res> {
+  factory _$$_TablePaymentTabCopyWith(
+          _$_TablePaymentTab value, $Res Function(_$_TablePaymentTab) then) =
+      __$$_TablePaymentTabCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String requestName, String name});
 }
 
 /// @nodoc
-class __$$_PaymentTabCopyWithImpl<$Res>
-    extends _$PaymentTabCopyWithImpl<$Res, _$_PaymentTab>
-    implements _$$_PaymentTabCopyWith<$Res> {
-  __$$_PaymentTabCopyWithImpl(
-      _$_PaymentTab _value, $Res Function(_$_PaymentTab) _then)
+class __$$_TablePaymentTabCopyWithImpl<$Res>
+    extends _$TablePaymentTabCopyWithImpl<$Res, _$_TablePaymentTab>
+    implements _$$_TablePaymentTabCopyWith<$Res> {
+  __$$_TablePaymentTabCopyWithImpl(
+      _$_TablePaymentTab _value, $Res Function(_$_TablePaymentTab) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_PaymentTabCopyWithImpl<$Res>
     Object? requestName = null,
     Object? name = null,
   }) {
-    return _then(_$_PaymentTab(
+    return _then(_$_TablePaymentTab(
       requestName: null == requestName
           ? _value.requestName
           : requestName // ignore: cast_nullable_to_non_nullable
@@ -107,11 +107,13 @@ class __$$_PaymentTabCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentTab with DiagnosticableTreeMixin implements _PaymentTab {
-  _$_PaymentTab({required this.requestName, required this.name});
+class _$_TablePaymentTab
+    with DiagnosticableTreeMixin
+    implements _TablePaymentTab {
+  _$_TablePaymentTab({required this.requestName, required this.name});
 
-  factory _$_PaymentTab.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentTabFromJson(json);
+  factory _$_TablePaymentTab.fromJson(Map<String, dynamic> json) =>
+      _$$_TablePaymentTabFromJson(json);
 
   @override
   final String requestName;
@@ -120,14 +122,14 @@ class _$_PaymentTab with DiagnosticableTreeMixin implements _PaymentTab {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PaymentTab(requestName: $requestName, name: $name)';
+    return 'TablePaymentTab(requestName: $requestName, name: $name)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'PaymentTab'))
+      ..add(DiagnosticsProperty('type', 'TablePaymentTab'))
       ..add(DiagnosticsProperty('requestName', requestName))
       ..add(DiagnosticsProperty('name', name));
   }
@@ -136,7 +138,7 @@ class _$_PaymentTab with DiagnosticableTreeMixin implements _PaymentTab {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentTab &&
+            other is _$_TablePaymentTab &&
             (identical(other.requestName, requestName) ||
                 other.requestName == requestName) &&
             (identical(other.name, name) || other.name == name));
@@ -149,24 +151,24 @@ class _$_PaymentTab with DiagnosticableTreeMixin implements _PaymentTab {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentTabCopyWith<_$_PaymentTab> get copyWith =>
-      __$$_PaymentTabCopyWithImpl<_$_PaymentTab>(this, _$identity);
+  _$$_TablePaymentTabCopyWith<_$_TablePaymentTab> get copyWith =>
+      __$$_TablePaymentTabCopyWithImpl<_$_TablePaymentTab>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentTabToJson(
+    return _$$_TablePaymentTabToJson(
       this,
     );
   }
 }
 
-abstract class _PaymentTab implements PaymentTab {
-  factory _PaymentTab(
+abstract class _TablePaymentTab implements TablePaymentTab {
+  factory _TablePaymentTab(
       {required final String requestName,
-      required final String name}) = _$_PaymentTab;
+      required final String name}) = _$_TablePaymentTab;
 
-  factory _PaymentTab.fromJson(Map<String, dynamic> json) =
-      _$_PaymentTab.fromJson;
+  factory _TablePaymentTab.fromJson(Map<String, dynamic> json) =
+      _$_TablePaymentTab.fromJson;
 
   @override
   String get requestName;
@@ -174,6 +176,6 @@ abstract class _PaymentTab implements PaymentTab {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentTabCopyWith<_$_PaymentTab> get copyWith =>
+  _$$_TablePaymentTabCopyWith<_$_TablePaymentTab> get copyWith =>
       throw _privateConstructorUsedError;
 }

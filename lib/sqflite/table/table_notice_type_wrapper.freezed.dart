@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'notice_type_wrapper.dart';
+part of 'table_notice_type_wrapper.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,33 +14,35 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-NoticeTypeWrapper _$NoticeTypeWrapperFromJson(Map<String, dynamic> json) {
-  return _NoticeTypeWrapper.fromJson(json);
+TableNoticeTypeWrapper _$TableNoticeTypeWrapperFromJson(
+    Map<String, dynamic> json) {
+  return _TableNoticeTypeWrapper.fromJson(json);
 }
 
 /// @nodoc
-mixin _$NoticeTypeWrapper {
+mixin _$TableNoticeTypeWrapper {
   String get noticeType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $NoticeTypeWrapperCopyWith<NoticeTypeWrapper> get copyWith =>
+  $TableNoticeTypeWrapperCopyWith<TableNoticeTypeWrapper> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NoticeTypeWrapperCopyWith<$Res> {
-  factory $NoticeTypeWrapperCopyWith(
-          NoticeTypeWrapper value, $Res Function(NoticeTypeWrapper) then) =
-      _$NoticeTypeWrapperCopyWithImpl<$Res, NoticeTypeWrapper>;
+abstract class $TableNoticeTypeWrapperCopyWith<$Res> {
+  factory $TableNoticeTypeWrapperCopyWith(TableNoticeTypeWrapper value,
+          $Res Function(TableNoticeTypeWrapper) then) =
+      _$TableNoticeTypeWrapperCopyWithImpl<$Res, TableNoticeTypeWrapper>;
   @useResult
   $Res call({String noticeType});
 }
 
 /// @nodoc
-class _$NoticeTypeWrapperCopyWithImpl<$Res, $Val extends NoticeTypeWrapper>
-    implements $NoticeTypeWrapperCopyWith<$Res> {
-  _$NoticeTypeWrapperCopyWithImpl(this._value, this._then);
+class _$TableNoticeTypeWrapperCopyWithImpl<$Res,
+        $Val extends TableNoticeTypeWrapper>
+    implements $TableNoticeTypeWrapperCopyWith<$Res> {
+  _$TableNoticeTypeWrapperCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -62,22 +64,23 @@ class _$NoticeTypeWrapperCopyWithImpl<$Res, $Val extends NoticeTypeWrapper>
 }
 
 /// @nodoc
-abstract class _$$_NoticeTypeWrapperCopyWith<$Res>
-    implements $NoticeTypeWrapperCopyWith<$Res> {
-  factory _$$_NoticeTypeWrapperCopyWith(_$_NoticeTypeWrapper value,
-          $Res Function(_$_NoticeTypeWrapper) then) =
-      __$$_NoticeTypeWrapperCopyWithImpl<$Res>;
+abstract class _$$_TableNoticeTypeWrapperCopyWith<$Res>
+    implements $TableNoticeTypeWrapperCopyWith<$Res> {
+  factory _$$_TableNoticeTypeWrapperCopyWith(_$_TableNoticeTypeWrapper value,
+          $Res Function(_$_TableNoticeTypeWrapper) then) =
+      __$$_TableNoticeTypeWrapperCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String noticeType});
 }
 
 /// @nodoc
-class __$$_NoticeTypeWrapperCopyWithImpl<$Res>
-    extends _$NoticeTypeWrapperCopyWithImpl<$Res, _$_NoticeTypeWrapper>
-    implements _$$_NoticeTypeWrapperCopyWith<$Res> {
-  __$$_NoticeTypeWrapperCopyWithImpl(
-      _$_NoticeTypeWrapper _value, $Res Function(_$_NoticeTypeWrapper) _then)
+class __$$_TableNoticeTypeWrapperCopyWithImpl<$Res>
+    extends _$TableNoticeTypeWrapperCopyWithImpl<$Res,
+        _$_TableNoticeTypeWrapper>
+    implements _$$_TableNoticeTypeWrapperCopyWith<$Res> {
+  __$$_TableNoticeTypeWrapperCopyWithImpl(_$_TableNoticeTypeWrapper _value,
+      $Res Function(_$_TableNoticeTypeWrapper) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +88,7 @@ class __$$_NoticeTypeWrapperCopyWithImpl<$Res>
   $Res call({
     Object? noticeType = null,
   }) {
-    return _then(_$_NoticeTypeWrapper(
+    return _then(_$_TableNoticeTypeWrapper(
       noticeType: null == noticeType
           ? _value.noticeType
           : noticeType // ignore: cast_nullable_to_non_nullable
@@ -96,27 +99,27 @@ class __$$_NoticeTypeWrapperCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NoticeTypeWrapper
+class _$_TableNoticeTypeWrapper
     with DiagnosticableTreeMixin
-    implements _NoticeTypeWrapper {
-  _$_NoticeTypeWrapper({required this.noticeType});
+    implements _TableNoticeTypeWrapper {
+  _$_TableNoticeTypeWrapper({required this.noticeType});
 
-  factory _$_NoticeTypeWrapper.fromJson(Map<String, dynamic> json) =>
-      _$$_NoticeTypeWrapperFromJson(json);
+  factory _$_TableNoticeTypeWrapper.fromJson(Map<String, dynamic> json) =>
+      _$$_TableNoticeTypeWrapperFromJson(json);
 
   @override
   final String noticeType;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NoticeTypeWrapper(noticeType: $noticeType)';
+    return 'TableNoticeTypeWrapper(noticeType: $noticeType)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'NoticeTypeWrapper'))
+      ..add(DiagnosticsProperty('type', 'TableNoticeTypeWrapper'))
       ..add(DiagnosticsProperty('noticeType', noticeType));
   }
 
@@ -124,7 +127,7 @@ class _$_NoticeTypeWrapper
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NoticeTypeWrapper &&
+            other is _$_TableNoticeTypeWrapper &&
             (identical(other.noticeType, noticeType) ||
                 other.noticeType == noticeType));
   }
@@ -136,29 +139,29 @@ class _$_NoticeTypeWrapper
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NoticeTypeWrapperCopyWith<_$_NoticeTypeWrapper> get copyWith =>
-      __$$_NoticeTypeWrapperCopyWithImpl<_$_NoticeTypeWrapper>(
+  _$$_TableNoticeTypeWrapperCopyWith<_$_TableNoticeTypeWrapper> get copyWith =>
+      __$$_TableNoticeTypeWrapperCopyWithImpl<_$_TableNoticeTypeWrapper>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NoticeTypeWrapperToJson(
+    return _$$_TableNoticeTypeWrapperToJson(
       this,
     );
   }
 }
 
-abstract class _NoticeTypeWrapper implements NoticeTypeWrapper {
-  factory _NoticeTypeWrapper({required final String noticeType}) =
-      _$_NoticeTypeWrapper;
+abstract class _TableNoticeTypeWrapper implements TableNoticeTypeWrapper {
+  factory _TableNoticeTypeWrapper({required final String noticeType}) =
+      _$_TableNoticeTypeWrapper;
 
-  factory _NoticeTypeWrapper.fromJson(Map<String, dynamic> json) =
-      _$_NoticeTypeWrapper.fromJson;
+  factory _TableNoticeTypeWrapper.fromJson(Map<String, dynamic> json) =
+      _$_TableNoticeTypeWrapper.fromJson;
 
   @override
   String get noticeType;
   @override
   @JsonKey(ignore: true)
-  _$$_NoticeTypeWrapperCopyWith<_$_NoticeTypeWrapper> get copyWith =>
+  _$$_TableNoticeTypeWrapperCopyWith<_$_TableNoticeTypeWrapper> get copyWith =>
       throw _privateConstructorUsedError;
 }
