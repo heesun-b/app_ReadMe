@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
@@ -16,6 +17,8 @@ import 'package:sqflite/sqflite.dart';
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   Widget failWidget =  const MaterialApp(
     home: Center(
@@ -38,6 +41,7 @@ void main() async {
       if (responseDTO.code == 1) {
         MetaDTO metaDTO = MetaDTO.fromJson(responseDTO.data);
         await MySqfliteInit.init(metaDTO);
+
         runApp(
           const ProviderScope(
             child: MyApp(),
@@ -71,7 +75,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primaryColor: Colours.app_main, fontFamily: 'NanumGothic',),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: Move.navigationBar,
+      initialRoute: Move.loginPage,
       routes: getRouters(),
     );
   }

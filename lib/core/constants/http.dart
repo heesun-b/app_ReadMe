@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:readme_app/core/constants/secure_storage.dart';
 import 'package:readme_app/core/constants/secure_storage_enum.dart';
 import 'package:readme_app/main.dart';
@@ -21,7 +22,7 @@ class MyHttp {
     String jwtToken = await SecureStorage.get(SecureStorageEnum.jwtToken) ?? "";
      return Dio(BaseOptions(
        headers: {
-         "Authorization": "Bearer $jwtToken"
+         "Authorization": jwtToken
        },
         // 주소 변경
         baseUrl: _baseUrl,
@@ -64,3 +65,5 @@ class MyHttp {
   }
 
 }
+
+const secureStorage = FlutterSecureStorage();

@@ -12,7 +12,6 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       role: json['role'] as String,
       isMembership: json['isMembership'] as bool,
       isAutoPayment: json['isAutoPayment'] as bool,
-      joinTime: json['joinTime'] as String,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -21,5 +20,4 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'role': instance.role,
       'isMembership': instance.isMembership,
       'isAutoPayment': instance.isAutoPayment,
-      'joinTime': instance.joinTime,
     };

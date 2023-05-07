@@ -10,7 +10,10 @@ part 'user.g.dart';
 class User with _$User {
   factory User({
     required int id,
-    required String username
+    required String username,
+    required String role,
+    required bool isMembership,
+    required bool isAutoPayment,
   }) = _User;
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);

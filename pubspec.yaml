@@ -59,6 +59,9 @@ dependencies:
   collection: ^1.16.0
   universal_file: ^1.0.0
   loading_animation_widget: ^1.2.0+4
+  google_sign_in: ^6.1.0
+  firebase_core: ^2.10.0
+  firebase_auth: ^4.4.2
 
 
 dev_dependencies:
