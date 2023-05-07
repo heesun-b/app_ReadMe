@@ -44,11 +44,9 @@ class UserRepository {
       /// 3.현재 사용자 가져오기
       final currentUser = _auth.currentUser;
 
-
-
       /// 4.사용자 id토큰 가져오기
       final idToken = await currentUser?.getIdToken();
-
+      log("Firebase Token: $idToken");
 
 
       /// 5. id토큰을 스프링 서버로 전달
@@ -68,6 +66,18 @@ class UserRepository {
       return responseDTO;
     }catch(e){
       print("Google Error 로그 $e");
+      return ResponseDTO(code: -1, msg: "구글 로그인 실패");
+    }
+  }
+
+
+  Future<ResponseDTO> getUser() async {
+    try{
+      Dio dio =  await MyHttp.getSecurity();
+      Response response = await dio.get("/users"); // 스프링에서 만든 join 로직에 요청
+      return ResponseDTO.fromJson(response.data);
+    }catch(e){
+      print("User 로그 $e");
       return ResponseDTO(code: -1, msg: "구글 로그인 실패");
     }
   }
