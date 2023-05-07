@@ -4,8 +4,14 @@ import 'package:readme_app/controller/user_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/core/constants/use_icons.dart';
+import 'package:readme_app/dto/user_memebership_info_dto/user_membership_info_dto.dart';
 import 'package:readme_app/view/components/use_button.dart';
+import 'package:readme_app/view/page/user/user_page/components/user_page_info_button.dart';
+import 'package:readme_app/view/page/user/user_page/components/user_page_main_button.dart';
+import 'package:readme_app/view/page/user/user_page/components/user_page_membership_info.dart';
+import 'package:readme_app/view/page/user/user_page/components/user_page_sub_button.dart';
 import 'package:readme_app/view/page/user/user_page_view_model.dart';
 
 class UserPage extends ConsumerWidget {
@@ -21,11 +27,11 @@ class UserPage extends ConsumerWidget {
           child: Column(
             children: [
               _logout(ref),
-              _header(model?.username ?? ""),
-              model == null || model.userInfoDTO == null ? _loginButton() : model.userInfoDTO!.isMembership ?   _membershipInfoCard(context) : _membershipCard(),
-              _mainButton(),
-              _subButton(),
-              _bottomInfo(),
+              _header(model?.user?.username ?? ""),
+              model == null || model.user == null  ? _loginButton(context) : (model.user!.isMembership ?   UserPageMembershipInfo() : _membershipCard(context)),
+              UserPageMainBtton(),
+              UserPageSubButton(),
+              UserPageInfoBtton(),
             ],
           ),
         ),
@@ -33,203 +39,6 @@ class UserPage extends ConsumerWidget {
     );
   }
 
-  Widget _bottomInfo() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: InkWell(
-            onTap: () {
-              // 추가
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                UseIcons.questionMark,
-                SizedBox(
-                  width: 5,
-                ),
-                Text("이용약관")
-              ],
-            ),
-          ),
-        ),
-        Divider(
-          thickness: 2,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: InkWell(
-            onTap: () {
-              // 추가
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                UseIcons.infoMark,
-                SizedBox(
-                  width: 5,
-                ),
-                Text("앱 정보")
-              ],
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget _subButton() {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            width: double.infinity,
-            height: 100,
-            decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(color: Colours.app_sub_grey, width: 2.0),
-                    right:
-                        BorderSide(color: Colours.app_sub_grey, width: 2.0))),
-            child: InkWell(
-              onTap: () {
-                // 추가 question
-                // Navigator.pushNamed(context, "/question");
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  UseIcons.question,
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text("문의하기")
-                ],
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Container(
-            width: double.infinity,
-            height: 100,
-            decoration: BoxDecoration(
-                border: Border(
-                    bottom:
-                        BorderSide(color: Colours.app_sub_grey, width: 2.0))),
-            child: InkWell(
-              onTap: () {
-                // Navigator.pushNamed(context, "/questionList");
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  UseIcons.questionList,
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text("문의내역")
-                ],
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget _mainButton() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              height: 150,
-              decoration: BoxDecoration(
-                  border: Border(
-                      top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
-                      bottom:
-                          BorderSide(color: Colours.app_sub_grey, width: 2.0),
-                      right:
-                          BorderSide(color: Colours.app_sub_grey, width: 2.0))),
-              child: InkWell(
-                onTap: () {
-                  // Navigator.pushNamed(context, "/contentBox");
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    HsStyleIcons.bookPayment,
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text("구매도서")
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              height: 150,
-              decoration: BoxDecoration(
-                  border: Border(
-                      top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
-                      bottom:
-                          BorderSide(color: Colours.app_sub_grey, width: 2.0),
-                      right:
-                          BorderSide(color: Colours.app_sub_grey, width: 2.0))),
-              child: InkWell(
-                onTap: () {
-                  // Navigator.pushNamed(context, "/paymentList");
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    HsStyleIcons.card,
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text("결제내역")
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              height: 150,
-              decoration: BoxDecoration(
-                  border: Border(
-                      top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
-                      bottom:
-                          BorderSide(color: Colours.app_sub_grey, width: 2.0))),
-              child: InkWell(
-                onTap: () {
-                  // review
-                  // Navigator.pushNamed(context, "/review");
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    HsStyleIcons.review,
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text("리뷰관리")
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
 
   Widget _logout(WidgetRef ref) {
     return Align(
@@ -248,7 +57,7 @@ class UserPage extends ConsumerWidget {
         ));
   }
 
-  Widget _membershipCard() {
+  Widget _membershipCard(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Container(
@@ -261,14 +70,14 @@ class UserPage extends ConsumerWidget {
             child: UseButton(
               title: "멤버십 구독하기",
               buttonPressed: () {
-                // PaymentPageBodyMembership 연결 추가
+              Navigator.pushNamed(context, "/membership");
               },
             ),
           )),
     );
   }
 
-  Widget _loginButton() {
+  Widget _loginButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Container(
@@ -281,167 +90,13 @@ class UserPage extends ConsumerWidget {
             child: UseButton(
               title: "로그인",
               buttonPressed: () {
-                // PaymentPageBodyMembership 연결 추가
+                Navigator.pushNamedAndRemoveUntil(context, Move.loginPage, (route) => false);
               },
             ),
           )),
     );
   }
 
-  Widget _membershipInfoCard(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: Colours.app_main, borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "멤버십 정보",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: Dimens.font_sp18),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "D-10",
-                      style: TextStyle(fontSize: Dimens.font_sp16),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "구독권:",
-                      style: TextStyle(fontSize: Dimens.font_sp16),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "스탠다드",
-                      style: TextStyle(fontSize: Dimens.font_sp16),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              scrollable: false,
-                              title: Text("스탠다드 구독권이란?"),
-                              content: SizedBox(
-                                height: 90,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                        "월 9,900원으로 ReadMe의 전체 도서를 열람할 수 있는 정기 구독권입니다."),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                        "최초 결제일 기준으로 매달 자동 결제가 되어 편리하게 사용 가능합니다."),
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context, '확인');
-                                    },
-                                    child: Text("확인"))
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      icon: UseIcons.questionMark,
-                      iconSize: 15,
-                      padding: EdgeInsets.zero,
-                      constraints: BoxConstraints(),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Row(
-                  children: [
-                    Text("이용기간:", style: TextStyle(fontSize: Dimens.font_sp16)),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text("2023.04.01-2023.04.30",
-                        style: TextStyle(fontSize: Dimens.font_sp16)),
-                  ],
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Row(
-                  children: [
-                    Text("다음 결제일:",
-                        style: TextStyle(fontSize: Dimens.font_sp16)),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text("2023.05.01",
-                        style: TextStyle(fontSize: Dimens.font_sp16)),
-                  ],
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Row(
-                  children: [
-                    Text("카드정보:", style: TextStyle(fontSize: Dimens.font_sp16)),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text("****-****-****-0000",
-                        style: TextStyle(fontSize: Dimens.font_sp16)),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/membershipCancel");
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: Text("해지"),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colours.app_sub_black,
-                      textStyle: TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          )),
-    );
-  }
 
   Widget _header(String username) {
     return Column(

@@ -21,23 +21,6 @@ class _HomeNavigationBarState extends State<HomeNavigationBar>{
 
   int _selectedIndex = 0;
 
-  Widget _buildScreen(int index) {
-    switch (index) {
-      case 0:
-        return CategoryPage();
-      case 1:
-        return SearchListPage();
-      case 2:
-        return MainPage();
-      case 3:
-        return ContentBoxPage();
-      case 4:
-        return  UserPage();
-      default:
-        return Container();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

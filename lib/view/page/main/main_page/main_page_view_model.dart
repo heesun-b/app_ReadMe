@@ -33,8 +33,7 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
         bestBooks: [],
         recommendBooks: [],
         latestBooks: [],
-        mainTabs: [],
-        isLoading: true
+        mainTabs: []
     );
 
     // Book Start
@@ -71,10 +70,6 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
         }
       }
     }
-
-    Future.delayed(const Duration(seconds: 2), () {
-      state = mainPageModel.copyWith(isLoading: false);
-    });
 
     state = mainPageModel;
     // Book End
@@ -117,7 +112,6 @@ final mainPageProvider =
 @unfreezed
 class MainPageModel with _$MainPageModel {
    factory MainPageModel({
-    required bool isLoading,
     required int totalPage,
     required int bestPage,
     required int recommendPage,
