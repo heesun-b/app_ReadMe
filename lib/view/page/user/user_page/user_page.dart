@@ -269,6 +269,26 @@ class UserPage extends ConsumerWidget {
     );
   }
 
+  Widget _loginButton() {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Container(
+          height: 170,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              color: Colours.app_main, borderRadius: BorderRadius.circular(10)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 40),
+            child: UseButton(
+              title: "로그인",
+              buttonPressed: () {
+               // PaymentPageBodyMembership 연결 추가
+              },
+            ),
+          )),
+    );
+  }
+
   Widget _membershipInfoCard(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),

@@ -1,11 +1,11 @@
 import 'package:readme_app/dto/meta_dto/meta_dto.dart';
 import 'package:readme_app/model/small_category/small_category.dart';
-import 'package:readme_app/sqflite/table/user.dart';
+import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/sqflite/model/big_category/big_category.dart';
-import 'package:readme_app/sqflite/table/main_tab.dart';
-import 'package:readme_app/sqflite/table/notice_type_wrapper.dart';
-import 'package:readme_app/sqflite/table/payment_tab.dart';
-import 'package:readme_app/sqflite/table/storage_box_tab.dart';
+import 'package:readme_app/sqflite/table/table_main_tab.dart';
+import 'package:readme_app/sqflite/table/table_notice_type_wrapper.dart';
+import 'package:readme_app/sqflite/table/table_payment_tab.dart';
+import 'package:readme_app/sqflite/table/table_storage_box_tab.dart';
 import 'package:readme_app/sqflite/table/table_big_category.dart';
 import 'package:readme_app/sqflite/table/table_small_category.dart';
 import 'package:sqflite/sqflite.dart';
@@ -55,67 +55,67 @@ class MySqfliteInit {
   }
 
 //
-  static Future<List<NoticeTypeWrapper>> getNoticeTypeWrapper() async {
+  static Future<List<TableNoticeTypeWrapper>> getNoticeTypeWrapper() async {
     if (_db == null) {
       return [];
     }
     List<Map> maps = await _db!.query(TableName.noticeTypeWrapper);
     if (maps.isNotEmpty) {
       return maps
-          .map((e) => NoticeTypeWrapper.fromJson(e as Map<String, dynamic>))
+          .map((e) => TableNoticeTypeWrapper.fromJson(e as Map<String, dynamic>))
           .toList();
     }
     return [];
   }
 
 //
-  static Future<List<StorageBoxTab>> getStorageBoxTabs() async {
+  static Future<List<TableStorageBoxTab>> getStorageBoxTabs() async {
     if (_db == null) {
       return [];
     }
     List<Map> maps = await _db!.query(TableName.storageBoxTab);
     if (maps.isNotEmpty) {
       return maps
-          .map((e) => StorageBoxTab.fromJson(e as Map<String, dynamic>))
+          .map((e) => TableStorageBoxTab.fromJson(e as Map<String, dynamic>))
           .toList();
     }
     return [];
   }
 
   //
-  static Future<List<PaymentTab>> getPaymentTab() async {
+  static Future<List<TablePaymentTab>> getPaymentTab() async {
     if (_db == null) {
       return [];
     }
     List<Map> maps = await _db!.query(TableName.paymentTab);
     if (maps.isNotEmpty) {
      return maps
-          .map((e) => PaymentTab.fromJson(e as Map<String, dynamic>))
+          .map((e) => TablePaymentTab.fromJson(e as Map<String, dynamic>))
           .toList();
 
     }
     return [];
   }
 
-  static Future<List<MainTab>> getMainTabs() async {
+  static Future<List<TableMainTab>> getMainTabs() async {
     if (_db == null) {
       return [];
     }
     List<Map> maps = await _db!.query(TableName.mainTab);
     if (maps.isNotEmpty) {
       var mainTabList = maps
-          .map((e) => MainTab.fromJson(e as Map<String, dynamic>))
+          .map((e) => TableMainTab.fromJson(e as Map<String, dynamic>))
           .toList();
       return mainTabList;
     }
     return [];
   }
 
-  static Future<User?> getUser() async {
+  static Future<TableUser?> getUser() async {
     List<Map> maps = await _db!.query(TableName.user);
     if (maps.isNotEmpty) {
       var map = maps.first;
-      return User.fromJson(map as Map<String, dynamic>);
+      return TableUser.fromJson(map as Map<String, dynamic>);
     }
     return null;
   }
@@ -171,14 +171,14 @@ class MySqfliteInit {
             id int primary key,
             username text not null,
             role text not null,
-            isMembership boolean not null, 
-            isAutoPayment boolean not null)
+            isMembership INTEGER not null, 
+            isAutoPayment INTEGER not null)
           ''');
   }
 
   static Future _open() async {
     var databasesPath = await getDatabasesPath();
-    var path = join(databasesPath, "my_db3.db");
+    var path = join(databasesPath, "my_db5.db");
 
     _db = await openDatabase(path, version: 1,
       onCreate: (Database db, int version) async {

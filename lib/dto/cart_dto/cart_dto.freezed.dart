@@ -36,7 +36,6 @@ abstract class $CartDTOCopyWith<$Res> {
   @useResult
   $Res call({int id, User user, Book book});
 
-  $UserCopyWith<$Res> get user;
   $BookCopyWith<$Res> get book;
 }
 
@@ -75,14 +74,6 @@ class _$CartDTOCopyWithImpl<$Res, $Val extends CartDTO>
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $BookCopyWith<$Res> get book {
     return $BookCopyWith<$Res>(_value.book, (value) {
       return _then(_value.copyWith(book: value) as $Val);
@@ -99,8 +90,6 @@ abstract class _$$_CartDTOCopyWith<$Res> implements $CartDTOCopyWith<$Res> {
   @useResult
   $Res call({int id, User user, Book book});
 
-  @override
-  $UserCopyWith<$Res> get user;
   @override
   $BookCopyWith<$Res> get book;
 }

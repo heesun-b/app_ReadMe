@@ -7,7 +7,7 @@ import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
-import 'package:readme_app/sqflite/table/main_tab.dart';
+import 'package:readme_app/sqflite/table/table_main_tab.dart';
 
 
 // 파일명
@@ -38,7 +38,7 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
     );
 
     // Book Start
-    List<MainTab> mainTabs = await MySqfliteInit.getMainTabs();
+    List<TableMainTab> mainTabs = await MySqfliteInit.getMainTabs();
     mainPageModel = mainPageModel.copyWith(mainTabs: mainTabs);
 
     for (var mainTab in mainTabs) {
@@ -126,6 +126,6 @@ class MainPageModel with _$MainPageModel {
     required List<Book> bestBooks,
     required List<Book> recommendBooks,
     required List<Book> latestBooks,
-     required List<MainTab> mainTabs,
+     required List<TableMainTab> mainTabs,
   }) = _MainPageModel;
 }
