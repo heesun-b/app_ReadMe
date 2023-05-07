@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readme_app/view/components/home_navigation_bar.dart';
 import 'package:readme_app/view/page/alarm/alarm_page/alarm_page.dart';
+import 'package:readme_app/view/page/auth/login_page/login_page.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/components/modal_button_sheet.dart';
 import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page.dart';
@@ -41,6 +42,8 @@ class Move {
   static String contentBoxPage = "/contentBox";
   static String bookDetailPage = "/bookDetail";
   static String modalButtonSheet = "/modalButtonSheet";
+  static String loginPage = "/login";
+
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -64,5 +67,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.questionListPage: (context) => QuestionListPage(),
     Move.bookmarkListPage: (context) => BookmarkListPage(),
     Move.contentBoxPage: (context) => ContentBoxPage(),
+    Move.loginPage: (context) => LoginPage(),
+
   };
 }

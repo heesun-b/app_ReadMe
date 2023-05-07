@@ -22,6 +22,9 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   int get id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
+  bool get isMembership => throw _privateConstructorUsedError;
+  bool get isAutoPayment => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +36,12 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({int id, String username});
+  $Res call(
+      {int id,
+      String username,
+      String role,
+      bool isMembership,
+      bool isAutoPayment});
 }
 
 /// @nodoc
@@ -51,6 +59,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? id = null,
     Object? username = null,
+    Object? role = null,
+    Object? isMembership = null,
+    Object? isAutoPayment = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -61,6 +72,18 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
+      isMembership: null == isMembership
+          ? _value.isMembership
+          : isMembership // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAutoPayment: null == isAutoPayment
+          ? _value.isAutoPayment
+          : isAutoPayment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -71,7 +94,12 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String username});
+  $Res call(
+      {int id,
+      String username,
+      String role,
+      bool isMembership,
+      bool isAutoPayment});
 }
 
 /// @nodoc
@@ -85,6 +113,9 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   $Res call({
     Object? id = null,
     Object? username = null,
+    Object? role = null,
+    Object? isMembership = null,
+    Object? isAutoPayment = null,
   }) {
     return _then(_$_User(
       id: null == id
@@ -95,6 +126,18 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
+      isMembership: null == isMembership
+          ? _value.isMembership
+          : isMembership // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAutoPayment: null == isAutoPayment
+          ? _value.isAutoPayment
+          : isAutoPayment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -102,7 +145,12 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 /// @nodoc
 @JsonSerializable()
 class _$_User with DiagnosticableTreeMixin implements _User {
-  _$_User({required this.id, required this.username});
+  _$_User(
+      {required this.id,
+      required this.username,
+      required this.role,
+      required this.isMembership,
+      required this.isAutoPayment});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -110,10 +158,16 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   final int id;
   @override
   final String username;
+  @override
+  final String role;
+  @override
+  final bool isMembership;
+  @override
+  final bool isAutoPayment;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, username: $username)';
+    return 'User(id: $id, username: $username, role: $role, isMembership: $isMembership, isAutoPayment: $isAutoPayment)';
   }
 
   @override
@@ -122,7 +176,10 @@ class _$_User with DiagnosticableTreeMixin implements _User {
     properties
       ..add(DiagnosticsProperty('type', 'User'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('username', username));
+      ..add(DiagnosticsProperty('username', username))
+      ..add(DiagnosticsProperty('role', role))
+      ..add(DiagnosticsProperty('isMembership', isMembership))
+      ..add(DiagnosticsProperty('isAutoPayment', isAutoPayment));
   }
 
   @override
@@ -132,12 +189,18 @@ class _$_User with DiagnosticableTreeMixin implements _User {
             other is _$_User &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.username, username) ||
-                other.username == username));
+                other.username == username) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.isMembership, isMembership) ||
+                other.isMembership == isMembership) &&
+            (identical(other.isAutoPayment, isAutoPayment) ||
+                other.isAutoPayment == isAutoPayment));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, username);
+  int get hashCode =>
+      Object.hash(runtimeType, id, username, role, isMembership, isAutoPayment);
 
   @JsonKey(ignore: true)
   @override
@@ -154,8 +217,12 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 }
 
 abstract class _User implements User {
-  factory _User({required final int id, required final String username}) =
-      _$_User;
+  factory _User(
+      {required final int id,
+      required final String username,
+      required final String role,
+      required final bool isMembership,
+      required final bool isAutoPayment}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -163,6 +230,12 @@ abstract class _User implements User {
   int get id;
   @override
   String get username;
+  @override
+  String get role;
+  @override
+  bool get isMembership;
+  @override
+  bool get isAutoPayment;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

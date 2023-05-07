@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:readme_app/controller/user_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/use_icons.dart';
 import 'package:readme_app/view/components/use_button.dart';
 
-class UserPage extends StatefulWidget {
+class UserPage extends ConsumerWidget {
   const UserPage({Key? key}) : super(key: key);
 
   @override
-  State<UserPage> createState() => _UserPageState();
-}
-
-class _UserPageState extends State<UserPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
             children: [
-              _logout(),
+              _logout(ref),
               _header(),
               // _membershipCard(),
               _membershipInfoCard(context),
@@ -95,7 +92,7 @@ class _UserPageState extends State<UserPage> {
             child: InkWell(
               onTap: () {
                 // 추가 question
-                Navigator.pushNamed(context, "/question");
+                // Navigator.pushNamed(context, "/question");
 
               },
               child: Row(
@@ -121,7 +118,7 @@ class _UserPageState extends State<UserPage> {
                         BorderSide(color: Colours.app_sub_grey, width: 2.0))),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, "/questionList");
+                // Navigator.pushNamed(context, "/questionList");
 
               },
               child: Row(
@@ -159,7 +156,7 @@ class _UserPageState extends State<UserPage> {
                           BorderSide(color: Colours.app_sub_grey, width: 2.0))),
               child: InkWell(
                 onTap: (){
-                  Navigator.pushNamed(context, "/contentBox");
+                  // Navigator.pushNamed(context, "/contentBox");
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -187,7 +184,7 @@ class _UserPageState extends State<UserPage> {
                           BorderSide(color: Colours.app_sub_grey, width: 2.0))),
               child: InkWell(
                 onTap: (){
-                  Navigator.pushNamed(context, "/paymentList");
+                  // Navigator.pushNamed(context, "/paymentList");
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -214,7 +211,7 @@ class _UserPageState extends State<UserPage> {
               child: InkWell(
                 onTap: (){
                   // review
-                  Navigator.pushNamed(context, "/review");
+                  // Navigator.pushNamed(context, "/review");
 
                 },
                 child: Column(
@@ -235,14 +232,16 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-  Widget _logout() {
+  Widget _logout( WidgetRef ref) {
     return Align(
         alignment: Alignment.topRight,
         child: Padding(
           padding: const EdgeInsets.only(top: 10),
           child: SizedBox(
               child: IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              await ref.read(userControllerProvider).logout();
+            },
             icon: UseIcons.logout,
             iconSize: 40,
             constraints: BoxConstraints(),

@@ -1,6 +1,6 @@
 import 'package:readme_app/dto/meta_dto/meta_dto.dart';
 import 'package:readme_app/model/small_category/small_category.dart';
-import 'package:readme_app/model/user/user.dart';
+import 'package:readme_app/sqflite/table/user.dart';
 import 'package:readme_app/sqflite/model/big_category/big_category.dart';
 import 'package:readme_app/sqflite/table/main_tab.dart';
 import 'package:readme_app/sqflite/table/notice_type_wrapper.dart';
@@ -169,7 +169,10 @@ class MySqfliteInit {
     batch.execute('''
           create table ${TableName.user} (
             id int primary key,
-            username text not null)
+            username text not null,
+            role text not null,
+            isMembership boolean not null, 
+            isAutoPayment boolean not null)
           ''');
   }
 
@@ -239,7 +242,8 @@ class MySqfliteInit {
     if(metaDTO.user != null) {
       await _db!.delete(TableName.user);
       await _db!.insert(TableName.user,
-          {'id': metaDTO.user!.id, 'username': metaDTO.user!.username});
+          {'id': metaDTO.user!.id, 'username': metaDTO.user!.username,
+          'role' : metaDTO.user!.role, 'isMembership' : metaDTO.user!.isMembership, 'isAutoPayment' : metaDTO.user!.isAutoPayment});
     }
 
   }

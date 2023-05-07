@@ -1,7 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:readme_app/model/user/user.dart';
 import 'package:readme_app/sqflite/model/big_category/big_category.dart';
+
+import '../../sqflite/table/user.dart';
 
 // 파일명
 part 'meta_dto.freezed.dart';
