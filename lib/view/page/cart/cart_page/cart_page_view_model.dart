@@ -5,7 +5,6 @@ import 'package:readme_app/dto/cart_dto/cart_dto.dart';
 import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/model/book/book_repository.dart';
-import 'package:readme_app/model/cart_mock_data.dart';
 
 // 파일명
 part 'cart_page_view_model.freezed.dart';
@@ -35,7 +34,6 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
       UseCartDTO useCartDTO = UseCartDTO(cartDTO: element, isChecked: false);
       useCartList.add(useCartDTO);
     });
-
     initCartBooks.cartBooks = useCartList;
     state = initCartBooks;
   }

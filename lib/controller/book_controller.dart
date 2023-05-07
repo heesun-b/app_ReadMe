@@ -60,20 +60,20 @@ class BookController {
     }
   }
 
-  Future<ResponseDTO> findByBookId(
-      int bookId, int userId,
-      ) async {
-    if (!isDuplication) {
-      isDuplication = true;
-      // 통신 할때 await
-      // responseDTO.data = responseBookList
-      // responseDTO.data.page.isLast = false
-      ResponseDTO responseDTO =  await BookRepository().searchViewerBook(bookId, userId);
-      BookViewerDTO bookViewerDTO = responseDTO.data;
-      ref.read(bookViewerPageProvider.notifier).
-
-    }
-  }
+  // Future<void> findByBookId(
+  //     int bookId, int userId,
+  //     ) async {
+  //   if (!isDuplication) {
+  //     isDuplication = true;
+  //     // 통신 할때 await
+  //     // responseDTO.data = responseBookList
+  //     // responseDTO.data.page.isLast = false
+  //     ResponseDTO responseDTO =  await BookRepository().searchViewerBook(bookId, userId);
+  //     BookViewerDTO bookViewerDTO = responseDTO.data;
+  //     ref.read(bookViewerPageProvider.notifier).
+  //
+  //   }
+  // }
 
 
 }

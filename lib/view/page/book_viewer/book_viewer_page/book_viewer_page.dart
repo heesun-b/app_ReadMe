@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page_view_model.dart';
 import 'package:readme_app/view/page/book_viewer/components/book_drawer_no_membership.dart';
 import '../../../../core/constants/colours.dart';
 import '../../../../core/constants/jh_style_icons.dart';
@@ -7,48 +9,21 @@ import '../../../../util/epub/src/helpers/epub_document.dart';
 import '../../../../util/epub/src/ui/epub_view.dart';
 import '../components/book_drawer.dart';
 
-class BookViewerPage extends StatefulWidget {
+class BookViewerPage extends ConsumerWidget {
   BookViewerPage({Key? key}) : super(key: key);
-
-  @override
-  _BookViewerPageState createState() => _BookViewerPageState();
-}
-
-/// 책 받아오기
-class _BookViewerPageState extends State<BookViewerPage>
-    with WidgetsBindingObserver {
-
-  late EpubController _epubReaderController;
-  bool _isBookMark = true;
-  bool _membership = true;
-  double _currentSliderValue = 100;
-  double _fontSize = 18.0;
-  bool _showAppBarAndBottomSheet = false;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  @override
-  void initState() {
-    WidgetsBinding.instance!.addObserver(this);
-    _epubReaderController = EpubController(
-      document: EpubDocument.openAsset('assets/epubs/test3.epub'),
-    );
-    super.initState();
-  }
 
   @override
-  void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
-    _epubReaderController.dispose();
-    super.dispose();
-  }
+  Widget build(BuildContext context, WidgetRef ref)   {
+    BookViewerPageModel? model = ref.watch(bookViewerPageProvider);
+    final epubReaderController =  EpubController(
+        document: EpubDocument.openAsset(model!.epubFilePath));
 
-
-  @override
-  Widget build(BuildContext context)   {
     return  Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: _showAppBarAndBottomSheet
+        appBar: model.isShowAppBarAndBottomSheet
             ? AppBar(
           centerTitle: true,
           leading: IconButton(
@@ -72,20 +47,18 @@ class _BookViewerPageState extends State<BookViewerPage>
         )
             : null,
         key: _scaffoldKey,
-        endDrawer: _membership == false
-            ? BookDrawerNoMembership(scaffoldKey: _scaffoldKey)
-            : BookDrawer(scaffoldKey: _scaffoldKey),
+        endDrawer: model.user == null
+            ? BookDrawerNoMembership()
+            : BookDrawer(),
         body: GestureDetector(
           onTap: () {
-            setState(() {
-              _showAppBarAndBottomSheet = !_showAppBarAndBottomSheet;
-            });
+            ref.read(bookViewerPageProvider.notifier).changeIsShowAppBarAndBottomSheet(model.isShowAppBarAndBottomSheet ? false : true);
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // buildAppBar(), /// Appbar
-              buildBookmark(),
+              buildBookmark(ref),
               /// 북마크
               Expanded(
                 // 책내용
@@ -93,14 +66,13 @@ class _BookViewerPageState extends State<BookViewerPage>
                   child: Container(
                     child: Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: buildEpubView()),
+                        child: buildEpubView(epubReaderController as BuildContext,ref)),
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                   ),
                 ),
               ),
-              buildBottomSheet()
-
+              buildBottomSheet(context, ref),
               /// BottomSheet
             ],
           ),
@@ -108,9 +80,9 @@ class _BookViewerPageState extends State<BookViewerPage>
       );
   }
 
-  Widget buildBottomSheet() {
+  Widget buildBottomSheet(BuildContext context, WidgetRef ref) {
     return Visibility(
-      visible: _showAppBarAndBottomSheet,
+      visible: ref.read(bookViewerPageProvider)!.isShowAppBarAndBottomSheet,
       child: BottomSheet(
         onClosing: () {},
         builder: (context) {
@@ -133,14 +105,12 @@ class _BookViewerPageState extends State<BookViewerPage>
                             thumbColor: Colours.app_main,
                             inactiveColor: Colours.app_sub_grey,
                             activeColor: Colours.app_main,
-                            value: _currentSliderValue,
+                            value: ref.read(bookViewerPageProvider)!.currentSliderValue,
                             max: 100,
                             divisions: 100,
-                            label: _currentSliderValue.round().toString(),
+                            label: ref.read(bookViewerPageProvider)!.currentSliderValue.round().toString(),
                             onChanged: (double value) {
-                              setState(() {
-                                _currentSliderValue = value;
-                              });
+                                ref.read(bookViewerPageProvider)!.currentSliderValue = value;
                             },
                           ),
                         ),
@@ -183,14 +153,14 @@ class _BookViewerPageState extends State<BookViewerPage>
   }
 
 
-  EpubView buildEpubView() {
+  EpubView buildEpubView(epubReaderController, WidgetRef ref) {
     return EpubView(
-      controller: _epubReaderController,
+      controller: epubReaderController,
       builders: EpubViewBuilders<DefaultBuilderOptions>(
         options: DefaultBuilderOptions(
           textStyle: TextStyle(
             height: 1.25,
-            fontSize: _fontSize,
+            fontSize: ref.read(bookViewerPageProvider)?.fontSize,
             color: Colors.black87,
             fontFamily: "NanumGothic",
           ),
@@ -199,9 +169,9 @@ class _BookViewerPageState extends State<BookViewerPage>
     );
   }
 
-  Widget buildBookmark() {
+  Widget buildBookmark(WidgetRef ref) {
     return Visibility(
-      visible: _isBookMark,
+      visible: ref.read(bookViewerPageProvider)!.isBookMark,
       child: Padding(
         padding: const EdgeInsets.only(right: 20),
         child: Align(

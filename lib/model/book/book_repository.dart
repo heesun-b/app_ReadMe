@@ -101,9 +101,9 @@ class BookRepository {
     }
   }
 
-  Future<ResponseDTO> searchViewerBook(int bookId, int userId) async {
+  Future<ResponseDTO> searchViewerBook() async {
     try{
-      Response response = await MyHttp.get().post("/", data: {"userId" : userId, "bookId" : bookId});
+      Response response = await MyHttp.get().get("/");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       BookViewerDTO bookViewerDTO = BookViewerDTO.fromJson(responseDTO.data);
       responseDTO.data = bookViewerDTO;

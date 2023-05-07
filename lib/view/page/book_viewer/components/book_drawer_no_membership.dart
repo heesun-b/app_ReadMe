@@ -7,8 +7,7 @@ import '../../../../core/constants/move.dart';
 import '../../../components/use_button.dart';
 
 class BookDrawerNoMembership extends StatelessWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  const BookDrawerNoMembership({Key? key, required this.scaffoldKey}) : super(key: key);
+  BookDrawerNoMembership({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

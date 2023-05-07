@@ -16,10 +16,27 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BookViewerPageModel {
-  Book get book => throw _privateConstructorUsedError;
-  set book(Book value) => throw _privateConstructorUsedError;
-  User get user => throw _privateConstructorUsedError;
-  set user(User value) => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  set title(String value) => throw _privateConstructorUsedError;
+  String get epubFilePath => throw _privateConstructorUsedError;
+  set epubFilePath(String value) => throw _privateConstructorUsedError;
+  String get coverFilePath => throw _privateConstructorUsedError;
+  set coverFilePath(String value) => throw _privateConstructorUsedError;
+  int get price => throw _privateConstructorUsedError;
+  set price(int value) => throw _privateConstructorUsedError;
+  bool get isHeart => throw _privateConstructorUsedError;
+  set isHeart(bool value) => throw _privateConstructorUsedError;
+  bool get isBookMark => throw _privateConstructorUsedError;
+  set isBookMark(bool value) => throw _privateConstructorUsedError;
+  bool get isShowAppBarAndBottomSheet => throw _privateConstructorUsedError;
+  set isShowAppBarAndBottomSheet(bool value) =>
+      throw _privateConstructorUsedError;
+  double get currentSliderValue => throw _privateConstructorUsedError;
+  set currentSliderValue(double value) => throw _privateConstructorUsedError;
+  double get fontSize => throw _privateConstructorUsedError;
+  set fontSize(double value) => throw _privateConstructorUsedError;
+  TableUser? get user => throw _privateConstructorUsedError;
+  set user(TableUser? value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookViewerPageModelCopyWith<BookViewerPageModel> get copyWith =>
@@ -32,10 +49,17 @@ abstract class $BookViewerPageModelCopyWith<$Res> {
           BookViewerPageModel value, $Res Function(BookViewerPageModel) then) =
       _$BookViewerPageModelCopyWithImpl<$Res, BookViewerPageModel>;
   @useResult
-  $Res call({Book book, User user});
-
-  $BookCopyWith<$Res> get book;
-  $UserCopyWith<$Res> get user;
+  $Res call(
+      {String title,
+      String epubFilePath,
+      String coverFilePath,
+      int price,
+      bool isHeart,
+      bool isBookMark,
+      bool isShowAppBarAndBottomSheet,
+      double currentSliderValue,
+      double fontSize,
+      TableUser? user});
 }
 
 /// @nodoc
@@ -51,35 +75,59 @@ class _$BookViewerPageModelCopyWithImpl<$Res, $Val extends BookViewerPageModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? book = null,
-    Object? user = null,
+    Object? title = null,
+    Object? epubFilePath = null,
+    Object? coverFilePath = null,
+    Object? price = null,
+    Object? isHeart = null,
+    Object? isBookMark = null,
+    Object? isShowAppBarAndBottomSheet = null,
+    Object? currentSliderValue = null,
+    Object? fontSize = null,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
-      book: null == book
-          ? _value.book
-          : book // ignore: cast_nullable_to_non_nullable
-              as Book,
-      user: null == user
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      epubFilePath: null == epubFilePath
+          ? _value.epubFilePath
+          : epubFilePath // ignore: cast_nullable_to_non_nullable
+              as String,
+      coverFilePath: null == coverFilePath
+          ? _value.coverFilePath
+          : coverFilePath // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      isHeart: null == isHeart
+          ? _value.isHeart
+          : isHeart // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBookMark: null == isBookMark
+          ? _value.isBookMark
+          : isBookMark // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowAppBarAndBottomSheet: null == isShowAppBarAndBottomSheet
+          ? _value.isShowAppBarAndBottomSheet
+          : isShowAppBarAndBottomSheet // ignore: cast_nullable_to_non_nullable
+              as bool,
+      currentSliderValue: null == currentSliderValue
+          ? _value.currentSliderValue
+          : currentSliderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      fontSize: null == fontSize
+          ? _value.fontSize
+          : fontSize // ignore: cast_nullable_to_non_nullable
+              as double,
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as TableUser?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BookCopyWith<$Res> get book {
-    return $BookCopyWith<$Res>(_value.book, (value) {
-      return _then(_value.copyWith(book: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
   }
 }
 
@@ -91,12 +139,17 @@ abstract class _$$_BookViewerPageModelCopyWith<$Res>
       __$$_BookViewerPageModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Book book, User user});
-
-  @override
-  $BookCopyWith<$Res> get book;
-  @override
-  $UserCopyWith<$Res> get user;
+  $Res call(
+      {String title,
+      String epubFilePath,
+      String coverFilePath,
+      int price,
+      bool isHeart,
+      bool isBookMark,
+      bool isShowAppBarAndBottomSheet,
+      double currentSliderValue,
+      double fontSize,
+      TableUser? user});
 }
 
 /// @nodoc
@@ -110,18 +163,58 @@ class __$$_BookViewerPageModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? book = null,
-    Object? user = null,
+    Object? title = null,
+    Object? epubFilePath = null,
+    Object? coverFilePath = null,
+    Object? price = null,
+    Object? isHeart = null,
+    Object? isBookMark = null,
+    Object? isShowAppBarAndBottomSheet = null,
+    Object? currentSliderValue = null,
+    Object? fontSize = null,
+    Object? user = freezed,
   }) {
     return _then(_$_BookViewerPageModel(
-      book: null == book
-          ? _value.book
-          : book // ignore: cast_nullable_to_non_nullable
-              as Book,
-      user: null == user
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      epubFilePath: null == epubFilePath
+          ? _value.epubFilePath
+          : epubFilePath // ignore: cast_nullable_to_non_nullable
+              as String,
+      coverFilePath: null == coverFilePath
+          ? _value.coverFilePath
+          : coverFilePath // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
+      isHeart: null == isHeart
+          ? _value.isHeart
+          : isHeart // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBookMark: null == isBookMark
+          ? _value.isBookMark
+          : isBookMark // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowAppBarAndBottomSheet: null == isShowAppBarAndBottomSheet
+          ? _value.isShowAppBarAndBottomSheet
+          : isShowAppBarAndBottomSheet // ignore: cast_nullable_to_non_nullable
+              as bool,
+      currentSliderValue: null == currentSliderValue
+          ? _value.currentSliderValue
+          : currentSliderValue // ignore: cast_nullable_to_non_nullable
+              as double,
+      fontSize: null == fontSize
+          ? _value.fontSize
+          : fontSize // ignore: cast_nullable_to_non_nullable
+              as double,
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as TableUser?,
     ));
   }
 }
@@ -129,16 +222,42 @@ class __$$_BookViewerPageModelCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BookViewerPageModel implements _BookViewerPageModel {
-  _$_BookViewerPageModel({required this.book, required this.user});
+  _$_BookViewerPageModel(
+      {required this.title,
+      required this.epubFilePath,
+      required this.coverFilePath,
+      required this.price,
+      required this.isHeart,
+      required this.isBookMark,
+      required this.isShowAppBarAndBottomSheet,
+      required this.currentSliderValue,
+      required this.fontSize,
+      this.user});
 
   @override
-  Book book;
+  String title;
   @override
-  User user;
+  String epubFilePath;
+  @override
+  String coverFilePath;
+  @override
+  int price;
+  @override
+  bool isHeart;
+  @override
+  bool isBookMark;
+  @override
+  bool isShowAppBarAndBottomSheet;
+  @override
+  double currentSliderValue;
+  @override
+  double fontSize;
+  @override
+  TableUser? user;
 
   @override
   String toString() {
-    return 'BookViewerPageModel(book: $book, user: $user)';
+    return 'BookViewerPageModel(title: $title, epubFilePath: $epubFilePath, coverFilePath: $coverFilePath, price: $price, isHeart: $isHeart, isBookMark: $isBookMark, isShowAppBarAndBottomSheet: $isShowAppBarAndBottomSheet, currentSliderValue: $currentSliderValue, fontSize: $fontSize, user: $user)';
   }
 
   @JsonKey(ignore: true)
@@ -150,15 +269,48 @@ class _$_BookViewerPageModel implements _BookViewerPageModel {
 }
 
 abstract class _BookViewerPageModel implements BookViewerPageModel {
-  factory _BookViewerPageModel({required Book book, required User user}) =
-      _$_BookViewerPageModel;
+  factory _BookViewerPageModel(
+      {required String title,
+      required String epubFilePath,
+      required String coverFilePath,
+      required int price,
+      required bool isHeart,
+      required bool isBookMark,
+      required bool isShowAppBarAndBottomSheet,
+      required double currentSliderValue,
+      required double fontSize,
+      TableUser? user}) = _$_BookViewerPageModel;
 
   @override
-  Book get book;
-  set book(Book value);
+  String get title;
+  set title(String value);
   @override
-  User get user;
-  set user(User value);
+  String get epubFilePath;
+  set epubFilePath(String value);
+  @override
+  String get coverFilePath;
+  set coverFilePath(String value);
+  @override
+  int get price;
+  set price(int value);
+  @override
+  bool get isHeart;
+  set isHeart(bool value);
+  @override
+  bool get isBookMark;
+  set isBookMark(bool value);
+  @override
+  bool get isShowAppBarAndBottomSheet;
+  set isShowAppBarAndBottomSheet(bool value);
+  @override
+  double get currentSliderValue;
+  set currentSliderValue(double value);
+  @override
+  double get fontSize;
+  set fontSize(double value);
+  @override
+  TableUser? get user;
+  set user(TableUser? value);
   @override
   @JsonKey(ignore: true)
   _$$_BookViewerPageModelCopyWith<_$_BookViewerPageModel> get copyWith =>

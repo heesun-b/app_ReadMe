@@ -7,10 +7,10 @@ import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
+import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/model/book_detail_mock_data.dart';
 import 'package:readme_app/model/review_mock_data.dart';
 import 'package:readme_app/util/star_score/star_score.dart';
-import 'package:readme_app/view/components/home_navigation_bar.dart';
 
 class BookDetailPage extends StatefulWidget {
   const BookDetailPage({Key? key}) : super(key: key);
@@ -733,7 +733,7 @@ class _BookDetailPageState extends State<BookDetailPage>
           top: 530,
             child: InkWell(
               onTap: (){
-                Navigator.pushNamed(context, "/viewer");
+                Navigator.pushNamed(context, "/viewer", arguments: {"bookDetail" : bookDetail});
               },
               child: Container(
           padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
