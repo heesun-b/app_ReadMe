@@ -3,7 +3,6 @@ import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/main.dart';
 import 'package:readme_app/model/book/book_repository.dart';
-import 'package:readme_app/provider/session_provider.dart';
 import 'package:readme_app/view/page/category/category_page/category_page_view_model.dart';
 import 'package:readme_app/view/page/main/main_page/main_page_view_model.dart';
 
@@ -30,11 +29,10 @@ class BookController {
       // responseDTO.data = responseBookList
       // responseDTO.data.page.isLast = false
       ResponseDTO responseDTO =  await BookRepository().searchMainListPage(page, requestName);
-      MainDTO mainDTO = responseDTO.data;
-      ref.read(mainPageProvider.notifier).pageSearch(name, mainDTO, page);
-      isDuplication = false;
 
-      // Fail 처리 싹 해야함
+        ref.read(mainPageProvider.notifier).pageSearch(name, responseDTO, page);
+        isDuplication = false;
+
 
     }
   }
@@ -54,7 +52,6 @@ class BookController {
       ref.read(categoryPageProvider.notifier).pageSearch(mainDTO, page, bigCategory, smallCategory: smallCategory);
       isDuplication = false;
 
-      // Fail 처리 싹 해야함
 
     }
   }

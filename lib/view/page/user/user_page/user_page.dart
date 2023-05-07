@@ -6,21 +6,23 @@ import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/use_icons.dart';
 import 'package:readme_app/view/components/use_button.dart';
+import 'package:readme_app/view/page/user/user_page_view_model.dart';
 
 class UserPage extends ConsumerWidget {
   const UserPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    UserPageModel? model = ref.watch(userPageProvider);
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
             children: [
               _logout(ref),
-              _header(),
-              // _membershipCard(),
-              _membershipInfoCard(context),
+              _header(model?.username ?? ""),
+              model == null || model.userInfoDTO == null ? _loginButton() : model.userInfoDTO!.isMembership ?   _membershipInfoCard(context) : _membershipCard(),
               _mainButton(),
               _subButton(),
               _bottomInfo(),
@@ -93,7 +95,6 @@ class UserPage extends ConsumerWidget {
               onTap: () {
                 // 추가 question
                 // Navigator.pushNamed(context, "/question");
-
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -119,7 +120,6 @@ class UserPage extends ConsumerWidget {
             child: InkWell(
               onTap: () {
                 // Navigator.pushNamed(context, "/questionList");
-
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -155,13 +155,13 @@ class UserPage extends ConsumerWidget {
                       right:
                           BorderSide(color: Colours.app_sub_grey, width: 2.0))),
               child: InkWell(
-                onTap: (){
+                onTap: () {
                   // Navigator.pushNamed(context, "/contentBox");
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                   HsStyleIcons.bookPayment,
+                    HsStyleIcons.bookPayment,
                     SizedBox(
                       height: 5,
                     ),
@@ -183,7 +183,7 @@ class UserPage extends ConsumerWidget {
                       right:
                           BorderSide(color: Colours.app_sub_grey, width: 2.0))),
               child: InkWell(
-                onTap: (){
+                onTap: () {
                   // Navigator.pushNamed(context, "/paymentList");
                 },
                 child: Column(
@@ -209,15 +209,14 @@ class UserPage extends ConsumerWidget {
                       bottom:
                           BorderSide(color: Colours.app_sub_grey, width: 2.0))),
               child: InkWell(
-                onTap: (){
+                onTap: () {
                   // review
                   // Navigator.pushNamed(context, "/review");
-
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  HsStyleIcons.review,
+                    HsStyleIcons.review,
                     SizedBox(
                       height: 5,
                     ),
@@ -232,7 +231,7 @@ class UserPage extends ConsumerWidget {
     );
   }
 
-  Widget _logout( WidgetRef ref) {
+  Widget _logout(WidgetRef ref) {
     return Align(
         alignment: Alignment.topRight,
         child: Padding(
@@ -262,7 +261,7 @@ class UserPage extends ConsumerWidget {
             child: UseButton(
               title: "멤버십 구독하기",
               buttonPressed: () {
-               // PaymentPageBodyMembership 연결 추가
+                // PaymentPageBodyMembership 연결 추가
               },
             ),
           )),
@@ -282,7 +281,7 @@ class UserPage extends ConsumerWidget {
             child: UseButton(
               title: "로그인",
               buttonPressed: () {
-               // PaymentPageBodyMembership 연결 추가
+                // PaymentPageBodyMembership 연결 추가
               },
             ),
           )),
@@ -427,7 +426,7 @@ class UserPage extends ConsumerWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, "/membershipCancel");
-                      },
+                    },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15.0),
                       child: Text("해지"),
@@ -444,7 +443,7 @@ class UserPage extends ConsumerWidget {
     );
   }
 
-  Widget _header() {
+  Widget _header(String username) {
     return Column(
       children: [
         Padding(
@@ -456,7 +455,7 @@ class UserPage extends ConsumerWidget {
           ),
         ),
         Text(
-          "ssar@nate.com",
+          "$username",
           style: TextStyle(
               fontWeight: FontWeight.w700, fontSize: Dimens.font_sp20),
         ),

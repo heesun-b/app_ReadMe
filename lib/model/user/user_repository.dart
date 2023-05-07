@@ -4,12 +4,16 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/core/constants/secure_storage.dart';
 import 'package:readme_app/core/constants/secure_storage_enum.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
+import 'package:readme_app/dto/user_info_dto/user_info_dto.dart';
+import 'package:readme_app/main.dart';
+import 'package:readme_app/sqflite/sqflite.dart';
 
 
 class UserRepository {
@@ -72,17 +76,42 @@ class UserRepository {
 
 
   Future<ResponseDTO> getUser() async {
-    try{
+    try {
       Dio dio =  await MyHttp.getSecurity();
-      Response response = await dio.get("/users"); // 스프링에서 만든 join 로직에 요청
-      return ResponseDTO.fromJson(response.data);
-    }catch(e){
+      Response response = await dio.get("/users"); // 스프링에서 만든 Join 로직에 요청
+
+      if (response.statusCode == 200) {
+        return ResponseDTO.fromJson(response.data);
+      } else {
+        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
+      }
+
+    } catch(e) {
       print("User 로그 $e");
-      return ResponseDTO(code: -1, msg: "구글 로그인 실패");
+      return ResponseDTO(code: -1, msg: "회원 정보 조회 실패");
     }
   }
 
   Future<void> logOut() async {
     await SecureStorage.clear();
+    await MySqfliteInit.deleteUser();
+  }
+
+  Future<ResponseDTO> getUserInfo() async {
+     try {
+      Dio dio = await MyHttp.getSecurity();
+      Response response = await dio.get("/users/my");
+      if (response.statusCode == 401 || response.statusCode == 403) {
+        return ResponseDTO(code: 401, msg: "인증 실패입니다.");
+      } else if (response.statusCode == 200) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        responseDTO.data = UserInfoDTO.fromJson(responseDTO.data);
+        return responseDTO;
+      } else {
+        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
+      }
+    } catch(e) {
+       return ResponseDTO(code: -1, msg: "$e");
+    }
   }
 }

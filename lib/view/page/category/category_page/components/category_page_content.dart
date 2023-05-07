@@ -139,23 +139,6 @@ class CategoryPageContent extends ConsumerWidget {
                               constraints: BoxConstraints(),
                               onPressed: () {
                                 ref.read(cartControllerProvider).insert(books[index].id);
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) => AlertDialog(
-                                    title: const Text("장바구니 담기 완료", style: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp14, ),),
-                                    content: const Text("장바구니로 이동하시겠습니까?", style: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp12, )),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        child: const Text('취소'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () => Navigator.pushNamed(context, "/cart"),
-                                        child: const Text('확인'),
-                                      ),
-                                    ],
-                                  ),
-                                );
                               },
                               icon: YhIcons.cart2,
                             ),

@@ -24,9 +24,15 @@ class QuestionRepository {
       Response response = await MyHttp.get()
       // todo 경로
           .post("/questions", data: {'title': title, 'content': content});
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      responseDTO.data = Question.fromJson(responseDTO.data);
-      return responseDTO;
+      if(response.statusCode == 401 || response.statusCode == 403) {
+        return ResponseDTO(code: 401, msg: response.statusMessage);
+      } else if(response.statusCode == 200) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        responseDTO.data = Question.fromJson(responseDTO.data);
+        return responseDTO;
+      } else {
+        return ResponseDTO(code:response.statusCode, msg: response.statusMessage);
+      }
     } catch (e) {
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
     }

@@ -47,27 +47,6 @@ class MyHttp {
     return true;
   }
 
-  static void securityDioCommonFail (
-      Function function,
-      Response response) async {
-
-    final mContext = navigatorKey.currentContext;
-
-    if (response.statusCode == 401) {
-
-      // 켜진 모든 페이지 제거하고 로그인 페이지로 보내기
-      Navigator.popAndPushNamed(mContext!, '');
-
-    } else if (response.statusCode == 403) {
-      var isOK = await refresh(function);
-      if (isOK) {
-        function.call();
-      } else {
-        // 켜진 모든 페이지 제거하고 로그인 페이지로 보내기
-        Navigator.popAndPushNamed(mContext!, '');
-      }
-    }
-  }
 
 }
 
