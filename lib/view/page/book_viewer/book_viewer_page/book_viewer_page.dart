@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:readme_app/core/constants/move.dart';
-import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page.dart';
 import 'package:readme_app/view/page/book_viewer/components/book_drawer_no_membership.dart';
-import 'package:readme_app/view/page/bookmark/bookmark_list_page/bookmark_list_page.dart';
 import '../../../../core/constants/colours.dart';
 import '../../../../core/constants/jh_style_icons.dart';
 import '../../../../util/epub/src/helpers/epub_document.dart';

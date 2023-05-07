@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:readme_app/core/constants/http.dart';
+import 'package:readme_app/dto/book_viewer_dto/book_viewer_dto.dart';
 import 'package:readme_app/dto/cart_dto/cart_dto.dart';
 import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
@@ -94,6 +95,18 @@ class BookRepository {
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       CartDTO cartDTO = CartDTO.fromJson(responseDTO.data);
       responseDTO.data = cartDTO;
+      return responseDTO;
+    } catch(e) {
+      return ResponseDTO(code: -1, msg: "실패 : ${e}");
+    }
+  }
+
+  Future<ResponseDTO> searchViewerBook(int bookId, int userId) async {
+    try{
+      Response response = await MyHttp.get().post("/", data: {"userId" : userId, "bookId" : bookId});
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      BookViewerDTO bookViewerDTO = BookViewerDTO.fromJson(responseDTO.data);
+      responseDTO.data = bookViewerDTO;
       return responseDTO;
     } catch(e) {
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
