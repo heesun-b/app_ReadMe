@@ -1,5 +1,6 @@
 import 'package:readme_app/dto/meta_dto/meta_dto.dart';
 import 'package:readme_app/model/small_category/small_category.dart';
+import 'package:readme_app/model/user/user.dart';
 import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/sqflite/model/big_category/big_category.dart';
 import 'package:readme_app/sqflite/table/table_main_tab.dart';
@@ -19,7 +20,11 @@ class MySqfliteInit {
     await _initInsert(metaDTO);
   }
 
-//
+  static Future<void> insertUser (User user) async{
+    await _db!.delete(TableName.user);
+    await _db!.insert(TableName.user, {'id': user.id, 'username': user.username, 'role' : user.role, 'isMembership' : user.isMembership, 'isAutoPayment' : user.isAutoPayment});
+  }
+
   static Future<List<BigCategory>> getBigCategoryList() async {
     List<BigCategory> categoryList = [];
     if (_db == null) {
