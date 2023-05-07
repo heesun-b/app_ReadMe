@@ -56,7 +56,7 @@ class BookViewerPageViewModel extends StateNotifier<BookViewerPageModel?> {
     );
 
     initBook.user = await MySqfliteInit.getUser();
-
+    print(initBook.user?.id ?? 0);
 
     BookDetailMockData bookDetail = bookDetailData["bookDetail"];
 
