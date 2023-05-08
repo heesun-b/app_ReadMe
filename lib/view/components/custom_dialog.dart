@@ -83,7 +83,7 @@ class CustomDialog extends StatelessWidget {
                 child: TextButton(
                   onPressed: callback,
                   child: Text(
-                    "닫기",
+                    "확인",
                     style: TextStyle(
                       color: Colours.app_sub_black
                       ,

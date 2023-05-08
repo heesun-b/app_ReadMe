@@ -7,6 +7,7 @@ import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/model/cart_mock_data.dart';
+import 'package:readme_app/view/components/none_list_widget.dart';
 import 'package:readme_app/view/components/use_button.dart';
 import 'package:readme_app/view/page/cart/cart_page/cart_page_view_model.dart';
 
@@ -122,6 +123,7 @@ class CartPageBody extends ConsumerWidget {
           thickness: 5,
           height: 1,
         ),
+        // model == null ? NoneListWidget(title: "장바구니") :
         _bookListTile(context, ref),
       ],
     );

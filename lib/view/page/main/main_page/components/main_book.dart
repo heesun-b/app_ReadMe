@@ -113,12 +113,12 @@ class MainBook extends ConsumerWidget {
                             constraints: const BoxConstraints(),
                             onPressed: () {
                               if(book!.isHeart) {
-                                ref.read(mainPageProvider.notifier).addScarp(name ,book.id ?? 0);
+                                ref.read(mainPageProvider.notifier).addScarp(name ,book.id);
                               } else {
                                 ref.read(mainPageProvider.notifier).deleteScrap(name, book.id);
                               }
                             },
-                            icon: book?.isHeart ?? false ? YhIcons.heartFill : YhIcons.heart,
+                            icon: book!.isHeart ==  false ? YhIcons.heart : YhIcons.heartFill,
                           ),
                           IconButton(
                             padding: EdgeInsets.zero,
