@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BookDetailPageModel {
   BookDetailDTO get book => throw _privateConstructorUsedError;
   set book(BookDetailDTO value) => throw _privateConstructorUsedError;
+  TableUser? get user => throw _privateConstructorUsedError;
+  set user(TableUser? value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookDetailPageModelCopyWith<BookDetailPageModel> get copyWith =>
@@ -30,7 +32,7 @@ abstract class $BookDetailPageModelCopyWith<$Res> {
           BookDetailPageModel value, $Res Function(BookDetailPageModel) then) =
       _$BookDetailPageModelCopyWithImpl<$Res, BookDetailPageModel>;
   @useResult
-  $Res call({BookDetailDTO book});
+  $Res call({BookDetailDTO book, TableUser? user});
 
   $BookDetailDTOCopyWith<$Res> get book;
 }
@@ -49,12 +51,17 @@ class _$BookDetailPageModelCopyWithImpl<$Res, $Val extends BookDetailPageModel>
   @override
   $Res call({
     Object? book = null,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       book: null == book
           ? _value.book
           : book // ignore: cast_nullable_to_non_nullable
               as BookDetailDTO,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as TableUser?,
     ) as $Val);
   }
 
@@ -75,7 +82,7 @@ abstract class _$$_BookDetailPageModelCopyWith<$Res>
       __$$_BookDetailPageModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BookDetailDTO book});
+  $Res call({BookDetailDTO book, TableUser? user});
 
   @override
   $BookDetailDTOCopyWith<$Res> get book;
@@ -93,12 +100,17 @@ class __$$_BookDetailPageModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? book = null,
+    Object? user = freezed,
   }) {
     return _then(_$_BookDetailPageModel(
       book: null == book
           ? _value.book
           : book // ignore: cast_nullable_to_non_nullable
               as BookDetailDTO,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as TableUser?,
     ));
   }
 }
@@ -106,14 +118,16 @@ class __$$_BookDetailPageModelCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BookDetailPageModel implements _BookDetailPageModel {
-  _$_BookDetailPageModel({required this.book});
+  _$_BookDetailPageModel({required this.book, this.user});
 
   @override
   BookDetailDTO book;
+  @override
+  TableUser? user;
 
   @override
   String toString() {
-    return 'BookDetailPageModel(book: $book)';
+    return 'BookDetailPageModel(book: $book, user: $user)';
   }
 
   @JsonKey(ignore: true)
@@ -125,12 +139,15 @@ class _$_BookDetailPageModel implements _BookDetailPageModel {
 }
 
 abstract class _BookDetailPageModel implements BookDetailPageModel {
-  factory _BookDetailPageModel({required BookDetailDTO book}) =
+  factory _BookDetailPageModel({required BookDetailDTO book, TableUser? user}) =
       _$_BookDetailPageModel;
 
   @override
   BookDetailDTO get book;
   set book(BookDetailDTO value);
+  @override
+  TableUser? get user;
+  set user(TableUser? value);
   @override
   @JsonKey(ignore: true)
   _$$_BookDetailPageModelCopyWith<_$_BookDetailPageModel> get copyWith =>

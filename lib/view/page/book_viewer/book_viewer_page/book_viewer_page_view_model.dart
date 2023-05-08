@@ -5,12 +5,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
-import 'package:readme_app/main.dart';
+import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
+import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/model/book_detail_mock_data.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 import 'package:readme_app/sqflite/table/table_user.dart';
-import 'package:readme_app/style/colours.dart';
 import 'package:readme_app/util/epub/epub_view.dart';
 
 // 파일명
@@ -44,7 +45,7 @@ class BookViewerPageViewModel extends StateNotifier<BookViewerPageModel?> {
 
   BookViewerPageViewModel(super.state);
 
-  void notifyInit(Map<String, dynamic> bookDetailData) async {
+  void notifyInit(BookDetailDTO book) async {
     BookViewerPageModel initBook = BookViewerPageModel(
       title: "",
       epubFilePath: "",
@@ -63,17 +64,13 @@ class BookViewerPageViewModel extends StateNotifier<BookViewerPageModel?> {
     );
 
     initBook.user = await MySqfliteInit.getUser();
-    print(initBook.user?.id ?? 0);
 
-    BookDetailMockData bookDetail = bookDetailData["bookDetail"];
-
-    print("bookDetail.epubFilePath: ${bookDetail.epubFilePath}" );
     initBook = initBook.copyWith(
-        title: bookDetail.title,
-        epubFilePath: bookDetail.epubFilePath,
-        coverFilePath: bookDetail.coverFilePath,
-        price: bookDetail.price,
-        isHeart: bookDetail.isHeart,
+        title: book.title,
+        epubFilePath: book.epubFile.fileUrl,
+        coverFilePath: book.coverFile.fileUrl,
+        price: book.price,
+        isHeart: book.isHeart,
         isBookMark: false,
         isShowAppBarAndBottomSheet: false,
         currentSliderValue: 100,
@@ -82,7 +79,7 @@ class BookViewerPageViewModel extends StateNotifier<BookViewerPageModel?> {
         fontFamily: "NanumGothic",
         bgColor: Colours.app_sub_white,
         user: initBook.user,
-        epubReaderController: EpubController(document: EpubDocument.openUrl(bookDetail.epubFilePath))
+        epubReaderController: EpubController(document: EpubDocument.openUrl(book.epubFile.fileUrl))
     );
 
     state = initBook;
@@ -96,7 +93,7 @@ class BookViewerPageViewModel extends StateNotifier<BookViewerPageModel?> {
     state = state!.copyWith(fontSize: state!.fontSize + 2.0);
   }
 
-  void ChangeFontFamily(String value) async {
+  void changeFontFamily(String value) async {
     state = state!.copyWith(fontFamily: value);
   }
 
@@ -125,9 +122,7 @@ class BookViewerPageViewModel extends StateNotifier<BookViewerPageModel?> {
   }
 }
 
-final bookViewerPageProvider = StateNotifierProvider.family.autoDispose<
-    BookViewerPageViewModel, BookViewerPageModel?, Map<String, dynamic>>(
-  (ref, bookDetailData) {
-    return BookViewerPageViewModel(null)..notifyInit(bookDetailData);
+final bookViewerPageProvider = StateNotifierProvider.family.autoDispose<BookViewerPageViewModel, BookViewerPageModel?, BookDetailDTO>((ref, book) {
+    return BookViewerPageViewModel(null)..notifyInit(book);
   },
 );

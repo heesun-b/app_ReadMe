@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:readme_app/core/constants/colours.dart';
+import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/model/book_detail_mock_data.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/components/book_detail_membership_botton.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/components/book_detail_purchase_button.dart';
 
 class BookDetailBottomSheet extends StatefulWidget {
-  const BookDetailBottomSheet({Key? key}) : super(key: key);
+  BookDetailBottomSheet(this.title, this.author, this.price, this.id, this.path, {Key? key}) : super(key: key);
+
+  String title;
+  String author;
+  int price;
+  int id;
+  String path;
 
   @override
   State<BookDetailBottomSheet> createState() => _BookDetailBottomSheetState();
@@ -32,10 +39,10 @@ class _BookDetailBottomSheetState extends State<BookDetailBottomSheet> with Sing
       child: Column(
         children: [
           TabBar(
-            labelStyle: TextStyle(fontSize: 22),
+            labelStyle: TextStyle(fontSize: Dimens.font_sp20),
             controller: _tabController,
             indicatorColor: Colours.app_main,
-            tabs: [
+            tabs: const [
               Tab(text: '멤버십 구독'),
               Tab(text: '소장'),
             ],
@@ -47,42 +54,42 @@ class _BookDetailBottomSheetState extends State<BookDetailBottomSheet> with Sing
                 Container(
                   color: Colors.white,
                   child: Padding(
-                    padding: EdgeInsets.all(40),
+                    padding: const EdgeInsets.all(40),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           'ReadMe 멤버가 아니신가요?',
                           style: TextStyle(
-                            fontSize: 22,
+                            fontSize: Dimens.font_sp20,
                           ),
                         ),
-                        SizedBox(height: 40),
-                        Text(
+                        const SizedBox(height: 40),
+                        const Text(
                           '멤버십을 구독하고 모든 도서를 자유롭게 열람해 보세요.',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: Dimens.font_sp20,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                          children: const [
                             Text(
                               '월 9,900원',
                               style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: Dimens.font_sp20,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
                               '(VAT 포함)',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: Dimens.font_sp16,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 40),
+                        const SizedBox(height: 30),
                         BookDetailMembershipButton(
                           text: '멤버십 구독하기',
                           onPressed: () => Navigator.pop(context),
@@ -94,7 +101,7 @@ class _BookDetailBottomSheetState extends State<BookDetailBottomSheet> with Sing
                 Container(
                   color: Colors.white,
                   child: Padding(
-                    padding: EdgeInsets.all(40),
+                    padding: const EdgeInsets.all(40),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -108,33 +115,33 @@ class _BookDetailBottomSheetState extends State<BookDetailBottomSheet> with Sing
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '${bookDetail.title}',
-                                  style: TextStyle(
-                                      fontSize: 26,
+                                  widget.title,
+                                  style: const TextStyle(
+                                      fontSize: Dimens.font_sp26,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
-                                  '${bookDetail.author}',
-                                  style: TextStyle(
-                                    fontSize: 20,
+                                  widget.author,
+                                  style: const TextStyle(
+                                    fontSize: Dimens.font_sp20,
                                   ),
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Row(
                                   children: [
                                     Text(
-                                      '소장가 ${bookDetail.price}원',
-                                      style: TextStyle(fontSize: 18),
+                                      '소장가 ${widget.price}원',
+                                      style: const TextStyle(fontSize: Dimens.font_sp18),
                                     ),
-                                    Text(
+                                    const Text(
                                       '(VAT 포함)',
-                                      style: TextStyle(fontSize: 13),
+                                      style: TextStyle(fontSize: Dimens.font_sp12),
                                     ),
                                   ],
                                 ),

@@ -7,6 +7,7 @@ import 'package:readme_app/model/book_detail_mock_data.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page_view_model.dart';
 
 class BookDetailInfo extends ConsumerWidget {
+
   int bookId;
   BookDetailInfo({required this.bookId, Key? key}) : super(key: key);
 
@@ -14,18 +15,16 @@ class BookDetailInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     BookDetailPageModel? model = ref.watch(bookDetailPageProvider(bookId));
-    // ???
-    BookDetailDTO book = model!.book;
 
     return Column(
       children: [
-        _buildCategory(book),
+        _buildCategory(model?.book),
         SizedBox(height: 20),
-        _buildTitle(book),
+        _buildTitle(model?.book),
         SizedBox(height: 8),
-        _buildAuthorStore(book),
+        _buildAuthorStore(model?.book),
         SizedBox(height: 20),
-        _buildPrice(book),
+        _buildPrice(model?.book),
         Divider(
           thickness: 2,
         ),
@@ -33,7 +32,7 @@ class BookDetailInfo extends ConsumerWidget {
     );
   }
 
-  Widget _buildCategory(BookDetailDTO book) {
+  Widget _buildCategory(BookDetailDTO? book) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -47,7 +46,7 @@ class BookDetailInfo extends ConsumerWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
-            book.bigCategory.name,
+            book?.bigCategory.name ?? "",
             style: TextStyle(
               fontSize: Dimens.font_sp14,
               color: Colours.app_sub_black,
@@ -65,7 +64,7 @@ class BookDetailInfo extends ConsumerWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
-            book.smallCategory.name,
+            book?.smallCategory.name ?? "",
             style: TextStyle(
               fontSize: Dimens.font_sp14,
               color: Colours.app_sub_black,
@@ -76,14 +75,14 @@ class BookDetailInfo extends ConsumerWidget {
     );
   }
 
-  Widget _buildTitle(BookDetailDTO book) {
+  Widget _buildTitle(BookDetailDTO? book) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 5.0),
           child: Text(
-            book.title,
+            book?.title ?? "",
             style: TextStyle(
               fontSize: Dimens.font_sp30,
               fontWeight: FontWeight.w700,
@@ -95,12 +94,12 @@ class BookDetailInfo extends ConsumerWidget {
     );
   }
 
-  Row _buildAuthorStore(BookDetailDTO book) {
+  Row _buildAuthorStore(BookDetailDTO? book) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          book.author,
+          book?.author ?? "",
           style: TextStyle(
             fontSize: Dimens.font_sp24,
             color: Colours.app_sub_black,
@@ -108,7 +107,7 @@ class BookDetailInfo extends ConsumerWidget {
         ),
         SizedBox(width: 10),
         Text(
-          "/ ${book.publisher.businessName}",
+          "/ ${book?.publisher.businessName}",
           style: TextStyle(
             fontSize: Dimens.font_sp24,
             color: Colours.app_sub_black,
@@ -118,12 +117,12 @@ class BookDetailInfo extends ConsumerWidget {
     );
   }
 
-  Widget _buildPrice(BookDetailDTO book) {
+  Widget _buildPrice(BookDetailDTO? book) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          "소장가 ${book.price}원",
+          "소장가 ${book?.price ?? "0"}원",
           style: TextStyle(
             fontSize: Dimens.font_sp20,
             color: Colours.app_sub_black,

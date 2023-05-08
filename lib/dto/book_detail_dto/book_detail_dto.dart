@@ -25,13 +25,12 @@ class BookDetailDTO with _$BookDetailDTO {
     required SmallCategory smallCategory,
     required String authorInfo,
     required bool isHeart,
-    required double stars,
+    required bool isPurchase,
     required FileDTO epubFile,
     required FileDTO coverFile,
     List<Review>? reviews,
   }) = _BookDetailDTO;
 
   factory BookDetailDTO.fromJson(Map<String, Object?> json) => _$BookDetailDTOFromJson(json);
-
 
 }

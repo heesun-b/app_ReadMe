@@ -20,7 +20,7 @@ _$_BookDetailDTO _$$_BookDetailDTOFromJson(Map<String, dynamic> json) =>
           SmallCategory.fromJson(json['smallCategory'] as Map<String, dynamic>),
       authorInfo: json['authorInfo'] as String,
       isHeart: json['isHeart'] as bool,
-      stars: (json['stars'] as num).toDouble(),
+      isPurchase: json['isPurchase'] as bool,
       epubFile: FileDTO.fromJson(json['epubFile'] as Map<String, dynamic>),
       coverFile: FileDTO.fromJson(json['coverFile'] as Map<String, dynamic>),
       reviews: (json['reviews'] as List<dynamic>?)
@@ -40,7 +40,7 @@ Map<String, dynamic> _$$_BookDetailDTOToJson(_$_BookDetailDTO instance) =>
       'smallCategory': instance.smallCategory,
       'authorInfo': instance.authorInfo,
       'isHeart': instance.isHeart,
-      'stars': instance.stars,
+      'isPurchase': instance.isPurchase,
       'epubFile': instance.epubFile,
       'coverFile': instance.coverFile,
       'reviews': instance.reviews,

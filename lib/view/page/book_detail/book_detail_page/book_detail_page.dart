@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/controller/cart_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
-import 'package:readme_app/core/constants/move.dart';
+import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page_view_model.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/components/book_detail_bottom_sheet.dart';
@@ -16,14 +16,15 @@ class BookDetailPage extends ConsumerWidget {
   BookDetailPage({required this.bookId, Key? key}) : super(key: key);
   int bookId;
 
-  bool isLiked = false;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     BookDetailPageModel? model = ref.watch(bookDetailPageProvider(bookId));
 
     return Scaffold(
-      body: CustomScrollView(
+      body: model == null ?  LoadingAnimationWidget.staggeredDotsWave(
+        color: Colors.white,
+        size: 100,
+      ) :  CustomScrollView(
         slivers: [
           SliverAppBar(
             elevation: 0,
@@ -76,10 +77,10 @@ class BookDetailPage extends ConsumerWidget {
                         children: [
                           BookDetailInfo(bookId:bookId),
                           BookDetailPageBody(bookId: bookId),
-                          Divider(
+                          const Divider(
                             thickness: 2,
                           ),
-                          SizedBox(height: 15),
+                          const SizedBox(height: 15),
                         ],
                       ),
                     ),
@@ -91,12 +92,13 @@ class BookDetailPage extends ConsumerWidget {
         ],
       ),
       bottomSheet: Container(
+        height: 60,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
               icon: Icon(
-                isLiked ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
+                model?.book.isHeart ?? false ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
                 size: 40,
               ),
               onPressed: () {
@@ -106,40 +108,67 @@ class BookDetailPage extends ConsumerWidget {
               },
             ),
             SizedBox(width: 10),
-            SizedBox(
+
+            model?.user != null
+                ?  SizedBox(
               width: 150,
               height: 40,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  textStyle: TextStyle(color: Colors.white, fontSize: 20),
-                  padding: EdgeInsets.all(5),
-                ),
-                child: Text("장바구니"),
-                onPressed: () {
-                  ref.read(cartControllerProvider).insert(bookId);
-                }
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    textStyle: TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
+                    padding: EdgeInsets.all(5),
+                  ),
+                  child: const Text("바로보기"),
+                  onPressed: () {
+                    // TODO
+                  }
               ),
-            ),
-            SizedBox(width: 10),
-            SizedBox(
-              width: 150,
-              height: 40,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  textStyle: TextStyle(color: Colors.white, fontSize: 20),
-                  padding: EdgeInsets.all(5),
+            )
+                : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 150,
+                  height: 40,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        textStyle: TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
+                        padding: EdgeInsets.all(5),
+                      ),
+                      child: const Text("장바구니"),
+                      onPressed: () {
+                        ref.read(cartControllerProvider).insert(bookId);
+                      }
+                  ),
                 ),
-                child: Text("구독 / 소장"),
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) => BookDetailBottomSheet(),
-                  );
-                },
-              ),
-            ),
+                const SizedBox(width: 10),
+                SizedBox(
+                  width: 150,
+                  height: 40,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      textStyle: const TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
+                      padding: const EdgeInsets.all(5),
+                    ),
+                    child: const Text("구독 / 소장"),
+                    onPressed: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) => BookDetailBottomSheet(
+                            model?.book.title ?? "",
+                            model?.book.author ?? "",
+                            model?.book.price ?? 0,
+                            model?.book.id ?? 0,
+                            model?.book.coverFile.fileUrl ?? "",)
+                      );
+                    },
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
