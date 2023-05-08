@@ -129,8 +129,9 @@ class BookRepository {
 
   Future<ResponseDTO> addCart(int bookId) async {
     try{
-      Dio dio = await MyHttp.getSecurity();
+      Dio dio = await MyHttp.getCommon();
       Response response = await dio.post("/carts", data: {"bookId" : bookId});
+      print(response.data);
       if(response.statusCode == 401 || response.statusCode == 403) {
         return ResponseDTO(code: 401, msg: response.statusMessage);
       } else if (response.statusCode == 200 ) {

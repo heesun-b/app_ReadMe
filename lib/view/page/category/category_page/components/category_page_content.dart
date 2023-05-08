@@ -131,7 +131,7 @@ class CategoryPageContent extends ConsumerWidget {
                               padding: EdgeInsets.zero,
                               constraints: BoxConstraints(),
                               onPressed: () {},
-                              icon: YhIcons.heart,
+                              icon: books[index].isHeart == false ? YhIcons.heart : YhIcons.heartFill,
                             ),
                             SizedBox(width: 10),
                             IconButton(

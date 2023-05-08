@@ -118,7 +118,7 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
 
 
 
-  void insert(ResponseDTO responseDTO) {
+  void insert (ResponseDTO responseDTO) {
     var context = navigatorKey.currentContext!;
     if(responseDTO.code! == 1) {
       UseCartDTO useCartDTO = UseCartDTO(cartDTO: responseDTO.data, isChecked: false);
@@ -142,7 +142,6 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
           ],
         ),
       );
-
     } else {
       DialogUtil.dialogShow(context, responseDTO.msg);
     }

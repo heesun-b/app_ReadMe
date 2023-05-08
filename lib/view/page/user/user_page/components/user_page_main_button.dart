@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/use_icons.dart';
+import 'package:readme_app/view/components/custom_dialog.dart';
 import 'package:readme_app/view/page/user/user_page_view_model.dart';
 
 class UserPageMainBtton extends ConsumerWidget {
@@ -30,6 +31,15 @@ class UserPageMainBtton extends ConsumerWidget {
                 onTap: () {
                   if(userModel != null) {
                     Navigator.pushNamed(context, "/contentBox");
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return   CustomDialog(title: "로그인 후 이용 가능",
+                          content: "로그인 하시겠습니까?",
+                          callback: () => Navigator.pushNamed(context, "/login"));
+                      },
+                    );
                   }
                 },
                 child: Column(
@@ -58,6 +68,15 @@ class UserPageMainBtton extends ConsumerWidget {
                 onTap: () {
                   if(userModel != null) {
                     Navigator.pushNamed(context, "/paymentList");
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return   CustomDialog(title: "로그인 후 이용 가능",
+                            content: "로그인 하시겠습니까?",
+                            callback: () => Navigator.pushNamed(context, "/login"));
+                      },
+                    );
                   }
                 },
                 child: Column(
@@ -85,6 +104,15 @@ class UserPageMainBtton extends ConsumerWidget {
                 onTap: () {
                   if(userModel != null) {
                     Navigator.pushNamed(context, "/review");
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return   CustomDialog(title: "로그인 후 이용 가능",
+                            content: "로그인 하시겠습니까?",
+                            callback: () => Navigator.pushNamed(context, "/login"));
+                      },
+                    );
                   }
                 },
                 child: Column(

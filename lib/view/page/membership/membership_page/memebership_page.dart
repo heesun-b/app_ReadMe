@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readme_app/core/constants/colours.dart';
+import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/util/bootpay/bootpay_subscribe.dart';
 import 'package:readme_app/view/page/membership/membership_page/components/membership_page_body.dart';
@@ -22,7 +23,7 @@ class MembershipPage extends StatelessWidget {
           style: TextStyle(
               color: Colours.app_sub_black,
               fontWeight: FontWeight.w700,
-              fontSize: 22),
+              fontSize: Dimens.font_sp24),
         ),
         centerTitle: true,
         leading: Row(
@@ -38,7 +39,7 @@ class MembershipPage extends StatelessWidget {
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {
-                Navigator.pushNamed(context, "/main");
+                Navigator.pushNamed(context, "/navigation");
               },
               icon: HsStyleIcons.homeFill,)
           ],
