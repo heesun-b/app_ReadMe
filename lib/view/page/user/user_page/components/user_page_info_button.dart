@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/core/constants/use_icons.dart';
 
 class UserPageInfoBtton extends ConsumerWidget {
@@ -15,15 +16,20 @@ class UserPageInfoBtton extends ConsumerWidget {
             onTap: () {
               // 추가
             },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                UseIcons.questionMark,
-                SizedBox(
-                  width: 5,
-                ),
-                Text("이용약관")
-              ],
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, Move.term);
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  UseIcons.questionMark,
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text("이용약관")
+                ],
+              ),
             ),
           ),
         ),
@@ -34,7 +40,7 @@ class UserPageInfoBtton extends ConsumerWidget {
           padding: const EdgeInsets.all(15.0),
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, "/appInfo");
+              Navigator.pushNamed(context, Move.appInfo);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

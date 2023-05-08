@@ -21,6 +21,7 @@ import 'package:readme_app/view/page/question/question_page.dart';
 import 'package:readme_app/view/page/question_list/question_list_page.dart';
 import 'package:readme_app/view/page/review/review_page.dart';
 import 'package:readme_app/view/page/search/search_list_page/search_list_page.dart';
+import 'package:readme_app/view/page/term/term_webview_page.dart';
 import 'package:readme_app/view/page/user/user_page/user_page.dart';
 
 import '../../view/page/bookmark/bookmark_list_page/bookmark_list_page.dart';
@@ -49,11 +50,13 @@ class Move {
   static String loginPage = "/login";
   static String appInfo = "/appInfo";
   static String notification = "/notification";
+  static String term = "/term";
 
 }
 
 Map<String, Widget Function(BuildContext)> getRouters(){
   return {
+    Move.term: (context) => TermWebViewPage(),
     Move.categoryPage: (context) => CategoryPage(),
     Move.searchListPage: (context) => SearchListPage(),
     Move.mainPage: (context) => MainPage(),
