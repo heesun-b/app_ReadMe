@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
+import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/core/constants/secure_storage.dart';
@@ -12,7 +13,6 @@ import 'package:readme_app/core/constants/secure_storage_enum.dart';
 import 'package:readme_app/dto/meta_dto/meta_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
-
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -24,11 +24,17 @@ void main() async {
 
   Widget failWidget = const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Center(
-      child: Text("현재 App을 사용하실 수 없습니다."),
+    home: Scaffold(
+      backgroundColor: Colours.app_sub_white,
+      body: Center(
+        child: Text(
+          "현재 App을 사용하실 수 없습니다.",
+          style:
+              TextStyle(fontSize: Dimens.font_sp18, fontWeight: FontWeight.w700),
+        ),
+      ),
     ),
   );
-
 
   // Meta 통신
   Dio dio = await MyHttp.getCommon();

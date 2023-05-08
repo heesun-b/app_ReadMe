@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/main.dart';
@@ -42,37 +45,44 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
 
     for (var mainTab in mainTabs) {
       var response = await BookRepository().mainList(mainTab.requestName);
-      MainDTO data = response.data;
-      List<Book>? contentList = data.content;
+      if(response.code == 1) {
+        MainDTO data = response.data;
+        List<Book>? contentList = data.content;
+        if (contentList.isNotEmpty) {
+          if (mainTab.name == "전체") {
 
-      if (contentList.isNotEmpty) {
-        if (mainTab.name == "전체") {
+            // TODO 나중에 추가 예정 Banner Start
+            List<String> banners = [];
+            for (var element in contentList) {
+              banners.add(element.coverFile.fileUrl);
+            }
+            mainPageModel.bookBanners.addAll(banners);
+            // Banner End
 
-          // TODO 나중에 추가 예정 Banner Start
-          List<String> banners = [];
-          for (var element in contentList) {
-            banners.add(element.coverFile.fileUrl);
+            mainPageModel.totalBooks.addAll(contentList);
+            mainPageModel = mainPageModel.copyWith(isTotalLast: data.last);
+          } else if (mainTab.name == "베스트셀러") {
+            mainPageModel.bestBooks.addAll(contentList);
+            mainPageModel = mainPageModel.copyWith(isBestLast: data.last);
+          } else if (mainTab.name == "추천") {
+            mainPageModel.recommendBooks.addAll(contentList);
+            mainPageModel = mainPageModel.copyWith(isRecommendLast: data.last);
+          } else if (mainTab.name == "신간") {
+            mainPageModel.latestBooks.addAll(contentList);
+            mainPageModel = mainPageModel.copyWith(isLatestLast: data.last);
           }
-          mainPageModel.bookBanners.addAll(banners);
-          // Banner End
-
-          mainPageModel.totalBooks.addAll(contentList);
-          mainPageModel = mainPageModel.copyWith(isTotalLast: data.last);
-        } else if (mainTab.name == "베스트셀러") {
-          mainPageModel.bestBooks.addAll(contentList);
-          mainPageModel = mainPageModel.copyWith(isBestLast: data.last);
-        } else if (mainTab.name == "추천") {
-          mainPageModel.recommendBooks.addAll(contentList);
-          mainPageModel = mainPageModel.copyWith(isRecommendLast: data.last);
-        } else if (mainTab.name == "신간") {
-          mainPageModel.latestBooks.addAll(contentList);
-          mainPageModel = mainPageModel.copyWith(isLatestLast: data.last);
         }
+
+        await Future.delayed(Duration(seconds: 3),);
+
+        state = mainPageModel;
+      } else {
+        DialogUtil.dialogShow(navigatorKey.currentContext!, response.msg);
       }
     }
-
-    state = mainPageModel;
-    // Book End
+    
+    
+    
   }
 
   void pageSearch(String name, ResponseDTO responseDTO, int page) {

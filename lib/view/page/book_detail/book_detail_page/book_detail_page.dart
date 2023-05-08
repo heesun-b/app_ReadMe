@@ -23,10 +23,7 @@ class BookDetailPage extends ConsumerWidget {
     BookDetailPageModel? model = ref.watch(bookDetailPageProvider(bookId));
 
     return Scaffold(
-      body: model == null ?  LoadingAnimationWidget.staggeredDotsWave(
-        color: Colors.white,
-        size: 100,
-      ) :  CustomScrollView(
+      body: CustomScrollView(
         slivers: [
           SliverAppBar(
             elevation: 0,

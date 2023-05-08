@@ -6,11 +6,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
+import 'package:readme_app/main.dart';
 import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/repository/book_repository.dart';
 import 'package:readme_app/model/small_category/small_category.dart';
 import 'package:readme_app/sqflite/model/big_category/big_category.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
+import 'package:readme_app/view/components/custom_dialog.dart';
 
 
 part 'category_page_view_model.freezed.dart';
@@ -53,6 +55,7 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
     CategoryPageModel books = CategoryPageModel(books: [] , page: 0, isLast: false, categoryTabs: [], bigCategoryId: 0, smallCategoryId: 0);
 
     List<BigCategory> sqlCategoryTabs =  await MySqfliteInit.getBigCategoryList();
+
     List<BigCategory> categoryTabs = [];
     for (var categoryTab in sqlCategoryTabs) {
       categoryTabs.add(categoryTab.copyWith (
@@ -61,18 +64,26 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
     }
    categoryTabs.insert(0, const BigCategory(id: 0, name: "종합"));
    ResponseDTO responseDTO = await BookRepository().mainList("all");
-   MainDTO total = responseDTO.data;
+   if(responseDTO.code == 1) {
+     MainDTO total = responseDTO.data;
+     books =  books.copyWith(books: total.content , page: 0, isLast: total.last, categoryTabs: categoryTabs);
+     state = books;
+   } else {
+     DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
+   }
 
-    books =  books.copyWith(books: total.content , page: 0, isLast: total.last, categoryTabs: categoryTabs);
-
-   state = books;
   }
 
 
   void categorySearch(int bigCategory, {int? smallCategory}) async {
     ResponseDTO responseDTO = await BookRepository().mainList("all", bigCategory: bigCategory, smallCategory: smallCategory);
-    MainDTO total = responseDTO.data;
-    state = state!.copyWith(books: total.content , page: 0, isLast: total.last, categoryTabs: state!.categoryTabs, bigCategoryId: bigCategory, smallCategoryId: smallCategory ?? 0);
+    if(responseDTO.code == 1 ) {
+      MainDTO total = responseDTO.data;
+      state = state!.copyWith(books: total.content , page: 0, isLast: total.last, categoryTabs: state!.categoryTabs, bigCategoryId: bigCategory, smallCategoryId: smallCategory ?? 0);
+    } else {
+      DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
+
+    }
   }
 
   void pageSearch(MainDTO mainDTO, int page, int bigCategory, {int? smallCategory}) async {

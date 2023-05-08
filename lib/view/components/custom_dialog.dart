@@ -103,7 +103,6 @@ class CustomDialog extends StatelessWidget {
             backgroundColor: Colours.app_sub_white,
             radius: 50.0,
             child: Image.asset("assets/images/readme_short.png",),
-            // 다이얼로그 아이콘 이미지를 assets 폴더에 추가해주세요.
           ),
         ),
       ],

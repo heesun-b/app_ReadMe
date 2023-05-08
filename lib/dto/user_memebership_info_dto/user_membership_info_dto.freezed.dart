@@ -21,18 +21,18 @@ UserMembershipInfoDTO _$UserMembershipInfoDTOFromJson(
 
 /// @nodoc
 mixin _$UserMembershipInfoDTO {
-  int get id => throw _privateConstructorUsedError;
-  set id(int value) => throw _privateConstructorUsedError;
-  String get membershipStartTime => throw _privateConstructorUsedError;
-  set membershipStartTime(String value) => throw _privateConstructorUsedError;
-  String get membershipEndTime => throw _privateConstructorUsedError;
-  set membershipEndTime(String value) => throw _privateConstructorUsedError;
-  int get price => throw _privateConstructorUsedError;
-  set price(int value) => throw _privateConstructorUsedError;
-  String get paymentTime => throw _privateConstructorUsedError;
-  set paymentTime(String value) => throw _privateConstructorUsedError;
-  Membership get membership => throw _privateConstructorUsedError;
-  set membership(Membership value) => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  set id(int? value) => throw _privateConstructorUsedError;
+  String? get membershipStartTime => throw _privateConstructorUsedError;
+  set membershipStartTime(String? value) => throw _privateConstructorUsedError;
+  String? get membershipEndTime => throw _privateConstructorUsedError;
+  set membershipEndTime(String? value) => throw _privateConstructorUsedError;
+  int? get price => throw _privateConstructorUsedError;
+  set price(int? value) => throw _privateConstructorUsedError;
+  String? get paymentTime => throw _privateConstructorUsedError;
+  set paymentTime(String? value) => throw _privateConstructorUsedError;
+  Membership? get membership => throw _privateConstructorUsedError;
+  set membership(Membership? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,14 +47,14 @@ abstract class $UserMembershipInfoDTOCopyWith<$Res> {
       _$UserMembershipInfoDTOCopyWithImpl<$Res, UserMembershipInfoDTO>;
   @useResult
   $Res call(
-      {int id,
-      String membershipStartTime,
-      String membershipEndTime,
-      int price,
-      String paymentTime,
-      Membership membership});
+      {int? id,
+      String? membershipStartTime,
+      String? membershipEndTime,
+      int? price,
+      String? paymentTime,
+      Membership? membership});
 
-  $MembershipCopyWith<$Res> get membership;
+  $MembershipCopyWith<$Res>? get membership;
 }
 
 /// @nodoc
@@ -71,45 +71,49 @@ class _$UserMembershipInfoDTOCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? membershipStartTime = null,
-    Object? membershipEndTime = null,
-    Object? price = null,
-    Object? paymentTime = null,
-    Object? membership = null,
+    Object? id = freezed,
+    Object? membershipStartTime = freezed,
+    Object? membershipEndTime = freezed,
+    Object? price = freezed,
+    Object? paymentTime = freezed,
+    Object? membership = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      membershipStartTime: null == membershipStartTime
+              as int?,
+      membershipStartTime: freezed == membershipStartTime
           ? _value.membershipStartTime
           : membershipStartTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      membershipEndTime: null == membershipEndTime
+              as String?,
+      membershipEndTime: freezed == membershipEndTime
           ? _value.membershipEndTime
           : membershipEndTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
+              as String?,
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      paymentTime: null == paymentTime
+              as int?,
+      paymentTime: freezed == paymentTime
           ? _value.paymentTime
           : paymentTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      membership: null == membership
+              as String?,
+      membership: freezed == membership
           ? _value.membership
           : membership // ignore: cast_nullable_to_non_nullable
-              as Membership,
+              as Membership?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $MembershipCopyWith<$Res> get membership {
-    return $MembershipCopyWith<$Res>(_value.membership, (value) {
+  $MembershipCopyWith<$Res>? get membership {
+    if (_value.membership == null) {
+      return null;
+    }
+
+    return $MembershipCopyWith<$Res>(_value.membership!, (value) {
       return _then(_value.copyWith(membership: value) as $Val);
     });
   }
@@ -124,15 +128,15 @@ abstract class _$$_UserMembershipInfoDTOCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      String membershipStartTime,
-      String membershipEndTime,
-      int price,
-      String paymentTime,
-      Membership membership});
+      {int? id,
+      String? membershipStartTime,
+      String? membershipEndTime,
+      int? price,
+      String? paymentTime,
+      Membership? membership});
 
   @override
-  $MembershipCopyWith<$Res> get membership;
+  $MembershipCopyWith<$Res>? get membership;
 }
 
 /// @nodoc
@@ -146,38 +150,38 @@ class __$$_UserMembershipInfoDTOCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? membershipStartTime = null,
-    Object? membershipEndTime = null,
-    Object? price = null,
-    Object? paymentTime = null,
-    Object? membership = null,
+    Object? id = freezed,
+    Object? membershipStartTime = freezed,
+    Object? membershipEndTime = freezed,
+    Object? price = freezed,
+    Object? paymentTime = freezed,
+    Object? membership = freezed,
   }) {
     return _then(_$_UserMembershipInfoDTO(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      membershipStartTime: null == membershipStartTime
+              as int?,
+      membershipStartTime: freezed == membershipStartTime
           ? _value.membershipStartTime
           : membershipStartTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      membershipEndTime: null == membershipEndTime
+              as String?,
+      membershipEndTime: freezed == membershipEndTime
           ? _value.membershipEndTime
           : membershipEndTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
+              as String?,
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as int,
-      paymentTime: null == paymentTime
+              as int?,
+      paymentTime: freezed == paymentTime
           ? _value.paymentTime
           : paymentTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      membership: null == membership
+              as String?,
+      membership: freezed == membership
           ? _value.membership
           : membership // ignore: cast_nullable_to_non_nullable
-              as Membership,
+              as Membership?,
     ));
   }
 }
@@ -188,28 +192,28 @@ class _$_UserMembershipInfoDTO
     with DiagnosticableTreeMixin
     implements _UserMembershipInfoDTO {
   _$_UserMembershipInfoDTO(
-      {required this.id,
-      required this.membershipStartTime,
-      required this.membershipEndTime,
-      required this.price,
-      required this.paymentTime,
-      required this.membership});
+      {this.id,
+      this.membershipStartTime,
+      this.membershipEndTime,
+      this.price,
+      this.paymentTime,
+      this.membership});
 
   factory _$_UserMembershipInfoDTO.fromJson(Map<String, dynamic> json) =>
       _$$_UserMembershipInfoDTOFromJson(json);
 
   @override
-  int id;
+  int? id;
   @override
-  String membershipStartTime;
+  String? membershipStartTime;
   @override
-  String membershipEndTime;
+  String? membershipEndTime;
   @override
-  int price;
+  int? price;
   @override
-  String paymentTime;
+  String? paymentTime;
   @override
-  Membership membership;
+  Membership? membership;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -246,34 +250,34 @@ class _$_UserMembershipInfoDTO
 
 abstract class _UserMembershipInfoDTO implements UserMembershipInfoDTO {
   factory _UserMembershipInfoDTO(
-      {required int id,
-      required String membershipStartTime,
-      required String membershipEndTime,
-      required int price,
-      required String paymentTime,
-      required Membership membership}) = _$_UserMembershipInfoDTO;
+      {int? id,
+      String? membershipStartTime,
+      String? membershipEndTime,
+      int? price,
+      String? paymentTime,
+      Membership? membership}) = _$_UserMembershipInfoDTO;
 
   factory _UserMembershipInfoDTO.fromJson(Map<String, dynamic> json) =
       _$_UserMembershipInfoDTO.fromJson;
 
   @override
-  int get id;
-  set id(int value);
+  int? get id;
+  set id(int? value);
   @override
-  String get membershipStartTime;
-  set membershipStartTime(String value);
+  String? get membershipStartTime;
+  set membershipStartTime(String? value);
   @override
-  String get membershipEndTime;
-  set membershipEndTime(String value);
+  String? get membershipEndTime;
+  set membershipEndTime(String? value);
   @override
-  int get price;
-  set price(int value);
+  int? get price;
+  set price(int? value);
   @override
-  String get paymentTime;
-  set paymentTime(String value);
+  String? get paymentTime;
+  set paymentTime(String? value);
   @override
-  Membership get membership;
-  set membership(Membership value);
+  Membership? get membership;
+  set membership(Membership? value);
   @override
   @JsonKey(ignore: true)
   _$$_UserMembershipInfoDTOCopyWith<_$_UserMembershipInfoDTO> get copyWith =>

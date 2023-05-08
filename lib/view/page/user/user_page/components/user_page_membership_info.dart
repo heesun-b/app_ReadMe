@@ -5,6 +5,7 @@ import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/use_icons.dart';
 import 'package:readme_app/dto/user_memebership_info_dto/user_membership_info_dto.dart';
 import 'package:readme_app/sqflite/table/table_user.dart';
+import 'package:readme_app/view/components/custom_dialog.dart';
 import 'package:readme_app/view/page/user/user_page_view_model.dart';
 
 class UserPageMembershipInfo extends ConsumerWidget {
@@ -14,16 +15,19 @@ class UserPageMembershipInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     UserPageModel? model = ref.watch(userPageProvider);
     UserMembershipInfoDTO? userMembership;
-    TableUser userInfo;
+    TableUser? userInfo;
 
     if(model != null) {
       userMembership = model.userMembershipInfoDTO;
       userInfo = model.user!;
     }
-    String? endTime = userMembership!.membershipEndTime;
+    String? endTime = userMembership?.membershipEndTime;
+    String? startTime = userMembership?.membershipStartTime;
 
     int membershipDay  = dDay(endTime ?? "");
-    String nextPayment = nextPaymentDay(endTime);
+    String nextPayment = nextPaymentDay(endTime ?? "");
+    String newStartTime = dateFormat(startTime ?? "");
+    String newEndTime = dateFormat(endTime ?? "");
 
     return Padding(
       padding: const EdgeInsets.all(15),
@@ -65,7 +69,7 @@ class UserPageMembershipInfo extends ConsumerWidget {
                       width: 10,
                     ),
                     Text(
-                      "스탠다드",
+                      userMembership?.membership?.membershipName ?? "",
                       style: TextStyle(fontSize: Dimens.font_sp16),
                     ),
                     SizedBox(
@@ -76,36 +80,12 @@ class UserPageMembershipInfo extends ConsumerWidget {
                         showDialog(
                           context: context,
                           builder: (context) {
-                            return AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              scrollable: false,
-                              title: Text("스탠다드 구독권이란?"),
-                              content: SizedBox(
-                                height: 90,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                        "월 9,900원으로 ReadMe의 전체 도서를 열람할 수 있는 정기 구독권입니다."),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                        "최초 결제일 기준으로 매달 자동 결제가 되어 편리하게 사용 가능합니다."),
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context, '확인');
-                                    },
-                                    child: Text("확인"))
-                              ],
-                            );
+                            return   CustomDialog(title: "스탠다드 구독권이란?",
+                              content: "월 9,900원으로 ReadMe의 전체 도서를 열람할 수 있는 정기 구독권입니다. 최초 결제일 기준으로 매달 자동 결제가 되어 편리하게 사용 가능합니다.",
+                              callback: () => Navigator.pop(context),);
                           },
                         );
+
                       },
                       icon: UseIcons.questionMark,
                       iconSize: 15,
@@ -123,7 +103,7 @@ class UserPageMembershipInfo extends ConsumerWidget {
                     SizedBox(
                       width: 10,
                     ),
-                    Text("${userMembership.membershipStartTime}~${userMembership.membershipEndTime}",
+                    Text("${newStartTime}~${newEndTime}",
                         style: TextStyle(fontSize: Dimens.font_sp16)),
                   ],
                 ),
@@ -178,8 +158,15 @@ class UserPageMembershipInfo extends ConsumerWidget {
    String nextPaymentDay (String endTime) {
      DateTime endDate = DateTime.parse(endTime);
      endDate = endDate.add(Duration(days: 30));
-     return endDate.toString();
+     DateTime newDate = DateTime(endDate.year, endDate.month, endDate.day);
+     String formattedDate = newDate.toString().split(' ')[0];
+     return formattedDate;
    }
 
-
+   String dateFormat (String date) {
+     DateTime endDate = DateTime.parse(date);
+     DateTime newDate = DateTime(endDate.year, endDate.month, endDate.day);
+     String formattedDate = newDate.toString().split(' ')[0];
+     return formattedDate;
+   }
 }

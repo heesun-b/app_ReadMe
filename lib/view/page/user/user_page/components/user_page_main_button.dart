@@ -24,8 +24,6 @@ class UserPageMainBtton extends ConsumerWidget {
               decoration: BoxDecoration(
                   border: Border(
                       top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
-                      bottom:
-                      BorderSide(color: Colours.app_sub_grey, width: 2.0),
                       right:
                       BorderSide(color: Colours.app_sub_grey, width: 2.0))),
               child: InkWell(
@@ -54,8 +52,6 @@ class UserPageMainBtton extends ConsumerWidget {
               decoration: BoxDecoration(
                   border: Border(
                       top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
-                      bottom:
-                      BorderSide(color: Colours.app_sub_grey, width: 2.0),
                       right:
                       BorderSide(color: Colours.app_sub_grey, width: 2.0))),
               child: InkWell(
@@ -84,8 +80,7 @@ class UserPageMainBtton extends ConsumerWidget {
               decoration: BoxDecoration(
                   border: Border(
                       top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
-                      bottom:
-                      BorderSide(color: Colours.app_sub_grey, width: 2.0))),
+               )),
               child: InkWell(
                 onTap: () {
                   if(userModel != null) {
