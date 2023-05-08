@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
 import 'package:readme_app/model/book/book.dart';
+import 'package:readme_app/model/qustion/question.dart';
 import 'package:readme_app/view/components/home_navigation_bar.dart';
 import 'package:readme_app/view/page/alarm/alarm_page/alarm_page.dart';
 import 'package:readme_app/view/page/app_info/app_info_page.dart';
@@ -18,6 +19,7 @@ import 'package:readme_app/view/page/notification/notification_page.dart';
 import 'package:readme_app/view/page/payment/payment_page/payment_page.dart';
 import 'package:readme_app/view/page/payment_list/payment_list_page.dart';
 import 'package:readme_app/view/page/question/question_page.dart';
+import 'package:readme_app/view/page/question_detail/question_detail_page.dart';
 import 'package:readme_app/view/page/question_list/question_list_page.dart';
 import 'package:readme_app/view/page/review/review_page.dart';
 import 'package:readme_app/view/page/search/search_list_page/search_list_page.dart';
@@ -42,6 +44,7 @@ class Move {
   static String paymentListPage = "/paymentList";
   static String membershipCancelPage = "/membershipCancel";
   static String questionPage = "/question";
+  static String questionDetailPage = "/questionDetail";
   static String questionListPage = "/questionList";
   static String bookmarkListPage = "/bookmarkList";
   static String contentBoxPage = "/contentBox";
@@ -51,7 +54,6 @@ class Move {
   static String appInfo = "/appInfo";
   static String notification = "/notification";
   static String term = "/term";
-
 }
 
 Map<String, Widget Function(BuildContext)> getRouters(){
@@ -79,14 +81,14 @@ Map<String, Widget Function(BuildContext)> getRouters(){
     // Move.modalButtonSheet: (context) => ModalButtonSheet(),
     Move.bookViewerPage: (context) {
       // var bookDetailDTO = BookDetailDTO.fromJson(ModalRoute.of(context)!.settings.arguments as Map<String, dynamic> );
-
       return BookViewerPage(ModalRoute.of(context)!.settings.arguments as BookDetailDTO);
     },
     Move.membershipPage: (context) => MembershipPage(),
     Move.reviewPage: (context) => ReviewPage(),
     Move.paymentListPage: (context) => PaymentListPage(),
     Move.membershipCancelPage: (context) => MembershipCancelPage(),
-    Move.questionPage: (context) => QuestionPage(),
+    Move.questionPage: (context) => QuestionPage(ModalRoute.of(context)!.settings.arguments as int),
+    Move.questionDetailPage: (context) => QuestionDetailPage(question: ModalRoute.of(context)!.settings.arguments as Question),
     Move.questionListPage: (context) => QuestionListPage(),
     Move.bookmarkListPage: (context) => BookmarkListPage(),
     Move.contentBoxPage: (context) => ContentBoxPage(),

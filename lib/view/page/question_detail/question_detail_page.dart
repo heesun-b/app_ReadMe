@@ -4,24 +4,21 @@ import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/model/qustion/question.dart';
-import 'package:readme_app/view/page/question_list/components/question_answer.dart';
-import 'package:readme_app/view/page/question_list/components/question_list_detail_view_model.dart';
+import 'package:readme_app/view/page/question_detail/question_detail_answer_widget.dart';
+import 'package:readme_app/view/page/question_detail/question_detail_view_model.dart';
 
-class QuestionListDetail extends ConsumerWidget {
-  int id;
-  QuestionListDetail({required this.id, Key? key}) : super(key: key);
+class QuestionDetailPage extends ConsumerWidget {
 
-  // detail 연결된 provider
+  Question question;
+  QuestionDetailPage({required this.question, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    QuestionListDetailModel? model = ref.watch(questionListDetailProvier(id));
-    Question useQuestion;
+    QuestionDetailModel? model = ref.watch(questionListDetailProvier(question));
 
     if(model == null) {
-      return CircularProgressIndicator();
+      return const CircularProgressIndicator();
     } else {
-      useQuestion = model.question;
       return Scaffold(
         appBar: _questionListDetailAppbar(context),
         body: SingleChildScrollView(
@@ -36,33 +33,33 @@ class QuestionListDetail extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          useQuestion.title,
-                          style: TextStyle(
+                          model.question.title ?? "",
+                          style: const TextStyle(
                               fontSize: Dimens.font_sp18,
                               fontWeight: FontWeight.w700,
                               overflow: TextOverflow.ellipsis),
                         ),
                       ),
-                      Text(useQuestion.time),
+                      Text(model.question.writeTime ?? ""),
                     ],
                   ),
                 ),
-                Divider(
+                const Divider(
                   thickness: 2,
                 ),
                 Padding(
                   padding:
                   const EdgeInsets.symmetric(vertical: 30.0, horizontal: 10),
                   child: Text(
-                    useQuestion.content,
-                    style: TextStyle(fontSize: Dimens.font_sp16),
+                    model.question.content,
+                    style: const TextStyle(fontSize: Dimens.font_sp16),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                useQuestion.status == 1 ?
-                    QuestionAnswer(reply: useQuestion.reply!) :
+                model.question.answer != null ?
+                    QuestionDetailAnswerWidget(answer: model.question.answer!) :
                     Container()
               ],
             ),

@@ -1,26 +1,21 @@
-import 'package:intl/intl.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:readme_app/model/publisher/publisher.dart';
+import 'package:readme_app/model/qustion/answer.dart';
 
-class Question {
-  final int id;
-  final String title;
-  final String content;
-  final int status;
-  final String? reply;
-  // final DateTime time;
-  final String time;
+// 파일명
+part 'question.freezed.dart';
+part 'question.g.dart';
 
-  Question(
-      {required this.id, required this.title, required this.content, required this.status, required this.time, required this.reply});
+@freezed
+class Question with _$Question {
+  factory Question({
+    required int id,
+    required Publisher publisher,
+    required String title,
+    required String content,
+    required String writeTime,
+    Answer? answer,
+  }) = _Question;
 
-
-  Question.fromJson(Map<String, dynamic> json)
-      : id = json["id"],
-        title = json["title"],
-        content = json["content"],
-        status = json["status"],
-        reply = json["reply"],
-        time = json["time"];
-        // time = DateFormat("yyyy-mm-dd").parse(json["time"]);
-
-
+  factory Question.fromJson(Map<String, Object?> json) => _$QuestionFromJson(json);
 }

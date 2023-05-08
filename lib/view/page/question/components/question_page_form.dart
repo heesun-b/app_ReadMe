@@ -5,11 +5,14 @@ import 'package:readme_app/controller/question_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/view/components/use_button.dart';
+import 'package:readme_app/view/page/question/components/question_page_view_model.dart';
 
 class QuestionPageForm extends ConsumerWidget {
-  QuestionPageForm({Key? key}) : super(key: key);
+  int questionId;
+  QuestionPageForm(this.questionId, {Key? key}) : super(key: key);
 
-  final   _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
 
@@ -32,9 +35,9 @@ class QuestionPageForm extends ConsumerWidget {
 
   Widget _subButton(WidgetRef ref) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 15),
+      padding: const EdgeInsets.symmetric(vertical: 15),
       child: UseButton(title: "제출하기", buttonPressed: () {
-              ref.read(questionControllerProvider).saveQuestion(_titleController.text, _contentController.text);
+              ref.read(questionControllerProvider).saveQuestion(_titleController.text, _contentController.text, questionId);
       }),
     );
   }
@@ -44,8 +47,8 @@ class QuestionPageForm extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
 
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.0),
           child: Text(
             "문의 내용",
             style: TextStyle(
@@ -54,7 +57,6 @@ class QuestionPageForm extends ConsumerWidget {
         ),
         TextFormField(
           inputFormatters: [
-            // FilteringTextInputFormatter.allow(RegExp(r'[a-z|A-Z|0-9|ㄱ-ㅎ|ㅏ-ㅣ|가-힣|ᆞ|ᆢ|ᄀᆞ|ᄂᆞ|ᄃᆞ|ᄅᆞ|ᄆᆞ|ᄇᆞ|ᄉᆞ|ᄋᆞ|ᄌᆞ|ᄎᆞ|ᄏᆞ|ᄐᆞ|ᄑᆞ|ᄒᆞ]')),
             FilteringTextInputFormatter.allow(RegExp(r"[\s\S]*")),
           ],
           controller: _contentController,
@@ -64,7 +66,7 @@ class QuestionPageForm extends ConsumerWidget {
           showCursor: true,
           maxLines: null,
           maxLength: 500,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colours.app_main),
                 borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -91,8 +93,8 @@ class QuestionPageForm extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.0),
           child: Text(
             "문의 제목",
             style: TextStyle(
@@ -120,7 +122,7 @@ class QuestionPageForm extends ConsumerWidget {
             return null;
           },
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
       ],

@@ -4,20 +4,23 @@ import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/view/page/question/components/question_page_body.dart';
 
 class QuestionPage extends StatelessWidget {
-  const QuestionPage({Key? key}) : super(key: key);
+
+  QuestionPage(this.questionId, {Key? key}) : super(key: key);
+
+  int questionId;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _questionPageAppbar(context),
-      body: QuestionPageBody(),
+      body: QuestionPageBody(questionId),
     );
   }
 
   AppBar _questionPageAppbar(BuildContext context) {
     return AppBar(
       elevation: 2,
-      title: Text(
+      title: const Text(
         "문의하기",
         style: TextStyle(
             color: Colours.app_sub_black,
@@ -28,15 +31,15 @@ class QuestionPage extends StatelessWidget {
       leading: Row(
         children: [
           IconButton(
-              padding: EdgeInsets.only(left: 10, right: 5),
-              constraints: BoxConstraints(),
+              padding: const EdgeInsets.only(left: 10, right: 5),
+              constraints: const BoxConstraints(),
               onPressed: () {
                 Navigator.pop(context);
               },
               icon: HsStyleIcons.back),
           IconButton(
             padding: EdgeInsets.zero,
-            constraints: BoxConstraints(),
+            constraints: const BoxConstraints(),
             onPressed: () {
               Navigator.pushNamed(context, "/navigation");
             },
@@ -45,7 +48,6 @@ class QuestionPage extends StatelessWidget {
       ),
       leadingWidth: 100,
       backgroundColor: Colours.app_sub_white,
-
     );
   }
 }
