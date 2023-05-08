@@ -112,15 +112,19 @@ class MainBook extends ConsumerWidget {
                             padding: EdgeInsets.zero,
                             constraints: const BoxConstraints(),
                             onPressed: () {
-                            // ref.read(mainPageProvider.notifier).changeIsScrap();
+                              if(book!.isHeart) {
+                                ref.read(mainPageProvider.notifier).addScarp(name ,book.id ?? 0);
+                              } else {
+                                ref.read(mainPageProvider.notifier).deleteScrap(name, book.id);
+                              }
                             },
-                            icon: YhIcons.heart,
+                            icon: book?.isHeart ?? false ? YhIcons.heartFill : YhIcons.heart,
                           ),
                           IconButton(
                             padding: EdgeInsets.zero,
                             constraints: const BoxConstraints(),
                             onPressed: () {
-                              ref.read(cartControllerProvider).insert(book!.id);
+                                ref.read(cartControllerProvider).insert(book!.id);
                             },
                             icon: YhIcons.cart2,
                           ),
