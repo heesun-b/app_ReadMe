@@ -32,8 +32,6 @@ class BookController {
 
         ref.read(mainPageProvider.notifier).pageSearch(name, responseDTO, page);
         isDuplication = false;
-
-
     }
   }
 

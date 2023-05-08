@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
+import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
+import 'package:readme_app/model/book/book.dart';
+import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page_view_model.dart';
 import 'package:readme_app/view/page/book_viewer/components/jh_style_button_add_minus.dart';
 
 import '../../../../core/constants/jh_style_icons.dart';
 
 
-class BookDrawer extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  BookDrawer({Key? key, required this.scaffoldKey}) : super(key: key);
+class BookDrawer extends ConsumerWidget {
+  BookDetailDTO book;
+  BookDrawer(this.book, {Key? key}) : super(key: key);
 
 
   @override
-  State<BookDrawer> createState() => _BookDrawerState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    BookViewerPageModel? model = ref.watch(bookViewerPageProvider(book));
 
-class _BookDrawerState extends State<BookDrawer> {
-
-  @override
-  Widget build(BuildContext context) {
     return Container(
       child: Drawer(
         child: Padding(
@@ -46,6 +46,7 @@ class _BookDrawerState extends State<BookDrawer> {
                       Container(
                         child: IconButton(
                             onPressed: () {
+                              ref.read(bookViewerPageProvider(book).notifier).bgColorBlack();
                               print("검은색 테마");
                             },
                             icon: JHicons.colorCircleBlack),
@@ -53,6 +54,7 @@ class _BookDrawerState extends State<BookDrawer> {
                       Container(
                         child: IconButton(
                             onPressed: () {
+                              ref.read(bookViewerPageProvider(book).notifier).bgColorWhite();
                               print("하얀색 테마");
                             },
                             icon: JHicons.colorCircleWhite),
@@ -60,6 +62,7 @@ class _BookDrawerState extends State<BookDrawer> {
                       Container(
                         child: IconButton(
                             onPressed: () {
+                              ref.read(bookViewerPageProvider(book).notifier).bgColorMain();
                               print("메인 테마");
                             },
                             icon: JHicons.colorCircleMain),
@@ -67,6 +70,7 @@ class _BookDrawerState extends State<BookDrawer> {
                       Container(
                         child: IconButton(
                             onPressed: () {
+                              ref.read(bookViewerPageProvider(book).notifier).bgColorGrey();
                               print("회색 테마");
                             },
                             icon: JHicons.colorCircleGrey),
@@ -102,15 +106,16 @@ class _BookDrawerState extends State<BookDrawer> {
                             width: 80,
                             child: jhUseButtonAddMinus(
                               title: "",
-                              buttonPressed: () {},
+                              buttonPressed: () {
+                                ref.read(bookViewerPageProvider(book).notifier).fontSizeDown();
+                                print("프로그레스 = ${model?.epubReaderController.currentValue?.progress}");
+                              },
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 3),
-                            width: 80,
-                            child: Positioned(
-                              child: JHicons.minus,
-                            ),
+                          Positioned(
+                            child: JHicons.minus,
+                            bottom: 3,
+                            left: 25,
                           ),
                         ],
                       ),
@@ -123,15 +128,15 @@ class _BookDrawerState extends State<BookDrawer> {
                             width: 80,
                             child: jhUseButtonAddMinus(
                               title: "",
-                              buttonPressed: () {},
+                              buttonPressed: () {
+                                ref.watch(bookViewerPageProvider(book).notifier).fontSizeUp();
+                              },
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 3),
-                            width: 80,
-                            child: Positioned(
-                              child: JHicons.add,
-                            ),
+                          Positioned(
+                            child: JHicons.add,
+                            bottom: 3,
+                            left: 25,
                           ),
                         ],
                       ),
@@ -173,7 +178,9 @@ class _BookDrawerState extends State<BookDrawer> {
                               style: TextStyle(
                                   color: Colours.app_sub_black,
                                   fontWeight: FontWeight.w500)),
-                          onPressed: () {},
+                          onPressed: () {
+                            ref.read(bookViewerPageProvider(book).notifier).changeFontFamily("NanumGothic");
+                          },
                         ),
                       ),
                       Container(
@@ -183,7 +190,9 @@ class _BookDrawerState extends State<BookDrawer> {
                               style: TextStyle(
                                   color: Colours.app_sub_black,
                                   fontWeight: FontWeight.w500)),
-                          onPressed: () {},
+                          onPressed: () {
+                            ref.read(bookViewerPageProvider(book).notifier).changeFontFamily("NanumMyeongjo");
+                          },
                         ),
                       ),
                       Container(
@@ -195,7 +204,9 @@ class _BookDrawerState extends State<BookDrawer> {
                                 color: Colours.app_sub_black,
                                 fontWeight: FontWeight.w500),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            ref.read(bookViewerPageProvider(book).notifier).changeFontFamily("Maruburi");
+                          },
                         ),
                       ),
                       SizedBox(

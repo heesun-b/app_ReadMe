@@ -22,10 +22,9 @@ class BookRepository {
   Future<ResponseDTO> getBookDetail (int bookId) async {
     try{
       Dio dio = await MyHttp.getCommon();
-      Response response =
-      await dio.get("/books/${bookId}/detail");
-      print(response.data);
+      Response response = await dio.get("/books/$bookId/detail");
       if(response.statusCode == 200) {
+        log(response.data.toString());
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
         BookDetailDTO bookDetailDTO = BookDetailDTO.fromJson(responseDTO.data);
         responseDTO.data = bookDetailDTO;
@@ -34,7 +33,8 @@ class BookRepository {
         return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
       }
     } catch (e) {
-      return ResponseDTO(code: -1, msg: "실패 : ${e}");
+      print(e.toString());
+      return ResponseDTO(code: -1, msg: "실패 : $e");
     }
   }
 

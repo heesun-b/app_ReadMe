@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
+import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/view/components/home_navigation_bar.dart';
 import 'package:readme_app/view/page/alarm/alarm_page/alarm_page.dart';
 import 'package:readme_app/view/page/app_info/app_info_page.dart';
@@ -70,7 +74,11 @@ Map<String, Widget Function(BuildContext)> getRouters(){
     Move.cartPage: (context) => CartPage(),
     // Move.bookDetailPage: (context) => BookDetailPage(),
     // Move.modalButtonSheet: (context) => ModalButtonSheet(),
-    Move.bookViewerPage: (context) => BookViewerPage(),
+    Move.bookViewerPage: (context) {
+      // var bookDetailDTO = BookDetailDTO.fromJson(ModalRoute.of(context)!.settings.arguments as Map<String, dynamic> );
+
+      return BookViewerPage(ModalRoute.of(context)!.settings.arguments as BookDetailDTO);
+    },
     Move.membershipPage: (context) => MembershipPage(),
     Move.reviewPage: (context) => ReviewPage(),
     Move.paymentListPage: (context) => PaymentListPage(),

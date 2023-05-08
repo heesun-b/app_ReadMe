@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/core/constants/colours.dart';
-import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/view/page/category/category_page/category_page_view_model.dart';
 import 'package:readme_app/view/page/category/category_page/components/category_page_body.dart';

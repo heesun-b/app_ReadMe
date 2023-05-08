@@ -10,7 +10,7 @@ class MembershipPageCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-        width: MediaQuery.sizeOf(context).width,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: Colours.app_main, borderRadius: BorderRadius.circular(10)),
         child: Padding(

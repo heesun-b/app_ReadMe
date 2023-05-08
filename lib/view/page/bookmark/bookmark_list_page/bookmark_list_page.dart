@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:readme_app/model/book_detail_mock_data.dart';
 import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page.dart';
 import '../../../../core/constants/colours.dart';
 import '../../../../core/constants/hs_style_icons.dart';
@@ -101,7 +102,7 @@ class _BookmarkListPageState extends State<BookmarkListPage> {
       centerTitle: true,
       leading: IconButton(icon: HsStyleIcons.back,
       onPressed: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BookViewerPage()));
+        // Navigator.pushNamed(context, "/viewer", arguments: {"bookDetail" : bookDetail});
       }),
       leadingWidth: 50,
     );

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
 import 'package:readme_app/model/book_detail_mock_data.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page_view_model.dart';
@@ -30,16 +31,17 @@ class BookDetailPageCover extends ConsumerWidget {
             child: Image.network(model?.book.coverFile.fileUrl ?? ""),
           ),
         ),
+
+        model?.user != null ? Container() :
         Positioned(
             left: 280,
-            top: 530,
+            top: 450,
             child: InkWell(
-              onTap: (){
-                // todo 수정
-                Navigator.pushNamed(context, "/viewer");
+              onTap:(){
+                Navigator.pushNamed(context, Move.bookViewerPage, arguments: model?.book);
               },
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colours.app_sub_white,
@@ -47,7 +49,7 @@ class BookDetailPageCover extends ConsumerWidget {
                   ),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Text(
+                child: const Text(
                   "미리보기",
                   style: TextStyle(
                     fontSize: Dimens.font_sp16,

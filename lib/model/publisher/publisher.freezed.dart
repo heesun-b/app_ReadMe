@@ -21,17 +21,11 @@ Publisher _$PublisherFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Publisher {
   int get id => throw _privateConstructorUsedError;
-  set id(int value) => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
-  set username(String value) => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
-  set role(String value) => throw _privateConstructorUsedError;
   String get businessNumber => throw _privateConstructorUsedError;
-  set businessNumber(String value) => throw _privateConstructorUsedError;
   String get businessName => throw _privateConstructorUsedError;
-  set businessName(String value) => throw _privateConstructorUsedError;
   String get joinTime => throw _privateConstructorUsedError;
-  set joinTime(String value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -180,17 +174,17 @@ class _$_Publisher with DiagnosticableTreeMixin implements _Publisher {
       _$$_PublisherFromJson(json);
 
   @override
-  int id;
+  final int id;
   @override
-  String username;
+  final String username;
   @override
-  String role;
+  final String role;
   @override
-  String businessNumber;
+  final String businessNumber;
   @override
-  String businessName;
+  final String businessName;
   @override
-  String joinTime;
+  final String joinTime;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -210,6 +204,28 @@ class _$_Publisher with DiagnosticableTreeMixin implements _Publisher {
       ..add(DiagnosticsProperty('joinTime', joinTime));
   }
 
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Publisher &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.businessNumber, businessNumber) ||
+                other.businessNumber == businessNumber) &&
+            (identical(other.businessName, businessName) ||
+                other.businessName == businessName) &&
+            (identical(other.joinTime, joinTime) ||
+                other.joinTime == joinTime));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, username, role, businessNumber, businessName, joinTime);
+
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
@@ -226,34 +242,28 @@ class _$_Publisher with DiagnosticableTreeMixin implements _Publisher {
 
 abstract class _Publisher implements Publisher {
   factory _Publisher(
-      {required int id,
-      required String username,
-      required String role,
-      required String businessNumber,
-      required String businessName,
-      required String joinTime}) = _$_Publisher;
+      {required final int id,
+      required final String username,
+      required final String role,
+      required final String businessNumber,
+      required final String businessName,
+      required final String joinTime}) = _$_Publisher;
 
   factory _Publisher.fromJson(Map<String, dynamic> json) =
       _$_Publisher.fromJson;
 
   @override
   int get id;
-  set id(int value);
   @override
   String get username;
-  set username(String value);
   @override
   String get role;
-  set role(String value);
   @override
   String get businessNumber;
-  set businessNumber(String value);
   @override
   String get businessName;
-  set businessName(String value);
   @override
   String get joinTime;
-  set joinTime(String value);
   @override
   @JsonKey(ignore: true)
   _$$_PublisherCopyWith<_$_Publisher> get copyWith =>

@@ -11,7 +11,7 @@ part 'publisher.g.dart';
 // 실행
 // flutter pub run build_runner build
 
-@unfreezed
+@freezed
 class Publisher with _$Publisher {
     factory Publisher({
     required int id,
@@ -23,5 +23,4 @@ class Publisher with _$Publisher {
   }) = _Publisher;
 
   factory Publisher.fromJson(Map<String, Object?> json) => _$PublisherFromJson(json);
-
 }
