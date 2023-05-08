@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/controller/book_controller.dart';
@@ -9,8 +7,8 @@ import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
-import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/view/components/use_button.dart';
+import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page.dart';
 import 'package:readme_app/view/page/main/main_page/main_page_view_model.dart';
 
 class MainBook extends ConsumerWidget {
@@ -53,7 +51,12 @@ class MainBook extends ConsumerWidget {
       children: [
         InkWell(
           onTap: () {
-            Navigator.pushNamed(context, "/bookDetail", arguments: {'id': book?.id ?? 0});
+            // todo 수정
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookDetailPage(bookId: book?.id ?? 0),
+                ));
           },
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -109,7 +112,7 @@ class MainBook extends ConsumerWidget {
                             padding: EdgeInsets.zero,
                             constraints: const BoxConstraints(),
                             onPressed: () {
-                              // 추후 추가
+                            // ref.read(mainPageProvider.notifier).changeIsScrap();
                             },
                             icon: YhIcons.heart,
                           ),
@@ -118,7 +121,6 @@ class MainBook extends ConsumerWidget {
                             constraints: const BoxConstraints(),
                             onPressed: () {
                               ref.read(cartControllerProvider).insert(book!.id);
-                              // Navigator.pushNamed(context, "/cart");
                             },
                             icon: YhIcons.cart2,
                           ),

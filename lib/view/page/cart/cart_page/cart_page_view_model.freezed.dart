@@ -16,6 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CartPageModel {
+  bool get isScrap => throw _privateConstructorUsedError;
+  set isScrap(bool value) => throw _privateConstructorUsedError;
   bool get isAllChecked => throw _privateConstructorUsedError;
   set isAllChecked(bool value) => throw _privateConstructorUsedError;
   int get totalPrice => throw _privateConstructorUsedError;
@@ -37,7 +39,8 @@ abstract class $CartPageModelCopyWith<$Res> {
       _$CartPageModelCopyWithImpl<$Res, CartPageModel>;
   @useResult
   $Res call(
-      {bool isAllChecked,
+      {bool isScrap,
+      bool isAllChecked,
       int totalPrice,
       int totalCount,
       List<UseCartDTO> cartBooks});
@@ -56,12 +59,17 @@ class _$CartPageModelCopyWithImpl<$Res, $Val extends CartPageModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isScrap = null,
     Object? isAllChecked = null,
     Object? totalPrice = null,
     Object? totalCount = null,
     Object? cartBooks = null,
   }) {
     return _then(_value.copyWith(
+      isScrap: null == isScrap
+          ? _value.isScrap
+          : isScrap // ignore: cast_nullable_to_non_nullable
+              as bool,
       isAllChecked: null == isAllChecked
           ? _value.isAllChecked
           : isAllChecked // ignore: cast_nullable_to_non_nullable
@@ -91,7 +99,8 @@ abstract class _$$_CartPageModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isAllChecked,
+      {bool isScrap,
+      bool isAllChecked,
       int totalPrice,
       int totalCount,
       List<UseCartDTO> cartBooks});
@@ -108,12 +117,17 @@ class __$$_CartPageModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isScrap = null,
     Object? isAllChecked = null,
     Object? totalPrice = null,
     Object? totalCount = null,
     Object? cartBooks = null,
   }) {
     return _then(_$_CartPageModel(
+      isScrap: null == isScrap
+          ? _value.isScrap
+          : isScrap // ignore: cast_nullable_to_non_nullable
+              as bool,
       isAllChecked: null == isAllChecked
           ? _value.isAllChecked
           : isAllChecked // ignore: cast_nullable_to_non_nullable
@@ -138,11 +152,14 @@ class __$$_CartPageModelCopyWithImpl<$Res>
 
 class _$_CartPageModel with DiagnosticableTreeMixin implements _CartPageModel {
   _$_CartPageModel(
-      {required this.isAllChecked,
+      {required this.isScrap,
+      required this.isAllChecked,
       required this.totalPrice,
       required this.totalCount,
       required this.cartBooks});
 
+  @override
+  bool isScrap;
   @override
   bool isAllChecked;
   @override
@@ -154,7 +171,7 @@ class _$_CartPageModel with DiagnosticableTreeMixin implements _CartPageModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CartPageModel(isAllChecked: $isAllChecked, totalPrice: $totalPrice, totalCount: $totalCount, cartBooks: $cartBooks)';
+    return 'CartPageModel(isScrap: $isScrap, isAllChecked: $isAllChecked, totalPrice: $totalPrice, totalCount: $totalCount, cartBooks: $cartBooks)';
   }
 
   @override
@@ -162,6 +179,7 @@ class _$_CartPageModel with DiagnosticableTreeMixin implements _CartPageModel {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'CartPageModel'))
+      ..add(DiagnosticsProperty('isScrap', isScrap))
       ..add(DiagnosticsProperty('isAllChecked', isAllChecked))
       ..add(DiagnosticsProperty('totalPrice', totalPrice))
       ..add(DiagnosticsProperty('totalCount', totalCount))
@@ -177,11 +195,15 @@ class _$_CartPageModel with DiagnosticableTreeMixin implements _CartPageModel {
 
 abstract class _CartPageModel implements CartPageModel {
   factory _CartPageModel(
-      {required bool isAllChecked,
+      {required bool isScrap,
+      required bool isAllChecked,
       required int totalPrice,
       required int totalCount,
       required List<UseCartDTO> cartBooks}) = _$_CartPageModel;
 
+  @override
+  bool get isScrap;
+  set isScrap(bool value);
   @override
   bool get isAllChecked;
   set isAllChecked(bool value);

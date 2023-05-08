@@ -50,6 +50,7 @@ class _BootPayDefaultState extends State<BootPayDefault> {
   }
 
   void bootpayDefault(BuildContext context) {
+
     Payload payload = getPayload(context);
     if (kIsWeb) {
       payload.extra?.openType = "redirect";
