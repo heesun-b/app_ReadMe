@@ -30,7 +30,7 @@ mixin _$BookDetailDTO {
   SmallCategory get smallCategory => throw _privateConstructorUsedError;
   String get authorInfo => throw _privateConstructorUsedError;
   bool get isHeart => throw _privateConstructorUsedError;
-  double get stars => throw _privateConstructorUsedError;
+  bool get isPurchase => throw _privateConstructorUsedError;
   FileDTO get epubFile => throw _privateConstructorUsedError;
   FileDTO get coverFile => throw _privateConstructorUsedError;
   List<Review>? get reviews => throw _privateConstructorUsedError;
@@ -58,7 +58,7 @@ abstract class $BookDetailDTOCopyWith<$Res> {
       SmallCategory smallCategory,
       String authorInfo,
       bool isHeart,
-      double stars,
+      bool isPurchase,
       FileDTO epubFile,
       FileDTO coverFile,
       List<Review>? reviews});
@@ -93,7 +93,7 @@ class _$BookDetailDTOCopyWithImpl<$Res, $Val extends BookDetailDTO>
     Object? smallCategory = null,
     Object? authorInfo = null,
     Object? isHeart = null,
-    Object? stars = null,
+    Object? isPurchase = null,
     Object? epubFile = null,
     Object? coverFile = null,
     Object? reviews = freezed,
@@ -139,10 +139,10 @@ class _$BookDetailDTOCopyWithImpl<$Res, $Val extends BookDetailDTO>
           ? _value.isHeart
           : isHeart // ignore: cast_nullable_to_non_nullable
               as bool,
-      stars: null == stars
-          ? _value.stars
-          : stars // ignore: cast_nullable_to_non_nullable
-              as double,
+      isPurchase: null == isPurchase
+          ? _value.isPurchase
+          : isPurchase // ignore: cast_nullable_to_non_nullable
+              as bool,
       epubFile: null == epubFile
           ? _value.epubFile
           : epubFile // ignore: cast_nullable_to_non_nullable
@@ -218,7 +218,7 @@ abstract class _$$_BookDetailDTOCopyWith<$Res>
       SmallCategory smallCategory,
       String authorInfo,
       bool isHeart,
-      double stars,
+      bool isPurchase,
       FileDTO epubFile,
       FileDTO coverFile,
       List<Review>? reviews});
@@ -256,7 +256,7 @@ class __$$_BookDetailDTOCopyWithImpl<$Res>
     Object? smallCategory = null,
     Object? authorInfo = null,
     Object? isHeart = null,
-    Object? stars = null,
+    Object? isPurchase = null,
     Object? epubFile = null,
     Object? coverFile = null,
     Object? reviews = freezed,
@@ -302,10 +302,10 @@ class __$$_BookDetailDTOCopyWithImpl<$Res>
           ? _value.isHeart
           : isHeart // ignore: cast_nullable_to_non_nullable
               as bool,
-      stars: null == stars
-          ? _value.stars
-          : stars // ignore: cast_nullable_to_non_nullable
-              as double,
+      isPurchase: null == isPurchase
+          ? _value.isPurchase
+          : isPurchase // ignore: cast_nullable_to_non_nullable
+              as bool,
       epubFile: null == epubFile
           ? _value.epubFile
           : epubFile // ignore: cast_nullable_to_non_nullable
@@ -336,7 +336,7 @@ class _$_BookDetailDTO with DiagnosticableTreeMixin implements _BookDetailDTO {
       required this.smallCategory,
       required this.authorInfo,
       required this.isHeart,
-      required this.stars,
+      required this.isPurchase,
       required this.epubFile,
       required this.coverFile,
       final List<Review>? reviews})
@@ -366,7 +366,7 @@ class _$_BookDetailDTO with DiagnosticableTreeMixin implements _BookDetailDTO {
   @override
   final bool isHeart;
   @override
-  final double stars;
+  final bool isPurchase;
   @override
   final FileDTO epubFile;
   @override
@@ -383,7 +383,7 @@ class _$_BookDetailDTO with DiagnosticableTreeMixin implements _BookDetailDTO {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BookDetailDTO(id: $id, publisher: $publisher, title: $title, author: $author, price: $price, introduction: $introduction, bigCategory: $bigCategory, smallCategory: $smallCategory, authorInfo: $authorInfo, isHeart: $isHeart, stars: $stars, epubFile: $epubFile, coverFile: $coverFile, reviews: $reviews)';
+    return 'BookDetailDTO(id: $id, publisher: $publisher, title: $title, author: $author, price: $price, introduction: $introduction, bigCategory: $bigCategory, smallCategory: $smallCategory, authorInfo: $authorInfo, isHeart: $isHeart, isPurchase: $isPurchase, epubFile: $epubFile, coverFile: $coverFile, reviews: $reviews)';
   }
 
   @override
@@ -401,7 +401,7 @@ class _$_BookDetailDTO with DiagnosticableTreeMixin implements _BookDetailDTO {
       ..add(DiagnosticsProperty('smallCategory', smallCategory))
       ..add(DiagnosticsProperty('authorInfo', authorInfo))
       ..add(DiagnosticsProperty('isHeart', isHeart))
-      ..add(DiagnosticsProperty('stars', stars))
+      ..add(DiagnosticsProperty('isPurchase', isPurchase))
       ..add(DiagnosticsProperty('epubFile', epubFile))
       ..add(DiagnosticsProperty('coverFile', coverFile))
       ..add(DiagnosticsProperty('reviews', reviews));
@@ -427,7 +427,8 @@ class _$_BookDetailDTO with DiagnosticableTreeMixin implements _BookDetailDTO {
             (identical(other.authorInfo, authorInfo) ||
                 other.authorInfo == authorInfo) &&
             (identical(other.isHeart, isHeart) || other.isHeart == isHeart) &&
-            (identical(other.stars, stars) || other.stars == stars) &&
+            (identical(other.isPurchase, isPurchase) ||
+                other.isPurchase == isPurchase) &&
             (identical(other.epubFile, epubFile) ||
                 other.epubFile == epubFile) &&
             (identical(other.coverFile, coverFile) ||
@@ -449,7 +450,7 @@ class _$_BookDetailDTO with DiagnosticableTreeMixin implements _BookDetailDTO {
       smallCategory,
       authorInfo,
       isHeart,
-      stars,
+      isPurchase,
       epubFile,
       coverFile,
       const DeepCollectionEquality().hash(_reviews));
@@ -480,7 +481,7 @@ abstract class _BookDetailDTO implements BookDetailDTO {
       required final SmallCategory smallCategory,
       required final String authorInfo,
       required final bool isHeart,
-      required final double stars,
+      required final bool isPurchase,
       required final FileDTO epubFile,
       required final FileDTO coverFile,
       final List<Review>? reviews}) = _$_BookDetailDTO;
@@ -509,7 +510,7 @@ abstract class _BookDetailDTO implements BookDetailDTO {
   @override
   bool get isHeart;
   @override
-  double get stars;
+  bool get isPurchase;
   @override
   FileDTO get epubFile;
   @override

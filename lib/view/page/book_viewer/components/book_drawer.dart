@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
+import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
+import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page_view_model.dart';
 import 'package:readme_app/view/page/book_viewer/components/jh_style_button_add_minus.dart';
 
@@ -9,13 +11,13 @@ import '../../../../core/constants/jh_style_icons.dart';
 
 
 class BookDrawer extends ConsumerWidget {
-  Map<String, dynamic> bookDetailData;
-  BookDrawer(this.bookDetailData, {Key? key}) : super(key: key);
+  BookDetailDTO book;
+  BookDrawer(this.book, {Key? key}) : super(key: key);
 
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    BookViewerPageModel? model = ref.watch(bookViewerPageProvider(bookDetailData));
+    BookViewerPageModel? model = ref.watch(bookViewerPageProvider(book));
 
     return Container(
       child: Drawer(
@@ -44,7 +46,7 @@ class BookDrawer extends ConsumerWidget {
                       Container(
                         child: IconButton(
                             onPressed: () {
-                              ref.read(bookViewerPageProvider(bookDetailData).notifier).bgColorBlack();
+                              ref.read(bookViewerPageProvider(book).notifier).bgColorBlack();
                               print("검은색 테마");
                             },
                             icon: JHicons.colorCircleBlack),
@@ -52,7 +54,7 @@ class BookDrawer extends ConsumerWidget {
                       Container(
                         child: IconButton(
                             onPressed: () {
-                              ref.read(bookViewerPageProvider(bookDetailData).notifier).bgColorWhite();
+                              ref.read(bookViewerPageProvider(book).notifier).bgColorWhite();
                               print("하얀색 테마");
                             },
                             icon: JHicons.colorCircleWhite),
@@ -60,7 +62,7 @@ class BookDrawer extends ConsumerWidget {
                       Container(
                         child: IconButton(
                             onPressed: () {
-                              ref.read(bookViewerPageProvider(bookDetailData).notifier).bgColorMain();
+                              ref.read(bookViewerPageProvider(book).notifier).bgColorMain();
                               print("메인 테마");
                             },
                             icon: JHicons.colorCircleMain),
@@ -68,7 +70,7 @@ class BookDrawer extends ConsumerWidget {
                       Container(
                         child: IconButton(
                             onPressed: () {
-                              ref.read(bookViewerPageProvider(bookDetailData).notifier).bgColorGrey();
+                              ref.read(bookViewerPageProvider(book).notifier).bgColorGrey();
                               print("회색 테마");
                             },
                             icon: JHicons.colorCircleGrey),
@@ -105,7 +107,7 @@ class BookDrawer extends ConsumerWidget {
                             child: jhUseButtonAddMinus(
                               title: "",
                               buttonPressed: () {
-                                ref.read(bookViewerPageProvider(bookDetailData).notifier).fontSizeDown();
+                                ref.read(bookViewerPageProvider(book).notifier).fontSizeDown();
                                 print("프로그레스 = ${model?.epubReaderController.currentValue?.progress}");
                               },
                             ),
@@ -127,7 +129,7 @@ class BookDrawer extends ConsumerWidget {
                             child: jhUseButtonAddMinus(
                               title: "",
                               buttonPressed: () {
-                                ref.watch(bookViewerPageProvider(bookDetailData).notifier).fontSizeUp();
+                                ref.watch(bookViewerPageProvider(book).notifier).fontSizeUp();
                               },
                             ),
                           ),
@@ -177,7 +179,7 @@ class BookDrawer extends ConsumerWidget {
                                   color: Colours.app_sub_black,
                                   fontWeight: FontWeight.w500)),
                           onPressed: () {
-                            ref.read(bookViewerPageProvider(bookDetailData).notifier).ChangeFontFamily("NanumGothic");
+                            ref.read(bookViewerPageProvider(book).notifier).changeFontFamily("NanumGothic");
                           },
                         ),
                       ),
@@ -189,7 +191,7 @@ class BookDrawer extends ConsumerWidget {
                                   color: Colours.app_sub_black,
                                   fontWeight: FontWeight.w500)),
                           onPressed: () {
-                            ref.read(bookViewerPageProvider(bookDetailData).notifier).ChangeFontFamily("NanumMyeongjo");
+                            ref.read(bookViewerPageProvider(book).notifier).changeFontFamily("NanumMyeongjo");
                           },
                         ),
                       ),
@@ -203,7 +205,7 @@ class BookDrawer extends ConsumerWidget {
                                 fontWeight: FontWeight.w500),
                           ),
                           onPressed: () {
-                            ref.read(bookViewerPageProvider(bookDetailData).notifier).ChangeFontFamily("Maruburi");
+                            ref.read(bookViewerPageProvider(book).notifier).changeFontFamily("Maruburi");
                           },
                         ),
                       ),

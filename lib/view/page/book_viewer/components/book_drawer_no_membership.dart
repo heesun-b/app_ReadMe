@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/dimens.dart';
+import 'package:readme_app/core/constants/hs_style_icons.dart';
+import 'package:readme_app/core/constants/yh_style_icons.dart';
+import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
+import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page_view_model.dart';
 
 import 'jh_style_button.dart';
@@ -9,12 +13,12 @@ import '../../../../core/constants/move.dart';
 import '../../../components/use_button.dart';
 
 class BookDrawerNoMembership extends ConsumerWidget {
-  Map<String, dynamic> bookDetailData;
-  BookDrawerNoMembership(this.bookDetailData, {Key? key}) : super(key: key);
+  BookDetailDTO book;
+  BookDrawerNoMembership(this.book, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    BookViewerPageModel? model = ref.watch(bookViewerPageProvider(bookDetailData));
+    BookViewerPageModel? model = ref.watch(bookViewerPageProvider(book));
 
     return Drawer(
       child: Padding(
@@ -47,10 +51,10 @@ class BookDrawerNoMembership extends ConsumerWidget {
                     Container(
                       child: IconButton(
                           onPressed: () {
-                            // Todo isheart값 받아와야 함
-                            print("하트 눌러짐");
+
                           },
-                          icon: JHicons.heartFill),
+                          icon: model?.isHeart ?? false ? JHicons.heartFill : JHicons.heart,
+                      ),
                     ),
                     SizedBox(
                       height: 50,

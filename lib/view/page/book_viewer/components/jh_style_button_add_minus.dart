@@ -17,7 +17,7 @@ class _useButtonState extends State<jhUseButtonAddMinus> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.sizeOf(context).width,
+      width: MediaQuery.of(context).size.width,
       height: 40,
       child: ElevatedButton(
         onPressed: widget.buttonPressed,

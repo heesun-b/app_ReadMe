@@ -13,7 +13,6 @@ class BookDetailPageBody extends ConsumerWidget {
 
   BookDetailPageBody({required this.bookId, Key? key}) : super(key: key);
 
-  int _selectedButtonIndex = 0;
   final GlobalKey _widgetKey = GlobalKey();
 
   @override
@@ -22,75 +21,75 @@ class BookDetailPageBody extends ConsumerWidget {
 
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(
-                  fontSize: Dimens.font_sp20,
-                ),
-              ),
-              onPressed: () {
-                // setState(() {
-                //   _selectedButtonIndex = 0;
-                // });
-              },
-              child: Text(
-                "도서 정보",
-                style: TextStyle(
-                  color: _selectedButtonIndex == 0
-                      ? Colours.app_sub_black
-                      : Colours.app_sub_black,
-                  fontSize: Dimens.font_sp20,
-                  fontWeight: _selectedButtonIndex == 0
-                      ? FontWeight.bold
-                      : FontWeight.normal,
-                ),
-              ),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: Dimens.font_sp20),
-              ),
-              onPressed: () {
-                Scrollable.ensureVisible(_widgetKey.currentContext!,
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    alignment: 0);
-              },
-              child: Text(
-                "리뷰 관리",
-                style: TextStyle(
-                  color: _selectedButtonIndex == 1
-                      ? Colours.app_sub_black
-                      : Colours.app_sub_black,
-                  fontSize: Dimens.font_sp20,
-                  fontWeight: _selectedButtonIndex == 1
-                      ? FontWeight.bold
-                      : FontWeight.normal,
-                ),
-              ),
-            ),
-          ],
-        ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //   crossAxisAlignment: CrossAxisAlignment.center,
+        //   children: [
+        //     TextButton(
+        //       style: TextButton.styleFrom(
+        //         textStyle: const TextStyle(
+        //           fontSize: Dimens.font_sp20,
+        //         ),
+        //       ),
+        //       onPressed: () {
+        //         // setState(() {
+        //         //   _selectedButtonIndex = 0;
+        //         // });
+        //       },
+        //       child: Text(
+        //         "도서 정보",
+        //         style: TextStyle(
+        //           color: _selectedButtonIndex == 0
+        //               ? Colours.app_sub_black
+        //               : Colours.app_sub_black,
+        //           fontSize: Dimens.font_sp20,
+        //           fontWeight: _selectedButtonIndex == 0
+        //               ? FontWeight.bold
+        //               : FontWeight.normal,
+        //         ),
+        //       ),
+        //     ),
+        //     TextButton(
+        //       style: TextButton.styleFrom(
+        //         textStyle: const TextStyle(fontSize: Dimens.font_sp20),
+        //       ),
+        //       onPressed: () {
+        //         Scrollable.ensureVisible(_widgetKey.currentContext!,
+        //             duration: Duration(milliseconds: 300),
+        //             curve: Curves.easeInOut,
+        //             alignment: 0);
+        //       },
+        //       child: Text(
+        //         "리뷰 관리",
+        //         style: TextStyle(
+        //           color: _selectedButtonIndex == 1
+        //               ? Colours.app_sub_black
+        //               : Colours.app_sub_black,
+        //           fontSize: Dimens.font_sp20,
+        //           fontWeight: _selectedButtonIndex == 1
+        //               ? FontWeight.bold
+        //               : FontWeight.normal,
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "< 책 소개 >",
                 style: TextStyle(
                     color: Colours.app_sub_black,
                     fontSize: Dimens.font_sp20,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Text(
                 model?.book.title ?? "",
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colours.app_sub_black,
                   fontSize: Dimens.font_sp18,
                 ),
@@ -127,11 +126,11 @@ class BookDetailPageBody extends ConsumerWidget {
               //     ),
               //   ],
               // ),
-              SizedBox(height: 20),
+              const SizedBox(height: 40),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "< 작가 정보 >",
                     style: TextStyle(
                       color: Colours.app_sub_black,
@@ -139,53 +138,53 @@ class BookDetailPageBody extends ConsumerWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Text(
-                    "${bookDetail.author}",
-                    style: TextStyle(
+                    model?.book.author ?? "",
+                    style: const TextStyle(
                       color: Colours.app_sub_black,
                       fontSize: Dimens.font_sp18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
-                    "${bookDetail.authorInfo}",
-                    style: TextStyle(
+                    model?.book.authorInfo ?? "",
+                    style: const TextStyle(
                       color: Colours.app_sub_black,
                       fontSize: Dimens.font_sp18,
                     ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 4,
                   ),
-                  SizedBox(height: 15),
-                  Divider(
+                  const SizedBox(height: 15),
+                  const Divider(
                     thickness: 2,
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 40),
                   Text(
                     key: _widgetKey,
                     "< 리뷰 관리 >",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colours.app_sub_black,
                       fontSize: Dimens.font_sp20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Column(
                     children: List.generate(
-                      riewList.length,
+                      model?.book.reviews?.length ?? 0,
                       (index) {
                         return Container(
-                          margin: EdgeInsets.symmetric(vertical: 5),
+                          margin: const EdgeInsets.symmetric(vertical: 5),
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             border: Border.all(
                               style: BorderStyle.solid,
                               color: Colours.app_sub_grey,
                             ),
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(10),
                             ),
                           ),
@@ -193,17 +192,27 @@ class BookDetailPageBody extends ConsumerWidget {
                             padding: const EdgeInsets.all(10.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Row(
                                   children: [
-                                    StarScore(score: riewList[index].stars),
+                                    StarScore(score: model?.book.reviews?[index].stars ?? 0),
                                     Spacer(),
-                                    Text("${riewList[index].userId} "),
-                                    Text("|  ${riewList[index].writeTime}")
+                                    Text("${model?.book.reviews?[index].user.username ?? ""} ", style: TextStyle(
+                                        fontWeight: FontWeight.bold
+                                    ),),
                                   ],
                                 ),
-                                SizedBox(height: 10),
-                                Text(riewList[index].content),
+                                // const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    const Spacer(),
+
+                                    Text("${model?.book.reviews?[index].writeTime ?? ""}")
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Text(model?.book.reviews?[index].content ?? ""),
                               ],
                             ),
                           ),
@@ -211,8 +220,8 @@ class BookDetailPageBody extends ConsumerWidget {
                       },
                     ),
                   ),
-                  SizedBox(height: 15),
-                  Divider(
+                  const SizedBox(height: 40),
+                  const Divider(
                     thickness: 2,
                   ),
                   BookDetailReviewForm(),
