@@ -20,7 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  await SecureStorage.clear();
+  // await SecureStorage.clear();
 
   Widget failWidget = const MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -42,7 +42,7 @@ void main() async {
         if (metaDTO.jwt != null && metaDTO.jwt != "") {
           SecureStorage.setKey(SecureStorageEnum.jwtToken, metaDTO.jwt!);
         }
-        await MySqfliteInit.deleteUser();
+        // await MySqfliteInit.deleteUser();
         runApp(
           ProviderScope(
             child: MyApp(),

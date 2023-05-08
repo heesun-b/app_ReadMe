@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/dimens.dart';
+import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page_view_model.dart';
 
 import 'jh_style_button.dart';
 import '../../../../core/constants/jh_style_icons.dart';
 import '../../../../core/constants/move.dart';
 import '../../../components/use_button.dart';
 
-class BookDrawerNoMembership extends StatelessWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  const BookDrawerNoMembership({Key? key, required this.scaffoldKey}) : super(key: key);
+class BookDrawerNoMembership extends ConsumerWidget {
+  Map<String, dynamic> bookDetailData;
+  BookDrawerNoMembership(this.bookDetailData, {Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    BookViewerPageModel? model = ref.watch(bookViewerPageProvider(bookDetailData));
+
     return Drawer(
       child: Padding(
         padding: const EdgeInsets.only(top: 40.0),
@@ -23,7 +27,7 @@ class BookDrawerNoMembership extends StatelessWidget {
               child: DrawerHeader(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/book2.png"),
+                    image: NetworkImage(model?.coverFilePath ?? ''),
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -43,6 +47,7 @@ class BookDrawerNoMembership extends StatelessWidget {
                     Container(
                       child: IconButton(
                           onPressed: () {
+                            // Todo isheart값 받아와야 함
                             print("하트 눌러짐");
                           },
                           icon: JHicons.heartFill),
@@ -54,7 +59,7 @@ class BookDrawerNoMembership extends StatelessWidget {
                     Expanded(
                       child: Container(
                           width: 120,
-                          child: Text("소장가 115,000원" ,style: TextStyle(fontSize: Dimens.font_sp16,fontWeight: FontWeight.w500),)
+                          child: Text("소장가 ${model?.price} 원" ,style: TextStyle(fontSize: Dimens.font_sp16,fontWeight: FontWeight.w500),)
                       ),
                     ),
                   ],
@@ -71,6 +76,7 @@ class BookDrawerNoMembership extends StatelessWidget {
                     Container(
                       width: 120,
                       child: jhUseButton(title: "장바구니", buttonPressed: () {
+                        // Todo 장바구니 담은 후 이동하기
                         Navigator.pushNamed(context, Move.cartPage);
                       },),
                     ),
@@ -80,7 +86,8 @@ class BookDrawerNoMembership extends StatelessWidget {
                     Container(
                       width: 120,
                       child: jhUseButton(title: "소장하기" , buttonPressed: () {
-                        print("장바구니 버튼 눌러짐");
+                        // Todo 소장하기 구현 필요
+                        print("소장하기 버튼 눌러짐");
                       },),
                     ),
                   ],
@@ -100,6 +107,7 @@ class BookDrawerNoMembership extends StatelessWidget {
                     Container(
                       width: 250,
                       child: UseButton(title: "멤버십 구독", buttonPressed: () {
+                        // Todo 멤버십 구독 구현 필요
                         Navigator.pushNamed(context, Move.cartPage);
                       },),
                     ),

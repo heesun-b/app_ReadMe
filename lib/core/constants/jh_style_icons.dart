@@ -23,6 +23,6 @@ class JHicons {
   static const Icon colorCircleWhite = Icon(CupertinoIcons.circle_fill, size: 35, color: Colours.app_sub_white,);
   static const Icon colorCircleMain = Icon(CupertinoIcons.circle_fill, size: 35, color: Colours.app_main,);
   static const Icon colorCircleGrey = Icon(CupertinoIcons.circle_fill, size: 35, color: Colours.app_sub_grey,);
-  static const Icon back = Icon(CupertinoIcons.back, size: 26,color: Colours.app_sub_black,);
+  static const Icon back = Icon(CupertinoIcons.back, size: 26);
 
 }
