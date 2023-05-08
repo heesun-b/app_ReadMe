@@ -6,7 +6,7 @@ import 'package:readme_app/dto/cart_dto/cart_dto.dart';
 import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/main.dart';
-import 'package:readme_app/model/book/book_repository.dart';
+import 'package:readme_app/repository/book_repository.dart';
 import 'package:readme_app/model/cart_mock_data.dart';
 import 'package:readme_app/view/components/custom_dialog.dart';
 
@@ -16,6 +16,7 @@ part 'cart_page_view_model.freezed.dart';
 @unfreezed
 class CartPageModel with _$CartPageModel {
   factory CartPageModel({
+    required bool isScrap,
     required bool isAllChecked,
     required int totalPrice,
     required int totalCount,
@@ -28,19 +29,23 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
 
   void notifyInit() async {
     CartPageModel initCartBooks = CartPageModel(
-        totalPrice: 0, totalCount: 0, cartBooks: [], isAllChecked: false);
-    // TODO 추후에 객체 변경 AND jwt 혹은 user_id 추가 필요
+        totalPrice: 0, totalCount: 0, cartBooks: [], isAllChecked: false, isScrap: false);
+
     ResponseDTO responseDTO = await BookRepository().findCartList();
-    List<CartDTO> cartDTOList = responseDTO.data;
-    List<UseCartDTO> useCartList = [];
+    if(responseDTO.code == 1) {
+      List<CartDTO> cartDTOList = responseDTO.data;
+      List<UseCartDTO> useCartList = [];
 
-    cartDTOList.forEach((element) {
-      UseCartDTO useCartDTO = UseCartDTO(cartDTO: element, isChecked: false);
-      useCartList.add(useCartDTO);
-    });
+      cartDTOList.forEach((element) {
+        UseCartDTO useCartDTO = UseCartDTO(cartDTO: element, isChecked: false);
+        useCartList.add(useCartDTO);
+      });
+      initCartBooks.cartBooks = useCartList;
+      state = initCartBooks;
+    } else{
+      state = initCartBooks;
+    }
 
-    initCartBooks.cartBooks = useCartList;
-    state = initCartBooks;
   }
 
   void changeAllChecked(value) {

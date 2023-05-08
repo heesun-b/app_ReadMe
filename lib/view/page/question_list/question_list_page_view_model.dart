@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/model/qustion/question.dart';
-import 'package:readme_app/model/qustion/question_repository.dart';
+import 'package:readme_app/repository/question_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 

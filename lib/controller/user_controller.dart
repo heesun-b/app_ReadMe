@@ -4,7 +4,7 @@ import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/main.dart';
 import 'package:readme_app/model/user/user.dart';
-import 'package:readme_app/model/user/user_repository.dart';
+import 'package:readme_app/repository/user_repository.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 
 final userControllerProvider = Provider<UserController>((ref) {

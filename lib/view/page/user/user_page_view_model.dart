@@ -9,7 +9,7 @@ import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/dto/user_memebership_info_dto/user_membership_info_dto.dart';
 import 'package:readme_app/main.dart';
-import 'package:readme_app/model/user/user_repository.dart';
+import 'package:readme_app/repository/user_repository.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/view/components/custom_dialog.dart';

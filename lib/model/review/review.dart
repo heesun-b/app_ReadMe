@@ -1,13 +1,13 @@
 import 'package:readme_app/model/user/user.dart';
 
-class Reviews {
+class Review {
   final int id;
   final User user;
   final double stars;
   final String content;
   final String status;
 
-  Reviews(
+  Review(
       {required this.id,
       required this.user,
       required this.stars,
@@ -22,7 +22,7 @@ class Reviews {
         "status": status,
       };
 
-  Reviews.fromJson(Map<String, dynamic> json)
+  Review.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         user = User.fromJson(json["smallCategory"]),
         stars = json["stars"],

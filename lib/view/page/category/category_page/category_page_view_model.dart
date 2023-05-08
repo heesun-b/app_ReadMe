@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/model/book/book.dart';
-import 'package:readme_app/model/book/book_repository.dart';
+import 'package:readme_app/repository/book_repository.dart';
 import 'package:readme_app/model/small_category/small_category.dart';
 import 'package:readme_app/sqflite/model/big_category/big_category.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
