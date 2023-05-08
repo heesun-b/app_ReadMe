@@ -79,7 +79,7 @@ class UserRepository {
   Future<ResponseDTO> getUser() async {
     try {
       Dio dio =  await MyHttp.getSecurity();
-      Response response = await dio.get("/users"); // 스프링에서 만든 Join 로직에 요청
+      Response response = await dio.get("/users");
 
       if (response.statusCode == 200) {
         return ResponseDTO.fromJson(response.data);
@@ -102,12 +102,15 @@ class UserRepository {
      try {
       Dio dio = await MyHttp.getSecurity();
       Response response = await dio.get("/users/my");
-
+      print("체크 ${response.data}");
       if (response.statusCode == 401 || response.statusCode == 403) {
         return ResponseDTO(code: 401, msg: "인증 실패입니다.");
       } else if (response.statusCode == 200) {
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-        responseDTO.data = UserMembershipInfoDTO.fromJson(responseDTO.data);
+        if(responseDTO.data != null) {
+          responseDTO.data = UserMembershipInfoDTO.fromJson(responseDTO.data);
+          return responseDTO;
+        }
         return responseDTO;
       } else {
         return ResponseDTO(code: response.statusCode, msg: response.statusMessage);

@@ -15,6 +15,7 @@ import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/view/components/custom_dialog.dart';
 
 part 'user_page_view_model.freezed.dart';
+
 @unfreezed
 class UserPageModel with _$UserPageModel {
   factory UserPageModel({
@@ -28,22 +29,28 @@ class UserPageViewModel extends StateNotifier<UserPageModel?> {
 
   void notifyInit() async {
     TableUser? tableUserInfo = await MySqfliteInit.getUser();
-    // print(tableUserInfo?.username.toString());
+
+     print(tableUserInfo?.username.toString());
+
     if(tableUserInfo != null) {
       ResponseDTO responseDTO = await UserRepository().getUserInfo();
       // log(responseDTO.data);
       if (responseDTO.code == 401) {
         Navigator.pushNamedAndRemoveUntil(navigatorKey.currentContext!, Move.loginPage, (route) => false);
       } else if (responseDTO.code == 1) {
+        if(responseDTO.data != null) {
           UserMembershipInfoDTO userInfoMembershipDTO = responseDTO.data;
           UserPageModel userPageModel = UserPageModel(userMembershipInfoDTO: userInfoMembershipDTO, user: tableUserInfo);
           state = userPageModel;
+        } else {
+          state = UserPageModel(user: tableUserInfo ,userMembershipInfoDTO: null );
+        }
       } else {
-        DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
+        DialogUtil.dialogShow(navigatorKey.currentContext!,  responseDTO.msg);
       } }
-    // } else {
-    //   state = UserPageModel(user: null ,userMembershipInfoDTO: null );
-    // }
+     else {
+      state = UserPageModel(user: tableUserInfo ,userMembershipInfoDTO: null );
+    }
   }
 }
 

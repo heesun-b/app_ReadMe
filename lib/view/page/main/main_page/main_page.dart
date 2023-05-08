@@ -17,8 +17,18 @@ class MainPage extends ConsumerWidget {
 
     MainPageModel? model = ref.watch(mainPageProvider);
 
-    return DefaultTabController(
-      length: model?.mainTabs.length ?? 1,
+    return model == null ? Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      color: Colours.app_main,
+      child: Center(
+        child: LoadingAnimationWidget.staggeredDotsWave(
+          size: 100,
+          color: Colours.app_sub_white,
+        ),
+      ),
+    )  :DefaultTabController(
+      length: model.mainTabs.length ,
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [

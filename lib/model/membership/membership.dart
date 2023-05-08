@@ -11,13 +11,11 @@ part 'membership.g.dart';
 @freezed
 class Membership with _$Membership{
   factory Membership(
-      {required int id,
-        required int price,
-        required String membershipTerm,
-        required String status}) = _Membership;
+      { int? id,
+         String? membershipName,
+         int? price,
+         String? membershipTerm,}) = _Membership;
 
   factory Membership.fromJson(Map<String, Object?> json) => _$MembershipFromJson(json);
-
-
 
 }

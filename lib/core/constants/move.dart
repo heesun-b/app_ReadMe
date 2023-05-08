@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readme_app/view/components/home_navigation_bar.dart';
 import 'package:readme_app/view/page/alarm/alarm_page/alarm_page.dart';
+import 'package:readme_app/view/page/app_info/app_info_page.dart';
 import 'package:readme_app/view/page/auth/login_page/login_page.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page.dart';
 import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page.dart';
@@ -9,6 +10,7 @@ import 'package:readme_app/view/page/category/category_page/category_page.dart';
 import 'package:readme_app/view/page/main/main_page/main_page.dart';
 import 'package:readme_app/view/page/membership/membership_page/memebership_page.dart';
 import 'package:readme_app/view/page/membership_cancel/membership_cancel_page.dart';
+import 'package:readme_app/view/page/notification/notification_page.dart';
 import 'package:readme_app/view/page/payment/payment_page/payment_page.dart';
 import 'package:readme_app/view/page/payment_list/payment_list_page.dart';
 import 'package:readme_app/view/page/question/question_page.dart';
@@ -41,6 +43,8 @@ class Move {
   static String bookDetailPage = "/bookDetail";
   static String modalButtonSheet = "/modalButtonSheet";
   static String loginPage = "/login";
+  static String appInfo = "/appInfo";
+  static String notification = "/notification";
 
 }
 
@@ -79,6 +83,8 @@ Map<String, Widget Function(BuildContext)> getRouters(){
     Move.bookmarkListPage: (context) => BookmarkListPage(),
     Move.contentBoxPage: (context) => ContentBoxPage(),
     Move.loginPage: (context) => LoginPage(),
+    Move.appInfo: (context) => AppInfoPage(),
+    Move.notification: (context) => NotificationPage(),
 
   };
 }

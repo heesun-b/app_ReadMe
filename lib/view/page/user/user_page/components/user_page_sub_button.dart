@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
+import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/use_icons.dart';
 import 'package:readme_app/view/page/user/user_page_view_model.dart';
 
@@ -9,31 +10,63 @@ class UserPageSubButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    UserPageModel? model = ref.watch(userPageProvider);
+    UserPageModel? userModel = ref.watch(userPageProvider);
+
     return Row(
       children: [
         Expanded(
           child: Container(
             width: double.infinity,
-            height: 100,
+            height: 150,
             decoration: BoxDecoration(
                 border: Border(
-                    bottom: BorderSide(color: Colours.app_sub_grey, width: 2.0),
+                    top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
+                    bottom:
+                    BorderSide(color: Colours.app_sub_grey, width: 2.0),
                     right:
                     BorderSide(color: Colours.app_sub_grey, width: 2.0))),
             child: InkWell(
               onTap: () {
-                if(model != null) {
-                  Navigator.pushNamed(context, "/question");
+                if(userModel != null) {
+                  Navigator.pushNamed(context, "/notification");
                 }
-
               },
-              child: Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  UseIcons.question,
+                  HsStyleIcons.alarm,
                   SizedBox(
-                    width: 5,
+                    height: 5,
+                  ),
+                  Text("공지")
+                ],
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            width: double.infinity,
+            height: 150,
+            decoration: BoxDecoration(
+                border: Border(
+                    top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
+                    bottom:
+                    BorderSide(color: Colours.app_sub_grey, width: 2.0),
+                    right:
+                    BorderSide(color: Colours.app_sub_grey, width: 2.0))),
+            child: InkWell(
+              onTap: () {
+                if(userModel != null) {
+                  Navigator.pushNamed(context, "/question");
+                }
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  HsStyleIcons.card,
+                  SizedBox(
+                    height: 5,
                   ),
                   Text("문의하기")
                 ],
@@ -44,23 +77,24 @@ class UserPageSubButton extends ConsumerWidget {
         Expanded(
           child: Container(
             width: double.infinity,
-            height: 100,
+            height: 150,
             decoration: BoxDecoration(
                 border: Border(
+                    top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
                     bottom:
                     BorderSide(color: Colours.app_sub_grey, width: 2.0))),
             child: InkWell(
               onTap: () {
-                if(model != null) {
+                if(userModel != null) {
                   Navigator.pushNamed(context, "/questionList");
                 }
               },
-              child: Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  UseIcons.questionList,
+                  HsStyleIcons.review,
                   SizedBox(
-                    width: 5,
+                    height: 5,
                   ),
                   Text("문의내역")
                 ],
@@ -69,6 +103,6 @@ class UserPageSubButton extends ConsumerWidget {
           ),
         )
       ],
-    );;
+    );
   }
 }

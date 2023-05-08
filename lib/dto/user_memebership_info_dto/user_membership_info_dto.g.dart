@@ -9,13 +9,14 @@ part of 'user_membership_info_dto.dart';
 _$_UserMembershipInfoDTO _$$_UserMembershipInfoDTOFromJson(
         Map<String, dynamic> json) =>
     _$_UserMembershipInfoDTO(
-      id: json['id'] as int,
-      membershipStartTime: json['membershipStartTime'] as String,
-      membershipEndTime: json['membershipEndTime'] as String,
-      price: json['price'] as int,
-      paymentTime: json['paymentTime'] as String,
-      membership:
-          Membership.fromJson(json['membership'] as Map<String, dynamic>),
+      id: json['id'] as int?,
+      membershipStartTime: json['membershipStartTime'] as String?,
+      membershipEndTime: json['membershipEndTime'] as String?,
+      price: json['price'] as int?,
+      paymentTime: json['paymentTime'] as String?,
+      membership: json['membership'] == null
+          ? null
+          : Membership.fromJson(json['membership'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_UserMembershipInfoDTOToJson(

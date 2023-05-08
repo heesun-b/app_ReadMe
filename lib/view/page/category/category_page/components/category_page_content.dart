@@ -102,14 +102,14 @@ class CategoryPageContent extends ConsumerWidget {
                           books[index].title,
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            fontSize: 20,
+                            fontSize: Dimens.font_sp18,
                           ),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 100,
                         ),
                         Text(
                           "${ books[index].author} | ${ books[index].publisher.businessName}",
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: Dimens.font_sp14),
                         ),
                         Row(
                           children: [
@@ -119,13 +119,13 @@ class CategoryPageContent extends ConsumerWidget {
                             ),
                             Text(
                               "${books[index].stars}",
-                              style: TextStyle(fontSize: 16),
+                              style: TextStyle(fontSize: Dimens.font_sp14),
                             ),
                           ],
                         ),
                         Row(
                           children: [
-                            Text("소장가 ${books[index].price}"),
+                            Text("소장가 ${books[index].price}", style: TextStyle(fontSize: Dimens.font_sp14),),
                             SizedBox(width: 100),
                             IconButton(
                               padding: EdgeInsets.zero,

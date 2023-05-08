@@ -18,7 +18,6 @@ class QuestionController {
 
 
  Future<void> saveQuestion(String title,  String content) async {
-   // SessionUser sessionUser = ref.read(sessionProvider);
    ResponseDTO responseDTO = await QuestionRepository().saveQuestion(title, content);
    if(responseDTO.code == 401) {
      Navigator.pushNamedAndRemoveUntil(mContext!, Move.loginPage, (route) => false);

@@ -34,7 +34,7 @@ class UserPageInfoBtton extends ConsumerWidget {
           padding: const EdgeInsets.all(15.0),
           child: InkWell(
             onTap: () {
-              // 추가
+              Navigator.pushNamed(context, "/appInfo");
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

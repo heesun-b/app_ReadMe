@@ -184,7 +184,7 @@ class MySqfliteInit {
 
   static Future _open() async {
     var databasesPath = await getDatabasesPath();
-    var path = join(databasesPath, "my_db5.db");
+    var path = join(databasesPath, "my_db6.db");
 
     _db = await openDatabase(path, version: 1,
       onCreate: (Database db, int version) async {
