@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:readme_app/core/constants/secure_storage.dart';
-import 'package:readme_app/sqflite/sqflite.dart';
-import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/view/components/home_navigation_bar.dart';
 import 'package:readme_app/view/page/alarm/alarm_page/alarm_page.dart';
 import 'package:readme_app/view/page/auth/login_page/login_page.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page.dart';
-import 'package:readme_app/view/page/book_detail/book_detail_page/components/modal_button_sheet.dart';
 import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page.dart';
 import 'package:readme_app/view/page/cart/cart_page/cart_page.dart';
 import 'package:readme_app/view/page/category/category_page/category_page.dart';
-import 'package:readme_app/view/page/main/main_page/main_page.dart';
 import 'package:readme_app/view/page/main/main_page/main_page.dart';
 import 'package:readme_app/view/page/membership/membership_page/memebership_page.dart';
 import 'package:readme_app/view/page/membership_cancel/membership_cancel_page.dart';
@@ -69,7 +64,7 @@ Map<String, Widget Function(BuildContext)> getRouters(){
     Move.alarmPage: (context) => AlarmPage(),
     Move.paymentPage: (context) => PaymentPage(),
     Move.cartPage: (context) => CartPage(),
-    Move.bookDetailPage: (context) => BookDetailPage(),
+    // Move.bookDetailPage: (context) => BookDetailPage(),
     // Move.modalButtonSheet: (context) => ModalButtonSheet(),
     Move.bookViewerPage: (context) => BookViewerPage(),
     Move.membershipPage: (context) => MembershipPage(),

@@ -5,7 +5,7 @@ import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/main.dart';
 import 'package:readme_app/model/book/book.dart';
-import 'package:readme_app/model/book/book_repository.dart';
+import 'package:readme_app/repository/book_repository.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 import 'package:readme_app/sqflite/table/table_main_tab.dart';
 import 'package:readme_app/view/components/custom_dialog.dart';

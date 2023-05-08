@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/model/qustion/question.dart';
-import 'package:readme_app/model/qustion/question_repository.dart';
+import 'package:readme_app/repository/question_repository.dart';
 
 class QuestionListDetailModel {
   Question question;
