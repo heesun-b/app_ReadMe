@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:readme_app/model/book_detail_mock_data.dart';
 import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page.dart';
 import '../../../../core/constants/colours.dart';
 import '../../../../core/constants/hs_style_icons.dart';

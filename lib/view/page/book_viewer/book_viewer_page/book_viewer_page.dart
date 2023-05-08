@@ -24,7 +24,7 @@ class BookViewerPage extends ConsumerWidget {
         appBar: model?.isShowAppBarAndBottomSheet ?? false ? AppBar(
           centerTitle: true,
           leading: IconButton(
-            icon: JHicons.back,
+            icon: JHicons.back, color: ref.watch(bookViewerPageProvider(bookDetailData))?.fontColor,
             onPressed: () {
               if(Navigator.of(context).widget.pages.length > 1) {
                 Navigator.pop(context);
@@ -33,11 +33,11 @@ class BookViewerPage extends ConsumerWidget {
               }
             },
           ),
-          backgroundColor: Colours.app_sub_white,
+          backgroundColor: ref.watch(bookViewerPageProvider(bookDetailData))?.bgColor,
           title: Text(
-            "스즈메의 문단속",
+            "${model?.title}",
             style: TextStyle(
-                color: Colours.app_sub_black,
+                color: ref.watch(bookViewerPageProvider(bookDetailData))?.fontColor,
                 fontWeight: FontWeight.w700,
                 fontSize: 22),
           ),
@@ -45,8 +45,8 @@ class BookViewerPage extends ConsumerWidget {
             : null,
         key: _scaffoldKey,
         endDrawer: model?.user == null
-            ? BookDrawerNoMembership()
-            : BookDrawer(),
+            ? BookDrawerNoMembership(bookDetailData)
+            : BookDrawer(bookDetailData),
         body: GestureDetector(
           onTap: () {
             ref.read(bookViewerPageProvider(bookDetailData).notifier).changeIsShowAppBarAndBottomSheet(model?.isShowAppBarAndBottomSheet ?? false ? false : true);
@@ -54,13 +54,13 @@ class BookViewerPage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // buildAppBar(), /// Appbar
-              buildBookmark(ref),
               /// 북마크
-              Expanded(
-                // 책내용
+              buildBookmark(ref),
+              /// 책내용
+                Expanded(
                 child: Center(
                   child: Container(
+                    color: ref.watch(bookViewerPageProvider(bookDetailData))?.bgColor,
                     child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         // child: buildEpubView(epubReaderController as BuildContext, ref)),
@@ -70,8 +70,8 @@ class BookViewerPage extends ConsumerWidget {
                   ),
                 ),
               ),
-              buildBottomSheet(context, ref),
               /// BottomSheet
+              buildBottomSheet(context, ref),
             ],
           ),
         ),
@@ -85,59 +85,33 @@ class BookViewerPage extends ConsumerWidget {
         onClosing: () {},
         builder: (context) {
           return Container(
-            height: 120,
-            color: Colours.app_sub_white,
+            height: 70,
+            color: ref.watch(bookViewerPageProvider(bookDetailData))?.bgColor,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 6,
-                      child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 5.0, left: 5.0, right: 5.0),
-                          child: Slider(
-                            thumbColor: Colours.app_main,
-                            inactiveColor: Colours.app_sub_grey,
-                            activeColor: Colours.app_main,
-                            value: ref.read(bookViewerPageProvider(bookDetailData))!.currentSliderValue,
-                            max: 100,
-                            divisions: 100,
-                            label: ref.read(bookViewerPageProvider(bookDetailData))!.currentSliderValue.round().toString(),
-                            onChanged: (double value) {
-                                ref.read(bookViewerPageProvider(bookDetailData))!.currentSliderValue = value;
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        child: Text("100%"),
-                      ),
-                    ),
-                  ],
-                ),
+                SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.only(right: 20.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      InkWell(
-                          onTap: () {
+                      Container(
+                        child: IconButton(
+                          onPressed : () {
                             Navigator.pushNamed(context, "/bookmarkList");
                           },
-                          child: JHicons.bookBox),
+                           icon: JHicons.bookBox, color: ref.watch(bookViewerPageProvider(bookDetailData))?.fontColor,
+                        ),
+                      ),
                       Container(
                         child: IconButton(
                             onPressed: () {
                               _scaffoldKey.currentState?.openEndDrawer();
                             },
-                            icon: JHicons.hambuger),
+                            icon: JHicons.hambuger, color: ref.watch(bookViewerPageProvider(bookDetailData))?.fontColor,
+                        ),
                       ),
                     ],
                   ),
@@ -158,9 +132,9 @@ class BookViewerPage extends ConsumerWidget {
         options: DefaultBuilderOptions(
           textStyle: TextStyle(
             height: 1.25,
-            fontSize: ref.read(bookViewerPageProvider(bookDetailData))?.fontSize,
-            color: Colors.black87,
-            fontFamily: "NanumGothic",
+            fontSize: ref.watch(bookViewerPageProvider(bookDetailData))?.fontSize,
+            color: ref.watch(bookViewerPageProvider(bookDetailData))?.fontColor,
+            fontFamily: ref.watch(bookViewerPageProvider(bookDetailData))?.fontFamily,
           ),
         ),
       ),

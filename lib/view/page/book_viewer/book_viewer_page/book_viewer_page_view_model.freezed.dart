@@ -35,6 +35,12 @@ mixin _$BookViewerPageModel {
   set currentSliderValue(double value) => throw _privateConstructorUsedError;
   double get fontSize => throw _privateConstructorUsedError;
   set fontSize(double value) => throw _privateConstructorUsedError;
+  Color get fontColor => throw _privateConstructorUsedError;
+  set fontColor(Color value) => throw _privateConstructorUsedError;
+  String get fontFamily => throw _privateConstructorUsedError;
+  set fontFamily(String value) => throw _privateConstructorUsedError;
+  Color get bgColor => throw _privateConstructorUsedError;
+  set bgColor(Color value) => throw _privateConstructorUsedError;
   TableUser? get user => throw _privateConstructorUsedError;
   set user(TableUser? value) => throw _privateConstructorUsedError;
   EpubController get epubReaderController => throw _privateConstructorUsedError;
@@ -62,6 +68,9 @@ abstract class $BookViewerPageModelCopyWith<$Res> {
       bool isShowAppBarAndBottomSheet,
       double currentSliderValue,
       double fontSize,
+      Color fontColor,
+      String fontFamily,
+      Color bgColor,
       TableUser? user,
       EpubController epubReaderController});
 }
@@ -88,6 +97,9 @@ class _$BookViewerPageModelCopyWithImpl<$Res, $Val extends BookViewerPageModel>
     Object? isShowAppBarAndBottomSheet = null,
     Object? currentSliderValue = null,
     Object? fontSize = null,
+    Object? fontColor = null,
+    Object? fontFamily = null,
+    Object? bgColor = null,
     Object? user = freezed,
     Object? epubReaderController = null,
   }) {
@@ -128,6 +140,18 @@ class _$BookViewerPageModelCopyWithImpl<$Res, $Val extends BookViewerPageModel>
           ? _value.fontSize
           : fontSize // ignore: cast_nullable_to_non_nullable
               as double,
+      fontColor: null == fontColor
+          ? _value.fontColor
+          : fontColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      fontFamily: null == fontFamily
+          ? _value.fontFamily
+          : fontFamily // ignore: cast_nullable_to_non_nullable
+              as String,
+      bgColor: null == bgColor
+          ? _value.bgColor
+          : bgColor // ignore: cast_nullable_to_non_nullable
+              as Color,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -158,6 +182,9 @@ abstract class _$$_BookViewerPageModelCopyWith<$Res>
       bool isShowAppBarAndBottomSheet,
       double currentSliderValue,
       double fontSize,
+      Color fontColor,
+      String fontFamily,
+      Color bgColor,
       TableUser? user,
       EpubController epubReaderController});
 }
@@ -182,6 +209,9 @@ class __$$_BookViewerPageModelCopyWithImpl<$Res>
     Object? isShowAppBarAndBottomSheet = null,
     Object? currentSliderValue = null,
     Object? fontSize = null,
+    Object? fontColor = null,
+    Object? fontFamily = null,
+    Object? bgColor = null,
     Object? user = freezed,
     Object? epubReaderController = null,
   }) {
@@ -222,6 +252,18 @@ class __$$_BookViewerPageModelCopyWithImpl<$Res>
           ? _value.fontSize
           : fontSize // ignore: cast_nullable_to_non_nullable
               as double,
+      fontColor: null == fontColor
+          ? _value.fontColor
+          : fontColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      fontFamily: null == fontFamily
+          ? _value.fontFamily
+          : fontFamily // ignore: cast_nullable_to_non_nullable
+              as String,
+      bgColor: null == bgColor
+          ? _value.bgColor
+          : bgColor // ignore: cast_nullable_to_non_nullable
+              as Color,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -247,6 +289,9 @@ class _$_BookViewerPageModel implements _BookViewerPageModel {
       required this.isShowAppBarAndBottomSheet,
       required this.currentSliderValue,
       required this.fontSize,
+      required this.fontColor,
+      required this.fontFamily,
+      required this.bgColor,
       this.user,
       required this.epubReaderController});
 
@@ -269,13 +314,19 @@ class _$_BookViewerPageModel implements _BookViewerPageModel {
   @override
   double fontSize;
   @override
+  Color fontColor;
+  @override
+  String fontFamily;
+  @override
+  Color bgColor;
+  @override
   TableUser? user;
   @override
   EpubController epubReaderController;
 
   @override
   String toString() {
-    return 'BookViewerPageModel(title: $title, epubFilePath: $epubFilePath, coverFilePath: $coverFilePath, price: $price, isHeart: $isHeart, isBookMark: $isBookMark, isShowAppBarAndBottomSheet: $isShowAppBarAndBottomSheet, currentSliderValue: $currentSliderValue, fontSize: $fontSize, user: $user, epubReaderController: $epubReaderController)';
+    return 'BookViewerPageModel(title: $title, epubFilePath: $epubFilePath, coverFilePath: $coverFilePath, price: $price, isHeart: $isHeart, isBookMark: $isBookMark, isShowAppBarAndBottomSheet: $isShowAppBarAndBottomSheet, currentSliderValue: $currentSliderValue, fontSize: $fontSize, fontColor: $fontColor, fontFamily: $fontFamily, bgColor: $bgColor, user: $user, epubReaderController: $epubReaderController)';
   }
 
   @JsonKey(ignore: true)
@@ -297,6 +348,9 @@ abstract class _BookViewerPageModel implements BookViewerPageModel {
       required bool isShowAppBarAndBottomSheet,
       required double currentSliderValue,
       required double fontSize,
+      required Color fontColor,
+      required String fontFamily,
+      required Color bgColor,
       TableUser? user,
       required EpubController epubReaderController}) = _$_BookViewerPageModel;
 
@@ -327,6 +381,15 @@ abstract class _BookViewerPageModel implements BookViewerPageModel {
   @override
   double get fontSize;
   set fontSize(double value);
+  @override
+  Color get fontColor;
+  set fontColor(Color value);
+  @override
+  String get fontFamily;
+  set fontFamily(String value);
+  @override
+  Color get bgColor;
+  set bgColor(Color value);
   @override
   TableUser? get user;
   set user(TableUser? value);
