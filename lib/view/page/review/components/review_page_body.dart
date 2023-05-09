@@ -1,3 +1,6 @@
+import 'dart:js';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/controller/review_controller.dart';
@@ -48,10 +51,10 @@ class ReviewPageBody extends ConsumerWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image.network(
-          model?.reviewList[index].book.coverUrl ?? "",
-          width: 70,
-          height: 90,
+        CachedNetworkImage(
+           imageUrl: model?.reviewList[index].book.coverUrl ?? "",
+          placeholder : (context, url) => CircularProgressIndicator(),
+          width : 70, height : 90, fit : BoxFit.cover,
         ),
         SizedBox(
           width: 10,

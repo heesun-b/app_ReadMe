@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +32,12 @@ class MainAdScreen extends ConsumerWidget {
             children: [
               ImageFiltered(
                   imageFilter: ImageFilter.blur(sigmaX: 40, sigmaY: 10),
-                  child: Image.network(bannerFile[index] ?? "")
+                  child:
+                CachedNetworkImage(
+                  imageUrl: bannerFile[index] ?? "",
+                  placeholder : (context, url) => CircularProgressIndicator(),
+                ),
+
               ),
               Padding(
                 padding: const EdgeInsets.all(40.0),

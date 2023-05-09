@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
@@ -21,14 +22,22 @@ class BookDetailPageCover extends ConsumerWidget {
       children: [
         ImageFiltered(
           imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Image.network(model?.book.coverFile.fileUrl ?? ""),
+          child:
+          CachedNetworkImage(
+            imageUrl: model?.book.coverFile.fileUrl ?? "",
+            placeholder : (context, url) => CircularProgressIndicator(),
+          ),
         ),
         Container(
           height: 600,
           width: 500,
           child: Padding(
             padding: EdgeInsets.all(60),
-            child: Image.network(model?.book.coverFile.fileUrl ?? ""),
+            child:
+            CachedNetworkImage(
+              imageUrl:model?.book.coverFile.fileUrl ?? "",
+              placeholder : (context, url) => CircularProgressIndicator(),
+            ),
           ),
         ),
 

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
@@ -41,11 +42,13 @@ class BookCardView extends ConsumerWidget {
           padding: const EdgeInsets.all(20.0),
           child: Row(
             children: [
-              Image.network(
-                book.coverFile.fileUrl,
-                width: 90,
-                height: 110,
+
+              CachedNetworkImage(
+                imageUrl: book.coverFile.fileUrl,
+                placeholder : (context, url) => CircularProgressIndicator(),
+                width : 90, height : 110, fit : BoxFit.cover,
               ),
+
               const SizedBox(
                 width: 15,
               ),
