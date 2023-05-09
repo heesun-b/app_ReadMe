@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/model/qustion/question.dart';
 import 'package:readme_app/repository/question_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
+import 'package:readme_app/view/components/custom_dialog.dart';
 
 part 'question_list_page_view_model.freezed.dart';
 
@@ -23,17 +24,27 @@ class QuestionListPageViewModel
   QuestionListPageModel questionModel = QuestionListPageModel(questions: []);
 
   void notifyInit() async {
-    // List<Question> data = QuestionRepository().findList();
-    // questionModel.questions.addAll(data);
-    state = null;
+    ResponseDTO data = await QuestionRepository().getList();
+    List<Question> questions = [data.data];
+    questionModel.questions = [...questions];
+    state = questionModel;
   }
 
-  void update(Question question) async {
-    List<Question> newQuestions = [...state!.questions];
-    newQuestions.add(question);
-    state = state!.copyWith(questions: newQuestions);
-    // state!.copyWith(questions: )
+  void delete(BuildContext context, ResponseDTO responseDTO) async {
+    if (responseDTO.code != 1) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return   CustomDialog(
+              title: "문의하기 삭제 실패",
+              content: responseDTO.msg ?? "문의하기 삭제를 실패했습니다.",
+              callback: () => Navigator.pop(context)
+          );
+        },
+      );
+    }
   }
+
 }
 
 final questionListPageProvider = StateNotifierProvider.autoDispose<

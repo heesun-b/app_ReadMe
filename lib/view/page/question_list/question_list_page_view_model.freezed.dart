@@ -93,25 +93,15 @@ class __$$_QuestionListPageModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_QuestionListPageModel
-    with DiagnosticableTreeMixin
-    implements _QuestionListPageModel {
+class _$_QuestionListPageModel implements _QuestionListPageModel {
   _$_QuestionListPageModel({required this.questions});
 
   @override
   List<Question> questions;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'QuestionListPageModel(questions: $questions)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'QuestionListPageModel'))
-      ..add(DiagnosticsProperty('questions', questions));
   }
 
   @JsonKey(ignore: true)
