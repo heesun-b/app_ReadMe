@@ -23,7 +23,7 @@ class QuestionController {
      Navigator.pushNamedAndRemoveUntil(mContext!, Move.loginPage, (route) => false);
    } else {
      ref.read(questionListPageProvider.notifier).update(responseDTO.data);
-     Navigator.pushNamed(mContext!, "/questionList");
+     Navigator.pushNamed(mContext!, Move.questionListPage);
    }
 
  }

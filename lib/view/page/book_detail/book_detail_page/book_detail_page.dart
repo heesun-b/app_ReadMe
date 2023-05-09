@@ -5,6 +5,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/controller/cart_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page_view_model.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/components/book_detail_bottom_sheet.dart';
@@ -21,10 +22,7 @@ class BookDetailPage extends ConsumerWidget {
     BookDetailPageModel? model = ref.watch(bookDetailPageProvider(bookId));
 
     return Scaffold(
-      body: model == null ?  LoadingAnimationWidget.staggeredDotsWave(
-        color: Colors.white,
-        size: 100,
-      ) :  CustomScrollView(
+      body: CustomScrollView(
         slivers: [
           SliverAppBar(
             elevation: 0,
@@ -45,7 +43,7 @@ class BookDetailPage extends ConsumerWidget {
                       Navigator.pop(context);
                       // Navigator.popUntil(context, ModalRoute.withName('/'));
                     } else {
-                      Navigator.pushNamed(context, "/navigation");
+                      Navigator.pushNamed(context, Move.navigationBar);
                     }
                   },
                 ),
@@ -53,7 +51,7 @@ class BookDetailPage extends ConsumerWidget {
                   icon: YhIcons.homeFill,
                   onPressed: () {
                     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeNavigationBar()));
-                    Navigator.pushNamed(context, "/navigation");
+                    Navigator.pushNamed(context, Move.navigationBar);
                   },
                 ),
               ],
@@ -62,7 +60,7 @@ class BookDetailPage extends ConsumerWidget {
               IconButton(
                   icon: YhIcons.cart,
                   onPressed: () {
-                    Navigator.pushNamed(context, "/cart");
+                    Navigator.pushNamed(context, Move.cartPage);
                   }),
             ],
           ),

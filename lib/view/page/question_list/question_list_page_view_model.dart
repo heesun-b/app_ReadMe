@@ -23,10 +23,9 @@ class QuestionListPageViewModel
   QuestionListPageModel questionModel = QuestionListPageModel(questions: []);
 
   void notifyInit() async {
-    List<Question> data = QuestionRepository().findList();
-    // ResponseDTO responseDTO =  QuestionRepository().findList();
-    questionModel.questions.addAll(data);
-    state = questionModel;
+    // List<Question> data = QuestionRepository().findList();
+    // questionModel.questions.addAll(data);
+    state = null;
   }
 
   void update(Question question) async {

@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/view/page/payment/payment_page/components/payment_page_body.dart';
 import 'package:readme_app/view/page/payment/payment_page/components/payment_page_body_membership.dart';
 
@@ -35,7 +36,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   borderRadius: BorderRadius.circular(20)
               ),
             onPressed: () {
-              Navigator.pushNamed(context, "/navigation");
+              Navigator.pushNamed(context, Move.navigationBar);
             },
             child: Text("완료", style: TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp20),)
           ),
@@ -64,7 +65,7 @@ class _PaymentPageState extends State<PaymentPage> {
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
                 onPressed: () {
-                  Navigator.pushNamed(context, "/navigation");
+                  Navigator.pushNamed(context, Move.navigationBar);
                 },
                 icon: HsStyleIcons.homeFill,)
           ],

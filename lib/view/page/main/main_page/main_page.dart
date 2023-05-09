@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/sqflite/table/table_main_tab.dart';
 import 'package:readme_app/view/page/main/main_page/components/main_ad_screen.dart';
@@ -29,61 +30,62 @@ class MainPage extends ConsumerWidget {
       ),
     )  :DefaultTabController(
       length: model.mainTabs.length ,
-      child: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            SliverAppBar(
-              elevation: 0,
-              backgroundColor: Colours.app_sub_white,
-              flexibleSpace: FlexibleSpaceBar(
-                background: MainAdScreen(),
-              ),
-              pinned: true,
-              expandedHeight: 500,
-              leading: IconButton(
-                icon: Image.asset(
-                  "assets/images/img.png",
+      child: Scaffold(
+        body: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                elevation: 0,
+                backgroundColor: Colours.app_sub_white,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: MainAdScreen(),
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, "/navigation");
-                },
-              ),
-              actions: [
-                IconButton(
-                  icon: YhIcons.alarm,
+                pinned: true,
+                expandedHeight: 500,
+                leading: IconButton(
+                  icon: Image.asset(
+                    "assets/images/img.png",
+                  ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "/alarm");
+                    Navigator.pushNamed(context, Move.navigationBar);
                   },
                 ),
-                IconButton(
-                    icon: YhIcons.cart,
+                actions: [
+                  IconButton(
+                    icon: YhIcons.alarm,
                     onPressed: () {
-                      Navigator.pushNamed(context, "/cart");
-                    })
-              ],
-            ),
-            SliverAppBar(
-              toolbarHeight: 0,
-              backgroundColor: Colours.app_sub_white,
-              elevation: 1.0,
-              pinned: true,
-              bottom: TabBar(
-                labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp14),
-                indicatorColor: Colours.app_main,
-                indicatorWeight: 3,
-                indicatorSize: TabBarIndicatorSize.tab,
-                tabs: model?.mainTabs != null ? List.generate(model!.mainTabs.length, (index) =>  Tab(text: model.mainTabs[index].name),) : [const Tab(text: "전체",)]
-
+                      Navigator.pushNamed(context, Move.alarmPage);
+                    },
+                  ),
+                  IconButton(
+                      icon: YhIcons.cart,
+                      onPressed: () {
+                        Navigator.pushNamed(context, Move.cartPage);
+                      })
+                ],
               ),
-            )
-          ];
-        },
-        body: TabBarView(
-          children: model?.mainTabs != null ?  List.generate(model!.mainTabs.length, (index) =>  MainBookList(model.mainTabs[index].name, model.mainTabs[index].requestName),)
-            : [
-                Container()
-            ]
-          ),
+              SliverAppBar(
+                toolbarHeight: 0,
+                backgroundColor: Colours.app_sub_white,
+                elevation: 1.0,
+                pinned: true,
+                bottom: TabBar(
+                  labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp14),
+                  indicatorColor: Colours.app_main,
+                  indicatorWeight: 3,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  tabs: model?.mainTabs != null ? List.generate(model!.mainTabs.length, (index) =>  Tab(text: model.mainTabs[index].name),) : [const Tab(text: "전체",)]
+                ),
+              )
+            ];
+          },
+          body: TabBarView(
+            children: model?.mainTabs != null ?  List.generate(model!.mainTabs.length, (index) =>  MainBookList(model.mainTabs[index].name, model.mainTabs[index].requestName),)
+              : [
+                  Container()
+              ]
+            ),
+        ),
       ),
     );
   }

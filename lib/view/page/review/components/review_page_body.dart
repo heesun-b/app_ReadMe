@@ -6,6 +6,7 @@ import 'package:readme_app/core/constants/hs_style_icons.dart';
 class ReviewPageBody extends StatelessWidget {
   const ReviewPageBody({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -109,7 +110,7 @@ class ReviewPageBody extends StatelessWidget {
                     ),
                     scrollable: false,
                     alignment: Alignment.center,
-                    content: Text("댓글을 삭제하시겠습니까?"),
+                    content: Text("댓글을 삭제하시겠습니까?", style: TextStyle(fontSize: Dimens.font_sp16),),
                     actions: [
                       TextButton(
                           onPressed: () {

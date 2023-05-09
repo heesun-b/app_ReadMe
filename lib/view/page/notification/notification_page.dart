@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/view/page/notification/components/notification_page_body.dart';
 
 class NotificationPage extends ConsumerWidget {
@@ -33,7 +34,7 @@ class NotificationPage extends ConsumerWidget {
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {
-                  Navigator.pushNamed(context, "/navigation");
+                  Navigator.pushNamed(context, Move.navigationBar);
                 },
                 icon: HsStyleIcons.homeFill,)
             ],

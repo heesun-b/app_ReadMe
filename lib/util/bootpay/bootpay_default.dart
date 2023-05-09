@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/http.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 
 class BootPayDefault extends StatefulWidget {
@@ -73,7 +74,7 @@ class _BootPayDefaultState extends State<BootPayDefault> {
       onClose: () {
         print('------- onClose');
         Bootpay().dismiss(context); //명시적으로 부트페이 뷰 종료 호출
-        Navigator.pushNamed(context, "/payment");
+        Navigator.pushNamed(context,  Move.paymentPage);
       },
       onIssued: (String data) {
         print('------- onIssued: $data');

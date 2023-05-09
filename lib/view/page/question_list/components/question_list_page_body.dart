@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/model/qustion/question.dart';
+import 'package:readme_app/view/components/none_list_widget.dart';
 import 'package:readme_app/view/page/question_list/components/question_list_detail.dart';
 import 'package:readme_app/view/page/question_list/question_list_page_view_model.dart';
 
@@ -21,7 +22,7 @@ class QuestionListPageBody extends ConsumerWidget {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
+        child: question.isEmpty ?  NoneListWidget(title:"문의내역"):  Column(
           children: List.generate(question.length, (index) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
@@ -31,7 +32,7 @@ class QuestionListPageBody extends ConsumerWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => QuestionListDetail(
-                              id: index,
+                              idx: index,
                             )),
                   );
                 },

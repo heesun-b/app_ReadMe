@@ -102,6 +102,8 @@ class CartPageBody extends ConsumerWidget {
   }
 
   Widget _hsCheckBox(BuildContext context, WidgetRef ref) {
+    CartPageModel? model = ref.watch(cartPageProvider);
+
     return Column(
       children: [
         Row(
@@ -123,7 +125,7 @@ class CartPageBody extends ConsumerWidget {
           thickness: 5,
           height: 1,
         ),
-        // model == null ? NoneListWidget(title: "장바구니") :
+        cartBooks.isEmpty ? NoneListWidget(title: "장바구니") :
         _bookListTile(context, ref),
       ],
     );

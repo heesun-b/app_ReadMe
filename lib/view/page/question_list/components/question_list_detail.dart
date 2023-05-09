@@ -8,14 +8,14 @@ import 'package:readme_app/view/page/question_list/components/question_answer.da
 import 'package:readme_app/view/page/question_list/components/question_list_detail_view_model.dart';
 
 class QuestionListDetail extends ConsumerWidget {
-  int id;
-  QuestionListDetail({required this.id, Key? key}) : super(key: key);
+  int idx;
+  QuestionListDetail({required this.idx, Key? key}) : super(key: key);
 
   // detail 연결된 provider
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    QuestionListDetailModel? model = ref.watch(questionListDetailProvier(id));
+    QuestionListDetailModel? model = ref.watch(questionListDetailProvier(idx));
     Question useQuestion;
 
     if(model == null) {

@@ -8,7 +8,7 @@ part of 'cart_dto.dart';
 
 _$_CartDTO _$$_CartDTOFromJson(Map<String, dynamic> json) => _$_CartDTO(
       id: json['id'] as int,
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      user: OriginUser.fromJson(json['user'] as Map<String, dynamic>),
       book: Book.fromJson(json['book'] as Map<String, dynamic>),
     );
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/view/page/question/components/question_page_body.dart';
 
 class QuestionPage extends StatelessWidget {
@@ -38,7 +39,7 @@ class QuestionPage extends StatelessWidget {
             padding: EdgeInsets.zero,
             constraints: BoxConstraints(),
             onPressed: () {
-              Navigator.pushNamed(context, "/navigation");
+              Navigator.pushNamed(context, Move.navigationBar);
             },
             icon: HsStyleIcons.homeFill,)
         ],
