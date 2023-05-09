@@ -181,3 +181,180 @@ abstract class _FileDTO implements FileDTO {
   _$$_FileDTOCopyWith<_$_FileDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+FileListDTO _$FileListDTOFromJson(Map<String, dynamic> json) {
+  return _FileListDTO.fromJson(json);
+}
+
+/// @nodoc
+mixin _$FileListDTO {
+  int get id => throw _privateConstructorUsedError;
+  FileDTO get imageFile => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FileListDTOCopyWith<FileListDTO> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FileListDTOCopyWith<$Res> {
+  factory $FileListDTOCopyWith(
+          FileListDTO value, $Res Function(FileListDTO) then) =
+      _$FileListDTOCopyWithImpl<$Res, FileListDTO>;
+  @useResult
+  $Res call({int id, FileDTO imageFile});
+
+  $FileDTOCopyWith<$Res> get imageFile;
+}
+
+/// @nodoc
+class _$FileListDTOCopyWithImpl<$Res, $Val extends FileListDTO>
+    implements $FileListDTOCopyWith<$Res> {
+  _$FileListDTOCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? imageFile = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      imageFile: null == imageFile
+          ? _value.imageFile
+          : imageFile // ignore: cast_nullable_to_non_nullable
+              as FileDTO,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $FileDTOCopyWith<$Res> get imageFile {
+    return $FileDTOCopyWith<$Res>(_value.imageFile, (value) {
+      return _then(_value.copyWith(imageFile: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_FileListDTOCopyWith<$Res>
+    implements $FileListDTOCopyWith<$Res> {
+  factory _$$_FileListDTOCopyWith(
+          _$_FileListDTO value, $Res Function(_$_FileListDTO) then) =
+      __$$_FileListDTOCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int id, FileDTO imageFile});
+
+  @override
+  $FileDTOCopyWith<$Res> get imageFile;
+}
+
+/// @nodoc
+class __$$_FileListDTOCopyWithImpl<$Res>
+    extends _$FileListDTOCopyWithImpl<$Res, _$_FileListDTO>
+    implements _$$_FileListDTOCopyWith<$Res> {
+  __$$_FileListDTOCopyWithImpl(
+      _$_FileListDTO _value, $Res Function(_$_FileListDTO) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? imageFile = null,
+  }) {
+    return _then(_$_FileListDTO(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      imageFile: null == imageFile
+          ? _value.imageFile
+          : imageFile // ignore: cast_nullable_to_non_nullable
+              as FileDTO,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_FileListDTO with DiagnosticableTreeMixin implements _FileListDTO {
+  _$_FileListDTO({required this.id, required this.imageFile});
+
+  factory _$_FileListDTO.fromJson(Map<String, dynamic> json) =>
+      _$$_FileListDTOFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final FileDTO imageFile;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FileListDTO(id: $id, imageFile: $imageFile)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'FileListDTO'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('imageFile', imageFile));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_FileListDTO &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.imageFile, imageFile) ||
+                other.imageFile == imageFile));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, imageFile);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FileListDTOCopyWith<_$_FileListDTO> get copyWith =>
+      __$$_FileListDTOCopyWithImpl<_$_FileListDTO>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_FileListDTOToJson(
+      this,
+    );
+  }
+}
+
+abstract class _FileListDTO implements FileListDTO {
+  factory _FileListDTO(
+      {required final int id,
+      required final FileDTO imageFile}) = _$_FileListDTO;
+
+  factory _FileListDTO.fromJson(Map<String, dynamic> json) =
+      _$_FileListDTO.fromJson;
+
+  @override
+  int get id;
+  @override
+  FileDTO get imageFile;
+  @override
+  @JsonKey(ignore: true)
+  _$$_FileListDTOCopyWith<_$_FileListDTO> get copyWith =>
+      throw _privateConstructorUsedError;
+}

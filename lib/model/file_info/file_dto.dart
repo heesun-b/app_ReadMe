@@ -21,5 +21,14 @@ class FileDTO with _$FileDTO {
 
 
   factory FileDTO.fromJson(Map<String, Object?> json) => _$FileDTOFromJson(json);
+}
 
+@freezed
+class FileListDTO with _$FileListDTO {
+  factory FileListDTO({
+    required int id,
+    required FileDTO imageFile
+  }) = _FileListDTO;
+
+  factory FileListDTO.fromJson(Map<String, Object?> json) => _$FileListDTOFromJson(json);
 }

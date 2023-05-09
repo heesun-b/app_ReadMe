@@ -13,7 +13,7 @@ class MainAdScreen extends ConsumerWidget {
     List<String> bannerFile = [];
 
     if(model != null) {
-      bannerFile = model.bookBanners;
+      bannerFile = model.bookBanners.map((e) => e.imageFile.fileUrl).toList();
     }
 
     return Container(

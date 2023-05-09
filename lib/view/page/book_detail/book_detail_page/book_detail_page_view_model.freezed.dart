@@ -24,6 +24,12 @@ mixin _$BookDetailPageModel {
   set last(bool value) => throw _privateConstructorUsedError;
   int get totalPages => throw _privateConstructorUsedError;
   set totalPages(int value) => throw _privateConstructorUsedError;
+  TextEditingController get textEditingController =>
+      throw _privateConstructorUsedError;
+  set textEditingController(TextEditingController value) =>
+      throw _privateConstructorUsedError;
+  double get stars => throw _privateConstructorUsedError;
+  set stars(double value) => throw _privateConstructorUsedError;
   TableUser? get user => throw _privateConstructorUsedError;
   set user(TableUser? value) => throw _privateConstructorUsedError;
 
@@ -43,6 +49,8 @@ abstract class $BookDetailPageModelCopyWith<$Res> {
       Pageable pageable,
       bool last,
       int totalPages,
+      TextEditingController textEditingController,
+      double stars,
       TableUser? user});
 
   $BookDetailDTOCopyWith<$Res> get book;
@@ -66,6 +74,8 @@ class _$BookDetailPageModelCopyWithImpl<$Res, $Val extends BookDetailPageModel>
     Object? pageable = null,
     Object? last = null,
     Object? totalPages = null,
+    Object? textEditingController = null,
+    Object? stars = null,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
@@ -85,6 +95,14 @@ class _$BookDetailPageModelCopyWithImpl<$Res, $Val extends BookDetailPageModel>
           ? _value.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as int,
+      textEditingController: null == textEditingController
+          ? _value.textEditingController
+          : textEditingController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController,
+      stars: null == stars
+          ? _value.stars
+          : stars // ignore: cast_nullable_to_non_nullable
+              as double,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -122,6 +140,8 @@ abstract class _$$_BookDetailPageModelCopyWith<$Res>
       Pageable pageable,
       bool last,
       int totalPages,
+      TextEditingController textEditingController,
+      double stars,
       TableUser? user});
 
   @override
@@ -145,6 +165,8 @@ class __$$_BookDetailPageModelCopyWithImpl<$Res>
     Object? pageable = null,
     Object? last = null,
     Object? totalPages = null,
+    Object? textEditingController = null,
+    Object? stars = null,
     Object? user = freezed,
   }) {
     return _then(_$_BookDetailPageModel(
@@ -164,6 +186,14 @@ class __$$_BookDetailPageModelCopyWithImpl<$Res>
           ? _value.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as int,
+      textEditingController: null == textEditingController
+          ? _value.textEditingController
+          : textEditingController // ignore: cast_nullable_to_non_nullable
+              as TextEditingController,
+      stars: null == stars
+          ? _value.stars
+          : stars // ignore: cast_nullable_to_non_nullable
+              as double,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -180,6 +210,8 @@ class _$_BookDetailPageModel implements _BookDetailPageModel {
       required this.pageable,
       required this.last,
       required this.totalPages,
+      required this.textEditingController,
+      required this.stars,
       this.user});
 
   @override
@@ -191,11 +223,15 @@ class _$_BookDetailPageModel implements _BookDetailPageModel {
   @override
   int totalPages;
   @override
+  TextEditingController textEditingController;
+  @override
+  double stars;
+  @override
   TableUser? user;
 
   @override
   String toString() {
-    return 'BookDetailPageModel(book: $book, pageable: $pageable, last: $last, totalPages: $totalPages, user: $user)';
+    return 'BookDetailPageModel(book: $book, pageable: $pageable, last: $last, totalPages: $totalPages, textEditingController: $textEditingController, stars: $stars, user: $user)';
   }
 
   @JsonKey(ignore: true)
@@ -212,6 +248,8 @@ abstract class _BookDetailPageModel implements BookDetailPageModel {
       required Pageable pageable,
       required bool last,
       required int totalPages,
+      required TextEditingController textEditingController,
+      required double stars,
       TableUser? user}) = _$_BookDetailPageModel;
 
   @override
@@ -226,6 +264,12 @@ abstract class _BookDetailPageModel implements BookDetailPageModel {
   @override
   int get totalPages;
   set totalPages(int value);
+  @override
+  TextEditingController get textEditingController;
+  set textEditingController(TextEditingController value);
+  @override
+  double get stars;
+  set stars(double value);
   @override
   TableUser? get user;
   set user(TableUser? value);

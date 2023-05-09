@@ -7,6 +7,8 @@ import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/main.dart';
 import 'package:readme_app/model/book/book.dart';
+import 'package:readme_app/model/file_info/file_dto.dart';
+import 'package:readme_app/repository/banner_repository.dart';
 import 'package:readme_app/repository/book_repository.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 import 'package:readme_app/sqflite/table/table_main_tab.dart';
@@ -38,6 +40,11 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
         mainTabs: []
     );
 
+    var bannerResponse = await BannerRepository().getBanners();
+    if(bannerResponse.code == 1) {
+      mainPageModel.bookBanners = bannerResponse.data;
+    }
+
     // Book Start
     List<TableMainTab> mainTabs = await MySqfliteInit.getMainTabs();
     mainPageModel = mainPageModel.copyWith(mainTabs: mainTabs);
@@ -49,15 +56,6 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
         List<Book>? contentList = data.content;
         if (contentList.isNotEmpty) {
           if (mainTab.name == "전체") {
-
-            // TODO 나중에 추가 예정 Banner Start
-            List<String> banners = [];
-            for (var element in contentList) {
-              banners.add(element.coverFile.fileUrl);
-            }
-            mainPageModel.bookBanners.addAll(banners);
-            // Banner End
-
             mainPageModel.totalBooks.addAll(contentList);
             mainPageModel = mainPageModel.copyWith(isTotalLast: data.last);
           } else if (mainTab.name == "베스트셀러") {
@@ -189,7 +187,7 @@ class MainPageModel with _$MainPageModel {
     required bool isBestLast,
     required bool isRecommendLast,
     required bool isLatestLast,
-    required List<String> bookBanners,
+    required List<FileListDTO> bookBanners,
     required List<Book> totalBooks,
     required List<Book> bestBooks,
     required List<Book> recommendBooks,

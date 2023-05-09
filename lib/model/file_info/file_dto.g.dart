@@ -18,3 +18,15 @@ Map<String, dynamic> _$$_FileDTOToJson(_$_FileDTO instance) =>
       'fileName': instance.fileName,
       'fileUrl': instance.fileUrl,
     };
+
+_$_FileListDTO _$$_FileListDTOFromJson(Map<String, dynamic> json) =>
+    _$_FileListDTO(
+      id: json['id'] as int,
+      imageFile: FileDTO.fromJson(json['imageFile'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$_FileListDTOToJson(_$_FileListDTO instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'imageFile': instance.imageFile,
+    };

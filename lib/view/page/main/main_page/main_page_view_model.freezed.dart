@@ -32,8 +32,9 @@ mixin _$MainPageModel {
   set isRecommendLast(bool value) => throw _privateConstructorUsedError;
   bool get isLatestLast => throw _privateConstructorUsedError;
   set isLatestLast(bool value) => throw _privateConstructorUsedError;
-  List<String> get bookBanners => throw _privateConstructorUsedError;
-  set bookBanners(List<String> value) => throw _privateConstructorUsedError;
+  List<FileListDTO> get bookBanners => throw _privateConstructorUsedError;
+  set bookBanners(List<FileListDTO> value) =>
+      throw _privateConstructorUsedError;
   List<Book> get totalBooks => throw _privateConstructorUsedError;
   set totalBooks(List<Book> value) => throw _privateConstructorUsedError;
   List<Book> get bestBooks => throw _privateConstructorUsedError;
@@ -65,7 +66,7 @@ abstract class $MainPageModelCopyWith<$Res> {
       bool isBestLast,
       bool isRecommendLast,
       bool isLatestLast,
-      List<String> bookBanners,
+      List<FileListDTO> bookBanners,
       List<Book> totalBooks,
       List<Book> bestBooks,
       List<Book> recommendBooks,
@@ -137,7 +138,7 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
       bookBanners: null == bookBanners
           ? _value.bookBanners
           : bookBanners // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<FileListDTO>,
       totalBooks: null == totalBooks
           ? _value.totalBooks
           : totalBooks // ignore: cast_nullable_to_non_nullable
@@ -179,7 +180,7 @@ abstract class _$$_MainPageModelCopyWith<$Res>
       bool isBestLast,
       bool isRecommendLast,
       bool isLatestLast,
-      List<String> bookBanners,
+      List<FileListDTO> bookBanners,
       List<Book> totalBooks,
       List<Book> bestBooks,
       List<Book> recommendBooks,
@@ -249,7 +250,7 @@ class __$$_MainPageModelCopyWithImpl<$Res>
       bookBanners: null == bookBanners
           ? _value.bookBanners
           : bookBanners // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<FileListDTO>,
       totalBooks: null == totalBooks
           ? _value.totalBooks
           : totalBooks // ignore: cast_nullable_to_non_nullable
@@ -310,7 +311,7 @@ class _$_MainPageModel with DiagnosticableTreeMixin implements _MainPageModel {
   @override
   bool isLatestLast;
   @override
-  List<String> bookBanners;
+  List<FileListDTO> bookBanners;
   @override
   List<Book> totalBooks;
   @override
@@ -365,7 +366,7 @@ abstract class _MainPageModel implements MainPageModel {
       required bool isBestLast,
       required bool isRecommendLast,
       required bool isLatestLast,
-      required List<String> bookBanners,
+      required List<FileListDTO> bookBanners,
       required List<Book> totalBooks,
       required List<Book> bestBooks,
       required List<Book> recommendBooks,
@@ -397,8 +398,8 @@ abstract class _MainPageModel implements MainPageModel {
   bool get isLatestLast;
   set isLatestLast(bool value);
   @override
-  List<String> get bookBanners;
-  set bookBanners(List<String> value);
+  List<FileListDTO> get bookBanners;
+  set bookBanners(List<FileListDTO> value);
   @override
   List<Book> get totalBooks;
   set totalBooks(List<Book> value);
