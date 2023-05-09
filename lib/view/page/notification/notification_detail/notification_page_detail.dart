@@ -63,6 +63,12 @@ class NotificationPageDetail extends ConsumerWidget {
               Divider(
                 thickness: 2,
               ),
+              model != null ?
+                Image.network(
+                  model.notice.imageFile.fileUrl ?? "",
+                  width: double.infinity,
+                )
+              : Container(),
               Padding(
                 padding:
                 const EdgeInsets.symmetric(vertical: 30.0, horizontal: 10),

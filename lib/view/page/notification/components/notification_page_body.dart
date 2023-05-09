@@ -14,16 +14,15 @@ class NotificationPageBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     NotificationPageModel? model = ref.watch(noticePageProvider);
 
-    var count = model?.noticeList?.content.length ?? 0;
+    var count   = model?.noticeList?.content.length ?? 0;
     bool isLast = model?.noticeList?.last ?? false;
-    int page = (model?.noticeList?.pageable.pageNumber ?? 0) + 1;
+    int page    = (model?.noticeList?.pageable.pageNumber ?? 0) + 1;
 
     return SingleChildScrollView(
         child: Column (
           children: List.generate(model?.noticeList?.content.length ?? 0, (index) => Column(
             children: [
               ListTile(
-                leading: UseIcons.alarm,
                 title: Text(model?.noticeList?.content[index].title ?? ""),
                 onTap: () {
                   Navigator.push(
