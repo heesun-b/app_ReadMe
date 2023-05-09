@@ -3,17 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
-import 'package:readme_app/view/page/notification/components/notification_page_view_model.dart';
-import 'package:readme_app/view/page/notification/notification_detail/notification_detail_page_view_model.dart';
+import 'package:readme_app/view/page/notice/notification_detail/notice_detail_page_view_model.dart';
 
-class NotificationPageDetail extends ConsumerWidget {
+class NoticePageDetail extends ConsumerWidget {
   int id;
-  NotificationPageDetail({required this.id, Key? key}) : super(key: key);
+  NoticePageDetail({required this.id, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    NotificationDetailPageModel? model = ref.watch(noticePageDetailProvider(id));
+    NoticeDetailPageModel? model = ref.watch(noticePageDetailProvider(id));
 
     return Scaffold(
       appBar: AppBar(

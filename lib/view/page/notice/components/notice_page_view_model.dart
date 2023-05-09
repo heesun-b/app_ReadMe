@@ -8,21 +8,21 @@ import 'package:readme_app/main.dart';
 import 'package:readme_app/repository/notice_repository.dart';
 import 'package:readme_app/view/components/custom_dialog.dart';
 
-part 'notification_page_view_model.freezed.dart';
+part 'notice_page_view_model.freezed.dart';
 
 @unfreezed
-class NotificationPageModel with _$NotificationPageModel {
-  factory NotificationPageModel({
+class NoticePageModel with _$NoticePageModel {
+  factory NoticePageModel({
     NoticeListDTO? noticeList,
-  }) = _NotificationPageModel;
+  }) = _NoticePageModel;
 }
 
-class NotificationPageViewModel extends StateNotifier<NotificationPageModel?> {
-  NotificationPageViewModel(super.state);
+class NoticePageViewModel extends StateNotifier<NoticePageModel?> {
+  NoticePageViewModel(super.state);
 
   void notifyInit() async {
     ResponseDTO responseDTO = await NoticeRepository().getList();
-    NotificationPageModel model = NotificationPageModel(noticeList: null);
+    NoticePageModel model = NoticePageModel(noticeList: null);
     if(responseDTO.code == 1) {
       NoticeListDTO noticeListDTO = responseDTO.data;
       model.noticeList = noticeListDTO;
@@ -49,7 +49,7 @@ class NotificationPageViewModel extends StateNotifier<NotificationPageModel?> {
   }
 }
 
-final noticePageProvider = StateNotifierProvider.autoDispose<NotificationPageViewModel, NotificationPageModel?>((ref) {
-  return NotificationPageViewModel(null)..notifyInit();
+final noticePageProvider = StateNotifierProvider.autoDispose<NoticePageViewModel, NoticePageModel?>((ref) {
+  return NoticePageViewModel(null)..notifyInit();
 },
 );

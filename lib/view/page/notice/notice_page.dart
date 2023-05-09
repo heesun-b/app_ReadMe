@@ -4,10 +4,10 @@ import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/move.dart';
-import 'package:readme_app/view/page/notification/components/notification_page_body.dart';
+import 'package:readme_app/view/page/notice/components/notice_page_body.dart';
 
-class NotificationPage extends ConsumerWidget {
-  const NotificationPage({Key? key}) : super(key: key);
+class NoticePage extends ConsumerWidget {
+  const NoticePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,6 +43,6 @@ class NotificationPage extends ConsumerWidget {
           leadingWidth: 100,
           backgroundColor: Colours.app_sub_white,
         ),
-      body: NotificationPageBody());
+      body: NoticePageBody());
   }
 }

@@ -7,30 +7,30 @@ import 'package:readme_app/main.dart';
 import 'package:readme_app/repository/notice_repository.dart';
 import 'package:readme_app/view/components/custom_dialog.dart';
 
-part 'notification_detail_page_view_model.freezed.dart';
+part 'notice_detail_page_view_model.freezed.dart';
 
 @unfreezed
-class NotificationDetailPageModel with _$NotificationDetailPageModel {
-  factory NotificationDetailPageModel({
+class NoticeDetailPageModel with _$NoticeDetailPageModel {
+  factory NoticeDetailPageModel({
     required NoticeDTO notice,
-  }) = _NotificationDetailPageModel;
+  }) = _NoticeDetailPageModel;
 }
 
-class NotificationDetailPageViewModel extends StateNotifier<NotificationDetailPageModel?> {
-  NotificationDetailPageViewModel(super.state);
+class NoticeDetailPageViewModel extends StateNotifier<NoticeDetailPageModel?> {
+  NoticeDetailPageViewModel(super.state);
 
   void notifyInit(int id) async {
     ResponseDTO responseDTO = await NoticeRepository().getNotice(id);
     if(responseDTO.code == 1) {
       NoticeDTO noticeDTO = responseDTO.data;
-      state = NotificationDetailPageModel(notice: noticeDTO);
+      state = NoticeDetailPageModel(notice: noticeDTO);
     } else {
       DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
     }
   }
 }
 
-final noticePageDetailProvider = StateNotifierProvider.family.autoDispose<NotificationDetailPageViewModel, NotificationDetailPageModel?, int>((ref, id) {
-  return NotificationDetailPageViewModel(null)..notifyInit(id);
+final noticePageDetailProvider = StateNotifierProvider.family.autoDispose<NoticeDetailPageViewModel, NoticeDetailPageModel?, int>((ref, id) {
+  return NoticeDetailPageViewModel(null)..notifyInit(id);
 },
 );

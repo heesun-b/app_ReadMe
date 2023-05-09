@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:readme_app/common/use_icons.dart';
 import 'package:readme_app/controller/notice_controller.dart';
 import 'package:readme_app/view/components/use_button.dart';
-import 'package:readme_app/view/page/notification/notification_detail/notification_page_detail.dart';
-import 'package:readme_app/view/page/notification/components/notification_page_view_model.dart';
+import 'package:readme_app/view/page/notice/components/notice_page_view_model.dart';
+import 'package:readme_app/view/page/notice/notification_detail/notice_page_detail.dart';
 
-class NotificationPageBody extends ConsumerWidget {
-  const NotificationPageBody({Key? key}) : super(key: key);
+class NoticePageBody extends ConsumerWidget {
+  const NoticePageBody({Key? key}) : super(key: key);
 
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    NotificationPageModel? model = ref.watch(noticePageProvider);
+    NoticePageModel? model = ref.watch(noticePageProvider);
 
     var count   = model?.noticeList?.content.length ?? 0;
     bool isLast = model?.noticeList?.last ?? false;
@@ -28,7 +27,7 @@ class NotificationPageBody extends ConsumerWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NotificationPageDetail(id: model?.noticeList?.content[index].id ?? 0),
+                        builder: (context) => NoticePageDetail(id: model?.noticeList?.content[index].id ?? 0),
                       ));
                 },
               ),

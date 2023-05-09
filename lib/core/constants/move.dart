@@ -15,7 +15,7 @@ import 'package:readme_app/view/page/category/category_page/category_page.dart';
 import 'package:readme_app/view/page/main/main_page/main_page.dart';
 import 'package:readme_app/view/page/membership/membership_page/memebership_page.dart';
 import 'package:readme_app/view/page/membership_cancel/membership_cancel_page.dart';
-import 'package:readme_app/view/page/notification/notification_page.dart';
+import 'package:readme_app/view/page/notice/notice_page.dart';
 import 'package:readme_app/view/page/payment/payment_page/payment_page.dart';
 import 'package:readme_app/view/page/payment_list/payment_list_page.dart';
 import 'package:readme_app/view/page/question/question_page.dart';
@@ -94,7 +94,7 @@ Map<String, Widget Function(BuildContext)> getRouters(){
     Move.contentBoxPage: (context) => ContentBoxPage(),
     Move.loginPage: (context) => LoginPage(),
     Move.appInfo: (context) => AppInfoPage(),
-    Move.notification: (context) => NotificationPage(),
+    Move.notification: (context) => NoticePage(),
 
   };
 }

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'notification_page_view_model.dart';
+part of 'notice_page_view_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,20 +15,20 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$NotificationPageModel {
+mixin _$NoticePageModel {
   NoticeListDTO? get noticeList => throw _privateConstructorUsedError;
   set noticeList(NoticeListDTO? value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $NotificationPageModelCopyWith<NotificationPageModel> get copyWith =>
+  $NotificationPageModelCopyWith<NoticePageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $NotificationPageModelCopyWith<$Res> {
-  factory $NotificationPageModelCopyWith(NotificationPageModel value,
-          $Res Function(NotificationPageModel) then) =
-      _$NotificationPageModelCopyWithImpl<$Res, NotificationPageModel>;
+  factory $NotificationPageModelCopyWith(NoticePageModel value,
+          $Res Function(NoticePageModel) then) =
+      _$NotificationPageModelCopyWithImpl<$Res, NoticePageModel>;
   @useResult
   $Res call({NoticeListDTO? noticeList});
 
@@ -37,7 +37,7 @@ abstract class $NotificationPageModelCopyWith<$Res> {
 
 /// @nodoc
 class _$NotificationPageModelCopyWithImpl<$Res,
-        $Val extends NotificationPageModel>
+        $Val extends NoticePageModel>
     implements $NotificationPageModelCopyWith<$Res> {
   _$NotificationPageModelCopyWithImpl(this._value, this._then);
 
@@ -110,7 +110,7 @@ class __$$_NotificationPageModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NotificationPageModel implements _NotificationPageModel {
+class _$_NotificationPageModel implements _NoticePageModel {
   _$_NotificationPageModel({this.noticeList});
 
   @override
@@ -129,8 +129,8 @@ class _$_NotificationPageModel implements _NotificationPageModel {
           this, _$identity);
 }
 
-abstract class _NotificationPageModel implements NotificationPageModel {
-  factory _NotificationPageModel({NoticeListDTO? noticeList}) =
+abstract class _NoticePageModel implements NoticePageModel {
+  factory _NoticePageModel({NoticeListDTO? noticeList}) =
       _$_NotificationPageModel;
 
   @override
