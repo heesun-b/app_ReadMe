@@ -63,45 +63,6 @@ class UserPageSubButton extends ConsumerWidget {
                 border: Border(
                     top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
                     bottom:
-                    BorderSide(color: Colours.app_sub_grey, width: 2.0),
-                    right:
-                    BorderSide(color: Colours.app_sub_grey, width: 2.0))),
-            child: InkWell(
-              onTap: () {
-                if(userModel != null) {
-                  Navigator.pushNamed(context, Move.questionPage);
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return   CustomDialog(title: "로그인 후 이용 가능",
-                          content: "로그인 하시겠습니까?",
-                          callback: () => Navigator.pushNamed(context, Move.loginPage));
-                    },
-                  );
-                }
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  HsStyleIcons.card,
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text("문의하기")
-                ],
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Container(
-            width: double.infinity,
-            height: 150,
-            decoration: BoxDecoration(
-                border: Border(
-                    top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
-                    bottom:
                     BorderSide(color: Colours.app_sub_grey, width: 2.0))),
             child: InkWell(
               onTap: () {
@@ -113,7 +74,7 @@ class UserPageSubButton extends ConsumerWidget {
                     builder: (context) {
                       return   CustomDialog(title: "로그인 후 이용 가능",
                           content: "로그인 하시겠습니까?",
-                          callback: () => Navigator.pushNamed(context, "/login"));
+                          callback: () => Navigator.pushNamed(context, Move.loginPage));
                     },
                   );
                 }
