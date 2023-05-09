@@ -5,7 +5,7 @@ import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/main.dart';
 import 'package:readme_app/model/qustion/question.dart';
 import 'package:readme_app/repository/question_repository.dart';
-import 'package:readme_app/view/page/question/components/question_page_view_model.dart';
+import 'package:readme_app/view/page/question/question_page_view_model.dart';
 import 'package:readme_app/view/page/question_list/question_list_page_view_model.dart';
 
 final questionControllerProvider = Provider<QuestionController>((ref) {
@@ -25,7 +25,7 @@ class QuestionController {
      } else {
        if (responseDTO.code == 1) {
          Question data = responseDTO.data;
-         Navigator.pushNamed(mContext!, Move.questionPage, arguments: data.id);
+         Navigator.pushNamed(mContext!, Move.questionDetailPage, arguments: data.id);
        } else {
          ref.read(questionPageProvider.notifier).save(mContext!, responseDTO.data);
        }

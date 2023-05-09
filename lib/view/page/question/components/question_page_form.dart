@@ -5,7 +5,7 @@ import 'package:readme_app/controller/question_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/view/components/use_button.dart';
-import 'package:readme_app/view/page/question/components/question_page_view_model.dart';
+import 'package:readme_app/view/page/question/question_page_view_model.dart';
 
 class QuestionPageForm extends ConsumerWidget {
   int questionId;
