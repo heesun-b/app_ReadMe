@@ -21,7 +21,7 @@ class NoticeController {
 
   Future<void> pageSearch(int page) async {
       ResponseDTO responseDTO =  await NoticeRepository().searchPage(page);
-      ref.read(noticePageProvider.notifier).pageSearch(page, responseDTO);
+      ref.read(noticePageProvider.notifier).pageSearch(responseDTO);
   }
 
 

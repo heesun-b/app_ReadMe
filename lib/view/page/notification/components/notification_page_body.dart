@@ -13,6 +13,7 @@ class NotificationPageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     NotificationPageModel? model = ref.watch(noticePageProvider);
+
     var count = model?.noticeList?.content.length ?? 0;
     bool isLast = model?.noticeList?.last ?? false;
     int page = (model?.noticeList?.pageable.pageNumber ?? 0) + 1;

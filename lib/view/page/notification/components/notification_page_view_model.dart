@@ -32,14 +32,11 @@ class NotificationPageViewModel extends StateNotifier<NotificationPageModel?> {
     }
   }
 
-  void pageSearch(int page, ResponseDTO responseDTO) async {
+  void pageSearch(ResponseDTO responseDTO) async {
     if(responseDTO.code == 1) {
       NoticeListDTO newModel = responseDTO.data;
-      newModel.pageable.pageNumber = page;
-
       List<NoticeDTO> originContent =  state!.noticeList!.content;
       newModel.content.addAll(originContent);
-
       state = state!.copyWith(noticeList: newModel);
     } else {
       DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);

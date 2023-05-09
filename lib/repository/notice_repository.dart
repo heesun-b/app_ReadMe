@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/dto/notice_dto/notice_dto.dart';
@@ -38,6 +40,7 @@ class NoticeRepository {
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
         NoticeListDTO noticeListDTO = NoticeListDTO.fromJson(responseDTO.data);
         responseDTO.data = noticeListDTO;
+        // log(noticeListDTO.toString());
         return responseDTO;
       } else {
         return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
@@ -53,8 +56,9 @@ class NoticeRepository {
       Response response = await dio.get("/notices/$id");
       if(response.statusCode == 200) {
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-        NoticeDTO noticeDTO = responseDTO.data;
+        NoticeDTO noticeDTO = NoticeDTO.fromJson(responseDTO.data);
         responseDTO.data = noticeDTO;
+        print(responseDTO.data);
         return responseDTO;
       } else {
         return ResponseDTO(code: response.statusCode, msg: response.statusMessage);

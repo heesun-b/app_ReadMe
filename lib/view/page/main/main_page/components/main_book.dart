@@ -20,8 +20,6 @@ class MainBook extends ConsumerWidget {
 
   MainBook(this.idx, this.name, this.count, this.requestName);
 
-
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 

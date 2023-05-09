@@ -23,6 +23,9 @@ class ReviewPageViewModel extends StateNotifier<ReviewPageModel?> {
 
   void notifyInit() async {
     ResponseDTO responseDTO = await ReviewRepository().getMyReviews();
+    print(responseDTO.code);
+    print(responseDTO.msg);
+    print(responseDTO.data.toString());
     if (responseDTO.code == 1) {
       state = ReviewPageModel(reviewList: responseDTO.data);
     } else if (responseDTO.code == 401 || responseDTO.code == 403){

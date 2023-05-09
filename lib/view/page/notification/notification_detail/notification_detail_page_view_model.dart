@@ -21,6 +21,7 @@ class NotificationDetailPageViewModel extends StateNotifier<NotificationDetailPa
 
   void notifyInit(int id) async {
     ResponseDTO responseDTO = await NoticeRepository().getNotice(id);
+    // print(responseDTO.data);
     if(responseDTO.code == 1) {
       state = responseDTO.data;
     } else {

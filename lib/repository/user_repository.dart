@@ -50,7 +50,7 @@ class UserRepository {
 
       /// 4.사용자 id토큰 가져오기
       final idToken = await currentUser?.getIdToken();
-      // log("Firebase Token: $idToken");
+      log("Firebase Token: $idToken");
 
 
       /// 5. id토큰을 스프링 서버로 전달
@@ -58,7 +58,7 @@ class UserRepository {
 
       /// 6.스프링 서버로 부터 받은 토큰을 앱 서버로 전달
       final jwtToken = response.headers.value('Authorization');
-      // print("체크 $jwtToken");
+      print("체크 $jwtToken");
 
       /// 7.앱에서 사용자 토큰 저장
       if (jwtToken != null) {
