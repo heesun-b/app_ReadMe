@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/controller/user_controller.dart';
+import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/jh_style_icons.dart';
+import 'package:readme_app/core/constants/move.dart';
 import '../../../../core/constants/colours.dart';
 import '../../../../core/constants/dimens.dart';
 
@@ -17,6 +19,12 @@ class LoginPage extends ConsumerWidget {
 
     return SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(icon: HsStyleIcons.back,
+            onPressed:() =>  Navigator.pushNamed(context, Move.navigationBar)),
+            elevation: 0,
+            backgroundColor: Colours.app_main,
+          ),
           body: Column(
             // 전체 column
             children: [

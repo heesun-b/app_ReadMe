@@ -68,7 +68,7 @@ class UserPage extends ConsumerWidget {
             child: UseButton(
               title: "멤버십 구독하기",
               buttonPressed: () {
-              Navigator.pushNamed(context, "/membership");
+              Navigator.pushNamed(context, Move.membershipPage);
               },
             ),
           )),

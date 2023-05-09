@@ -1,10 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
@@ -168,6 +165,8 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
         newLatestBooks.add(book);
         state = state!.copyWith(totalBooks: newLatestBooks);
       }
+    } else {
+      DialogUtil.dialogShow(navigatorKey.currentContext!, response.statusMessage);
     }
   }
 }

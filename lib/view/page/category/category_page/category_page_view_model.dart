@@ -1,9 +1,11 @@
 
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/main.dart';
@@ -74,7 +76,6 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
 
   }
 
-
   void categorySearch(int bigCategory, {int? smallCategory}) async {
     ResponseDTO responseDTO = await BookRepository().mainList("all", bigCategory: bigCategory, smallCategory: smallCategory);
     if(responseDTO.code == 1 ) {
@@ -82,7 +83,6 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
       state = state!.copyWith(books: total.content , page: 0, isLast: total.last, categoryTabs: state!.categoryTabs, bigCategoryId: bigCategory, smallCategoryId: smallCategory ?? 0);
     } else {
       DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
-
     }
   }
 
@@ -91,8 +91,35 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
   }
 
   void bigCategoryIdSelect(int bigCategoryId) {
-    print(bigCategoryId);
     state = state!.copyWith(bigCategoryId: bigCategoryId);
+  }
+
+  void addScarp(int bookId) async {
+    Dio dio = await MyHttp.getSecurity();
+    // todo 경로 추가
+    Response response = await dio.post("/??", data: {'bookId' : bookId});
+    if(response.statusCode == 401 || response.statusCode == 401 ) {
+      DialogUtil.dialogShow(navigatorKey.currentContext!, response.statusMessage);
+    } else if (response.statusCode == 200) {
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Book book = Book.fromJson(responseDTO.data);
+      List<Book> newBooks = state!.books.where((element) => element.id != book.id).toList();
+      newBooks.add(book);
+      state = state!.copyWith(books: newBooks);
+    }
+  }
+
+  void deleteScrap(int bookId) async {
+    Dio dio = await MyHttp.getSecurity();
+    // todo 경로 추가
+    Response response = await dio.post("/??", data: {'bookId' : bookId});
+    if(response.statusCode == 401 || response.statusCode == 401 ) {
+      DialogUtil.dialogShow(navigatorKey.currentContext!, response.statusMessage);
+    } else if (response.statusCode == 200) {
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      List<Book> newBooks = state!.books.where((element) => element.id != bookId).toList();
+      state = state!.copyWith(books: newBooks);
+    }
   }
 }
 

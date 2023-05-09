@@ -15,8 +15,9 @@ class _NoneListWidgetState extends State<NoneListWidget> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
+        padding: EdgeInsets.all(50),
         child: Text("${widget.title} 내역이 존재하지 않습니다.", style: TextStyle(
-          fontSize: Dimens.font_sp24, fontWeight: FontWeight.w700, color: Colours.app_sub_grey
+          fontSize: Dimens.font_sp18, fontWeight: FontWeight.w700, color: Colours.app_sub_grey
         ),),
       ),
     );

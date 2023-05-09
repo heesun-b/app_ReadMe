@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/dto/cart_dto/cart_dto.dart';
 import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
@@ -136,7 +137,7 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
               child: const Text('취소'),
             ),
             TextButton(
-              onPressed: () => Navigator.pushNamed(context, "/cart"),
+              onPressed: () => Navigator.pushNamed(context, Move.cartPage),
               child: const Text('확인'),
             ),
           ],

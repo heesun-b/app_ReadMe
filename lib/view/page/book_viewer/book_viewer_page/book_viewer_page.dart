@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/jh_style_icons.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
 import 'package:readme_app/util/epub/src/ui/epub_view.dart';
 import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page_view_model.dart';
@@ -95,7 +96,7 @@ class BookViewerPage extends ConsumerWidget {
                       Container(
                         child: IconButton(
                           onPressed : () {
-                            Navigator.pushNamed(context, "/bookmarkList");
+                            Navigator.pushNamed(context, Move.bookmarkListPage);
                           },
                            icon: JHicons.bookBox, color: ref.watch(bookViewerPageProvider(book))?.fontColor,
                         ),

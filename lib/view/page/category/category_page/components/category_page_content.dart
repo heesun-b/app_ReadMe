@@ -9,6 +9,7 @@ import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/model/cart_mock_data.dart';
 import 'package:readme_app/model/small_category/small_category.dart';
+import 'package:readme_app/view/components/book_card_view.dart';
 import 'package:readme_app/view/components/use_button.dart';
 import 'package:readme_app/view/page/category/category_page/category_page_view_model.dart';
 
@@ -71,86 +72,10 @@ class CategoryPageContent extends ConsumerWidget {
     return List.generate(books.length, (index) {
       return Column(
         children: [
-          InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, "/bookDetail");
-            },
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(color: Colours.app_sub_grey),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Row(
-                  children: [
-                    Image.network(
-                      books[index].coverFile.fileUrl,
-                      width: 100,
-                      height: 150,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          books[index].title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: Dimens.font_sp18,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 100,
-                        ),
-                        Text(
-                          "${ books[index].author} | ${ books[index].publisher.businessName}",
-                          style: TextStyle(fontSize: Dimens.font_sp14),
-                        ),
-                        Row(
-                          children: [
-                            YhIcons.star,
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              "${books[index].stars}",
-                              style: TextStyle(fontSize: Dimens.font_sp14),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text("소장가 ${books[index].price}", style: TextStyle(fontSize: Dimens.font_sp14),),
-                            SizedBox(width: 100),
-                            IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: BoxConstraints(),
-                              onPressed: () {},
-                              icon: books[index].isHeart == false ? YhIcons.heart : YhIcons.heartFill,
-                            ),
-                            SizedBox(width: 10),
-                            IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: BoxConstraints(),
-                              onPressed: () {
-                                ref.read(cartControllerProvider).insert(books[index].id);
-                              },
-                              icon: YhIcons.cart2,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          BookCardView(book:books[index], addCart: () =>  ref.read(cartControllerProvider).insert(books[index].id),
+          chaneScrap: () => books[index].isHeart
+              ? ref.read(categoryPageProvider.notifier).deleteScrap(books[index].id)
+              : ref.read(categoryPageProvider.notifier).addScarp(books[index].id)),
 
           isLast != true && count - 1 == index
               ? Padding(

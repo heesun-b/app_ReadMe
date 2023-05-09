@@ -7,12 +7,12 @@ import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
+import 'package:readme_app/view/components/book_card_view.dart';
 import 'package:readme_app/view/components/use_button.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page.dart';
 import 'package:readme_app/view/page/main/main_page/main_page_view_model.dart';
 
 class MainBook extends ConsumerWidget {
-
   int idx;
   String name;
   int count;
@@ -22,7 +22,6 @@ class MainBook extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     MainPageModel? model = ref.watch(mainPageProvider);
     bool isLast = false;
     int page = 0;
@@ -36,119 +35,38 @@ class MainBook extends ConsumerWidget {
     } else if (name == "베스트셀러") {
       book = model?.bestBooks[idx];
       isLast = model?.isBestLast ?? false;
-      page = ((model?.bestPage ) ?? 0) + 1;
+      page = ((model?.bestPage) ?? 0) + 1;
     } else if (name == "추천") {
       book = model?.recommendBooks[idx];
       isLast = model?.isRecommendLast ?? false;
-      page = ((model?.recommendPage ) ?? 0) + 1;
+      page = ((model?.recommendPage) ?? 0) + 1;
     } else if (name == "신간") {
       book = model?.latestBooks[idx];
       isLast = model?.isLatestLast ?? false;
-      page = ((model?.latestPage ) ?? 0) + 1;
+      page = ((model?.latestPage) ?? 0) + 1;
     }
 
     return Column(
       children: [
-        InkWell(
-          onTap: () {
-            // todo 수정
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookDetailPage(bookId: book?.id ?? 0),
-                ));
-          },
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colours.app_sub_darkgrey),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: [
-                  Image.network(
-                    book?.coverFile.fileUrl ?? "",
-                    width: 90,
-                    height: 110,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        book?.title ?? "",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: Dimens.font_sp18,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                      ),
-                      const SizedBox(height: 10,),
-                      Text(
-                        "${book?.author} | ${book?.publisher.businessName}",
-                        style: const TextStyle(fontSize: Dimens.font_sp14),
-                      ),
-                      Row(
-                        children: [
-                          YhIcons.star,
-                          Text(
-                            book?.stars.toString() ?? "",
-                            style: const TextStyle(fontSize: Dimens.font_sp14),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("소장가 ${book?.price}", style: const TextStyle(fontSize: Dimens.font_sp14),),
-                          const SizedBox(width: 100),
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(),
-                            onPressed: () {
-                              if(book!.isHeart) {
-                                ref.read(mainPageProvider.notifier).addScarp(name ,book.id);
-                              } else {
-                                ref.read(mainPageProvider.notifier).deleteScrap(name, book.id);
-                              }
-                            },
-                            icon: book!.isHeart ==  false ? YhIcons.heart : YhIcons.heartFill,
-                          ),
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(),
-                            onPressed: () {
-                                ref.read(cartControllerProvider).insert(book!.id);
-                            },
-                            icon: YhIcons.cart2,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+        BookCardView(
+          book: book!,
+          addCart: () => ref.read(cartControllerProvider).insert(book!.id),
+          chaneScrap: () => book!.isHeart
+              ? ref.read(mainPageProvider.notifier).deleteScrap(name, book.id)
+              : ref.read(mainPageProvider.notifier).addScarp(name, book.id),
         ),
-
         isLast != true && count - 1 == idx
             ? Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 50),
-              child: UseButton(title: "더보기", buttonPressed: () {
-                  ref.read(bookControllerProvider).pageSearch(name, page, requestName);
-                }
-              ),
-            )
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                child: UseButton(
+                    title: "더보기",
+                    buttonPressed: () {
+                      ref.read(bookControllerProvider).pageSearch(name, page, requestName);
+                    }),
+              )
             : Container()
       ],
     );
   }
-
 }

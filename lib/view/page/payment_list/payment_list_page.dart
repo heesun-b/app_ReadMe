@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/view/page/payment_list/components/payment_list_body.dart';
 
 // UserPage에 연결해야 함
@@ -47,7 +48,7 @@ class _PaymentListPageState extends State<PaymentListPage>
             padding: EdgeInsets.zero,
             constraints: BoxConstraints(),
             onPressed: () {
-              Navigator.pushNamed(context, "/navigation");
+              Navigator.pushNamed(context, Move.navigationBar);
             },
             icon: HsStyleIcons.homeFill,
           )
