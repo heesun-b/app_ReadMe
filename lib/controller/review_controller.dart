@@ -6,6 +6,7 @@ import 'package:readme_app/dto/review_dto/review_dto.dart';
 import 'package:readme_app/main.dart';
 import 'package:readme_app/repository/review_repository.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page_view_model.dart';
+import 'package:readme_app/view/page/review/review_page_view_model.dart';
 
 final reviewControllerProvider = Provider<ReviewController>((ref) {
   return ReviewController(ref);
@@ -40,6 +41,15 @@ class ReviewController {
       ref.read(bookDetailPageProvider(bookId).notifier).getReviews(mContext!, responseDTO, isRefresh: true);
     } else {
       ref.read(bookDetailPageProvider(bookId).notifier).getReviews(mContext!, responseDTO);
+    }
+  }
+
+  Future<void> delete(int id) async {
+    ResponseDTO responseDTO = await ReviewRepository().reviewDelete(id);
+    if (responseDTO.code == 401) {
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.loginPage, (route) => false);
+    } else {
+      ref.read(reviewPageProvider.notifier).delete(responseDTO, id);
     }
   }
 }

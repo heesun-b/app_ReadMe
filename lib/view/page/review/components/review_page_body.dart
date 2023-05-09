@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:readme_app/controller/review_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
+import 'package:readme_app/util/star_score/star_score.dart';
+import 'package:readme_app/view/page/review/review_page_view_model.dart';
 
-class ReviewPageBody extends StatelessWidget {
-  const ReviewPageBody({Key? key}) : super(key: key);
-
+class ReviewPageBody extends ConsumerWidget {
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ReviewPageModel? model = ref.watch(reviewPageProvider);
     return Column(
-      children: List.generate(10, (index) {
+      children: List.generate(model?.reviewList.length ?? 0, (index) {
         return Padding(
           padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-          child: _reviewTile(context),
+          child: _reviewTile(context, ref, index),
         );
       }),
     );
   }
 
-  Widget _reviewTile(BuildContext context) {
+  Widget _reviewTile(BuildContext context, WidgetRef ref, int index) {
     return Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colours.app_sub_grey),
@@ -30,22 +33,23 @@ class ReviewPageBody extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              _topInfo(context),
+              _topInfo(index, context, ref),
               SizedBox(
                 height: 10,
               ),
-              _bottomInfo()
+              _bottomInfo(ref, index),
             ],
           ),
         ));
   }
 
-  Widget _bottomInfo() {
+  Widget _bottomInfo(WidgetRef ref, int index) {
+    ReviewPageModel? model = ref.watch(reviewPageProvider);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image.asset(
-          "assets/images/book.jpg",
+        Image.network(
+          model?.reviewList[index].book.coverUrl ?? "",
           width: 70,
           height: 90,
         ),
@@ -57,19 +61,19 @@ class ReviewPageBody extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text("도서명 : 1984", style: TextStyle(fontSize: Dimens.font_sp12),),
+                Text(model?.reviewList[index].book.title ?? "", style: TextStyle(fontSize: Dimens.font_sp12),),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: Text("|"),
                 ),
-                Text("조지 오웰", style: TextStyle(fontSize: Dimens.font_sp12),),
+                Text(model?.reviewList[index].book.author ?? "", style: TextStyle(fontSize: Dimens.font_sp12),),
               ],
             ),
             SizedBox(
               height: 20,
             ),
             Text(
-              "너무 재밌어요!",
+              model?.reviewList[index].content ?? "",
               style: TextStyle(fontSize: Dimens.font_sp16),
             ),
           ],
@@ -78,20 +82,22 @@ class ReviewPageBody extends StatelessWidget {
     );
   }
 
-  Widget _topInfo(BuildContext context) {
+  Widget _topInfo( int index,BuildContext context, WidgetRef ref) {
+    ReviewPageModel? model = ref.watch(reviewPageProvider);
+    ReviewController controller = ref.read(reviewControllerProvider);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-            starScore(3),
+            StarScore(score: model?.reviewList[index].stars ?? 0,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: Text("|"),
             ),
             Text(
-              "2023.04.25",
+              model?.reviewList[index].writeTime ?? "",
               style: TextStyle(fontSize: Dimens.font_sp12),
             )
           ],
@@ -120,6 +126,7 @@ class ReviewPageBody extends StatelessWidget {
                       TextButton(
                           onPressed: () {
                             // 추가
+                            controller.delete(model?.reviewList[index].id ?? 0);
                           },
                           child: Text('확인')),
                     ],
@@ -135,20 +142,5 @@ class ReviewPageBody extends StatelessWidget {
     );
   }
 
-  Widget starScore(int num) {
-    return Row(
-      children: [
-        Row(
-          children: List.generate(num, (index) {
-            return HsStyleIcons.starFill;
-          }),
-        ),
-        Row(
-          children: List.generate(5 - num, (index) {
-            return HsStyleIcons.star;
-          }),
-        ),
-      ],
-    );
-  }
+
 }

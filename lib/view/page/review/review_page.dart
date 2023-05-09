@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
-import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/view/page/review/components/review_page_body.dart';
 
-class ReviewPage extends StatelessWidget {
-  const ReviewPage({Key? key}) : super(key: key);
+class ReviewPage extends ConsumerWidget {
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: _reviewPageAppbar(context),
       body: SingleChildScrollView(
@@ -21,7 +20,7 @@ class ReviewPage extends StatelessWidget {
   AppBar _reviewPageAppbar(BuildContext context) {
     return AppBar(
       elevation: 1,
-      title: Text(
+      title: const Text(
         "리뷰관리",
         style: TextStyle(
             color: Colours.app_sub_black,
