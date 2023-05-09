@@ -12,7 +12,6 @@ part 'membership.g.dart';
 class Membership with _$Membership{
   factory Membership(
       { int? id,
-         String? membershipName,
          int? price,
          String? membershipTerm,}) = _Membership;
 

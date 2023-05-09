@@ -1,4 +1,3 @@
-import 'dart:js';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/controller/review_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
-import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/util/star_score/star_score.dart';
 import 'package:readme_app/view/page/review/review_page_view_model.dart';
 

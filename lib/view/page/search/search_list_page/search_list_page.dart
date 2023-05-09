@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:readme_app/core/constants/use_icons.dart';
@@ -93,10 +94,12 @@ class _SearchListPageState extends State<SearchListPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Row(
                   children: [
-                    Image.network(
-                      cartList[0].image,
-                      width: 100,
+                    CachedNetworkImage(
                       height: 150,
+                      width: 100,
+                      placeholder: (context, url) => const CircularProgressIndicator(),
+                      imageUrl: cartList[0].image,
+                      fit: BoxFit.cover,
                     ),
                     SizedBox(
                       width: 15,

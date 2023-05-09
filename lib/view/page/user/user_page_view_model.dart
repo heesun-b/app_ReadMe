@@ -29,9 +29,6 @@ class UserPageViewModel extends StateNotifier<UserPageModel?> {
 
   void notifyInit() async {
     TableUser? tableUserInfo = await MySqfliteInit.getUser();
-
-     print(tableUserInfo?.username.toString());
-
     if(tableUserInfo != null) {
       ResponseDTO responseDTO = await UserRepository().getUserInfo();
       // log(responseDTO.data);

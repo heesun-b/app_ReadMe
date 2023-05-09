@@ -29,6 +29,7 @@ class UserPageMembershipInfo extends ConsumerWidget {
     String newStartTime = dateFormat(startTime ?? "");
     String newEndTime = dateFormat(endTime ?? "");
 
+
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Container(
@@ -69,7 +70,7 @@ class UserPageMembershipInfo extends ConsumerWidget {
                       width: 10,
                     ),
                     Text(
-                      userMembership?.membership?.membershipName ?? "",
+                      "스탠다드",
                       style: TextStyle(fontSize: Dimens.font_sp16),
                     ),
                     SizedBox(
@@ -151,6 +152,7 @@ class UserPageMembershipInfo extends ConsumerWidget {
 
    int dDay(String membershipEndTime) {
      DateTime now = DateTime.now();
+     print("체크 : $membershipEndTime");
      DateTime endDate = DateTime.parse(membershipEndTime);
      return endDate.difference(now).inDays;
    }
