@@ -35,19 +35,6 @@ class MyHttp {
     return jwtToken != null ? getSecurity() : Future(() => get());
   }
 
-  static Future<bool> refresh (Function function) async {
-
-    // AccessToken [만료 기간이 짧다] -> header -> 403
-    // RefreshToken [만료 기간이 굉장히 길다] -> server -> access Token 재발급 -> 저장 -> 다시 통신해서 로직 발생
-
-    // 일시적으로 사용하는 토큰
-    // 자동 로그인에 사용하는 토큰
-
-
-    return true;
-  }
-
-
 }
 
 const secureStorage = FlutterSecureStorage();

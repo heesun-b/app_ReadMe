@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:readme_app/core/constants/colours.dart';
+import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/view/page/content_box/content_box_page/components/content_box_list_view.dart';
-import '../../../../core/constants/colours.dart';
-import '../../../../core/constants/hs_style_icons.dart';
-import '../../../../core/constants/yh_style_icons.dart';
 import '../../../../model/cart_mock_data.dart';
 
 class ContentBoxPage extends StatefulWidget {
@@ -58,12 +57,11 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
                   ),
                 );
               }),
-            )
+            ),
+            ContentBoxListView(),
           ],
-
         ),
       )
-
     );
   }
 

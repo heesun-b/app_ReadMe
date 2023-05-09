@@ -29,25 +29,6 @@ class CategoryPageModel with _$CategoryPageModel {
   required bool isLast
   }) = _CategoryPageModel;
 }
-//
-// @unfreezed
-// class BigCategoryDTO  with _$BigCategoryDTO {
-//   factory BigCategoryDTO({
-//     required int id,
-//     required String name,
-//     List<SmallCategoryDTO>? smallCategory,
-//     required bool isChecked
-// }) = _BigCategoryDTO;
-//   }
-//
-// @unfreezed
-// class SmallCategoryDTO  with _$SmallCategoryDTO {
-//   factory SmallCategoryDTO({
-//     required int id,
-//     required String name,
-//     required bool isChecked
-//   }) = _SmallCategoryDTO;
-// }
 
 class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
   CategoryPageViewModel(super.state);

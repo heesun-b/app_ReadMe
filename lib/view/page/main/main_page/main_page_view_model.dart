@@ -69,17 +69,12 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
             mainPageModel = mainPageModel.copyWith(isLatestLast: data.last);
           }
         }
-
         await Future.delayed(Duration(seconds: 3),);
-
         state = mainPageModel;
       } else {
         DialogUtil.dialogShow(navigatorKey.currentContext!, response.msg);
       }
     }
-    
-    
-    
   }
 
   void pageSearch(String name, ResponseDTO responseDTO, int page) {

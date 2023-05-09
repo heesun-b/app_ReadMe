@@ -50,12 +50,11 @@ class UserRepository {
 
       /// 4.사용자 id토큰 가져오기
       final idToken = await currentUser?.getIdToken();
-      log("Firebase Token: $idToken");
+      // log("Firebase Token: $idToken");
 
 
       /// 5. id토큰을 스프링 서버로 전달
       Response response = await MyHttp.get().post("/login", data: {'idToken': idToken}); // 스프링에서 만든 join 로직에 요청
-
 
       /// 6.스프링 서버로 부터 받은 토큰을 앱 서버로 전달
       final jwtToken = response.headers.value('Authorization');
@@ -70,7 +69,7 @@ class UserRepository {
 
       return responseDTO;
     }catch(e){
-      print("Google Error 로그 $e");
+      // print("Google Error 로그 $e");
       return ResponseDTO(code: -1, msg: "구글 로그인 실패");
     }
   }
