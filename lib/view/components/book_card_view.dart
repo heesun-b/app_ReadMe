@@ -8,8 +8,8 @@ import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_pa
 
 class BookCardView extends ConsumerWidget {
   Book book;
-  VoidCallback chaneScrap;
-  VoidCallback addCart;
+  final VoidCallback chaneScrap;
+  final VoidCallback addCart;
 
   BookCardView(
       {required this.book,
@@ -17,6 +17,7 @@ class BookCardView extends ConsumerWidget {
       required this.addCart,
       Key? key})
       : super(key: key);
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -87,17 +88,17 @@ class BookCardView extends ConsumerWidget {
                       IconButton(
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
-                        onPressed:
-                          chaneScrap,
+                        onPressed :() => chaneScrap.call(),
                         icon: book.isHeart == false
                             ? YhIcons.heart
                             : YhIcons.heartFill,
                       ),
+                      const SizedBox(width: 10),
                       IconButton(
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
-                        onPressed:
-                          addCart,
+                        onPressed:() =>
+                            addCart.call(),
                           // ref.read(cartControllerProvider).insert(book!.id);
                         icon: YhIcons.cart2,
                       ),

@@ -17,7 +17,6 @@ part 'cart_page_view_model.freezed.dart';
 @unfreezed
 class CartPageModel with _$CartPageModel {
   factory CartPageModel({
-    required bool isScrap,
     required bool isAllChecked,
     required int totalPrice,
     required int totalCount,
@@ -30,9 +29,10 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
 
   void notifyInit() async {
     CartPageModel initCartBooks = CartPageModel(
-        totalPrice: 0, totalCount: 0, cartBooks: [], isAllChecked: false, isScrap: false);
+        totalPrice: 0, totalCount: 0, cartBooks: [], isAllChecked: false);
 
     ResponseDTO responseDTO = await BookRepository().findCartList();
+
     if(responseDTO.code == 1) {
       List<CartDTO> cartDTOList = responseDTO.data;
       List<UseCartDTO> useCartList = [];
@@ -41,6 +41,7 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
         UseCartDTO useCartDTO = UseCartDTO(cartDTO: element, isChecked: false);
         useCartList.add(useCartDTO);
       });
+
       initCartBooks.cartBooks = useCartList;
       state = initCartBooks;
     } else{
@@ -117,11 +118,9 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
 
   }
 
-
-
   void insert (ResponseDTO responseDTO) {
     var context = navigatorKey.currentContext!;
-    if(responseDTO.code! == 1) {
+    if(responseDTO.code == 1) {
       UseCartDTO useCartDTO = UseCartDTO(cartDTO: responseDTO.data, isChecked: false);
       List<UseCartDTO> newUseCartList = [...state!.cartBooks];
       newUseCartList.add(useCartDTO);
@@ -143,7 +142,8 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
           ],
         ),
       );
-    } else {
+    } else
+    { print(responseDTO.msg);
       DialogUtil.dialogShow(context, responseDTO.msg);
     }
 

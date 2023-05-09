@@ -8,7 +8,6 @@ import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 import 'package:readme_app/sqflite/table/table_user.dart';
-import 'package:readme_app/view/page/main/main_page/main_page_view_model.dart';
 
 class BookRepository {
   static final BookRepository _instance = BookRepository._single();
@@ -39,16 +38,16 @@ class BookRepository {
 
   Future<ResponseDTO> findCartList() async {
     try {
-      Dio dio = await MyHttp.getSecurity();
+      Dio dio = await MyHttp.getCommon();
       TableUser? tableUser =  await MySqfliteInit.getUser();
       Response response =
-          await dio.get("/carts/${tableUser!.id}/users");
-
+          await dio.get("/carts");
       if(response.statusCode == 401 || response.statusCode == 403) {
         return ResponseDTO(code: 401, msg: response.statusMessage);
       } else if(response.statusCode == 200) {
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
         List<CartDTO> cartList = [];
+
         for (var cartBook in responseDTO.data) {
           CartDTO cartDTO = CartDTO.fromJson(cartBook);
           cartList.add(cartDTO);
@@ -128,9 +127,8 @@ class BookRepository {
 
   Future<ResponseDTO> addCart(int bookId) async {
     try{
-      Dio dio = await MyHttp.getCommon();
+      Dio dio = await MyHttp.getSecurity();
       Response response = await dio.post("/carts", data: {"bookId" : bookId});
-      print(response.data);
       if(response.statusCode == 401 || response.statusCode == 403) {
         return ResponseDTO(code: 401, msg: response.statusMessage);
       } else if (response.statusCode == 200 ) {

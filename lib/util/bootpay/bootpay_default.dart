@@ -44,7 +44,7 @@ class _BootPayDefaultState extends State<BootPayDefault> {
           onPressed: () {
             bootpayDefault(context);
           },
-          child: Text(
+          child: const Text(
             "결제하기",
             style: TextStyle(
                 fontWeight: FontWeight.w700, fontSize: Dimens.font_sp20),
@@ -54,7 +54,9 @@ class _BootPayDefaultState extends State<BootPayDefault> {
 
   void bootpayDefault(BuildContext context) async {
     Dio dio = await MyHttp.getSecurity();
-    // Response response = await dio.post("/????" , data: {'??' : });
+
+    // Response response = await dio.post("/" , data: {'??' : });
+
     Payload payload = getPayload(context);
     if (kIsWeb) {
       payload.extra?.openType = "redirect";

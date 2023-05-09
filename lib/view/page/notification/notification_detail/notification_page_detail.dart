@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
+import 'package:readme_app/view/page/notification/components/notification_page_view_model.dart';
+import 'package:readme_app/view/page/notification/notification_detail/notification_detail_page_view_model.dart';
 
-class NotificationPageDetail extends StatefulWidget {
-  const NotificationPageDetail({Key? key}) : super(key: key);
+class NotificationPageDetail extends ConsumerWidget {
+  int id;
+  NotificationPageDetail({required this.id, Key? key}) : super(key: key);
 
   @override
-  State<NotificationPageDetail> createState() => _NotificationPageDetailState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
 
-class _NotificationPageDetailState extends State<NotificationPageDetail> {
-  @override
-  Widget build(BuildContext context) {
+    NotificationDetailPageModel? model = ref.watch(noticePageDetailProvider(id));
+
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
@@ -48,14 +50,13 @@ class _NotificationPageDetailState extends State<NotificationPageDetail> {
                   children: [
                     Expanded(
                       child: Text(
-                        "useQuestion.title",
+                        model?.notice.title ?? "",
                         style: TextStyle(
                             fontSize: Dimens.font_sp18,
                             fontWeight: FontWeight.w700,
                             overflow: TextOverflow.ellipsis),
                       ),
                     ),
-                    Text("useQuestion.time"),
                   ],
                 ),
               ),
@@ -66,7 +67,7 @@ class _NotificationPageDetailState extends State<NotificationPageDetail> {
                 padding:
                 const EdgeInsets.symmetric(vertical: 30.0, horizontal: 10),
                 child: Text(
-                  "useQuestion.content",
+                  model?.notice.content ?? "",
                   style: TextStyle(fontSize: Dimens.font_sp16),
                 ),
               ),

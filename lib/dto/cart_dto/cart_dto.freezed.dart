@@ -21,7 +21,6 @@ CartDTO _$CartDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CartDTO {
   int get id => throw _privateConstructorUsedError;
-  User get user => throw _privateConstructorUsedError;
   Book get book => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +33,7 @@ abstract class $CartDTOCopyWith<$Res> {
   factory $CartDTOCopyWith(CartDTO value, $Res Function(CartDTO) then) =
       _$CartDTOCopyWithImpl<$Res, CartDTO>;
   @useResult
-  $Res call({int id, User user, Book book});
+  $Res call({int id, Book book});
 
   $BookCopyWith<$Res> get book;
 }
@@ -53,7 +52,6 @@ class _$CartDTOCopyWithImpl<$Res, $Val extends CartDTO>
   @override
   $Res call({
     Object? id = null,
-    Object? user = null,
     Object? book = null,
   }) {
     return _then(_value.copyWith(
@@ -61,10 +59,6 @@ class _$CartDTOCopyWithImpl<$Res, $Val extends CartDTO>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
       book: null == book
           ? _value.book
           : book // ignore: cast_nullable_to_non_nullable
@@ -88,7 +82,7 @@ abstract class _$$_CartDTOCopyWith<$Res> implements $CartDTOCopyWith<$Res> {
       __$$_CartDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, User user, Book book});
+  $Res call({int id, Book book});
 
   @override
   $BookCopyWith<$Res> get book;
@@ -105,7 +99,6 @@ class __$$_CartDTOCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? user = null,
     Object? book = null,
   }) {
     return _then(_$_CartDTO(
@@ -113,10 +106,6 @@ class __$$_CartDTOCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User,
       book: null == book
           ? _value.book
           : book // ignore: cast_nullable_to_non_nullable
@@ -128,7 +117,7 @@ class __$$_CartDTOCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_CartDTO with DiagnosticableTreeMixin implements _CartDTO {
-  _$_CartDTO({required this.id, required this.user, required this.book});
+  _$_CartDTO({required this.id, required this.book});
 
   factory _$_CartDTO.fromJson(Map<String, dynamic> json) =>
       _$$_CartDTOFromJson(json);
@@ -136,13 +125,11 @@ class _$_CartDTO with DiagnosticableTreeMixin implements _CartDTO {
   @override
   final int id;
   @override
-  final User user;
-  @override
   final Book book;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CartDTO(id: $id, user: $user, book: $book)';
+    return 'CartDTO(id: $id, book: $book)';
   }
 
   @override
@@ -151,7 +138,6 @@ class _$_CartDTO with DiagnosticableTreeMixin implements _CartDTO {
     properties
       ..add(DiagnosticsProperty('type', 'CartDTO'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('user', user))
       ..add(DiagnosticsProperty('book', book));
   }
 
@@ -161,13 +147,12 @@ class _$_CartDTO with DiagnosticableTreeMixin implements _CartDTO {
         (other.runtimeType == runtimeType &&
             other is _$_CartDTO &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.user, user) || other.user == user) &&
             (identical(other.book, book) || other.book == book));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, user, book);
+  int get hashCode => Object.hash(runtimeType, id, book);
 
   @JsonKey(ignore: true)
   @override
@@ -184,17 +169,13 @@ class _$_CartDTO with DiagnosticableTreeMixin implements _CartDTO {
 }
 
 abstract class _CartDTO implements CartDTO {
-  factory _CartDTO(
-      {required final int id,
-      required final User user,
-      required final Book book}) = _$_CartDTO;
+  factory _CartDTO({required final int id, required final Book book}) =
+      _$_CartDTO;
 
   factory _CartDTO.fromJson(Map<String, dynamic> json) = _$_CartDTO.fromJson;
 
   @override
   int get id;
-  @override
-  User get user;
   @override
   Book get book;
   @override
