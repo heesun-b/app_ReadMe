@@ -20,9 +20,11 @@ class BookDetailPageModel with _$BookDetailPageModel {
     required Pageable pageable,
     required bool last,
     required int totalPages,
+    required TextEditingController textEditingController,
+    required double stars,
     TableUser? user,
-}) = _BookDetailPageModel;
-  }
+  }) = _BookDetailPageModel;
+}
 
 
 class BookDetailViewModel extends StateNotifier<BookDetailPageModel?> {
@@ -32,17 +34,30 @@ class BookDetailViewModel extends StateNotifier<BookDetailPageModel?> {
    ResponseDTO responseDTO =  await BookRepository().getBookDetail(bookId);
    if(responseDTO.code == 1) {
      BookDetailDTO bookDetailDTO = responseDTO.data;
-     BookDetailPageModel book = BookDetailPageModel(book: bookDetailDTO, pageable: bookDetailDTO.reviews.pageable, last: bookDetailDTO.reviews.last, totalPages: bookDetailDTO.reviews.totalPages);
+     BookDetailPageModel book = BookDetailPageModel(
+         book: bookDetailDTO, pageable: bookDetailDTO.reviews.pageable,
+         last: bookDetailDTO.reviews.last, totalPages: bookDetailDTO.reviews.totalPages,
+         textEditingController: TextEditingController(), stars: 0.0
+     );
      state = book;
    } else {
      DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
    }
   }
 
-  void getReviews(BuildContext context, ResponseDTO responseDTO) async {
+  void getReviews (
+      BuildContext context,
+      ResponseDTO responseDTO, {isRefresh = false}
+  ) async {
     if(responseDTO.code == 1) {
       ReviewDTO reviewDTO = responseDTO.data;
-      List<Review> reviewList = [...state!.book.reviews.content, ...reviewDTO.content];
+
+      List<Review> reviewList = [];
+      if (!isRefresh){
+        reviewList.addAll(state!.book.reviews.content);
+      }
+      reviewList.addAll(reviewDTO.content);
+
       var bookDetailPageModel = state!.copyWith(
         last: reviewDTO.last,
         totalPages: reviewDTO.totalPages,
@@ -55,10 +70,12 @@ class BookDetailViewModel extends StateNotifier<BookDetailPageModel?> {
         pageable: reviewDTO.pageable,
       );
       state = bookDetailPageModel;
+      DialogUtil.dialogShow(context, responseDTO.msg);
     } else {
       DialogUtil.dialogShow(context, responseDTO.msg);
     }
   }
+
 }
 
 final bookDetailPageProvider = StateNotifierProvider.family.autoDispose<BookDetailViewModel, BookDetailPageModel?, int>((ref, bookId) {

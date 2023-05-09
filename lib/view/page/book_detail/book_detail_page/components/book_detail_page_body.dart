@@ -195,8 +195,8 @@ class BookDetailPageBody extends ConsumerWidget {
                                 Row(
                                   children: [
                                     StarScore(score: model?.book.reviews.content[index].stars ?? 0),
-                                    Spacer(),
-                                    Text("${model?.book.reviews.content[index].user.username ?? ""} ", style: TextStyle(
+                                    const Spacer(),
+                                    Text("${model?.book.reviews.content[index].user.username ?? ""} ", style: const TextStyle(
                                         fontWeight: FontWeight.bold
                                     ),),
                                   ],
@@ -222,13 +222,19 @@ class BookDetailPageBody extends ConsumerWidget {
 
                   model?.last ?? true ? const SizedBox() : Column(
                     children: [
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 20),
                       Center(
                         child: TextButton(
                           onPressed: () {
                             ref.read(reviewControllerProvider).getReviews(model.book.id, model.pageable.pageNumber + 1);
                           },
-                          child: Center(child: Text("( ${model!.pageable.pageNumber + 1} / ${model.totalPages} ) 더보기")),
+                          child: Center(
+                              child: Text("( ${model!.pageable.pageNumber + 1} / ${model.totalPages} ) 더보기",
+                                style: const TextStyle(
+                                    color: Colors.black
+                                ),
+                              )
+                          ),
                         ),
                       ),
                     ],
@@ -237,7 +243,7 @@ class BookDetailPageBody extends ConsumerWidget {
                   const Divider(
                     thickness: 2,
                   ),
-                  BookDetailReviewForm(),
+                  model?.user != null ? BookDetailReviewForm(bookId) : Container(),
                 ],
               ),
             ],

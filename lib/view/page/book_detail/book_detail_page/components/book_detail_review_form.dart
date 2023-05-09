@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:readme_app/controller/review_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
+import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page_view_model.dart';
 
-class BookDetailReviewForm extends StatefulWidget {
-  const BookDetailReviewForm({Key? key}) : super(key: key);
+class BookDetailReviewForm extends ConsumerWidget {
 
-  @override
-  State<BookDetailReviewForm> createState() => _BookDetailReviewFormState();
-}
+  final int bookId;
 
-class _BookDetailReviewFormState extends State<BookDetailReviewForm> {
-
-  double _rating = 0;
-
-  final _textController = TextEditingController();
+  BookDetailReviewForm(this.bookId);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    BookDetailPageModel? model = ref.watch(bookDetailPageProvider(bookId));
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 15),
       width: MediaQuery.of(context).size.width,
@@ -26,7 +24,7 @@ class _BookDetailReviewFormState extends State<BookDetailReviewForm> {
         children: [
           Container(
             margin: EdgeInsets.only(bottom: 15),
-            child: Text(
+            child: const Text(
               "< 리뷰 작성 >",
               style: TextStyle(
                 color: Colours.app_sub_black,
@@ -41,7 +39,7 @@ class _BookDetailReviewFormState extends State<BookDetailReviewForm> {
                 style: BorderStyle.solid,
                 color: Colours.app_sub_darkgrey,
               ),
-              borderRadius: BorderRadius.all(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(10),
               ),
             ),
@@ -51,28 +49,26 @@ class _BookDetailReviewFormState extends State<BookDetailReviewForm> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: RatingBar.builder(
-                    initialRating: _rating,
+                    initialRating: model?.stars ?? 0,
                     minRating: 0,
                     direction: Axis.horizontal,
                     allowHalfRating: true,
                     itemCount: 5,
                     itemSize: 18,
-                    itemBuilder: (context, _) => Icon(
+                    itemBuilder: (context, _) => const Icon(
                       Icons.star,
                       color: Colors.amber,
                     ),
                     onRatingUpdate: (rating) {
-                      setState(() {
-                        _rating = rating;
-                      });
+                      model?.stars = rating;
                     },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: TextFormField(
-                    controller: _textController,
-                    decoration: InputDecoration(
+                    controller: model?.textEditingController,
+                    decoration: const InputDecoration(
                       hintText: "내용을 입력하세요",
                       border: OutlineInputBorder(),
                     ),
@@ -86,22 +82,26 @@ class _BookDetailReviewFormState extends State<BookDetailReviewForm> {
                     child: ElevatedButton(
                       onPressed: () {
                         // 등록 후 위치 이동
+                        ref.read(reviewControllerProvider).save(
+                            model?.book.id ?? 0, model?.stars ?? 0.0,
+                            model?.textEditingController.text ?? ""
+                        );
                       },
-                      child: Text("등록"),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colours.app_sub_black,
                         foregroundColor: Colours.app_sub_white,
-                        textStyle: TextStyle(fontSize: Dimens.font_sp14),
+                        textStyle: const TextStyle(fontSize: Dimens.font_sp14),
                       ),
+                      child: const Text("등록"),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 60),
+          const SizedBox(height: 60),
         ],
       ),
-    );;
+    );
   }
 }

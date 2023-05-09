@@ -24,7 +24,29 @@ class ReviewRepository {
     try{
       Response response = await MyHttp.get().get("/reviews/$bookId/book?size=3&page=$page");
       if(response.statusCode == 200) {
-        log(response.data.toString());
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        ReviewDTO reviewDTO = ReviewDTO.fromJson(responseDTO.data);
+        responseDTO.data = reviewDTO;
+        return responseDTO;
+      } else {
+        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
+      }
+    } catch (e) {
+      return ResponseDTO(code: -1, msg: "실패 : $e");
+    }
+  }
+
+
+  Future<ResponseDTO> save(int bookId, double stars, String content) async {
+    try{
+      var dio = await MyHttp.getSecurity();
+      Response response = await dio.post("/reviews", data: {
+        "bookId": bookId,
+        "stars": stars,
+        "content": content
+      });
+
+      if(response.statusCode == 200) {
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
         ReviewDTO reviewDTO = ReviewDTO.fromJson(responseDTO.data);
         responseDTO.data = reviewDTO;

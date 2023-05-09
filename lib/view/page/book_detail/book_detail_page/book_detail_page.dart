@@ -106,30 +106,29 @@ class BookDetailPage extends ConsumerWidget {
               },
             ),
             SizedBox(width: 10),
-
-            model?.user != null
-                ?  SizedBox(
-              width: 150,
-              height: 40,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    textStyle: TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
-                    padding: EdgeInsets.all(5),
-                  ),
-                  child: const Text("바로보기"),
-                  onPressed: () {
-                    // TODO
-                  }
-              ),
-            )
+                (model?.user?.isMembership ?? false) || (model?.book.isPurchase ?? false)
+                    ?  SizedBox(
+                    width: 150,
+                    height: 40,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          textStyle: TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
+                          padding: EdgeInsets.all(5),
+                        ),
+                        child: const Text("바로보기"),
+                        onPressed: () {
+                          Navigator.pushNamed(context, Move.bookViewerPage, arguments: model?.book);
+                        }
+                    ),
+                )
                 : Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 150,
-                  height: 40,
-                  child: ElevatedButton(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      height: 40,
+                      child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         textStyle: TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
