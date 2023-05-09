@@ -29,7 +29,6 @@ class UserPageMembershipInfo extends ConsumerWidget {
     String newStartTime = dateFormat(startTime ?? "");
     String newEndTime = dateFormat(endTime ?? "");
 
-
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Container(

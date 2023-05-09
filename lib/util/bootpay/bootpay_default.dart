@@ -3,14 +3,14 @@ import 'package:bootpay/model/extra.dart';
 import 'package:bootpay/model/item.dart';
 import 'package:bootpay/model/payload.dart';
 import 'package:bootpay/model/user.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
-import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/core/constants/move.dart';
+import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
+import 'package:readme_app/repository/payment_repository.dart';
 
 class BootPayDefault extends StatefulWidget {
 
@@ -54,7 +54,7 @@ class _BootPayDefaultState extends State<BootPayDefault> {
 
   void bootpayDefault(BuildContext context) async {
 
-
+    ResponseDTO responseDTO = await PaymentRepository().payment();
 
     Payload payload = getPayload(context);
     if (kIsWeb) {

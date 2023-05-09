@@ -23,14 +23,14 @@ class UserPageMainBtton extends ConsumerWidget {
             child: Container(
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   border: Border(
                       top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
                       right:
                       BorderSide(color: Colours.app_sub_grey, width: 2.0))),
               child: InkWell(
                 onTap: () {
-                  if(userModel != null) {
+                  if(userModel?.user != null) {
                     Navigator.pushNamed(context, Move.contentBoxPage);
                   } else {
                     showDialog(
@@ -43,7 +43,7 @@ class UserPageMainBtton extends ConsumerWidget {
                     );
                   }
                 },
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     HsStyleIcons.bookPayment,
@@ -60,15 +60,15 @@ class UserPageMainBtton extends ConsumerWidget {
             child: Container(
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   border: Border(
                       top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
                       right:
                       BorderSide(color: Colours.app_sub_grey, width: 2.0))),
               child: InkWell(
                 onTap: () {
-                  if(userModel != null) {
-                    Navigator.pushNamed(context,Move.paymentListPage);
+                  if(userModel?.user != null) {
+                    Navigator.pushNamed(context, Move.contentBoxPage);
                   } else {
                     showDialog(
                       context: context,
@@ -80,7 +80,7 @@ class UserPageMainBtton extends ConsumerWidget {
                     );
                   }
                 },
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     HsStyleIcons.card,
@@ -97,26 +97,26 @@ class UserPageMainBtton extends ConsumerWidget {
             child: Container(
               width: double.infinity,
               height: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   border: Border(
                       top: BorderSide(color: Colours.app_sub_grey, width: 2.0),
                )),
               child: InkWell(
                 onTap: () {
-                  if(userModel != null) {
-                    Navigator.pushNamed(context, Move.reviewPage);
+                  if(userModel?.user != null) {
+                    Navigator.pushNamed(context, Move.contentBoxPage);
                   } else {
                     showDialog(
                       context: context,
                       builder: (context) {
                         return   CustomDialog(title: "로그인 후 이용 가능",
                             content: "로그인 하시겠습니까?",
-                            callback: () => Navigator.pushNamed(context, "/login"));
+                            callback: () => Navigator.pushNamed(context, Move.loginPage));
                       },
                     );
                   }
                 },
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     HsStyleIcons.review,
@@ -131,6 +131,6 @@ class UserPageMainBtton extends ConsumerWidget {
           )
         ],
       ),
-    );;
+    );
   }
 }

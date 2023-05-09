@@ -1,8 +1,6 @@
 
 
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 
@@ -20,6 +18,7 @@ class PaymentRepository {
     Response response = await dio.post("/", data: {});
     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
     //
+
     return responseDTO;
   }
 
