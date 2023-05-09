@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/core/constants/colours.dart';
+import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/view/page/category/category_page/category_page_view_model.dart';
@@ -37,7 +38,7 @@ class CategoryPage extends ConsumerWidget {
               style: TextStyle(
                   color: Colours.app_sub_black,
                   fontWeight: FontWeight.w700,
-                  fontSize: 22),
+                  fontSize: Dimens.font_sp20),
             ),
             centerTitle: true,
           ),

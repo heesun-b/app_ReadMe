@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
+import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page.dart';
@@ -42,11 +44,19 @@ class BookCardView extends ConsumerWidget {
           padding: const EdgeInsets.all(20.0),
           child: Row(
             children: [
-
-              CachedNetworkImage(
-                imageUrl: book.coverFile.fileUrl,
-                placeholder : (context, url) => CircularProgressIndicator(),
-                width : 90, height : 110, fit : BoxFit.cover,
+              Container(
+                height: 130,
+                width: 90,
+                child: CachedNetworkImage(
+                  imageUrl: book.coverFile.fileUrl,
+                  placeholder : (context, url) => Center(
+                    child: LoadingAnimationWidget.twoRotatingArc(
+                      size: 50,
+                      color: Colours.app_main,
+                    ),
+                  ),
+                  fit : BoxFit.fill,
+                ),
               ),
 
               const SizedBox(
@@ -93,8 +103,8 @@ class BookCardView extends ConsumerWidget {
                         constraints: const BoxConstraints(),
                         onPressed :() => chaneScrap.call(),
                         icon: book.isHeart == false
-                            ? YhIcons.heart
-                            : YhIcons.heartFill,
+                            ? HsStyleIcons.heart
+                            : HsStyleIcons.heartFill,
                       ),
                       const SizedBox(width: 10),
                       IconButton(
@@ -102,7 +112,6 @@ class BookCardView extends ConsumerWidget {
                         constraints: const BoxConstraints(),
                         onPressed:() =>
                             addCart.call(),
-                          // ref.read(cartControllerProvider).insert(book!.id);
                         icon: YhIcons.cart2,
                       ),
                     ],

@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
@@ -22,7 +24,7 @@ class NoticePageDetail extends ConsumerWidget {
           style: TextStyle(
               color: Colours.app_sub_black,
               fontWeight: FontWeight.w700,
-              fontSize: 22),
+              fontSize: Dimens.font_sp20),
         ),
         centerTitle: true,
         actions: [
@@ -63,10 +65,17 @@ class NoticePageDetail extends ConsumerWidget {
                 thickness: 2,
               ),
               model != null ?
-                Image.network(
-                  model.notice.imageFile.fileUrl ?? "",
-                  width: double.infinity,
-                )
+              CachedNetworkImage(
+                imageUrl:  model?.notice.imageFile.fileUrl ?? "",
+                placeholder : (context, url) => Center(
+                  child: LoadingAnimationWidget.twoRotatingArc(
+                    size: 50,
+                    color: Colours.app_main,
+                  ),
+                ),
+                width: double.infinity,
+              )
+
               : Container(),
               Padding(
                 padding:

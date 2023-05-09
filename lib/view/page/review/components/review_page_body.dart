@@ -2,10 +2,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/controller/review_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/util/star_score/star_score.dart';
+import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page.dart';
 import 'package:readme_app/view/page/review/review_page_view_model.dart';
 
 class ReviewPageBody extends ConsumerWidget {
@@ -13,35 +15,46 @@ class ReviewPageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ReviewPageModel? model = ref.watch(reviewPageProvider);
+
     return Column(
       children: List.generate(model?.reviewList.length ?? 0, (index) {
         return Padding(
           padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-          child: _reviewTile(context, ref, index),
+          child: _reviewTile(context, ref, index, model?.reviewList[index].book.id ?? 0),
         );
       }),
     );
   }
 
-  Widget _reviewTile(BuildContext context, WidgetRef ref, int index) {
-    return Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colours.app_sub_grey),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              _topInfo(index, context, ref),
-              SizedBox(
-                height: 10,
-              ),
-              _bottomInfo(ref, index),
-            ],
+  Widget _reviewTile(BuildContext context, WidgetRef ref, int index, int bookId) {
+    return InkWell(
+      child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colours.app_sub_grey),
+            borderRadius: BorderRadius.circular(10),
           ),
-        ));
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                _topInfo(index, context, ref),
+                SizedBox(
+                  height: 10,
+                ),
+                _bottomInfo(ref, index),
+              ],
+            ),
+          )),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  BookDetailPage(bookId:bookId),
+            ));
+      },
+    );
   }
 
   Widget _bottomInfo(WidgetRef ref, int index) {
@@ -49,10 +62,22 @@ class ReviewPageBody extends ConsumerWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CachedNetworkImage(
-           imageUrl: model?.reviewList[index].book.coverUrl ?? "",
-          placeholder : (context, url) => CircularProgressIndicator(),
-          width : 70, height : 90, fit : BoxFit.cover,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5.0),
+          child: Container(
+            height: 90,
+            width: 70,
+            child: CachedNetworkImage(
+               imageUrl: model?.reviewList[index].book.coverUrl ?? "",
+              placeholder : (context, url) => Center(
+                child: LoadingAnimationWidget.twoRotatingArc(
+                  size: 50,
+                  color: Colours.app_main,
+                ),
+              ),
+              fit : BoxFit.fill,
+            ),
+          ),
         ),
         SizedBox(
           width: 10,
@@ -60,6 +85,9 @@ class ReviewPageBody extends ConsumerWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(
+              height: 10,
+            ),
             Row(
               children: [
                 Text(model?.reviewList[index].book.title ?? "", style: TextStyle(fontSize: Dimens.font_sp12),),
@@ -71,11 +99,16 @@ class ReviewPageBody extends ConsumerWidget {
               ],
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
-            Text(
-              model?.reviewList[index].content ?? "",
-              style: TextStyle(fontSize: Dimens.font_sp16),
+            Container(
+              width: 250,
+              child: Text(
+                model?.reviewList[index].content ?? "",
+                style: TextStyle(fontSize: Dimens.font_sp16),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+              ),
             ),
           ],
         )

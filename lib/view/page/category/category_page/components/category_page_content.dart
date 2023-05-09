@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/controller/book_controller.dart';
 import 'package:readme_app/controller/cart_controller.dart';
+import 'package:readme_app/controller/scrap_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
@@ -32,7 +33,7 @@ class CategoryPageContent extends ConsumerWidget {
         smallCategory.isEmpty ? Container()
             : Column(
               children: [
-                const Divider(thickness: 1),
+                SizedBox(height: 10,),
                 SizedBox(
                   height: 20,
                   child: ListView.builder(
@@ -74,8 +75,8 @@ class CategoryPageContent extends ConsumerWidget {
         children: [
           BookCardView(book:books[index], addCart: () =>  ref.read(cartControllerProvider).insert(books[index].id),
           chaneScrap: () => books[index].isHeart
-              ? ref.read(categoryPageProvider.notifier).deleteScrap(books[index].id)
-              : ref.read(categoryPageProvider.notifier).addScarp(books[index].id)),
+              ? ref.read(scrapControllerProvider).delete(books[index].id)
+              : ref.read(scrapControllerProvider).insert(books[index].id)),
 
           isLast != true && count - 1 == index
               ? Padding(

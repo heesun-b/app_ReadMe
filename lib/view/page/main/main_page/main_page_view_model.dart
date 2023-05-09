@@ -103,63 +103,57 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
 
   }
   
-  void addScarp(String name, int bookId) async {
-    Dio dio = await MyHttp.getSecurity();
-    // todo 경로 추가
-    Response response = await dio.post("/??", data: {'bookId' : bookId});
-    if(response.statusCode == 401 || response.statusCode == 403) {
-      DialogUtil.dialogShow(navigatorKey.currentContext!, response.statusMessage);
-    } else if (response.statusCode == 200) {
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+  void addScarp(int bookId, ResponseDTO responseDTO) async {
+
+    if(responseDTO.code == 401) {
+      DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
+    } else if (responseDTO.code == 1) {
       Book book = Book.fromJson(responseDTO.data);
-      if(name == "전체") {
+
         List<Book> newTotalBooks = state!.totalBooks.where((element) => element.id != bookId).toList();
         newTotalBooks.add(book);
         state = state!.copyWith(totalBooks: newTotalBooks);
-      } else if(name == "베스트셀러") {
+
         List<Book> newBestBooks = state!.bestBooks.where((element) => element.id != bookId).toList();
         newBestBooks.add(book);
         state = state!.copyWith(totalBooks: newBestBooks);
-      } else if(name ==  "추천") {
+
         List<Book> newRecommendBooks = state!.recommendBooks.where((element) => element.id != bookId).toList();
         newRecommendBooks.add(book);
         state = state!.copyWith(totalBooks: newRecommendBooks);
-      } else if (name ==  "신간") {
+
         List<Book> newLatestBooks = state!.latestBooks.where((element) => element.id != bookId).toList();
         newLatestBooks.add(book);
         state = state!.copyWith(totalBooks: newLatestBooks);
       }
     }
-  }
 
-  void deleteScrap (String name, int bookId) async {
-    Dio dio = await MyHttp.getSecurity();
-    // todo 경로 추가
-    Response response = await dio.delete("/??", data: {'bookId' : bookId});
-    if(response.statusCode == 401 || response.statusCode == 403) {
-      DialogUtil.dialogShow(navigatorKey.currentContext!, response.statusMessage);
-    } else if (response.statusCode == 200) {
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      Book book = Book.fromJson(responseDTO.data);
-      if(name == "전체") {
+
+  void deleteScrap (int bookId, ResponseDTO responseDTO) async {
+    if(responseDTO.code == 401) {
+      DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
+    } else if (responseDTO.code == 1) {
+
+      Book book = responseDTO.data;
+
         List<Book> newTotalBooks = state!.totalBooks.where((element) => element.id != bookId).toList();
         newTotalBooks.add(book);
         state = state!.copyWith(totalBooks: newTotalBooks);
-      } else if(name == "베스트셀러") {
+
         List<Book> newBestBooks = state!.bestBooks.where((element) => element.id != bookId).toList();
         newBestBooks.add(book);
         state = state!.copyWith(totalBooks: newBestBooks);
-      } else if(name ==  "추천") {
+
         List<Book> newRecommendBooks = state!.recommendBooks.where((element) => element.id != bookId).toList();
         newRecommendBooks.add(book);
         state = state!.copyWith(totalBooks: newRecommendBooks);
-      } else if (name ==  "신간") {
+
         List<Book> newLatestBooks = state!.latestBooks.where((element) => element.id != bookId).toList();
         newLatestBooks.add(book);
         state = state!.copyWith(totalBooks: newLatestBooks);
-      }
+
     } else {
-      DialogUtil.dialogShow(navigatorKey.currentContext!, response.statusMessage);
+      DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
     }
   }
 }

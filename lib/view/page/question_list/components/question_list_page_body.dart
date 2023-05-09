@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/model/qustion/question.dart';
+import 'package:readme_app/view/components/none_list_widget.dart';
 import 'package:readme_app/view/page/question_detail/question_detail_page.dart';
 import 'package:readme_app/view/page/question_list/question_list_page_view_model.dart';
 
@@ -16,8 +17,8 @@ class QuestionListPageBody extends ConsumerWidget {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: List.generate(model?.questions.length ?? 0, (index) {
+        child: model == null ? NoneListWidget(title: "문의")  : Column(
+          children: List.generate(model.questions.length ?? 0, (index) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: InkWell(
@@ -25,7 +26,7 @@ class QuestionListPageBody extends ConsumerWidget {
                   Navigator.pushNamed(
                     context,
                     Move.questionDetailPage,
-                    arguments: model?.questions[index]
+                    arguments: model.questions[index]
                   );
                 },
                 child: Container(
@@ -40,11 +41,11 @@ class QuestionListPageBody extends ConsumerWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(model?.questions[index].writeTime ?? "",
+                          Text(model.questions[index].writeTime ?? "",
                               style: TextStyle(fontWeight: FontWeight.w700)),
                           Text(
-                            model?.questions[index].answer == null ? "진행중" : "답변완료",
-                            style: TextStyle(color: model?.questions[index].answer == null
+                            model.questions[index].answer == null ? "진행중" : "답변완료",
+                            style: TextStyle(color: model.questions[index].answer == null
                                     ? Colours.app_sub_blue
                                     : Colours.app_sub_darkgrey),
                           ),
@@ -53,7 +54,7 @@ class QuestionListPageBody extends ConsumerWidget {
                       const Divider(
                         thickness: 1,
                       ),
-                      Text(model?.questions[index].title ?? ""),
+                      Text(model.questions[index].title ?? ""),
                     ],
                   ),
                 ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/controller/notice_controller.dart';
+import 'package:readme_app/core/constants/colours.dart';
+import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/view/components/use_button.dart';
 import 'package:readme_app/view/page/notice/components/notice_page_view_model.dart';
 import 'package:readme_app/view/page/notice/notification_detail/notice_page_detail.dart';
@@ -22,7 +24,8 @@ class NoticePageBody extends ConsumerWidget {
           children: List.generate(model?.noticeList?.content.length ?? 0, (index) => Column(
             children: [
               ListTile(
-                title: Text(model?.noticeList?.content[index].title ?? ""),
+                title: Text(model?.noticeList?.content[index].title ?? "",
+                style:  TextStyle(fontSize: Dimens.font_sp16),),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -31,7 +34,7 @@ class NoticePageBody extends ConsumerWidget {
                       ));
                 },
               ),
-
+              Divider(thickness: 1),
               isLast != true && count - 1 == index
                   ? Padding(
                 padding:

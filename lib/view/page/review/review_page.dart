@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/colours.dart';
+import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/view/page/review/components/review_page_body.dart';
@@ -25,7 +26,7 @@ class ReviewPage extends ConsumerWidget {
         style: TextStyle(
             color: Colours.app_sub_black,
             fontWeight: FontWeight.w700,
-            fontSize: 22),
+            fontSize: Dimens.font_sp20),
       ),
       centerTitle: true,
       leading: Row(

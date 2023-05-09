@@ -22,7 +22,7 @@ class CartMockData {
 List<CartMockData> cartList = [
   CartMockData(
     id: 1,
-      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/e7c6f9c3-fefe-4384-8553-ddbe2929aed3-book2.png",
+      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/book1.jpg",
       title: "1984",
       author: "조지 오웰",
       store: "그린",
@@ -31,7 +31,7 @@ List<CartMockData> cartList = [
       ischecked: false),
   CartMockData(
       id: 2,
-      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/e7c6f9c3-fefe-4384-8553-ddbe2929aed3-book2.png",
+      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/book1.jpg",
       title: "물고기는 존재하지 않는다",
       author: "룰루 밀러",
       store: "그린",
@@ -40,7 +40,7 @@ List<CartMockData> cartList = [
       ischecked: false),
   CartMockData(
       id: 3,
-      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/e7c6f9c3-fefe-4384-8553-ddbe2929aed3-book2.png",
+      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/book1.jpg",
       title: "물고기는 존재하지 않는다",
       author: "룰루 밀러",
       store: "그린",
@@ -49,7 +49,7 @@ List<CartMockData> cartList = [
       ischecked: false),
   CartMockData(
       id: 4,
-      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/e7c6f9c3-fefe-4384-8553-ddbe2929aed3-book2.png",
+      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/book1.jpg",
       title: "물고기는 존재하지 않는다",
       author: "룰루 밀러",
       store: "그린",
@@ -58,7 +58,7 @@ List<CartMockData> cartList = [
       ischecked: false),
   CartMockData(
       id: 5,
-      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/e7c6f9c3-fefe-4384-8553-ddbe2929aed3-book2.png",
+      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/book1.jpg",
       title: "물고기는 존재하지 않는다",
       author: "룰루 밀러",
       store: "그린",
@@ -67,7 +67,7 @@ List<CartMockData> cartList = [
       ischecked: false),
   CartMockData(
       id: 6,
-      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/e7c6f9c3-fefe-4384-8553-ddbe2929aed3-book2.png",
+      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/book1.jpg",
       title: "물고기는 존재하지 않는다",
       author: "룰루 밀러",
       store: "그린",
@@ -76,7 +76,7 @@ List<CartMockData> cartList = [
       ischecked: false),
   CartMockData(
       id: 7,
-      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/e7c6f9c3-fefe-4384-8553-ddbe2929aed3-book2.png",
+      image: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/book1.jpg",
       title: "물고기는 존재하지 않는다",
       author: "룰루 밀러",
       store: "그린",

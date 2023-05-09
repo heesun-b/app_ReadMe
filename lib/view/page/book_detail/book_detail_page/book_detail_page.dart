@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/controller/cart_controller.dart';
+import 'package:readme_app/controller/scrap_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/move.dart';
@@ -31,17 +32,15 @@ class BookDetailPage extends ConsumerWidget {
               background: BookDetailPageCover(bookId: bookId),
             ),
             pinned: true,
-            expandedHeight: 500,
+            expandedHeight: 550,
             leadingWidth: 100,
             leading: Row(
               children: [
                 IconButton(
                   icon: YhIcons.back,
                   onPressed: () {
-                    // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeNavigationBar()));
                     if (Navigator.of(context).widget.pages.length > 1) {
                       Navigator.pop(context);
-                      // Navigator.popUntil(context, ModalRoute.withName('/'));
                     } else {
                       Navigator.pushNamed(context, Move.navigationBar);
                     }
@@ -57,11 +56,14 @@ class BookDetailPage extends ConsumerWidget {
               ],
             ),
             actions: [
-              IconButton(
-                  icon: YhIcons.cart,
-                  onPressed: () {
-                    Navigator.pushNamed(context, Move.cartPage);
-                  }),
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: IconButton(
+                    icon: YhIcons.cart,
+                    onPressed: () {
+                      Navigator.pushNamed(context, Move.cartPage);
+                    }),
+              ),
             ],
           ),
           SliverList(
@@ -90,44 +92,48 @@ class BookDetailPage extends ConsumerWidget {
         ],
       ),
       bottomSheet: Container(
-        height: 60,
+        height: 80,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(
-              icon: Icon(
-                model?.book.isHeart ?? false ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
-                size: 40,
-              ),
-              onPressed: () {
-                // setState(() {
-                //   isLiked = !isLiked;
-                // });
-              },
-            ),
-            SizedBox(width: 10),
+            model?.user == null ? Container(child: YhIcons.heart,)
+                : IconButton(
+                  icon:
+                    model?.book.isHeart ?? false ? YhIcons.heartFill : YhIcons.heart,
+                  onPressed: () {
+                    model?.book.isHeart ?? false
+                    ? ref.read(scrapControllerProvider).delete(model?.book.id ?? 0)
+                        : ref.read(scrapControllerProvider).insert(model?.book.id?? 0);
+                  },
+                ),
+            // SizedBox(width: 10),
                 (model?.user?.isMembership ?? false) || (model?.book.isPurchase ?? false)
-                    ?  SizedBox(
-                    width: 150,
-                    height: 40,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          textStyle: TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
-                          padding: EdgeInsets.all(5),
+                    ?  Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 50,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                              textStyle: TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
+                              padding: EdgeInsets.all(5),
+                            ),
+                            child: const Text("바로보기"),
+                            onPressed: () {
+                              Navigator.pushNamed(context, Move.bookViewerPage, arguments: model?.book);
+                            }
                         ),
-                        child: const Text("바로보기"),
-                        onPressed: () {
-                          Navigator.pushNamed(context, Move.bookViewerPage, arguments: model?.book);
-                        }
-                    ),
-                )
+                ),
+                      ),
+                    )
                 : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
                       width: 150,
-                      height: 40,
+                      height: 50,
                       child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,

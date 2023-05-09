@@ -75,30 +75,23 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
     state = state!.copyWith(bigCategoryId: bigCategoryId);
   }
 
-  void addScarp(int bookId) async {
-    Dio dio = await MyHttp.getSecurity();
-    // todo 경로 추가
-    Response response = await dio.post("/??", data: {'bookId' : bookId});
-    if(response.statusCode == 401 || response.statusCode == 401 ) {
-      DialogUtil.dialogShow(navigatorKey.currentContext!, response.statusMessage);
-    } else if (response.statusCode == 200) {
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      Book book = Book.fromJson(responseDTO.data);
+  void addScarp(int bookId, ResponseDTO responseDTO) async {
+    if(responseDTO.code == 401 ) {
+      DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
+    } else if (responseDTO.code == 1) {
+      Book book = responseDTO.data;
       List<Book> newBooks = state!.books.where((element) => element.id != book.id).toList();
       newBooks.add(book);
       state = state!.copyWith(books: newBooks);
     }
   }
 
-  void deleteScrap(int bookId) async {
-    Dio dio = await MyHttp.getSecurity();
-    // todo 경로 추가
-    Response response = await dio.post("/??", data: {'bookId' : bookId});
-    if(response.statusCode == 401 || response.statusCode == 401 ) {
-      DialogUtil.dialogShow(navigatorKey.currentContext!, response.statusMessage);
-    } else if (response.statusCode == 200) {
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      List<Book> newBooks = state!.books.where((element) => element.id != bookId).toList();
+  void deleteScrap(int bookId, ResponseDTO responseDTO) async {
+    if(responseDTO.code == 401 ) {
+      DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
+    } else if (responseDTO.code == 1) {
+      // List<Book> newBooks = state!.books.where((element) => element.id != bookId).toList();
+      List<Book> newBooks = state!.books;
       state = state!.copyWith(books: newBooks);
     }
   }

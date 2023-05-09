@@ -152,7 +152,6 @@ class UserPageMembershipInfo extends ConsumerWidget {
 
    int dDay(String membershipEndTime) {
      DateTime now = DateTime.now();
-     print("체크 : $membershipEndTime");
      DateTime endDate = DateTime.parse(membershipEndTime);
      return endDate.difference(now).inDays;
    }

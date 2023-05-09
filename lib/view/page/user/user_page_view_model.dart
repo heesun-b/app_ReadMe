@@ -33,7 +33,7 @@ class UserPageViewModel extends StateNotifier<UserPageModel?> {
       ResponseDTO responseDTO = await UserRepository().getUserInfo();
       // log(responseDTO.data);
       if (responseDTO.code == 401) {
-        Navigator.pushNamedAndRemoveUntil(navigatorKey.currentContext!, Move.loginPage, (route) => false);
+        DialogUtil.dialogShow(navigatorKey.currentContext!,  "유저 정보 조회 실패");
       } else if (responseDTO.code == 1) {
         if(responseDTO.data != null) {
           UserMembershipInfoDTO userInfoMembershipDTO = responseDTO.data;
@@ -43,7 +43,7 @@ class UserPageViewModel extends StateNotifier<UserPageModel?> {
           state = UserPageModel(user: tableUserInfo ,userMembershipInfoDTO: null );
         }
       } else {
-        DialogUtil.dialogShow(navigatorKey.currentContext!,  responseDTO.msg);
+        DialogUtil.dialogShow(navigatorKey.currentContext!,  "유저 정보 조회 실패");
       } }
      else {
       state = UserPageModel(user: tableUserInfo ,userMembershipInfoDTO: null );

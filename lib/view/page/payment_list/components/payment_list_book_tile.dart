@@ -170,7 +170,7 @@ List<Item> generateItems(int numberOfItems) {
   return List.generate(numberOfItems, (int index) {
     return Item(
       // 인덱스 순서 보기 위해 임의로 넣은 값
-      headerValue: '2023.04.25 - $index',
+      headerValue: '2023.04.25',
       // expandedValue: 'This is item number $index',
     );
   });

@@ -26,9 +26,9 @@ class ReviewPageViewModel extends StateNotifier<ReviewPageModel?> {
     if (responseDTO.code == 1) {
       state = ReviewPageModel(reviewList: responseDTO.data);
     } else if (responseDTO.code == 401 || responseDTO.code == 403){
-      Navigator.pushNamedAndRemoveUntil(navigatorKey.currentContext!, Move.loginPage, (route) => false);
+      DialogUtil.dialogShow(navigatorKey.currentContext!, "로그인 후 이용 가능");
     } else {
-      DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
+      DialogUtil.dialogShow(navigatorKey.currentContext!, "로그인 후 이용 가능");
     }
   }
 
@@ -37,7 +37,19 @@ class ReviewPageViewModel extends StateNotifier<ReviewPageModel?> {
       state = state!.copyWith(
         reviewList: state!.reviewList..removeWhere((element) => element.id == id)
       );
-      DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
+
+      showDialog(
+        context: navigatorKey.currentContext!,
+        builder: (BuildContext context) {
+          return CustomDialog(
+            title: "리뷰 삭제 완료",
+            content: responseDTO.msg ?? "리뷰 삭제가 완료되었습니다.",
+            callback: () {
+              Navigator.pop(context);
+            },
+          );
+        },
+      );
     } else {
       DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
     }

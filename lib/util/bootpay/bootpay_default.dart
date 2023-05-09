@@ -53,9 +53,8 @@ class _BootPayDefaultState extends State<BootPayDefault> {
   }
 
   void bootpayDefault(BuildContext context) async {
-    Dio dio = await MyHttp.getSecurity();
 
-    // Response response = await dio.post("/" , data: {'??' : });
+
 
     Payload payload = getPayload(context);
     if (kIsWeb) {

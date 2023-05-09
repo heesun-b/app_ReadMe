@@ -60,7 +60,7 @@ class BookViewerPageViewModel extends StateNotifier<BookViewerPageModel?> {
       fontFamily: "",
       bgColor: Colours.app_sub_white,
       user: null,
-      epubReaderController: EpubController(document: EpubDocument.openUrl("https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookepub/60f2fc61-323d-410b-b501-3d0a76beed5d-book1.epub"))
+      epubReaderController: EpubController(document: EpubDocument.openUrl("https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookepub/40eae962-86bb-465a-9273-10467848c9b3-book3.epub"))
     );
 
     initBook.user = await MySqfliteInit.getUser();

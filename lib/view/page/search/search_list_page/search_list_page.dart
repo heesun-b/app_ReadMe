@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/core/constants/use_icons.dart';
 import 'package:validators/validators.dart';
 import '../../../../core/constants/colours.dart';
@@ -97,7 +98,12 @@ class _SearchListPageState extends State<SearchListPage> {
                     CachedNetworkImage(
                       height: 150,
                       width: 100,
-                      placeholder: (context, url) => const CircularProgressIndicator(),
+                      placeholder: (context, url) => Center(
+                        child: LoadingAnimationWidget.twoRotatingArc(
+                          size: 50,
+                          color: Colours.app_main,
+                        ),
+                      ),
                       imageUrl: cartList[0].image,
                       fit: BoxFit.cover,
                     ),

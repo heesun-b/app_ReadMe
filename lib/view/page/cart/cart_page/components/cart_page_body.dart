@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/controller/cart_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
@@ -164,9 +166,16 @@ class CartPageBody extends ConsumerWidget {
                       child: Container(
                         width: 80,
                         height: 110,
-                        child: Image.network(
-                          "${cartBooks[index].cartDTO.book.coverFile.fileUrl}",
-                          fit: BoxFit.fitHeight,
+                        child:
+                        CachedNetworkImage(
+                          imageUrl: cartBooks[index].cartDTO.book.coverFile.fileUrl,
+                          placeholder : (context, url) => Center(
+                            child: LoadingAnimationWidget.twoRotatingArc(
+                              size: 50,
+                              color: Colours.app_main,
+                            ),
+                          ),
+                          width : 70, height : 90, fit : BoxFit.cover,
                         ),
                       ),
                     ),

@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/view/page/main/main_page/main_page_view_model.dart';
 
 class MainAdScreen extends ConsumerWidget {
@@ -34,8 +36,15 @@ class MainAdScreen extends ConsumerWidget {
                   imageFilter: ImageFilter.blur(sigmaX: 40, sigmaY: 10),
                   child:
                 CachedNetworkImage(
+                  fit: BoxFit.fill,
+                  width: MediaQuery.of(context).size.width,
                   imageUrl: bannerFile[index] ?? "",
-                  placeholder : (context, url) => CircularProgressIndicator(),
+                  placeholder : (context, url) => Center(
+                    child: LoadingAnimationWidget.twoRotatingArc(
+                      size: 50,
+                      color: Colours.app_main,
+                    ),
+                  ),
                 ),
 
               ),
@@ -46,7 +55,16 @@ class MainAdScreen extends ConsumerWidget {
                   width: 500,
                   child: Padding(
                     padding: EdgeInsets.all(20),
-                    child: Image.network(bannerFile[index] ?? ""),
+                    child:
+                    CachedNetworkImage(
+                      imageUrl: bannerFile[index] ?? "",
+                      placeholder : (context, url) => Center(
+                        child: LoadingAnimationWidget.twoRotatingArc(
+                          size: 50,
+                          color: Colours.app_main,
+                        ),
+                      ),
+                    )
                   ),
                 ),
               ),

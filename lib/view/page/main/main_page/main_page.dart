@@ -70,7 +70,7 @@ class MainPage extends ConsumerWidget {
                 elevation: 1.0,
                 pinned: true,
                 bottom: TabBar(
-                  labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp14),
+                  labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: Dimens.font_sp16),
                   indicatorColor: Colours.app_main,
                   indicatorWeight: 3,
                   indicatorSize: TabBarIndicatorSize.tab,

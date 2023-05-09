@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/controller/book_controller.dart';
 import 'package:readme_app/controller/cart_controller.dart';
+import 'package:readme_app/controller/scrap_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
@@ -53,8 +54,8 @@ class MainBook extends ConsumerWidget {
           book: book!,
           addCart: () => ref.read(cartControllerProvider).insert(book!.id),
           chaneScrap: () => book!.isHeart
-              ? ref.read(mainPageProvider.notifier).deleteScrap(name, book.id)
-              : ref.read(mainPageProvider.notifier).addScarp(name, book.id),
+              ? ref.read(scrapControllerProvider).delete(book.id)
+              : ref.read(scrapControllerProvider).insert(book.id),
         ),
         isLast != true && count - 1 == idx
             ? Padding(

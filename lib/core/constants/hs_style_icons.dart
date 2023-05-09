@@ -17,4 +17,6 @@ class HsStyleIcons {
   static const Icon review = Icon(CupertinoIcons.ellipses_bubble_fill, size: 35,);
   static const Icon up = Icon(CupertinoIcons.arrow_up);
   static const Icon alarm = Icon(CupertinoIcons.bell_fill, size: 35,);
+  static const Icon heart = Icon(CupertinoIcons.heart, size: 20);
+  static const Icon heartFill = Icon(CupertinoIcons.heart_fill, size: 20);
 }

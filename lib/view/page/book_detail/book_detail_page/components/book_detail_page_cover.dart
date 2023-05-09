@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/move.dart';
@@ -12,6 +13,7 @@ import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_pa
 
 class BookDetailPageCover extends ConsumerWidget {
   int bookId;
+
   BookDetailPageCover({required this.bookId, Key? key}) : super(key: key);
 
   @override
@@ -21,52 +23,79 @@ class BookDetailPageCover extends ConsumerWidget {
     return Stack(
       children: [
         ImageFiltered(
-          imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child:
-          CachedNetworkImage(
-            imageUrl: model?.book.coverFile.fileUrl ?? "",
-            placeholder : (context, url) => CircularProgressIndicator(),
-          ),
+          imageFilter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+          child: model == null
+              ? LoadingAnimationWidget.twoRotatingArc(
+                  size: 80,
+                  color: Colours.app_main,
+                )
+              : CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width,
+                  imageUrl: model.book.coverFile.fileUrl ?? "",
+                  placeholder: (context, url) => Center(
+                    child: LoadingAnimationWidget.twoRotatingArc(
+                      size: 80,
+                      color: Colours.app_main,
+                    ),
+                  ),
+                ),
         ),
-        Container(
-          height: 600,
-          width: 500,
-          child: Padding(
-            padding: EdgeInsets.all(60),
-            child:
-            CachedNetworkImage(
-              imageUrl:model?.book.coverFile.fileUrl ?? "",
-              placeholder : (context, url) => CircularProgressIndicator(),
+        Positioned(
+          top: 2,
+          right: 2,
+          left: 2,
+          child: Container(
+            height: 600,
+            width: 500,
+            child: Padding(
+              padding: EdgeInsets.all(60),
+              child: model == null
+                  ? LoadingAnimationWidget.twoRotatingArc(
+                      size: 80,
+                      color: Colours.app_main,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: model.book.coverFile.fileUrl ?? "",
+                      placeholder: (context, url) => Center(
+                        child: LoadingAnimationWidget.twoRotatingArc(
+                          size: 80,
+                          color: Colours.app_main,
+                        ),
+                      ),
+                    ),
             ),
           ),
         ),
-
-        model?.user != null ? Container() :
-        Positioned(
-            left: 280,
-            top: 450,
-            child: InkWell(
-              onTap:(){
-                Navigator.pushNamed(context, Move.bookViewerPage, arguments: model?.book);
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colours.app_sub_white,
-                    width: 3,
+        model?.user != null
+            ? Container()
+            : Positioned(
+                left: 280,
+                top: 520,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, Move.bookViewerPage,
+                        arguments: model?.book);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 15.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colours.app_sub_white,
+                        width: 3,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Text(
+                      "미리보기",
+                      style: TextStyle(
+                        fontSize: Dimens.font_sp16,
+                        color: Colours.app_sub_white,
+                      ),
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Text(
-                  "미리보기",
-                  style: TextStyle(
-                    fontSize: Dimens.font_sp16,
-                    color: Colours.app_sub_white,
-                  ),
-                ),
-              ),
-            )),
+                )),
       ],
     );
   }
