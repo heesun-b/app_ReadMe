@@ -34,10 +34,10 @@ class ReviewPageViewModel extends StateNotifier<ReviewPageModel?> {
 
   void delete(ResponseDTO responseDTO, int id) async {
     if(responseDTO.code == 1) {
-      DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
       state = state!.copyWith(
         reviewList: state!.reviewList..removeWhere((element) => element.id == id)
       );
+      DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
     } else {
       DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
     }
