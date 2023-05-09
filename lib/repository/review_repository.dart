@@ -57,7 +57,7 @@ class ReviewRepository {
   Future<ResponseDTO> reviewDelete(int id) async {
     try{
       var dio = await MyHttp.getSecurity();
-      Response response = await dio.delete("/reviews/$id}");
+      Response response = await dio.delete("/reviews/$id");
       if(response.statusCode == 200) {
         return ResponseDTO.fromJson(response.data);
       } else {

@@ -26,7 +26,12 @@ class UserPage extends ConsumerWidget {
             children: [
               _logout(ref),
               _header(model?.user?.username ?? ""),
-              model == null || model.user == null  ? _loginButton(context) : (model.user!.isMembership ?   UserPageMembershipInfo() : _membershipCard(context)),
+              model == null || model.user == null
+                  ? _loginButton(context)
+                  : model.user!.isMembership
+                      // ?   UserPageMembershipInfo()
+                      ? _membershipCard(context)
+                      : _membershipCard(context),
               UserPageMainBtton(),
               UserPageSubButton(),
               UserPageInfoBtton(),
