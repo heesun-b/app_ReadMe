@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:readme_app/controller/review_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
-import 'package:readme_app/model/book_detail_mock_data.dart';
-import 'package:readme_app/model/review_mock_data.dart';
 import 'package:readme_app/util/star_score/star_score.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page_view_model.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/components/book_detail_review_form.dart';
@@ -18,7 +17,6 @@ class BookDetailPageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     BookDetailPageModel? model = ref.watch(bookDetailPageProvider(bookId));
-
     return Column(
       children: [
         // Row(
@@ -174,7 +172,7 @@ class BookDetailPageBody extends ConsumerWidget {
                   const SizedBox(height: 15),
                   Column(
                     children: List.generate(
-                      model?.book.reviews?.length ?? 0,
+                      model?.book.reviews.content.length ?? 0,
                       (index) {
                         return Container(
                           margin: const EdgeInsets.symmetric(vertical: 5),
@@ -196,9 +194,9 @@ class BookDetailPageBody extends ConsumerWidget {
                               children: [
                                 Row(
                                   children: [
-                                    StarScore(score: model?.book.reviews?[index].stars ?? 0),
+                                    StarScore(score: model?.book.reviews.content[index].stars ?? 0),
                                     Spacer(),
-                                    Text("${model?.book.reviews?[index].user.username ?? ""} ", style: TextStyle(
+                                    Text("${model?.book.reviews.content[index].user.username ?? ""} ", style: TextStyle(
                                         fontWeight: FontWeight.bold
                                     ),),
                                   ],
@@ -208,17 +206,32 @@ class BookDetailPageBody extends ConsumerWidget {
                                   children: [
                                     const Spacer(),
 
-                                    Text("${model?.book.reviews?[index].writeTime ?? ""}")
+                                    Text(model?.book.reviews.content[index].writeTime ?? "")
                                   ],
                                 ),
                                 const SizedBox(height: 10),
-                                Text(model?.book.reviews?[index].content ?? ""),
+                                Text(model?.book.reviews.content[index].content ?? ""),
                               ],
                             ),
                           ),
                         );
                       },
                     ),
+                  ),
+
+
+                  model?.last ?? true ? const SizedBox() : Column(
+                    children: [
+                      const SizedBox(height: 30),
+                      Center(
+                        child: TextButton(
+                          onPressed: () {
+                            ref.read(reviewControllerProvider).getReviews(model.book.id, model.pageable.pageNumber + 1);
+                          },
+                          child: Center(child: Text("( ${model!.pageable.pageNumber + 1} / ${model.totalPages} ) 더보기")),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 40),
                   const Divider(

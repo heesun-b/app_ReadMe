@@ -33,7 +33,7 @@ mixin _$BookDetailDTO {
   bool get isPurchase => throw _privateConstructorUsedError;
   FileDTO get epubFile => throw _privateConstructorUsedError;
   FileDTO get coverFile => throw _privateConstructorUsedError;
-  List<Review>? get reviews => throw _privateConstructorUsedError;
+  ReviewDTO get reviews => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -61,13 +61,14 @@ abstract class $BookDetailDTOCopyWith<$Res> {
       bool isPurchase,
       FileDTO epubFile,
       FileDTO coverFile,
-      List<Review>? reviews});
+      ReviewDTO reviews});
 
   $PublisherCopyWith<$Res> get publisher;
   $BigCategoryCopyWith<$Res> get bigCategory;
   $SmallCategoryCopyWith<$Res> get smallCategory;
   $FileDTOCopyWith<$Res> get epubFile;
   $FileDTOCopyWith<$Res> get coverFile;
+  $ReviewDTOCopyWith<$Res> get reviews;
 }
 
 /// @nodoc
@@ -96,7 +97,7 @@ class _$BookDetailDTOCopyWithImpl<$Res, $Val extends BookDetailDTO>
     Object? isPurchase = null,
     Object? epubFile = null,
     Object? coverFile = null,
-    Object? reviews = freezed,
+    Object? reviews = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -151,10 +152,10 @@ class _$BookDetailDTOCopyWithImpl<$Res, $Val extends BookDetailDTO>
           ? _value.coverFile
           : coverFile // ignore: cast_nullable_to_non_nullable
               as FileDTO,
-      reviews: freezed == reviews
+      reviews: null == reviews
           ? _value.reviews
           : reviews // ignore: cast_nullable_to_non_nullable
-              as List<Review>?,
+              as ReviewDTO,
     ) as $Val);
   }
 
@@ -197,6 +198,14 @@ class _$BookDetailDTOCopyWithImpl<$Res, $Val extends BookDetailDTO>
       return _then(_value.copyWith(coverFile: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReviewDTOCopyWith<$Res> get reviews {
+    return $ReviewDTOCopyWith<$Res>(_value.reviews, (value) {
+      return _then(_value.copyWith(reviews: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -221,7 +230,7 @@ abstract class _$$_BookDetailDTOCopyWith<$Res>
       bool isPurchase,
       FileDTO epubFile,
       FileDTO coverFile,
-      List<Review>? reviews});
+      ReviewDTO reviews});
 
   @override
   $PublisherCopyWith<$Res> get publisher;
@@ -233,6 +242,8 @@ abstract class _$$_BookDetailDTOCopyWith<$Res>
   $FileDTOCopyWith<$Res> get epubFile;
   @override
   $FileDTOCopyWith<$Res> get coverFile;
+  @override
+  $ReviewDTOCopyWith<$Res> get reviews;
 }
 
 /// @nodoc
@@ -259,7 +270,7 @@ class __$$_BookDetailDTOCopyWithImpl<$Res>
     Object? isPurchase = null,
     Object? epubFile = null,
     Object? coverFile = null,
-    Object? reviews = freezed,
+    Object? reviews = null,
   }) {
     return _then(_$_BookDetailDTO(
       id: null == id
@@ -314,10 +325,10 @@ class __$$_BookDetailDTOCopyWithImpl<$Res>
           ? _value.coverFile
           : coverFile // ignore: cast_nullable_to_non_nullable
               as FileDTO,
-      reviews: freezed == reviews
-          ? _value._reviews
+      reviews: null == reviews
+          ? _value.reviews
           : reviews // ignore: cast_nullable_to_non_nullable
-              as List<Review>?,
+              as ReviewDTO,
     ));
   }
 }
@@ -339,8 +350,7 @@ class _$_BookDetailDTO with DiagnosticableTreeMixin implements _BookDetailDTO {
       required this.isPurchase,
       required this.epubFile,
       required this.coverFile,
-      final List<Review>? reviews})
-      : _reviews = reviews;
+      required this.reviews});
 
   factory _$_BookDetailDTO.fromJson(Map<String, dynamic> json) =>
       _$$_BookDetailDTOFromJson(json);
@@ -371,15 +381,8 @@ class _$_BookDetailDTO with DiagnosticableTreeMixin implements _BookDetailDTO {
   final FileDTO epubFile;
   @override
   final FileDTO coverFile;
-  final List<Review>? _reviews;
   @override
-  List<Review>? get reviews {
-    final value = _reviews;
-    if (value == null) return null;
-    if (_reviews is EqualUnmodifiableListView) return _reviews;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final ReviewDTO reviews;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -433,7 +436,7 @@ class _$_BookDetailDTO with DiagnosticableTreeMixin implements _BookDetailDTO {
                 other.epubFile == epubFile) &&
             (identical(other.coverFile, coverFile) ||
                 other.coverFile == coverFile) &&
-            const DeepCollectionEquality().equals(other._reviews, _reviews));
+            (identical(other.reviews, reviews) || other.reviews == reviews));
   }
 
   @JsonKey(ignore: true)
@@ -453,7 +456,7 @@ class _$_BookDetailDTO with DiagnosticableTreeMixin implements _BookDetailDTO {
       isPurchase,
       epubFile,
       coverFile,
-      const DeepCollectionEquality().hash(_reviews));
+      reviews);
 
   @JsonKey(ignore: true)
   @override
@@ -484,7 +487,7 @@ abstract class _BookDetailDTO implements BookDetailDTO {
       required final bool isPurchase,
       required final FileDTO epubFile,
       required final FileDTO coverFile,
-      final List<Review>? reviews}) = _$_BookDetailDTO;
+      required final ReviewDTO reviews}) = _$_BookDetailDTO;
 
   factory _BookDetailDTO.fromJson(Map<String, dynamic> json) =
       _$_BookDetailDTO.fromJson;
@@ -516,7 +519,7 @@ abstract class _BookDetailDTO implements BookDetailDTO {
   @override
   FileDTO get coverFile;
   @override
-  List<Review>? get reviews;
+  ReviewDTO get reviews;
   @override
   @JsonKey(ignore: true)
   _$$_BookDetailDTOCopyWith<_$_BookDetailDTO> get copyWith =>

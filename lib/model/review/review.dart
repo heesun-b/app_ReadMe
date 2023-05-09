@@ -6,7 +6,6 @@ class Review {
   final User user;
   final double stars;
   final String content;
-  final String status;
   final String writeTime;
 
   Review(
@@ -15,7 +14,6 @@ class Review {
       required this.user,
       required this.stars,
       required this.content,
-      required this.status,
       required this.writeTime,
     });
 
@@ -24,7 +22,6 @@ class Review {
         "user": user.toJson(),
         "stars": stars,
         "content": content,
-        "status": status,
         "writeTime": writeTime
       };
 
@@ -33,6 +30,5 @@ class Review {
         user = User.fromJson(json["user"]),
         stars = json["stars"],
         content = json["content"],
-        writeTime = json["writeTime"],
-        status = json["status"];
+        writeTime = json["writeTime"];
 }

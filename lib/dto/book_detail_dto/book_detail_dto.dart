@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:readme_app/dto/review_dto/review_dto.dart';
 import 'package:readme_app/model/big_category/big_category.dart';
 import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/model/file_info/file_dto.dart';
@@ -28,7 +29,7 @@ class BookDetailDTO with _$BookDetailDTO {
     required bool isPurchase,
     required FileDTO epubFile,
     required FileDTO coverFile,
-    List<Review>? reviews,
+    required ReviewDTO reviews,
   }) = _BookDetailDTO;
 
   factory BookDetailDTO.fromJson(Map<String, Object?> json) => _$BookDetailDTOFromJson(json);

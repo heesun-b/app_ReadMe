@@ -23,9 +23,7 @@ _$_BookDetailDTO _$$_BookDetailDTOFromJson(Map<String, dynamic> json) =>
       isPurchase: json['isPurchase'] as bool,
       epubFile: FileDTO.fromJson(json['epubFile'] as Map<String, dynamic>),
       coverFile: FileDTO.fromJson(json['coverFile'] as Map<String, dynamic>),
-      reviews: (json['reviews'] as List<dynamic>?)
-          ?.map((e) => Review.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      reviews: ReviewDTO.fromJson(json['reviews'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_BookDetailDTOToJson(_$_BookDetailDTO instance) =>

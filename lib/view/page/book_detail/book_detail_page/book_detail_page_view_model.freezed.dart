@@ -18,6 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BookDetailPageModel {
   BookDetailDTO get book => throw _privateConstructorUsedError;
   set book(BookDetailDTO value) => throw _privateConstructorUsedError;
+  Pageable get pageable => throw _privateConstructorUsedError;
+  set pageable(Pageable value) => throw _privateConstructorUsedError;
+  bool get last => throw _privateConstructorUsedError;
+  set last(bool value) => throw _privateConstructorUsedError;
+  int get totalPages => throw _privateConstructorUsedError;
+  set totalPages(int value) => throw _privateConstructorUsedError;
   TableUser? get user => throw _privateConstructorUsedError;
   set user(TableUser? value) => throw _privateConstructorUsedError;
 
@@ -32,9 +38,15 @@ abstract class $BookDetailPageModelCopyWith<$Res> {
           BookDetailPageModel value, $Res Function(BookDetailPageModel) then) =
       _$BookDetailPageModelCopyWithImpl<$Res, BookDetailPageModel>;
   @useResult
-  $Res call({BookDetailDTO book, TableUser? user});
+  $Res call(
+      {BookDetailDTO book,
+      Pageable pageable,
+      bool last,
+      int totalPages,
+      TableUser? user});
 
   $BookDetailDTOCopyWith<$Res> get book;
+  $PageableCopyWith<$Res> get pageable;
 }
 
 /// @nodoc
@@ -51,6 +63,9 @@ class _$BookDetailPageModelCopyWithImpl<$Res, $Val extends BookDetailPageModel>
   @override
   $Res call({
     Object? book = null,
+    Object? pageable = null,
+    Object? last = null,
+    Object? totalPages = null,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
@@ -58,6 +73,18 @@ class _$BookDetailPageModelCopyWithImpl<$Res, $Val extends BookDetailPageModel>
           ? _value.book
           : book // ignore: cast_nullable_to_non_nullable
               as BookDetailDTO,
+      pageable: null == pageable
+          ? _value.pageable
+          : pageable // ignore: cast_nullable_to_non_nullable
+              as Pageable,
+      last: null == last
+          ? _value.last
+          : last // ignore: cast_nullable_to_non_nullable
+              as bool,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -72,6 +99,14 @@ class _$BookDetailPageModelCopyWithImpl<$Res, $Val extends BookDetailPageModel>
       return _then(_value.copyWith(book: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PageableCopyWith<$Res> get pageable {
+    return $PageableCopyWith<$Res>(_value.pageable, (value) {
+      return _then(_value.copyWith(pageable: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -82,10 +117,17 @@ abstract class _$$_BookDetailPageModelCopyWith<$Res>
       __$$_BookDetailPageModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BookDetailDTO book, TableUser? user});
+  $Res call(
+      {BookDetailDTO book,
+      Pageable pageable,
+      bool last,
+      int totalPages,
+      TableUser? user});
 
   @override
   $BookDetailDTOCopyWith<$Res> get book;
+  @override
+  $PageableCopyWith<$Res> get pageable;
 }
 
 /// @nodoc
@@ -100,6 +142,9 @@ class __$$_BookDetailPageModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? book = null,
+    Object? pageable = null,
+    Object? last = null,
+    Object? totalPages = null,
     Object? user = freezed,
   }) {
     return _then(_$_BookDetailPageModel(
@@ -107,6 +152,18 @@ class __$$_BookDetailPageModelCopyWithImpl<$Res>
           ? _value.book
           : book // ignore: cast_nullable_to_non_nullable
               as BookDetailDTO,
+      pageable: null == pageable
+          ? _value.pageable
+          : pageable // ignore: cast_nullable_to_non_nullable
+              as Pageable,
+      last: null == last
+          ? _value.last
+          : last // ignore: cast_nullable_to_non_nullable
+              as bool,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -118,16 +175,27 @@ class __$$_BookDetailPageModelCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_BookDetailPageModel implements _BookDetailPageModel {
-  _$_BookDetailPageModel({required this.book, this.user});
+  _$_BookDetailPageModel(
+      {required this.book,
+      required this.pageable,
+      required this.last,
+      required this.totalPages,
+      this.user});
 
   @override
   BookDetailDTO book;
+  @override
+  Pageable pageable;
+  @override
+  bool last;
+  @override
+  int totalPages;
   @override
   TableUser? user;
 
   @override
   String toString() {
-    return 'BookDetailPageModel(book: $book, user: $user)';
+    return 'BookDetailPageModel(book: $book, pageable: $pageable, last: $last, totalPages: $totalPages, user: $user)';
   }
 
   @JsonKey(ignore: true)
@@ -139,12 +207,25 @@ class _$_BookDetailPageModel implements _BookDetailPageModel {
 }
 
 abstract class _BookDetailPageModel implements BookDetailPageModel {
-  factory _BookDetailPageModel({required BookDetailDTO book, TableUser? user}) =
-      _$_BookDetailPageModel;
+  factory _BookDetailPageModel(
+      {required BookDetailDTO book,
+      required Pageable pageable,
+      required bool last,
+      required int totalPages,
+      TableUser? user}) = _$_BookDetailPageModel;
 
   @override
   BookDetailDTO get book;
   set book(BookDetailDTO value);
+  @override
+  Pageable get pageable;
+  set pageable(Pageable value);
+  @override
+  bool get last;
+  set last(bool value);
+  @override
+  int get totalPages;
+  set totalPages(int value);
   @override
   TableUser? get user;
   set user(TableUser? value);
