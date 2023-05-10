@@ -1,6 +1,8 @@
 import 'package:readme_app/dto/meta_dto/meta_dto.dart';
 import 'package:readme_app/model/small_category/small_category.dart';
 import 'package:readme_app/model/user/user.dart';
+import 'package:readme_app/sqflite/table/table_book.dart';
+import 'package:readme_app/sqflite/table/table_search.dart';
 import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/sqflite/model/big_category/big_category.dart';
 import 'package:readme_app/sqflite/table/table_main_tab.dart';
@@ -19,6 +21,64 @@ class MySqfliteInit {
     await _open();
     await _initInsert(metaDTO);
   }
+
+  static Future<void> insertBook (int id, String url) async {
+    List<Map> books = await _db!.query(TableName.books,
+        where: 'id = ?', whereArgs: [id]);
+    if (books.isEmpty) {
+      await _db!.insert(TableName.books,
+          {
+            'id': id, 'url': url, 'createdAt': DateTime.now().millisecondsSinceEpoch
+          }
+      );
+    } else {
+      await _db!.delete(TableName.books, where: 'id = ?', whereArgs: [id]);
+      await _db!.insert(TableName.books,
+          {
+            'id': id, 'url': url, 'createdAt': DateTime.now().millisecondsSinceEpoch
+          }
+      );
+    }
+  }
+
+  static Future<void> insertSearchText (String searchText) async {
+    List<Map> books = await _db!.query(TableName.search, where: 'searchText = ?', whereArgs: [searchText]);
+    if (books.isEmpty) {
+      await _db!.insert(TableName.search,
+          {
+            'searchText': searchText, 'createdAt': DateTime.now().millisecondsSinceEpoch
+          }
+      );
+    } else {
+      await _db!.delete(TableName.search, where: 'searchText = ?', whereArgs: [searchText]);
+      await _db!.insert(TableName.search,
+          {
+            'searchText': searchText, 'createdAt': DateTime.now().millisecondsSinceEpoch
+          }
+      );
+    }
+  }
+
+  static Future<void> deleteSearchText (String searchText) async {
+    await _db!.delete(TableName.search, where: 'searchText = ?', whereArgs: [searchText]);
+  }
+
+  static Future<List<TableSearch>> getSearchTextOrderByCreatedAtDesc() async {
+    final List<Map> maps = await _db!.query(
+      TableName.search,
+      orderBy: 'createdAt DESC',
+    );
+    return maps.map((e) => TableSearch.fromJson(e as Map<String, dynamic>)).toList();
+  }
+
+  static Future<List<TableBook>> getBooksOrderByCreatedAtDesc() async {
+    final List<Map> maps = await _db!.query(
+      TableName.books,
+      orderBy: 'createdAt DESC',
+    );
+    return maps.map((e) => TableBook.fromJson(e as Map<String, dynamic>)).toList();
+  }
+
 
   static Future<void> insertUser (User user) async{
     await _db!.delete(TableName.user);
@@ -127,6 +187,23 @@ class MySqfliteInit {
   }
 
   static void _createTableV1(Batch batch) {
+
+    batch.execute('DROP TABLE IF EXISTS ${TableName.search}');
+    batch.execute('''
+          create table ${TableName.search} (
+            searchText text,
+            createdAt TEXT not null)
+    ''');
+
+
+    batch.execute('DROP TABLE IF EXISTS ${TableName.books}');
+    batch.execute('''
+          create table ${TableName.books} (
+            id integer primary key,
+            url text not null,
+            createdAt TEXT not null)
+          ''');
+
     batch.execute('DROP TABLE IF EXISTS ${TableName.bigCategory}');
     batch.execute('''
           create table ${TableName.bigCategory} (
@@ -184,7 +261,7 @@ class MySqfliteInit {
 
   static Future _open() async {
     var databasesPath = await getDatabasesPath();
-    var path = join(databasesPath, "my_db7.db");
+    var path = join(databasesPath, "my_db11.db");
 
     _db = await openDatabase(path, version: 1,
       onCreate: (Database db, int version) async {
@@ -266,4 +343,7 @@ class TableName {
   static const String paymentTab = "PaymentTab";
   static const String storageBoxTab = "StorageBoxTab";
   static const String user = "User";
+  static const String books = "books";
+  static const String search = "searchTable";
+
 }

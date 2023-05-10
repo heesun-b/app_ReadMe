@@ -66,9 +66,10 @@ dependencies:
   firebase_core: ^2.10.0
   firebase_auth: ^4.4.2
   cached_network_image: ^3.2.3
-#  animated_bottom_navigation_bar: ^1.2.0
   http: ^0.13.3
   path_provider: ^2.0.14
+  firebase_messaging: ^14.5.0
+  flutter_local_notifications:
 
 
 dev_dependencies:

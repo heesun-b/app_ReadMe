@@ -6,6 +6,7 @@ import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
 import 'package:readme_app/dto/cart_dto/cart_dto.dart';
 import 'package:readme_app/dto/main_dto/main_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
+import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 import 'package:readme_app/sqflite/table/table_user.dart';
 
@@ -78,6 +79,24 @@ class BookRepository {
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
     }
   }
+
+  Future<ResponseDTO> searchKeyword(String keyword) async {
+    try {
+      var dio = await MyHttp.getCommon();
+      Response response = await dio.get("/search?keyword=$keyword");
+      if(response.statusCode == 200) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        List<Book> bookList = (responseDTO.data as List<dynamic>).map((e) => Book.fromJson(e)).toList();
+        responseDTO.data = bookList;
+        return responseDTO;
+      } else {
+        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
+      }
+    } catch (e) {
+      return ResponseDTO(code: -1, msg: "실패 : ${e}");
+    }
+  }
+
 
   Future<ResponseDTO> searchMainListPage(int page, String requestName, {int? bigCategory, int? smallCategory}) async {
     String endPoint = getEndPoint(requestName, bigCategory, smallCategory);

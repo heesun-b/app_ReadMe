@@ -1,6 +1,7 @@
 
 
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -46,10 +47,18 @@ class UserRepository {
       final currentUser = _auth.currentUser;
       /// 4.사용자 id토큰 가져오기
       final idToken = await currentUser?.getIdToken();
-      // log("Firebase Token: $idToken");
+      log("Firebase Token: ${googleAuth.idToken}");
 
+      String fcmToken = await SecureStorage.get(SecureStorageEnum.fcmToken) ?? "";
       /// 5. id토큰을 스프링 서버로 전달
-      Response response = await MyHttp.get().post("/login", data: {'idToken': idToken}); // 스프링에서 만든 join 로직에 요청
+      Response response = await MyHttp.get().post("/login",
+          data: {
+            'idToken': googleAuth.idToken,
+            'osType:': Platform.isAndroid ? "ANDROID" : "IOS",
+            'fcmToken': fcmToken,
+          }
+
+      ); // 스프링에서 만든 join 로직에 요청
 
       /// 6.스프링 서버로 부터 받은 토큰을 앱 서버로 전달
       final jwtToken = response.headers.value('Authorization');

@@ -1,9 +1,13 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:readme_app/controller/notification_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/http.dart';
@@ -22,6 +26,18 @@ void main() async {
 
   await Firebase.initializeApp();
   await SecureStorage.clear();
+
+  NotificationController notificationController = NotificationController();
+  var token = await notificationController.messaging.getToken();
+  SecureStorage.setKey(SecureStorageEnum.fcmToken, token ?? "");
+
+  AndroidNotificationChannel? androidNotificationChannel;
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  FirebaseMessaging.onMessage.listen((message) {
+    notificationController.fbMsgForegroundHandler(message, flutterLocalNotificationsPlugin, androidNotificationChannel);
+  });
 
   Widget failWidget = const MaterialApp(
     debugShowCheckedModeBanner: false,

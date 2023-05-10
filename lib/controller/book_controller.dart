@@ -5,6 +5,7 @@ import 'package:readme_app/main.dart';
 import 'package:readme_app/repository/book_repository.dart';
 import 'package:readme_app/view/page/category/category_page/category_page_view_model.dart';
 import 'package:readme_app/view/page/main/main_page/main_page_view_model.dart';
+import 'package:readme_app/view/page/search/search_list_page/search_list_page_view_model.dart';
 
 final bookControllerProvider = Provider<BookController>((ref) {
   return BookController(ref);
@@ -33,6 +34,14 @@ class BookController {
         ref.read(mainPageProvider.notifier).pageSearch(name, responseDTO, page);
         isDuplication = false;
     }
+  }
+
+  Future<void> search(
+      String searchKeyword
+  ) async {
+      ResponseDTO responseDTO =  await BookRepository().searchKeyword(searchKeyword);
+      ref.read(searchListPageProvider.notifier).search(responseDTO, searchKeyword);
+      isDuplication = false;
   }
 
 

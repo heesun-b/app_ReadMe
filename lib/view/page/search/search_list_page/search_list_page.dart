@@ -1,184 +1,116 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:readme_app/core/constants/use_icons.dart';
-import 'package:validators/validators.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:readme_app/controller/book_controller.dart';
+import 'package:readme_app/controller/cart_controller.dart';
+import 'package:readme_app/controller/scrap_controller.dart';
+import 'package:readme_app/view/components/book_card_view.dart';
+import 'package:readme_app/view/page/search/search_list_page/search_list_page_view_model.dart';
 import '../../../../core/constants/colours.dart';
 import '../../../../core/constants/hs_style_icons.dart';
 import '../../../../core/constants/jh_style_icons.dart';
 import '../../../../core/constants/yh_style_icons.dart';
-import '../../../../model/cart_mock_data.dart';
 
-class SearchListPage extends StatefulWidget {
-  SearchListPage({Key? key}) : super(key: key);
+class SearchListPage extends ConsumerWidget {
 
   @override
-  _SearchListPageState createState() => _SearchListPageState();
-}
-
-class _SearchListPageState extends State<SearchListPage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool recentlyWords = false;
-  var searchWords = "1984";
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
+  Widget build(BuildContext context, WidgetRef ref) {
+    SearchListPageModel? model = ref.watch(searchListPageProvider);
+    return SafeArea(
         child: Scaffold(
-            key: _scaffoldKey,
-            appBar: searchAppBar(),
-            body: searchWords == "1984"
-                ? buildSearchSuccess()
-                : buildRecentlyWords()
+            resizeToAvoidBottomInset: true,
+            key: model?.scaffoldKey,
+            appBar: searchAppBar(ref, context),
+            body: SingleChildScrollView(
+              child: model?.isShow ?? false
+                  ? buildSearchSuccess(ref)
+                  : buildRecentlyWords(ref),
+            )
         ),
-      ),
-    );
+      );
   }
 
-  Column buildRecentlyWords() {
+  Column buildRecentlyWords(WidgetRef ref) {
+    BookController bookController = ref.read(bookControllerProvider);
+    SearchListPageModel? model = ref.watch(searchListPageProvider);
+    var provider = ref.watch(searchListPageProvider.notifier);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 20.0, top: 10),
+
+        model?.tableSearches.isNotEmpty ?? false ?
+        const Padding(
+          padding: EdgeInsets.only(left: 20.0, top: 10),
           child: Text(
             "최근 검색어",
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
           ),
-        ),
+        ) : Container(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Container(
-            width: 400,
-            child: recentlyWords == true
-                ? Text("1. 1984")
-                : Center(
-                child: Text("최근 검색어가 없습니다.",
-                    style: TextStyle(fontSize: 16))),
-            margin: EdgeInsets.symmetric(vertical: 10),
-            height: 150,
-            decoration: BoxDecoration(
-              color: Colours.app_sub_grey,
-              borderRadius: BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-            ),
+            child: model?.tableSearches.isNotEmpty ?? false
+                ? ListView.builder(
+                    itemCount: model?.tableSearches.length ?? 0,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(model?.tableSearches[index].searchText ?? ""),
+                        trailing: IconButton(
+                          icon: const Icon(
+                            Icons.clear,
+                            color: Colours.app_sub_black,
+                          ),
+                          onPressed: () {
+                            provider.deleteSearchKeyword(model?.tableSearches[index].searchText ?? "");
+                          },
+                        ),
+                        onTap: () {
+                          bookController.search(model?.tableSearches[index].searchText ?? "");
+                        },
+                      );
+                    })
+                : Column(
+                    children: [
+                      SizedBox(height: 200),
+                      Center(child: Text("최근 검색어가 없습니다.",style: TextStyle(fontSize: 16)))
+                    ]
+                ),
           ),
         ),
       ],
     );
   }
 
-  Widget buildSearchSuccess() {
-    return SingleChildScrollView(
-      child: Container(
-        child: ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: 1,
-          itemBuilder: (context, index) {
-            return Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(color: Colours.app_sub_darkgrey),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Row(
-                  children: [
-                    CachedNetworkImage(
-                      height: 150,
-                      width: 100,
-                      placeholder: (context, url) => Center(
-                        child: LoadingAnimationWidget.twoRotatingArc(
-                          size: 50,
-                          color: Colours.app_main,
-                        ),
-                      ),
-                      imageUrl: cartList[0].image,
-                      fit: BoxFit.cover,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${cartList[index].title}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 100,
-                        ),
-                        Text(
-                          "${cartList[index].author} | ${cartList[index]
-                              .store}",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        Row(
-                          children: [
-                            YhIcons.star,
-                            Text(
-                              "${cartList[index].score}",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text("소장가 ${cartList[index].price}"),
-                            SizedBox(width: 100),
-                            IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: BoxConstraints(),
-                              onPressed: () {},
-                              icon: YhIcons.heart,
-                            ),
-                            IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: BoxConstraints(),
-                              onPressed: () {},
-                              icon: YhIcons.cart2,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+  Widget buildSearchSuccess(WidgetRef ref) {
+    SearchListPageModel? model = ref.watch(searchListPageProvider);
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: model?.books.length ?? 0,
+      itemBuilder: (context, index) {
+        return BookCardView(
+          book: model!.books[index],
+          addCart: () => ref.read(cartControllerProvider).insert(model.books[index].id),
+          chaneScrap: () => model.books[index].isHeart
+              ? ref.read(scrapControllerProvider).delete(model.books[index].id)
+              : ref.read(scrapControllerProvider).insert(model.books[index].id),
+        );
+      },
     );
   }
 
-  AppBar searchAppBar() {
+  AppBar searchAppBar(WidgetRef ref, BuildContext context) {
+    SearchListPageModel? model = ref.watch(searchListPageProvider);
+    BookController bookController = ref.read(bookControllerProvider);
     return AppBar(
       elevation: 1,
-      leading: IconButton(
-        icon: HsStyleIcons.back,
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
       actions: [
         IconButton(onPressed: () {
-          // 추가
+          FocusScope.of(context).unfocus();
+          if ((model?.textController.text ?? "") != "") {
+            bookController.search(model?.textController.text ?? "");
+          }
         }, icon: JHicons.search)
       ],
       backgroundColor: Colours.app_sub_white,
@@ -187,19 +119,19 @@ class _SearchListPageState extends State<SearchListPage> {
         children: [
           // Container(child: UseIcons.search),
           Form(
-            key: _formKey,
+            key: model?.formKey,
             child: Row(
               children: <Widget>[
                 Container(
                   width: 250,
-                  // height: 40,
-                  decoration: BoxDecoration(
-                    // color: Colours.app_main,
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(8.0),
                     ),
                   ),
                   child: TextFormField(
+                    focusNode: model?.focusNode,
+                    controller: model?.textController,
                     maxLines: 1,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
@@ -214,10 +146,8 @@ class _SearchListPageState extends State<SearchListPage> {
                       return null;
                     },
                     onFieldSubmitted: (value) {
-                      if (_formKey.currentState!.validate()) {
-                        // 검색어가 유효하면 검색 함수를 실행합니다.
-                        // search(value);
-                        return print("검색 성공!");
+                      if (value != "") {
+                        bookController.search(value);
                       }
                     },
                   ),
@@ -231,4 +161,5 @@ class _SearchListPageState extends State<SearchListPage> {
       centerTitle: true,
     );
   }
+
 }

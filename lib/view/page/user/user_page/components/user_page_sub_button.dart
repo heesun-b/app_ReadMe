@@ -29,22 +29,11 @@ class UserPageSubButton extends ConsumerWidget {
                     BorderSide(color: Colours.app_sub_grey, width: 2.0))),
             child: InkWell(
               onTap: () {
-                if(userModel?.user != null) {
-                  Navigator.pushNamed(context,  Move.notification);
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return   CustomDialog(title: "로그인 후 이용 가능",
-                          content: "로그인 하시겠습니까?",
-                          callback: () => Navigator.pushNamed(context, Move.loginPage));
-                    },
-                  );
-                }
+                Navigator.pushNamed(context,  Move.notification);
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   HsStyleIcons.alarm,
                   SizedBox(
                     height: 5,

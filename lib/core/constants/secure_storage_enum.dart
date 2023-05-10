@@ -1,3 +1,3 @@
 enum SecureStorageEnum {
-  jwtToken
+  jwtToken, fcmToken
 }

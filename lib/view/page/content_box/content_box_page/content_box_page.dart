@@ -4,7 +4,6 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
-import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/model/cart_mock_data.dart';
 
 class ContentBoxPage extends StatefulWidget {
@@ -35,19 +34,10 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
             ),
           ),
           centerTitle: true,
-          leading: Row(children: [
-            IconButton(
-                padding: EdgeInsets.only(left: 10, right: 5),
-                constraints: BoxConstraints(),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: HsStyleIcons.back),
-          ]),
-          bottom: const PreferredSize(
+          bottom: PreferredSize(
             preferredSize: Size.fromHeight(48.0),
             child: Column(
-              children: <Widget>[
+              children: const [
                 Divider(
                   height: 2,
                   color: Colours.app_sub_black,
@@ -77,10 +67,8 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
         ),
         body: TabBarView(
           children: <Widget>[
-            // buildRecentlyView(context),
-            // buildRecentlyView(context),
-            testWidget(),
-            testWidget(),
+            buildGridView(),
+            buildGridView(),
             buildGridView(),
             buildGridView(),
           ],
@@ -125,103 +113,4 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
         }
     );
   }
-
-
-  Widget testWidget() {
-    return Container(
-      child: Text("test"),
-    );
-  }
-  // todo 문제???????
-  // Widget buildRecentlyView(BuildContext context) {
-  //   return SingleChildScrollView(
-  //     child: Container(
-  //       child: ListView.builder(
-  //         physics: const NeverScrollableScrollPhysics(),
-  //         shrinkWrap: true,
-  //         itemCount: cartList.length,
-  //         itemBuilder: (context, index) {
-  //           return Container(
-  //             width: MediaQuery
-  //                 .of(context)
-  //                 .size
-  //                 .width,
-  //             decoration: const BoxDecoration(
-  //               border: Border(
-  //                 bottom: BorderSide(color: Colours.app_sub_darkgrey),
-  //               ),
-  //             ),
-  //             child: Padding(
-  //               padding: const EdgeInsets.all(20.0),
-  //               child: Row(
-  //                 children: [
-  //                   CachedNetworkImage(
-  //                     imageUrl: cartList[index].image ?? "",
-  //                     height: 150,
-  //                     width: 100,
-  //                     placeholder: (context, url) =>
-  //                         LoadingAnimationWidget.twoRotatingArc(
-  //                           size: 50,
-  //                           color: Colours.app_main,
-  //                         ),
-  //                   ),
-  //                   const SizedBox(
-  //                     width: 15,
-  //                   ),
-  //                   Column(
-  //                     mainAxisAlignment: MainAxisAlignment.center,
-  //                     crossAxisAlignment: CrossAxisAlignment.start,
-  //                     children: [
-  //                       Text(
-  //                         cartList[index].title,
-  //                         style: const TextStyle(
-  //                           fontWeight: FontWeight.w700,
-  //                           fontSize: 20,
-  //                         ),
-  //                         overflow: TextOverflow.ellipsis,
-  //                         maxLines: 3,
-  //                       ),
-  //                       Text(
-  //                         "${cartList[index].author} | ${cartList[index]
-  //                             .store}",
-  //                         style: const TextStyle(fontSize: 16),
-  //                       ),
-  //                       Row(
-  //                         children: [
-  //                           YhIcons.star,
-  //                           Text(
-  //                             cartList[index].score,
-  //                             style: const TextStyle(fontSize: 16),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                       Row(
-  //                         children: [
-  //                           Text("소장가 ${cartList[index].price}원"),
-  //                           Spacer(),
-  //                           IconButton(
-  //                             padding: EdgeInsets.zero,
-  //                             constraints: const BoxConstraints(),
-  //                             onPressed: () {},
-  //                             icon: HsStyleIcons.heart,
-  //                           ),
-  //                           IconButton(
-  //                             padding: EdgeInsets.zero,
-  //                             constraints: const BoxConstraints(),
-  //                             onPressed: () {},
-  //                             icon: YhIcons.cart2,
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           );
-  //         },
-  //       ),
-  //     ),
-  //   );
-  // }
 }
