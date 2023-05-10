@@ -91,7 +91,7 @@ Map<String, Widget Function(BuildContext)> getRouters(){
     Move.questionDetailPage: (context) => QuestionDetailPage(question: ModalRoute.of(context)!.settings.arguments as Question),
     Move.questionListPage: (context) => QuestionListPage(),
     Move.bookmarkListPage: (context) => BookmarkListPage(),
-    Move.questionDetailPage: (context) => ContentBoxPage(pageIndex: ModalRoute.of(context)!.settings.arguments as int),
+    Move.questionDetailPage: (context) => ContentBoxPage(),
 
 
 

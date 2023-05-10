@@ -57,16 +57,19 @@ class MainPage extends ConsumerWidget {
                 ),
                 actions: [
                   IconButton(
+                    visualDensity: VisualDensity.compact,
                     icon: YhIcons.alarm,
                     onPressed: () {
                       Navigator.pushNamed(context, Move.alarmPage);
                     },
                   ),
                   IconButton(
+                      visualDensity: VisualDensity.compact,
                       icon: YhIcons.cart,
                       onPressed: () {
                         Navigator.pushNamed(context, Move.cartPage);
-                      })
+                      }),
+                  SizedBox(width: 20,)
                 ],
               ),
               SliverAppBar(

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
@@ -94,7 +95,7 @@ class BookCardView extends ConsumerWidget {
                   Row(
                     children: [
                       Text(
-                        "소장가 ${book.price}",
+                        "소장가 ${priceFormat(book.price)}",
                         style: const TextStyle(fontSize: Dimens.font_sp14),
                       ),
                       const SizedBox(width: 100),
@@ -123,5 +124,11 @@ class BookCardView extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+
+  String priceFormat(int price) {
+    var newPrice = NumberFormat('###,###,###,### 원');
+    return newPrice.format(price);
   }
 }

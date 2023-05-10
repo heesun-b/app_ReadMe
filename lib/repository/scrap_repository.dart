@@ -33,7 +33,6 @@ class ScrapRepository {
     }
   }
 
-
   Future<ResponseDTO> deleteScrap(int id) async {
     try {
       Dio dio = await MyHttp.getSecurity();
@@ -51,7 +50,6 @@ class ScrapRepository {
       return ResponseDTO(code: -1, msg: "실패 : ${e}");
     }
   }
-
 }
 
 

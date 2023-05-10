@@ -8,9 +8,9 @@ import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/model/cart_mock_data.dart';
 
 class ContentBoxPage extends StatefulWidget {
-  int pageIndex;
 
-   ContentBoxPage({this.pageIndex = 0, super.key});
+  ContentBoxPage({Key? key}) : super(key: key);
+
 
   @override
   State<ContentBoxPage> createState() => _ContentBoxPageState();
@@ -20,7 +20,7 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: widget.pageIndex,
+      initialIndex: 0,
       length: 4,
       child: Scaffold(
         appBar: AppBar(
@@ -126,6 +126,7 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
     );
   }
 
+  // todo 문제???????
   Widget buildRecentlyView(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
@@ -172,7 +173,7 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
                             fontSize: 20,
                           ),
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 100,
+                          maxLines: 3,
                         ),
                         Text(
                           "${cartList[index].author} | ${cartList[index]
