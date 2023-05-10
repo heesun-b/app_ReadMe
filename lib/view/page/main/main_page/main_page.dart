@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/move.dart';
@@ -23,10 +24,14 @@ class MainPage extends ConsumerWidget {
       height: MediaQuery.of(context).size.height,
       color: Colours.app_main,
       child: Center(
-        child: LoadingAnimationWidget.staggeredDotsWave(
-          size: 100,
-          color: Colours.app_sub_white,
-        ),
+        child:
+        Lottie.network(
+            'https://assets5.lottiefiles.com/packages/lf20_JvPPeJ.json',
+        width: 200, height: 300, fit: BoxFit.contain),
+        // LoadingAnimationWidget.staggeredDotsWave(
+        //   size: 100,
+        //   color: Colours.app_sub_white,
+        // ),
       ),
     )  :DefaultTabController(
       length: model.mainTabs.length ,

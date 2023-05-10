@@ -69,7 +69,7 @@ class MainPageViewModel extends StateNotifier<MainPageModel?> {
             mainPageModel = mainPageModel.copyWith(isLatestLast: data.last);
           }
         }
-        await Future.delayed(Duration(seconds: 3),);
+        await Future.delayed(Duration(seconds: 4),);
         state = mainPageModel;
       } else {
         DialogUtil.dialogShow(navigatorKey.currentContext!, response.msg);
