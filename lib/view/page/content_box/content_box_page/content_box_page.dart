@@ -195,7 +195,7 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
                               padding: EdgeInsets.zero,
                               constraints: const BoxConstraints(),
                               onPressed: () {},
-                              icon: YhIcons.heart,
+                              icon: HsStyleIcons.heart,
                             ),
                             IconButton(
                               padding: EdgeInsets.zero,

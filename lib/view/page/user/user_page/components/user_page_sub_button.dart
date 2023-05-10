@@ -29,7 +29,7 @@ class UserPageSubButton extends ConsumerWidget {
                     BorderSide(color: Colours.app_sub_grey, width: 2.0))),
             child: InkWell(
               onTap: () {
-                if(userModel != null) {
+                if(userModel?.user != null) {
                   Navigator.pushNamed(context,  Move.notification);
                 } else {
                   showDialog(
@@ -66,7 +66,7 @@ class UserPageSubButton extends ConsumerWidget {
                     BorderSide(color: Colours.app_sub_grey, width: 2.0))),
             child: InkWell(
               onTap: () {
-                if(userModel != null) {
+                if(userModel?.user != null) {
                   Navigator.pushNamed(context, Move.questionListPage);
                 } else {
                   showDialog(

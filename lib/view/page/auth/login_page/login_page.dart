@@ -40,8 +40,8 @@ class LoginPage extends ConsumerWidget {
                       Align(
                         alignment: Alignment.center,
                         child: Container(
-                          width: 180,
-                          height: 180,
+                          width: 150,
+                          height: 150,
                           child: Image.asset(
                             "assets/images/readme_short.png",
                             fit: BoxFit.cover,
@@ -89,9 +89,9 @@ class LoginPage extends ConsumerWidget {
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
                                 width: 320,
-                                height: 80,
+                                height: 100,
                                 child:
-                                Image.asset("assets/images/btn_google.png"),
+                                Image.asset("assets/images/btn_google.png" , fit: BoxFit.fitWidth,),
                               ),
                             ),
                             InkWell(
@@ -112,12 +112,6 @@ class LoginPage extends ConsumerWidget {
                       ),
                       SizedBox(
                         height: 100,
-                      ),
-                      Container(
-                        height: 40,
-                        child: Image.asset(
-                          "assets/images/readme_long.png",
-                        ),
                       ),
                     ],
                   ),

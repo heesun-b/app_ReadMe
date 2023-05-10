@@ -30,7 +30,7 @@ class UserPageMainBtton extends ConsumerWidget {
                       BorderSide(color: Colours.app_sub_grey, width: 2.0))),
               child: InkWell(
                 onTap: () {
-                  if(userModel != null) {
+                  if(userModel?.user != null) {
                     Navigator.pushNamed(context, Move.contentBoxPage);
                   } else {
                     showDialog(
@@ -67,7 +67,7 @@ class UserPageMainBtton extends ConsumerWidget {
                       BorderSide(color: Colours.app_sub_grey, width: 2.0))),
               child: InkWell(
                 onTap: () {
-                  if(userModel != null) {
+                  if(userModel?.user != null) {
                     Navigator.pushNamed(context,Move.paymentListPage);
                   } else {
                     showDialog(
@@ -103,7 +103,7 @@ class UserPageMainBtton extends ConsumerWidget {
                )),
               child: InkWell(
                 onTap: () {
-                  if(userModel != null) {
+                  if(userModel?.user != null) {
                     Navigator.pushNamed(context, Move.reviewPage);
                   } else {
                     showDialog(

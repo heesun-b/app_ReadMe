@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
@@ -122,7 +123,7 @@ class BookDetailInfo extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          "소장가 ${book?.price ?? "0"}원",
+          "소장가 ${priceFormat(book?.price ?? 0)}",
           style: TextStyle(
             fontSize: Dimens.font_sp20,
             color: Colours.app_sub_black,
@@ -130,5 +131,10 @@ class BookDetailInfo extends ConsumerWidget {
         ),
       ],
     );
+  }
+
+  String priceFormat(int price) {
+    var newPrice = NumberFormat('###,###,###,### 원');
+    return newPrice.format(price);
   }
 }
