@@ -1,14 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
-import 'package:readme_app/model/book/book.dart';
 import 'package:readme_app/model/qustion/question.dart';
 import 'package:readme_app/view/components/home_navigation_bar.dart';
 import 'package:readme_app/view/page/alarm/alarm_page/alarm_page.dart';
 import 'package:readme_app/view/page/app_info/app_info_page.dart';
 import 'package:readme_app/view/page/auth/login_page/login_page.dart';
-import 'package:readme_app/view/page/book_detail/book_detail_page/book_detail_page.dart';
 import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page.dart';
 import 'package:readme_app/view/page/cart/cart_page/cart_page.dart';
 import 'package:readme_app/view/page/category/category_page/category_page.dart';
@@ -75,12 +71,11 @@ Map<String, Widget Function(BuildContext)> getRouters(){
       );
     },
     Move.alarmPage: (context) => AlarmPage(),
-    Move.paymentPage: (context) => PaymentPage(),
+    Move.paymentPage: (context) => PaymentPage(paymentId: ModalRoute.of(context)!.settings.arguments as int),
     Move.cartPage: (context) => CartPage(),
     // Move.bookDetailPage: (context) => BookDetailPage(),
     // Move.modalButtonSheet: (context) => ModalButtonSheet(),
     Move.bookViewerPage: (context) {
-      // var bookDetailDTO = BookDetailDTO.fromJson(ModalRoute.of(context)!.settings.arguments as Map<String, dynamic> );
       return BookViewerPage(ModalRoute.of(context)!.settings.arguments as BookDetailDTO);
     },
     Move.membershipPage: (context) => MembershipPage(),

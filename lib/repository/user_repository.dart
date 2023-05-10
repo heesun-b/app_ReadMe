@@ -46,7 +46,7 @@ class UserRepository {
       final currentUser = _auth.currentUser;
       /// 4.사용자 id토큰 가져오기
       final idToken = await currentUser?.getIdToken();
-      log("Firebase Token: $idToken");
+      // log("Firebase Token: $idToken");
 
       /// 5. id토큰을 스프링 서버로 전달
       Response response = await MyHttp.get().post("/login", data: {'idToken': idToken}); // 스프링에서 만든 join 로직에 요청

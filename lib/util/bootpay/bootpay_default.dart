@@ -16,6 +16,7 @@ import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/repository/payment_repository.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 import 'package:readme_app/sqflite/table/table_user.dart';
+import 'package:readme_app/view/components/custom_dialog.dart';
 
 class BootPayDefault extends StatefulWidget {
 
@@ -81,17 +82,22 @@ class _BootPayDefaultState extends State<BootPayDefault> {
       // closeButton: Icon(Icons.close, size: 35.0, color: Colors.black54),
       onCancel: (String data) {
         log('------- onCancel: $data');
+        DialogUtil.dialogShow(context, "결제 취소");
+        Navigator.pushNamedAndRemoveUntil(context, Move.navigationBar, (route) => false);
       },
       onError: (String data) {
         log('------- onCancel: $data');
+        DialogUtil.dialogShow(context, "결제 취소");
       },
       onClose: () {
         log('------- onClose');
         Bootpay().dismiss(context); //명시적으로 부트페이 뷰 종료 호출
-        Navigator.pop(context);
+        Navigator.pushNamedAndRemoveUntil(context, Move.paymentPage, (route) => false);
       },
       onIssued: (String data) {
         log('------- onIssued: $data');
+        DialogUtil.dialogShow(context, "결제 취소");
+
       },
       onConfirm: (String data) {
         /**
@@ -113,7 +119,6 @@ class _BootPayDefaultState extends State<BootPayDefault> {
       onDone: (String data) {
         log('------- onDone: $data');
          Navigator.pushNamedAndRemoveUntil(context, Move.paymentPage, (route) => false);
-
       },
     );
   }

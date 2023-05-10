@@ -126,9 +126,9 @@ class BookCardView extends ConsumerWidget {
     );
   }
 
-
   String priceFormat(int price) {
     var newPrice = NumberFormat('###,###,###,### 원');
     return newPrice.format(price);
   }
+
 }

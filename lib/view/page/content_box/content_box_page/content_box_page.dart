@@ -77,8 +77,10 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
         ),
         body: TabBarView(
           children: <Widget>[
-            buildRecentlyView(context),
-            buildRecentlyView(context),
+            // buildRecentlyView(context),
+            // buildRecentlyView(context),
+            testWidget(),
+            testWidget(),
             buildGridView(),
             buildGridView(),
           ],
@@ -117,8 +119,6 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
                       color: Colours.app_main,
                     ),
                   ),
-
-
             ),
 
           );
@@ -126,96 +126,102 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
     );
   }
 
-  // todo 문제???????
-  Widget buildRecentlyView(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: cartList.length,
-          itemBuilder: (context, index) {
-            return Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(color: Colours.app_sub_darkgrey),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl: cartList[index].image ?? "",
-                      height: 150,
-                      width: 100,
-                      placeholder: (context, url) =>
-                          LoadingAnimationWidget.twoRotatingArc(
-                            size: 50,
-                            color: Colours.app_main,
-                          ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          cartList[index].title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                        ),
-                        Text(
-                          "${cartList[index].author} | ${cartList[index]
-                              .store}",
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                        Row(
-                          children: [
-                            YhIcons.star,
-                            Text(
-                              cartList[index].score,
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text("소장가 ${cartList[index].price}원"),
-                            Spacer(),
-                            IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(),
-                              onPressed: () {},
-                              icon: HsStyleIcons.heart,
-                            ),
-                            IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(),
-                              onPressed: () {},
-                              icon: YhIcons.cart2,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+
+  Widget testWidget() {
+    return Container(
+      child: Text("test"),
     );
   }
+  // todo 문제???????
+  // Widget buildRecentlyView(BuildContext context) {
+  //   return SingleChildScrollView(
+  //     child: Container(
+  //       child: ListView.builder(
+  //         physics: const NeverScrollableScrollPhysics(),
+  //         shrinkWrap: true,
+  //         itemCount: cartList.length,
+  //         itemBuilder: (context, index) {
+  //           return Container(
+  //             width: MediaQuery
+  //                 .of(context)
+  //                 .size
+  //                 .width,
+  //             decoration: const BoxDecoration(
+  //               border: Border(
+  //                 bottom: BorderSide(color: Colours.app_sub_darkgrey),
+  //               ),
+  //             ),
+  //             child: Padding(
+  //               padding: const EdgeInsets.all(20.0),
+  //               child: Row(
+  //                 children: [
+  //                   CachedNetworkImage(
+  //                     imageUrl: cartList[index].image ?? "",
+  //                     height: 150,
+  //                     width: 100,
+  //                     placeholder: (context, url) =>
+  //                         LoadingAnimationWidget.twoRotatingArc(
+  //                           size: 50,
+  //                           color: Colours.app_main,
+  //                         ),
+  //                   ),
+  //                   const SizedBox(
+  //                     width: 15,
+  //                   ),
+  //                   Column(
+  //                     mainAxisAlignment: MainAxisAlignment.center,
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                     children: [
+  //                       Text(
+  //                         cartList[index].title,
+  //                         style: const TextStyle(
+  //                           fontWeight: FontWeight.w700,
+  //                           fontSize: 20,
+  //                         ),
+  //                         overflow: TextOverflow.ellipsis,
+  //                         maxLines: 3,
+  //                       ),
+  //                       Text(
+  //                         "${cartList[index].author} | ${cartList[index]
+  //                             .store}",
+  //                         style: const TextStyle(fontSize: 16),
+  //                       ),
+  //                       Row(
+  //                         children: [
+  //                           YhIcons.star,
+  //                           Text(
+  //                             cartList[index].score,
+  //                             style: const TextStyle(fontSize: 16),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                       Row(
+  //                         children: [
+  //                           Text("소장가 ${cartList[index].price}원"),
+  //                           Spacer(),
+  //                           IconButton(
+  //                             padding: EdgeInsets.zero,
+  //                             constraints: const BoxConstraints(),
+  //                             onPressed: () {},
+  //                             icon: HsStyleIcons.heart,
+  //                           ),
+  //                           IconButton(
+  //                             padding: EdgeInsets.zero,
+  //                             constraints: const BoxConstraints(),
+  //                             onPressed: () {},
+  //                             icon: YhIcons.cart2,
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           );
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
 }
