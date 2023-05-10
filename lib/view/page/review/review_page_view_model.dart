@@ -45,7 +45,7 @@ class ReviewPageViewModel extends StateNotifier<ReviewPageModel?> {
             title: "리뷰 삭제 완료",
             content: responseDTO.msg ?? "리뷰 삭제가 완료되었습니다.",
             callback: () {
-              Navigator.pop(context);
+              Navigator.pushNamedAndRemoveUntil(context, Move.reviewPage, (route) => false);
             },
           );
         },

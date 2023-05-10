@@ -4,12 +4,13 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
-import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/model/cart_mock_data.dart';
 
 class ContentBoxPage extends StatefulWidget {
-  const ContentBoxPage({super.key});
+  int pageIndex;
+
+   ContentBoxPage({this.pageIndex = 0, super.key});
 
   @override
   State<ContentBoxPage> createState() => _ContentBoxPageState();
@@ -19,7 +20,7 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 2,
+      initialIndex: widget.pageIndex,
       length: 4,
       child: Scaffold(
         appBar: AppBar(
@@ -152,11 +153,9 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
                       height: 150,
                       width: 100,
                       placeholder: (context, url) =>
-                          Center(
-                            child: LoadingAnimationWidget.twoRotatingArc(
-                              size: 50,
-                              color: Colours.app_main,
-                            ),
+                          LoadingAnimationWidget.twoRotatingArc(
+                            size: 50,
+                            color: Colours.app_main,
                           ),
                     ),
                     const SizedBox(
@@ -167,8 +166,8 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${cartList[index].title}",
-                          style: TextStyle(
+                          cartList[index].title,
+                          style: const TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 20,
                           ),
