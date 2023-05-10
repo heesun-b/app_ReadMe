@@ -102,7 +102,7 @@ class _BookmarkListPageState extends State<BookmarkListPage> {
       centerTitle: true,
       leading: IconButton(icon: HsStyleIcons.back,
       onPressed: () {
-        // Navigator.pushNamed(context, "/viewer", arguments: {"bookDetail" : bookDetail});
+       Navigator.pop(context);
       }),
       leadingWidth: 50,
     );

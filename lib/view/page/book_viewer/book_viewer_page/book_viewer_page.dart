@@ -139,7 +139,7 @@ class BookViewerPage extends ConsumerWidget {
 
   Widget buildBookmark(WidgetRef ref) {
     return Visibility(
-      visible: ref.read(bookViewerPageProvider(book))!.isBookMark,
+      visible: ref.read(bookViewerPageProvider(book))?.isBookMark ?? false,
       child: Padding(
         padding: const EdgeInsets.only(right: 20),
         child: Align(

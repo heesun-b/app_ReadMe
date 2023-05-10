@@ -135,7 +135,6 @@ class _BootPayDefaultState extends State<BootPayDefault> {
       item.name = widget.cartBookList[index].cartDTO.book.title;
       item.qty = 1;
       item.price = widget.cartBookList[index].cartDTO.book.price.toDouble();
-      //TODO id 어떻게 할지 물어보기
       item.id = widget.cartBookList[index].cartDTO.book.id.toString();
       itemList.add(item);
     });
@@ -163,7 +162,7 @@ class _BootPayDefaultState extends State<BootPayDefault> {
         .toString();
 
     payload.metadata = {
-      "id" : paymentDTO.id,
+      "paymentId" : paymentDTO.id,
       "type" : paymentDTO.type,
     }; // 전달할 파라미터, 결제 후 되돌려 주는 값
 
@@ -171,9 +170,7 @@ class _BootPayDefaultState extends State<BootPayDefault> {
     TableUser? tableUser = await MySqfliteInit.getUser();
 
     user.email= tableUser?.username ?? "";
-    print("${user.email}");
     user.id = tableUser?.id.toString() ?? "";
-    print("${user.id}");
 
     Extra extra = Extra(); // 결제 옵션
     extra.separatelyConfirmed = true;

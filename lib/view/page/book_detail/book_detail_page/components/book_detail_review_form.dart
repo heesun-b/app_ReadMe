@@ -47,7 +47,7 @@ class BookDetailReviewForm extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: RatingBar.builder(
                     initialRating: model?.stars ?? 0,
                     minRating: 0,
@@ -65,7 +65,7 @@ class BookDetailReviewForm extends ConsumerWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
                     controller: model?.textEditingController,
                     decoration: const InputDecoration(
@@ -84,8 +84,12 @@ class BookDetailReviewForm extends ConsumerWidget {
                         // 등록 후 위치 이동
                         ref.read(reviewControllerProvider).save(
                             model?.book.id ?? 0, model?.stars ?? 0.0,
-                            model?.textEditingController.text ?? ""
+                            model?.textEditingController.text ?? "",
+                            model?.pageable.pageNumber ?? 0,
+                            model?.pageable.pageSize ?? 0
                         );
+
+                        model?.textEditingController.clear();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colours.app_sub_black,

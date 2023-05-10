@@ -31,14 +31,14 @@ class ReviewController {
     }
   }
 
-  Future<void> save(int bookId, double stars, String content) async {
-    ResponseDTO responseDTO = await ReviewRepository().save(bookId, stars, content);
-    if (responseDTO.code == 401) {
+  Future<void> save(int bookId, double stars, String content, int pageNumber, int size) async {
+
+    ResponseDTO responseDTO = await ReviewRepository().save(bookId, stars, content, pageNumber, size);
+    if (responseDTO.code == 401 || responseDTO.code == 403) {
       Navigator.pushNamedAndRemoveUntil(mContext!, Move.loginPage, (route) => false);
     } else if (responseDTO.code == 1) {
-      ReviewDTO reviewDTO = responseDTO.data;
-      responseDTO.data = reviewDTO;
-      ref.read(bookDetailPageProvider(bookId).notifier).getReviews(mContext!, responseDTO, isRefresh: true);
+      ref.read(bookDetailPageProvider(bookId).notifier).getReviews(mContext!, responseDTO, isRefresh: false);
+      // ref.read(bookDetailPageProvider(bookId).notifier).save(responseDTO);
     } else {
       ref.read(bookDetailPageProvider(bookId).notifier).getReviews(mContext!, responseDTO);
     }

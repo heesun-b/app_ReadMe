@@ -136,6 +136,8 @@ class BookRepository {
         CartDTO cartDTO = CartDTO.fromJson(responseDTO.data);
         responseDTO.data = cartDTO;
         return responseDTO;
+      } else if (response.statusCode == 400){
+        return ResponseDTO(code: 400, msg: response.statusMessage);
       } else {
         return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
       }

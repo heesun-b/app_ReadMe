@@ -119,7 +119,7 @@ class BookDetailPageBody extends ConsumerWidget {
                                     ),),
                                   ],
                                 ),
-                                // const SizedBox(height: 10),
+                                // const SizedBox(height: 10),ㄹ더
                                 Row(
                                   children: [
                                     const Spacer(),
@@ -136,8 +136,6 @@ class BookDetailPageBody extends ConsumerWidget {
                       },
                     ),
                   ),
-
-
                   model?.last ?? true ? const SizedBox() : Column(
                     children: [
                       const SizedBox(height: 20),

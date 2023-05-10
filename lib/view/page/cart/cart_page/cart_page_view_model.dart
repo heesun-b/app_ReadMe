@@ -140,8 +140,9 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
       List<UseCartDTO> newUseCartList = [...state!.cartBooks];
       newUseCartList.add(useCartDTO);
       state = state!.copyWith(cartBooks: newUseCartList, isAllChecked: false);
-    } else
-    { print(responseDTO.msg);
+    } else if (responseDTO.code == 400) {
+      DialogUtil.dialogShow(context, "이미 구매한 도서입니다.");
+    } else { print(responseDTO.msg);
       DialogUtil.dialogShow(context, "장바구니 추가 실패");
     }
 

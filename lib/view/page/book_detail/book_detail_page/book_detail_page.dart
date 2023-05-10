@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:lottie/lottie.dart';
 import 'package:readme_app/controller/cart_controller.dart';
 import 'package:readme_app/controller/scrap_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
@@ -20,9 +22,20 @@ class BookDetailPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     BookDetailPageModel? model = ref.watch(bookDetailPageProvider(bookId));
 
-    return Scaffold(
+    return  model == null ? Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      color: Colours.app_main,
+      child: Center(
+        child:
+        LoadingAnimationWidget.staggeredDotsWave(
+          size: 100,
+          color: Colours.app_sub_white,
+        ),
+      ),
+    ) : Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
+        child : CustomScrollView(
           slivers: [
             SliverAppBar(
               elevation: 0,
@@ -96,18 +109,18 @@ class BookDetailPage extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            model?.user == null ? Container(child: YhIcons.heart,)
+            model.user == null ? Container(child: YhIcons.heart,)
                 : IconButton(
                   icon:
-                    model?.book.isHeart ?? false ? YhIcons.heartFill : YhIcons.heart,
+                    model.book.isHeart ?? false ? YhIcons.heartFill : YhIcons.heart,
                   onPressed: () {
-                    model?.book.isHeart ?? false
-                    ? ref.read(scrapControllerProvider).delete(model?.book.id ?? 0)
-                        : ref.read(scrapControllerProvider).insert(model?.book.id?? 0);
+                    model.book.isHeart ?? false
+                    ? ref.read(scrapControllerProvider).delete(model.book.id ?? 0)
+                        : ref.read(scrapControllerProvider).insert(model.book.id?? 0);
                   },
                 ),
             SizedBox(width: 15),
-                (model?.user?.isMembership ?? false) || (model?.book.isPurchase ?? false)
+                (model.user?.isMembership ?? false) || (model.book.isPurchase ?? false)
                     ?  Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),

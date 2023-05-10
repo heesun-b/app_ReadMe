@@ -1,11 +1,6 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:readme_app/core/constants/secure_storage.dart';
-import 'package:readme_app/core/constants/secure_storage_enum.dart';
 import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/dto/review_dto/review_dto.dart';
@@ -58,7 +53,7 @@ class BookDetailViewModel extends StateNotifier<BookDetailPageModel?> {
   }
 
   void getReviews(BuildContext context,
-      ResponseDTO responseDTO, {isRefresh = false}) async {
+      ResponseDTO responseDTO, {isRefresh = true}) async {
     if (responseDTO.code == 1) {
       ReviewDTO reviewDTO = responseDTO.data;
 
@@ -68,31 +63,21 @@ class BookDetailViewModel extends StateNotifier<BookDetailPageModel?> {
       }
       reviewList.addAll(reviewDTO.content);
 
+      ReviewDTO newReviews = state!.book.reviews.copyWith(
+        content: reviewList,
+        pageable: reviewDTO.pageable,
+      );
+
+      BookDetailDTO newBook = state!.book.copyWith(reviews: newReviews);
+
       var bookDetailPageModel = state!.copyWith(
         last: reviewDTO.last,
         totalPages: reviewDTO.totalPages,
-        book: state!.book.copyWith(
-            reviews: state!.book.reviews.copyWith(
-              content: reviewList,
-              pageable: reviewDTO.pageable,
-            )
-        ),
+        book: newBook,
         pageable: reviewDTO.pageable,
       );
       state = bookDetailPageModel;
 
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CustomDialog(
-            title: "리뷰 조회 완료",
-            content: "리뷰 조회 완료.",
-            callback: () {
-              Navigator.of(context).pop(); // 다이얼로그를 닫습니다.
-            },
-          );
-        },
-      );
     } else {
       DialogUtil.dialogShow(context, responseDTO.msg);
     }
