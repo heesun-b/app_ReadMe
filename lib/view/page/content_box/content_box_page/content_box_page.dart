@@ -4,6 +4,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/core/constants/yh_style_icons.dart';
 import 'package:readme_app/model/cart_mock_data.dart';
 
@@ -22,6 +23,7 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
+          elevation: 1,
           backgroundColor: Colours.app_sub_white,
           title: const Text(
             "보관함",
@@ -142,7 +144,7 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Row(
                   children: [
                     CachedNetworkImage(
@@ -189,8 +191,8 @@ class _ContentBoxPageState extends State<ContentBoxPage> {
                         ),
                         Row(
                           children: [
-                            Text("소장가 ${cartList[index].price}"),
-                            const SizedBox(width: 100),
+                            Text("소장가 ${cartList[index].price}원"),
+                            Spacer(),
                             IconButton(
                               padding: EdgeInsets.zero,
                               constraints: const BoxConstraints(),

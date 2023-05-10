@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
+import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/model/book_detail_mock_data.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/components/book_detail_membership_botton.dart';
 import 'package:readme_app/view/page/book_detail/book_detail_page/components/book_detail_purchase_button.dart';
@@ -92,7 +95,7 @@ class _BookDetailBottomSheetState extends State<BookDetailBottomSheet> with Sing
                         const SizedBox(height: 30),
                         BookDetailMembershipButton(
                           text: '멤버십 구독하기',
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () => Navigator.pushNamed(context, Move.membershipPage)
                         ),
                       ],
                     ),
@@ -108,12 +111,13 @@ class _BookDetailBottomSheetState extends State<BookDetailBottomSheet> with Sing
                         Row(
                           children: [
                             SizedBox(
-                              child: Image.asset(
-                                "assets/images/book.jpg",
-                                height: 170,
-                                width: 100,
-                                fit: BoxFit.cover,
-                              ),
+                              child:
+                                  CachedNetworkImage(
+                                    imageUrl: widget.path,
+                                    height: 170,
+                                    width: 100,
+                                    fit: BoxFit.cover,
+                                  ),
                             ),
                             const SizedBox(width: 10),
                             Column(
@@ -122,22 +126,24 @@ class _BookDetailBottomSheetState extends State<BookDetailBottomSheet> with Sing
                                 Text(
                                   widget.title,
                                   style: const TextStyle(
-                                      fontSize: Dimens.font_sp26,
-                                      fontWeight: FontWeight.bold),
+                                      fontSize: Dimens.font_sp20,
+                                      fontWeight: FontWeight.bold,
+                                  overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
                                   widget.author,
                                   style: const TextStyle(
-                                    fontSize: Dimens.font_sp20,
+                                    fontSize: Dimens.font_sp18,
                                   ),
                                 ),
                                 const SizedBox(height: 10),
                                 Row(
                                   children: [
                                     Text(
-                                      '소장가 ${widget.price}원',
-                                      style: const TextStyle(fontSize: Dimens.font_sp18),
+                                      '소장가 ${priceFormat(widget.price)}',
+                                      style: const TextStyle(fontSize: Dimens.font_sp16),
                                     ),
                                     const Text(
                                       '(VAT 포함)',
@@ -164,5 +170,10 @@ class _BookDetailBottomSheetState extends State<BookDetailBottomSheet> with Sing
         ],
       ),
     );
+  }
+
+  String priceFormat(int price) {
+    var newPrice = NumberFormat('###,###,###,### 원');
+    return newPrice.format(price);
   }
 }

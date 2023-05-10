@@ -169,6 +169,7 @@ class _SearchListPageState extends State<SearchListPage> {
 
   AppBar searchAppBar() {
     return AppBar(
+      elevation: 1,
       leading: IconButton(
         icon: HsStyleIcons.back,
         onPressed: () {
