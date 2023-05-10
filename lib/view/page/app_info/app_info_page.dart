@@ -49,8 +49,9 @@ class _AppInfoPageState extends State<AppInfoPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset("assets/images/readme_short.png", height: 200, width: 200,),
-            SizedBox(height: 10,),
-            Text("ver $_version", style: TextStyle(fontSize: Dimens.font_sp26, fontWeight: FontWeight.w700),)
+            // SizedBox(height: 5,),
+            Text("ver $_version", style: TextStyle(fontSize: Dimens.font_sp26, fontWeight: FontWeight.w700),),
+          SizedBox(height: 200,),
           ],
         ),
       ),

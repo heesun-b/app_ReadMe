@@ -68,7 +68,7 @@ class UserPageMainBtton extends ConsumerWidget {
               child: InkWell(
                 onTap: () {
                   if(userModel?.user != null) {
-                    Navigator.pushNamed(context, Move.contentBoxPage);
+                    Navigator.pushNamed(context,Move.paymentListPage);
                   } else {
                     showDialog(
                       context: context,
@@ -104,7 +104,7 @@ class UserPageMainBtton extends ConsumerWidget {
               child: InkWell(
                 onTap: () {
                   if(userModel?.user != null) {
-                    Navigator.pushNamed(context, Move.contentBoxPage);
+                    Navigator.pushNamed(context, Move.reviewPage);
                   } else {
                     showDialog(
                       context: context,

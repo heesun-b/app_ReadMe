@@ -4,11 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/dto/cart_dto/cart_dto.dart';
-import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
+import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/main.dart';
 import 'package:readme_app/repository/book_repository.dart';
-import 'package:readme_app/model/cart_mock_data.dart';
 import 'package:readme_app/view/components/custom_dialog.dart';
 
 // 파일명
@@ -121,7 +120,6 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
   void insert (ResponseDTO responseDTO) {
     var context = navigatorKey.currentContext!;
     if(responseDTO.code == 1) {
-
       showDialog(
         context: context,
         builder: (context) {
@@ -132,17 +130,13 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
           );
         },
       );
-
       UseCartDTO useCartDTO = UseCartDTO(cartDTO: responseDTO.data, isChecked: false);
       List<UseCartDTO> newUseCartList = [...state!.cartBooks];
       newUseCartList.add(useCartDTO);
-
-
       state = state!.copyWith(cartBooks: newUseCartList, isAllChecked: false);
-
     } else
     { print(responseDTO.msg);
-      DialogUtil.dialogShow(context, responseDTO.msg);
+      DialogUtil.dialogShow(context, "장바구니 추가 실패");
     }
 
   }

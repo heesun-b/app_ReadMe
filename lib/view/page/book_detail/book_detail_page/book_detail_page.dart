@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/controller/cart_controller.dart';
 import 'package:readme_app/controller/scrap_controller.dart';
 import 'package:readme_app/core/constants/colours.dart';
@@ -23,73 +21,75 @@ class BookDetailPage extends ConsumerWidget {
     BookDetailPageModel? model = ref.watch(bookDetailPageProvider(bookId));
 
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            elevation: 0,
-            backgroundColor: Colours.app_sub_white,
-            flexibleSpace: FlexibleSpaceBar(
-              background: BookDetailPageCover(bookId: bookId),
-            ),
-            pinned: true,
-            expandedHeight: 550,
-            leadingWidth: 100,
-            leading: Row(
-              children: [
-                IconButton(
-                  icon: YhIcons.back,
-                  onPressed: () {
-                    if (Navigator.of(context).widget.pages.length > 1) {
-                      Navigator.pop(context);
-                    } else {
-                      Navigator.pushNamed(context, Move.navigationBar);
-                    }
-                  },
-                ),
-                IconButton(
-                  icon: YhIcons.homeFill,
-                  onPressed: () {
-                    // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeNavigationBar()));
-                    Navigator.pushNamed(context, Move.navigationBar);
-                  },
-                ),
-              ],
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 10.0),
-                child: IconButton(
-                    icon: YhIcons.cart,
-                    onPressed: () {
-                      Navigator.pushNamed(context, Move.cartPage);
-                    }),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              elevation: 0,
+              backgroundColor: Colours.app_sub_white,
+              flexibleSpace: FlexibleSpaceBar(
+                background: BookDetailPageCover(bookId: bookId),
               ),
-            ],
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          BookDetailInfo(bookId:bookId),
-                          BookDetailPageBody(bookId: bookId),
-                          const Divider(
-                            thickness: 2,
-                          ),
-                          const SizedBox(height: 15),
-                        ],
-                      ),
-                    ),
-                  ],
+              pinned: true,
+              expandedHeight: 550,
+              leadingWidth: 100,
+              leading: Row(
+                children: [
+                  IconButton(
+                    icon: YhIcons.back,
+                    onPressed: () {
+                      if (Navigator.of(context).widget.pages.length > 1) {
+                        Navigator.pop(context);
+                      } else {
+                        Navigator.pushNamed(context, Move.navigationBar);
+                      }
+                    },
+                  ),
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    icon: YhIcons.homeFill,
+                    onPressed: () {
+                      Navigator.pushNamed(context, Move.navigationBar);
+                    },
+                  ),
+                ],
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: IconButton(
+                      icon: YhIcons.cart,
+                      onPressed: () {
+                        Navigator.pushNamed(context, Move.cartPage);
+                      }),
                 ),
               ],
             ),
-          )
-        ],
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          children: [
+                            BookDetailInfo(bookId:bookId),
+                            BookDetailPageBody(bookId: bookId),
+                            const Divider(
+                              thickness: 2,
+                            ),
+                            const SizedBox(height: 15),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
       bottomSheet: Container(
         height: 80,
@@ -106,7 +106,7 @@ class BookDetailPage extends ConsumerWidget {
                         : ref.read(scrapControllerProvider).insert(model?.book.id?? 0);
                   },
                 ),
-            // SizedBox(width: 10),
+            SizedBox(width: 15),
                 (model?.user?.isMembership ?? false) || (model?.book.isPurchase ?? false)
                     ?  Expanded(
                       child: Padding(
@@ -133,7 +133,7 @@ class BookDetailPage extends ConsumerWidget {
                   children: [
                     SizedBox(
                       width: 150,
-                      height: 50,
+                      height: 40,
                       child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
@@ -177,5 +177,7 @@ class BookDetailPage extends ConsumerWidget {
       ),
     );
   }
+
+
 }
 

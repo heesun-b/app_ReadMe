@@ -19,59 +19,7 @@ class BookDetailPageBody extends ConsumerWidget {
     BookDetailPageModel? model = ref.watch(bookDetailPageProvider(bookId));
     return Column(
       children: [
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //   crossAxisAlignment: CrossAxisAlignment.center,
-        //   children: [
-        //     TextButton(
-        //       style: TextButton.styleFrom(
-        //         textStyle: const TextStyle(
-        //           fontSize: Dimens.font_sp20,
-        //         ),
-        //       ),
-        //       onPressed: () {
-        //         // setState(() {
-        //         //   _selectedButtonIndex = 0;
-        //         // });
-        //       },
-        //       child: Text(
-        //         "도서 정보",
-        //         style: TextStyle(
-        //           color: _selectedButtonIndex == 0
-        //               ? Colours.app_sub_black
-        //               : Colours.app_sub_black,
-        //           fontSize: Dimens.font_sp20,
-        //           fontWeight: _selectedButtonIndex == 0
-        //               ? FontWeight.bold
-        //               : FontWeight.normal,
-        //         ),
-        //       ),
-        //     ),
-        //     TextButton(
-        //       style: TextButton.styleFrom(
-        //         textStyle: const TextStyle(fontSize: Dimens.font_sp20),
-        //       ),
-        //       onPressed: () {
-        //         Scrollable.ensureVisible(_widgetKey.currentContext!,
-        //             duration: Duration(milliseconds: 300),
-        //             curve: Curves.easeInOut,
-        //             alignment: 0);
-        //       },
-        //       child: Text(
-        //         "리뷰 관리",
-        //         style: TextStyle(
-        //           color: _selectedButtonIndex == 1
-        //               ? Colours.app_sub_black
-        //               : Colours.app_sub_black,
-        //           fontSize: Dimens.font_sp20,
-        //           fontWeight: _selectedButtonIndex == 1
-        //               ? FontWeight.bold
-        //               : FontWeight.normal,
-        //         ),
-        //       ),
-        //     ),
-        //   ],
-        // ),
+
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -94,36 +42,6 @@ class BookDetailPageBody extends ConsumerWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 4,
               ),
-              // SizedBox(height: 20),
-              // Column(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [
-              //     Text(
-              //       "< 목차 >",
-              //       style: TextStyle(
-              //         color: Colours.app_sub_black,
-              //         fontSize: Dimens.font_sp20,
-              //         fontWeight: FontWeight.bold,
-              //       ),
-              //     ),
-              //     SizedBox(height: 15),
-              //     Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: List.generate(
-              //         bookContentList.length,
-              //         (index) {
-              //           return Text(
-              //             "",
-              //             style: TextStyle(
-              //               fontSize: Dimens.font_sp18,
-              //               color: Colours.app_sub_black,
-              //             ),
-              //           );
-              //         },
-              //       ),
-              //     ),
-              //   ],
-              // ),
               const SizedBox(height: 40),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,7 +167,7 @@ class BookDetailPageBody extends ConsumerWidget {
             ],
           ),
         )
-      ],
+      ]
     );
   }
 }

@@ -23,6 +23,7 @@ class CategoryPage extends ConsumerWidget {
         child: PreferredSize(
           preferredSize: Size.fromHeight(kToolbarHeight),
           child: AppBar(
+            elevation: 1,
             leadingWidth: 100,
             backgroundColor: Colours.app_sub_white,
             actions: [
