@@ -35,7 +35,6 @@ class UserRepository {
         // // 로그인 취소
         return null;
       }
-
       /// 2.구글 로그인 정보로 인증
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
@@ -43,15 +42,11 @@ class UserRepository {
         idToken: googleAuth.idToken,
       );
 
-      // final UserCredential userCredential = await _auth.signInWithCredential(credential);
-
       /// 3.현재 사용자 가져오기
       final currentUser = _auth.currentUser;
-
       /// 4.사용자 id토큰 가져오기
       final idToken = await currentUser?.getIdToken();
       log("Firebase Token: $idToken");
-
 
       /// 5. id토큰을 스프링 서버로 전달
       Response response = await MyHttp.get().post("/login", data: {'idToken': idToken}); // 스프링에서 만든 join 로직에 요청
@@ -101,7 +96,6 @@ class UserRepository {
      try {
       Dio dio = await MyHttp.getSecurity();
       Response response = await dio.get("/users/my");
-      print("체크 ${response.data}");
       if (response.statusCode == 401 || response.statusCode == 403) {
         return ResponseDTO(code: 401, msg: "인증 실패입니다.");
       } else if (response.statusCode == 200) {

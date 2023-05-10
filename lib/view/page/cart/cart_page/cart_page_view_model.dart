@@ -8,6 +8,8 @@ import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/main.dart';
 import 'package:readme_app/repository/book_repository.dart';
+import 'package:readme_app/sqflite/sqflite.dart';
+import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/view/components/custom_dialog.dart';
 
 // 파일명
@@ -16,6 +18,8 @@ part 'cart_page_view_model.freezed.dart';
 @unfreezed
 class CartPageModel with _$CartPageModel {
   factory CartPageModel({
+    required String username,
+    required int userId,
     required bool isAllChecked,
     required int totalPrice,
     required int totalCount,
@@ -27,10 +31,12 @@ class CartPageViewModel extends StateNotifier<CartPageModel?> {
   CartPageViewModel(super.state);
 
   void notifyInit() async {
+
     CartPageModel initCartBooks = CartPageModel(
-        totalPrice: 0, totalCount: 0, cartBooks: [], isAllChecked: false);
+        totalPrice: 0, totalCount: 0, cartBooks: [], isAllChecked: false,username: "", userId: 0);
 
     ResponseDTO responseDTO = await BookRepository().findCartList();
+
 
     if(responseDTO.code == 1) {
       List<CartDTO> cartDTOList = responseDTO.data;

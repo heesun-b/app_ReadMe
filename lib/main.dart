@@ -17,9 +17,10 @@ import 'package:readme_app/sqflite/sqflite.dart';
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
 
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
   await SecureStorage.clear();
 
   Widget failWidget = const MaterialApp(
@@ -38,6 +39,7 @@ void main() async {
 
   // Meta 통신
   Dio dio = await MyHttp.getCommon();
+
   try {
     Response response = await dio.get("/meta");
     if (response.statusCode == 200) {

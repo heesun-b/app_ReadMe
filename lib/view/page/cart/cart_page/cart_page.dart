@@ -5,7 +5,8 @@ import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
-import 'package:readme_app/model/cart_mock_data.dart';
+import 'package:readme_app/sqflite/sqflite.dart';
+import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/util/bootpay/bootpay_default.dart';
 import 'package:readme_app/view/page/cart/cart_page/cart_page_view_model.dart';
 import 'package:readme_app/view/page/cart/cart_page/components/cart_page_body.dart';
@@ -23,6 +24,11 @@ class CartPage extends ConsumerWidget {
     List<UseCartDTO> cartList = [];
     if(model != null) {
       cartList.addAll(model.cartBooks);
+    }
+
+    Future<TableUser?> getTableUser () async {
+      TableUser? tableUser = await MySqfliteInit.getUser();
+      return tableUser;
     }
 
     return Scaffold(
@@ -57,7 +63,7 @@ class CartPage extends ConsumerWidget {
           )),
       backgroundColor: Colours.app_sub_white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "장바구니",
           style: TextStyle(
               color: Colours.app_sub_black,

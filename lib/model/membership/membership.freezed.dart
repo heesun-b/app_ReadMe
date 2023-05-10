@@ -21,7 +21,6 @@ Membership _$MembershipFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Membership {
   int? get id => throw _privateConstructorUsedError;
-  String? get membershipName => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
   String? get membershipTerm => throw _privateConstructorUsedError;
 
@@ -37,8 +36,7 @@ abstract class $MembershipCopyWith<$Res> {
           Membership value, $Res Function(Membership) then) =
       _$MembershipCopyWithImpl<$Res, Membership>;
   @useResult
-  $Res call(
-      {int? id, String? membershipName, int? price, String? membershipTerm});
+  $Res call({int? id, int? price, String? membershipTerm});
 }
 
 /// @nodoc
@@ -55,7 +53,6 @@ class _$MembershipCopyWithImpl<$Res, $Val extends Membership>
   @override
   $Res call({
     Object? id = freezed,
-    Object? membershipName = freezed,
     Object? price = freezed,
     Object? membershipTerm = freezed,
   }) {
@@ -64,10 +61,6 @@ class _$MembershipCopyWithImpl<$Res, $Val extends Membership>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      membershipName: freezed == membershipName
-          ? _value.membershipName
-          : membershipName // ignore: cast_nullable_to_non_nullable
-              as String?,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -88,8 +81,7 @@ abstract class _$$_MembershipCopyWith<$Res>
       __$$_MembershipCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? id, String? membershipName, int? price, String? membershipTerm});
+  $Res call({int? id, int? price, String? membershipTerm});
 }
 
 /// @nodoc
@@ -104,7 +96,6 @@ class __$$_MembershipCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? membershipName = freezed,
     Object? price = freezed,
     Object? membershipTerm = freezed,
   }) {
@@ -113,10 +104,6 @@ class __$$_MembershipCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      membershipName: freezed == membershipName
-          ? _value.membershipName
-          : membershipName // ignore: cast_nullable_to_non_nullable
-              as String?,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -132,8 +119,7 @@ class __$$_MembershipCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Membership with DiagnosticableTreeMixin implements _Membership {
-  _$_Membership(
-      {this.id, this.membershipName, this.price, this.membershipTerm});
+  _$_Membership({this.id, this.price, this.membershipTerm});
 
   factory _$_Membership.fromJson(Map<String, dynamic> json) =>
       _$$_MembershipFromJson(json);
@@ -141,15 +127,13 @@ class _$_Membership with DiagnosticableTreeMixin implements _Membership {
   @override
   final int? id;
   @override
-  final String? membershipName;
-  @override
   final int? price;
   @override
   final String? membershipTerm;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Membership(id: $id, membershipName: $membershipName, price: $price, membershipTerm: $membershipTerm)';
+    return 'Membership(id: $id, price: $price, membershipTerm: $membershipTerm)';
   }
 
   @override
@@ -158,7 +142,6 @@ class _$_Membership with DiagnosticableTreeMixin implements _Membership {
     properties
       ..add(DiagnosticsProperty('type', 'Membership'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('membershipName', membershipName))
       ..add(DiagnosticsProperty('price', price))
       ..add(DiagnosticsProperty('membershipTerm', membershipTerm));
   }
@@ -169,8 +152,6 @@ class _$_Membership with DiagnosticableTreeMixin implements _Membership {
         (other.runtimeType == runtimeType &&
             other is _$_Membership &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.membershipName, membershipName) ||
-                other.membershipName == membershipName) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.membershipTerm, membershipTerm) ||
                 other.membershipTerm == membershipTerm));
@@ -178,8 +159,7 @@ class _$_Membership with DiagnosticableTreeMixin implements _Membership {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, membershipName, price, membershipTerm);
+  int get hashCode => Object.hash(runtimeType, id, price, membershipTerm);
 
   @JsonKey(ignore: true)
   @override
@@ -198,7 +178,6 @@ class _$_Membership with DiagnosticableTreeMixin implements _Membership {
 abstract class _Membership implements Membership {
   factory _Membership(
       {final int? id,
-      final String? membershipName,
       final int? price,
       final String? membershipTerm}) = _$_Membership;
 
@@ -207,8 +186,6 @@ abstract class _Membership implements Membership {
 
   @override
   int? get id;
-  @override
-  String? get membershipName;
   @override
   int? get price;
   @override

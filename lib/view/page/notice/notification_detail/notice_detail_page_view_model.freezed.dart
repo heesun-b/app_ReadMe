@@ -20,17 +20,15 @@ mixin _$NoticeDetailPageModel {
   set notice(NoticeDTO value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $NotificationDetailPageModelCopyWith<NoticeDetailPageModel>
-      get copyWith => throw _privateConstructorUsedError;
+  $NoticeDetailPageModelCopyWith<NoticeDetailPageModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NotificationDetailPageModelCopyWith<$Res> {
-  factory $NotificationDetailPageModelCopyWith(
-          NoticeDetailPageModel value,
+abstract class $NoticeDetailPageModelCopyWith<$Res> {
+  factory $NoticeDetailPageModelCopyWith(NoticeDetailPageModel value,
           $Res Function(NoticeDetailPageModel) then) =
-      _$NotificationDetailPageModelCopyWithImpl<$Res,
-          NoticeDetailPageModel>;
+      _$NoticeDetailPageModelCopyWithImpl<$Res, NoticeDetailPageModel>;
   @useResult
   $Res call({NoticeDTO notice});
 
@@ -38,10 +36,10 @@ abstract class $NotificationDetailPageModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$NotificationDetailPageModelCopyWithImpl<$Res,
+class _$NoticeDetailPageModelCopyWithImpl<$Res,
         $Val extends NoticeDetailPageModel>
-    implements $NotificationDetailPageModelCopyWith<$Res> {
-  _$NotificationDetailPageModelCopyWithImpl(this._value, this._then);
+    implements $NoticeDetailPageModelCopyWith<$Res> {
+  _$NoticeDetailPageModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -71,12 +69,11 @@ class _$NotificationDetailPageModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_NotificationDetailPageModelCopyWith<$Res>
-    implements $NotificationDetailPageModelCopyWith<$Res> {
-  factory _$$_NotificationDetailPageModelCopyWith(
-          _$_NotificationDetailPageModel value,
-          $Res Function(_$_NotificationDetailPageModel) then) =
-      __$$_NotificationDetailPageModelCopyWithImpl<$Res>;
+abstract class _$$_NoticeDetailPageModelCopyWith<$Res>
+    implements $NoticeDetailPageModelCopyWith<$Res> {
+  factory _$$_NoticeDetailPageModelCopyWith(_$_NoticeDetailPageModel value,
+          $Res Function(_$_NoticeDetailPageModel) then) =
+      __$$_NoticeDetailPageModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({NoticeDTO notice});
@@ -86,13 +83,11 @@ abstract class _$$_NotificationDetailPageModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NotificationDetailPageModelCopyWithImpl<$Res>
-    extends _$NotificationDetailPageModelCopyWithImpl<$Res,
-        _$_NotificationDetailPageModel>
-    implements _$$_NotificationDetailPageModelCopyWith<$Res> {
-  __$$_NotificationDetailPageModelCopyWithImpl(
-      _$_NotificationDetailPageModel _value,
-      $Res Function(_$_NotificationDetailPageModel) _then)
+class __$$_NoticeDetailPageModelCopyWithImpl<$Res>
+    extends _$NoticeDetailPageModelCopyWithImpl<$Res, _$_NoticeDetailPageModel>
+    implements _$$_NoticeDetailPageModelCopyWith<$Res> {
+  __$$_NoticeDetailPageModelCopyWithImpl(_$_NoticeDetailPageModel _value,
+      $Res Function(_$_NoticeDetailPageModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +95,7 @@ class __$$_NotificationDetailPageModelCopyWithImpl<$Res>
   $Res call({
     Object? notice = null,
   }) {
-    return _then(_$_NotificationDetailPageModel(
+    return _then(_$_NoticeDetailPageModel(
       notice: null == notice
           ? _value.notice
           : notice // ignore: cast_nullable_to_non_nullable
@@ -111,35 +106,34 @@ class __$$_NotificationDetailPageModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NotificationDetailPageModel implements _NoticeDetailPageModel {
-  _$_NotificationDetailPageModel({required this.notice});
+class _$_NoticeDetailPageModel implements _NoticeDetailPageModel {
+  _$_NoticeDetailPageModel({required this.notice});
 
   @override
   NoticeDTO notice;
 
   @override
   String toString() {
-    return 'NotificationDetailPageModel(notice: $notice)';
+    return 'NoticeDetailPageModel(notice: $notice)';
   }
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NotificationDetailPageModelCopyWith<_$_NotificationDetailPageModel>
-      get copyWith => __$$_NotificationDetailPageModelCopyWithImpl<
-          _$_NotificationDetailPageModel>(this, _$identity);
+  _$$_NoticeDetailPageModelCopyWith<_$_NoticeDetailPageModel> get copyWith =>
+      __$$_NoticeDetailPageModelCopyWithImpl<_$_NoticeDetailPageModel>(
+          this, _$identity);
 }
 
-abstract class _NoticeDetailPageModel
-    implements NoticeDetailPageModel {
+abstract class _NoticeDetailPageModel implements NoticeDetailPageModel {
   factory _NoticeDetailPageModel({required NoticeDTO notice}) =
-      _$_NotificationDetailPageModel;
+      _$_NoticeDetailPageModel;
 
   @override
   NoticeDTO get notice;
   set notice(NoticeDTO value);
   @override
   @JsonKey(ignore: true)
-  _$$_NotificationDetailPageModelCopyWith<_$_NotificationDetailPageModel>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_NoticeDetailPageModelCopyWith<_$_NoticeDetailPageModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }

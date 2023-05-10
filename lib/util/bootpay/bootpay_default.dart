@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bootpay/bootpay.dart';
 import 'package:bootpay/model/extra.dart';
 import 'package:bootpay/model/item.dart';
@@ -8,13 +10,17 @@ import 'package:flutter/material.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/move.dart';
+import 'package:readme_app/dto/payment_dto/payment_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/repository/payment_repository.dart';
+import 'package:readme_app/sqflite/sqflite.dart';
+import 'package:readme_app/sqflite/table/table_user.dart';
 
 class BootPayDefault extends StatefulWidget {
 
   List<UseCartDTO> cartBookList;
+
 
   BootPayDefault({required this.cartBookList, Key? key}) : super(key: key);
 
@@ -41,8 +47,10 @@ class _BootPayDefaultState extends State<BootPayDefault> {
           backgroundColor: Colours.app_sub_black,
           shape: ContinuousRectangleBorder(
               borderRadius: BorderRadius.circular(20)),
-          onPressed: () {
-            bootpayDefault(context);
+          onPressed: () async {
+            PaymentDTO paymentDTO = await paymentRequest(widget.cartBookList);
+            print("체크 1 : $paymentDTO");
+            bootpayDefault(context, paymentDTO);
           },
           child: const Text(
             "결제하기",
@@ -52,11 +60,16 @@ class _BootPayDefaultState extends State<BootPayDefault> {
     );
   }
 
-  void bootpayDefault(BuildContext context) async {
+  Future<PaymentDTO> paymentRequest (List<UseCartDTO> cartBookList) async {
+    ResponseDTO responseDTO = await PaymentRepository().payment(cartBookList);
+    PaymentDTO paymentDTO =  responseDTO.data;
+    return paymentDTO;
+  }
 
-    ResponseDTO responseDTO = await PaymentRepository().payment();
+  void bootpayDefault(BuildContext context, PaymentDTO paymentDTO) async {
 
-    Payload payload = getPayload(context);
+    Payload payload = await getPayload(context, paymentDTO);
+
     if (kIsWeb) {
       payload.extra?.openType = "redirect";
     }
@@ -67,18 +80,18 @@ class _BootPayDefaultState extends State<BootPayDefault> {
       showCloseButton: false,
       // closeButton: Icon(Icons.close, size: 35.0, color: Colors.black54),
       onCancel: (String data) {
-        print('------- onCancel: $data');
+        log('------- onCancel: $data');
       },
       onError: (String data) {
-        print('------- onCancel: $data');
+        log('------- onCancel: $data');
       },
       onClose: () {
-        print('------- onClose');
+        log('------- onClose');
         Bootpay().dismiss(context); //명시적으로 부트페이 뷰 종료 호출
-        Navigator.pushNamed(context,  Move.paymentPage);
+        Navigator.pop(context);
       },
       onIssued: (String data) {
-        print('------- onIssued: $data');
+        log('------- onIssued: $data');
       },
       onConfirm: (String data) {
         /**
@@ -98,16 +111,21 @@ class _BootPayDefaultState extends State<BootPayDefault> {
         return false;
       },
       onDone: (String data) {
-        // dio.post("http://43.200.163.130:8070/payments/callback",
-        //    options: Options(
-        //      contentType: "application/json; charset=utf-8"
-        //    ));
-        print('------- onDone: $data');
+        log('------- onDone: $data');
+         Navigator.pushNamedAndRemoveUntil(context, Move.paymentPage, (route) => false);
+
       },
     );
   }
 
-  Payload getPayload(BuildContext context) {
+
+  Future<TableUser?> getUser () async {
+    TableUser? user = await MySqfliteInit.getUser();
+    return user;
+  }
+
+
+  Future< Payload> getPayload(BuildContext context, PaymentDTO paymentDTO) async {
     Payload payload = Payload();
 
     List<Item> itemList = [];
@@ -144,17 +162,18 @@ class _BootPayDefaultState extends State<BootPayDefault> {
         .microsecondsSinceEpoch
         .toString();
 
-    // payload.metadata = {
-    //   "callbackParam1" : "value12",
-    //   "callbackParam2" : "value34",
-    //   "callbackParam3" : "value56",
-    //   "callbackParam4" : "value78",
-    // }; // 전달할 파라미터, 결제 후 되돌려 주는 값
+    payload.metadata = {
+      "id" : paymentDTO.id,
+      "type" : paymentDTO.type,
+    }; // 전달할 파라미터, 결제 후 되돌려 주는 값
 
     User user = User(); // 구매자 정보
+    TableUser? tableUser = await MySqfliteInit.getUser();
 
-    user.email = "ssar@nate.com";
-    user.id = '1';
+    user.email= tableUser?.username ?? "";
+    print("${user.email}");
+    user.id = tableUser?.id.toString() ?? "";
+    print("${user.id}");
 
     Extra extra = Extra(); // 결제 옵션
     extra.separatelyConfirmed = true;

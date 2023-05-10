@@ -9,6 +9,7 @@ import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/model/cart_mock_data.dart';
+import 'package:readme_app/util/bootpay/bootpay_default.dart';
 import 'package:readme_app/view/components/none_list_widget.dart';
 import 'package:readme_app/view/components/use_button.dart';
 import 'package:readme_app/view/page/cart/cart_page/cart_page_view_model.dart';
@@ -24,7 +25,7 @@ class CartPageBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     CartPageModel? model = ref.watch(cartPageProvider);
 
-    if(model != null) {
+    if (model != null) {
       cartBooks = model!.cartBooks;
       isAllChecked = model!.isAllChecked;
     }
@@ -114,7 +115,7 @@ class CartPageBody extends ConsumerWidget {
                 activeColor: Colours.app_sub_black,
                 value: isAllChecked,
                 onChanged: (value) {
-                    isAllChecked = value!;
+                  isAllChecked = value!;
                   ref.read(cartPageProvider.notifier).changeAllChecked(value);
                 }),
             Text(
@@ -127,8 +128,9 @@ class CartPageBody extends ConsumerWidget {
           thickness: 5,
           height: 1,
         ),
-        cartBooks.isEmpty ? NoneListWidget(title: "장바구니") :
-        _bookListTile(context, ref),
+        cartBooks.isEmpty
+            ? NoneListWidget(title: "장바구니")
+            : _bookListTile(context, ref),
       ],
     );
   }
@@ -149,15 +151,22 @@ class CartPageBody extends ConsumerWidget {
                 activeColor: Colours.app_sub_black,
                 value: cartBooks[index].isChecked,
                 onChanged: (value) {
-                  ref.read(cartPageProvider.notifier).changedOneCheck(value, index);
+                  ref
+                      .read(cartPageProvider.notifier)
+                      .changedOneCheck(value, index);
                   // changeChecked(value, index);
                 },
               ),
-              SizedBox(width: 8,),
+              SizedBox(
+                width: 8,
+              ),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, "/bookDetail", arguments: {
-                  'bookId': cartBooks[index].cartDTO.book.id},);
+                  Navigator.pushNamed(
+                    context,
+                    "/bookDetail",
+                    arguments: {'bookId': cartBooks[index].cartDTO.book.id},
+                  );
                 },
                 child: Row(
                   children: [
@@ -166,16 +175,18 @@ class CartPageBody extends ConsumerWidget {
                       child: Container(
                         width: 80,
                         height: 110,
-                        child:
-                        CachedNetworkImage(
-                          imageUrl: cartBooks[index].cartDTO.book.coverFile.fileUrl,
-                          placeholder : (context, url) => Center(
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              cartBooks[index].cartDTO.book.coverFile.fileUrl,
+                          placeholder: (context, url) => Center(
                             child: LoadingAnimationWidget.twoRotatingArc(
                               size: 50,
                               color: Colours.app_main,
                             ),
                           ),
-                          width : 70, height : 90, fit : BoxFit.cover,
+                          width: 70,
+                          height: 90,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -206,16 +217,21 @@ class CartPageBody extends ConsumerWidget {
                             Text("${cartBooks[index].cartDTO.book.stars}"),
                           ],
                         ),
-                        Text("소장가 ${priceFormat(cartBooks[index].cartDTO.book.price)}"),
+                        Text(
+                            "소장가 ${priceFormat(cartBooks[index].cartDTO.book.price)}"),
                       ],
                     ),
                   ],
                 ),
               ),
               Spacer(),
-              IconButton(onPressed: () {
-                ref.read(cartControllerProvider).deleteCartBook(cartBooks[index].cartDTO.id);
-              }, icon: HsStyleIcons.delete)
+              IconButton(
+                  onPressed: () {
+                    ref
+                        .read(cartControllerProvider)
+                        .deleteCartBook(cartBooks[index].cartDTO.id);
+                  },
+                  icon: HsStyleIcons.delete)
             ],
           ),
         );
@@ -249,7 +265,6 @@ class CartPageBody extends ConsumerWidget {
   changeChecked(value, int index) {
     cartBooks[index].isChecked = value;
   }
-
 
   String priceFormat(int price) {
     var newPrice = NumberFormat('###,###,###,### 원');

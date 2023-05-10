@@ -20,15 +20,15 @@ mixin _$NoticePageModel {
   set noticeList(NoticeListDTO? value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $NotificationPageModelCopyWith<NoticePageModel> get copyWith =>
+  $NoticePageModelCopyWith<NoticePageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NotificationPageModelCopyWith<$Res> {
-  factory $NotificationPageModelCopyWith(NoticePageModel value,
-          $Res Function(NoticePageModel) then) =
-      _$NotificationPageModelCopyWithImpl<$Res, NoticePageModel>;
+abstract class $NoticePageModelCopyWith<$Res> {
+  factory $NoticePageModelCopyWith(
+          NoticePageModel value, $Res Function(NoticePageModel) then) =
+      _$NoticePageModelCopyWithImpl<$Res, NoticePageModel>;
   @useResult
   $Res call({NoticeListDTO? noticeList});
 
@@ -36,10 +36,9 @@ abstract class $NotificationPageModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$NotificationPageModelCopyWithImpl<$Res,
-        $Val extends NoticePageModel>
-    implements $NotificationPageModelCopyWith<$Res> {
-  _$NotificationPageModelCopyWithImpl(this._value, this._then);
+class _$NoticePageModelCopyWithImpl<$Res, $Val extends NoticePageModel>
+    implements $NoticePageModelCopyWith<$Res> {
+  _$NoticePageModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -73,11 +72,11 @@ class _$NotificationPageModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_NotificationPageModelCopyWith<$Res>
-    implements $NotificationPageModelCopyWith<$Res> {
-  factory _$$_NotificationPageModelCopyWith(_$_NotificationPageModel value,
-          $Res Function(_$_NotificationPageModel) then) =
-      __$$_NotificationPageModelCopyWithImpl<$Res>;
+abstract class _$$_NoticePageModelCopyWith<$Res>
+    implements $NoticePageModelCopyWith<$Res> {
+  factory _$$_NoticePageModelCopyWith(
+          _$_NoticePageModel value, $Res Function(_$_NoticePageModel) then) =
+      __$$_NoticePageModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({NoticeListDTO? noticeList});
@@ -87,11 +86,11 @@ abstract class _$$_NotificationPageModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NotificationPageModelCopyWithImpl<$Res>
-    extends _$NotificationPageModelCopyWithImpl<$Res, _$_NotificationPageModel>
-    implements _$$_NotificationPageModelCopyWith<$Res> {
-  __$$_NotificationPageModelCopyWithImpl(_$_NotificationPageModel _value,
-      $Res Function(_$_NotificationPageModel) _then)
+class __$$_NoticePageModelCopyWithImpl<$Res>
+    extends _$NoticePageModelCopyWithImpl<$Res, _$_NoticePageModel>
+    implements _$$_NoticePageModelCopyWith<$Res> {
+  __$$_NoticePageModelCopyWithImpl(
+      _$_NoticePageModel _value, $Res Function(_$_NoticePageModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +98,7 @@ class __$$_NotificationPageModelCopyWithImpl<$Res>
   $Res call({
     Object? noticeList = freezed,
   }) {
-    return _then(_$_NotificationPageModel(
+    return _then(_$_NoticePageModel(
       noticeList: freezed == noticeList
           ? _value.noticeList
           : noticeList // ignore: cast_nullable_to_non_nullable
@@ -110,34 +109,32 @@ class __$$_NotificationPageModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NotificationPageModel implements _NoticePageModel {
-  _$_NotificationPageModel({this.noticeList});
+class _$_NoticePageModel implements _NoticePageModel {
+  _$_NoticePageModel({this.noticeList});
 
   @override
   NoticeListDTO? noticeList;
 
   @override
   String toString() {
-    return 'NotificationPageModel(noticeList: $noticeList)';
+    return 'NoticePageModel(noticeList: $noticeList)';
   }
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NotificationPageModelCopyWith<_$_NotificationPageModel> get copyWith =>
-      __$$_NotificationPageModelCopyWithImpl<_$_NotificationPageModel>(
-          this, _$identity);
+  _$$_NoticePageModelCopyWith<_$_NoticePageModel> get copyWith =>
+      __$$_NoticePageModelCopyWithImpl<_$_NoticePageModel>(this, _$identity);
 }
 
 abstract class _NoticePageModel implements NoticePageModel {
-  factory _NoticePageModel({NoticeListDTO? noticeList}) =
-      _$_NotificationPageModel;
+  factory _NoticePageModel({NoticeListDTO? noticeList}) = _$_NoticePageModel;
 
   @override
   NoticeListDTO? get noticeList;
   set noticeList(NoticeListDTO? value);
   @override
   @JsonKey(ignore: true)
-  _$$_NotificationPageModelCopyWith<_$_NotificationPageModel> get copyWith =>
+  _$$_NoticePageModelCopyWith<_$_NoticePageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
