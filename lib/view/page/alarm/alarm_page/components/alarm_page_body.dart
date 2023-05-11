@@ -57,109 +57,131 @@ class _AlarmPageBodyState extends State<AlarmPageBody> {
               ),
             ),
           ),
-          Column(
-            children: List.generate(3, (index) {
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                child: InkWell(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          scrollable: true,
-                          alignment: Alignment.center,
-                          content: SizedBox(
-                            height: 250,
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "업데이트 공지",
-                                    style:
-                                        TextStyle(fontSize: Dimens.font_sp18),
-                                  ),
-                                  Divider(
-                                    thickness: 1,
-                                    height: 30,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        height: 5,
+          Column(children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: InkWell(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        scrollable: true,
+                        alignment: Alignment.center,
+                        content: SizedBox(
+                          height: 250,
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Text(
+                                  "공지",
+                                  style: TextStyle(fontSize: Dimens.font_sp18),
+                                ),
+                                Divider(
+                                  thickness: 1,
+                                  height: 30,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: Text("2023.05.11"),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 5.0),
+                                      child: Text(
+                                        "ReadMe의 버전이 업데이트 되었습니다. 이제 도서 뷰어의 폰트 사이즈를 지정할 수 있어요 😍",
+                                        style: TextStyle(
+                                            fontSize: Dimens.font_sp14),
                                       ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 10.0),
-                                        child: Text("2023.04.30"),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 5.0),
-                                        child: Text(
-                                          "ReadMe의 버전이 업데이트 되었습니다. 이제 도서 뷰어의 폰트 사이즈를 지정할 수 있어요 😍",
-                                          style: TextStyle(
-                                              fontSize: Dimens.font_sp14),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
                           ),
-                          actions: [
-                            Center(
-                              child: TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context, '확인');
-                                  },
-                                  child: Text('확인'),
-                                  style: TextButton.styleFrom(
-                                      foregroundColor: Colours.app_sub_black,
-                                      textStyle: TextStyle(
-                                          fontSize: Dimens.font_sp16))),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colours.app_sub_grey)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        children: [
-                          // Image.asset("assets/images/img.png", width: 25,),
-                          HsStyleIcons.megaphone,
-                          SizedBox(
-                            width: 5,
+                        ),
+                        actions: [
+                          Center(
+                            child: TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context, '확인');
+                                },
+                                child: Text('확인'),
+                                style: TextButton.styleFrom(
+                                    foregroundColor: Colours.app_sub_black,
+                                    textStyle:
+                                        TextStyle(fontSize: Dimens.font_sp16))),
                           ),
-                          Text(
-                            "(공지)",
-                            style: TextStyle(fontSize: Dimens.font_sp12),
-                          ),
-                          SizedBox(
-                            width: 2,
-                          ),
-                          Text("알려드립니다! 버전 업데이트 예정입니다."),
                         ],
-                      ),
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colours.app_sub_grey)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        // Image.asset("assets/images/img.png", width: 25,),
+                        HsStyleIcons.megaphone,
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "(공지)",
+                          style: TextStyle(fontSize: Dimens.font_sp12),
+                        ),
+                        SizedBox(
+                          width: 2,
+                        ),
+                        Text("중요한 업데이트 안내"),
+                      ],
                     ),
                   ),
                 ),
-              );
-            }),
-          )
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colours.app_sub_grey)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        HsStyleIcons.megaphone,
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "(광고)",
+                          style: TextStyle(fontSize: Dimens.font_sp12),
+                        ),
+                        SizedBox(
+                          width: 2,
+                        ),
+                        Text("성공의 법칙 책이 오픈하였습니다"),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+          ]),
         ],
       ),
     );
