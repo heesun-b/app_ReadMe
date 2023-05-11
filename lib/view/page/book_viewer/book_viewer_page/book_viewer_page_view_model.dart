@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -8,8 +6,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
-import 'package:readme_app/model/book/book.dart';
-import 'package:readme_app/model/book_detail_mock_data.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 import 'package:readme_app/sqflite/table/table_user.dart';
 import 'package:readme_app/util/epub/epub_view.dart';
@@ -17,6 +13,15 @@ import 'package:readme_app/util/epub/epub_view.dart';
 // 파일명
 part 'book_viewer_page_view_model.freezed.dart';
 
+
+@unfreezed
+class BookMark with _$BookMark {
+  factory BookMark(
+  {
+    required String title,
+    required String link,
+  }) = _BookMark;
+}
 
 @unfreezed
 class BookViewerPageModel with _$BookViewerPageModel {
@@ -36,12 +41,12 @@ class BookViewerPageModel with _$BookViewerPageModel {
         required Color bgColor,
         TableUser? user,
         required EpubController epubReaderController,
+        required List<BookMark> bookmarks,
       }) = _BookViewerPageModel;
 
 }
 
 class BookViewerPageViewModel extends StateNotifier<BookViewerPageModel?> {
-
 
   BookViewerPageViewModel(super.state);
 
@@ -60,11 +65,13 @@ class BookViewerPageViewModel extends StateNotifier<BookViewerPageModel?> {
       fontFamily: "",
       bgColor: Colours.app_sub_white,
       user: null,
-      epubReaderController: EpubController(document: EpubDocument.openUrl("https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookepub/40eae962-86bb-465a-9273-10467848c9b3-book3.epub"))
+      epubReaderController: EpubController(document: EpubDocument.openUrl("https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookepub/40eae962-86bb-465a-9273-10467848c9b3-book3.epub")),
+      bookmarks: [],
     );
 
     initBook.user = await MySqfliteInit.getUser();
 
+    var epubController = EpubController(document: EpubDocument.openUrl(book.epubFile.fileUrl));
     initBook = initBook.copyWith(
         title: book.title,
         epubFilePath: book.epubFile.fileUrl,
@@ -79,10 +86,24 @@ class BookViewerPageViewModel extends StateNotifier<BookViewerPageModel?> {
         fontFamily: "NanumGothic",
         bgColor: Colours.app_sub_white,
         user: initBook.user,
-        epubReaderController: EpubController(document: EpubDocument.openUrl(book.epubFile.fileUrl))
+        epubReaderController: epubController,
+        bookmarks: [],
     );
-
     state = initBook;
+  }
+
+  void goBookMark(String link) async {
+    print("link : $link");
+    state!.epubReaderController.gotoEpubCfi(link);
+  }
+
+  void addBookMark(String title, String link) async {
+    print("link : $link");
+    state = state!.copyWith(bookmarks: [...state!.bookmarks, BookMark(title: title, link: link)]);
+  }
+
+  void changeIsBookMark(value) async {
+    state = state!.copyWith(isBookMark: value);
   }
 
   void changeIsShowAppBarAndBottomSheet(value) async {

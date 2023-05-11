@@ -2,17 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:readme_app/core/constants/jh_style_icons.dart';
-import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
 import 'package:readme_app/util/epub/src/ui/epub_view.dart';
 import 'package:readme_app/view/page/book_viewer/book_viewer_page/book_viewer_page_view_model.dart';
-import 'package:readme_app/view/page/book_viewer/components/book_drawer_no_membership.dart';
+import 'package:readme_app/view/page/book_viewer/components/book_mark.dart';
 import '../components/book_drawer.dart';
 
 class BookViewerPage extends ConsumerWidget {
 
-  BookViewerPage(this.book, {Key? key}) : super(key: key);
   BookDetailDTO book;
+  BookViewerPage(this.book, {Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -41,9 +40,7 @@ class BookViewerPage extends ConsumerWidget {
         )
             : null,
         key: _scaffoldKey,
-        endDrawer: model?.user == null
-            ? BookDrawerNoMembership(book)
-            : BookDrawer(book),
+        endDrawer: (model?.isBookMark ?? false) ? BookMarkPage(book, model?.epubReaderController)  : BookDrawer(book, model?.epubReaderController),
         body: GestureDetector(
           onTap: () {
             ref.read(bookViewerPageProvider(book).notifier).changeIsShowAppBarAndBottomSheet(model?.isShowAppBarAndBottomSheet ?? false ? false : true);
@@ -54,7 +51,7 @@ class BookViewerPage extends ConsumerWidget {
               /// 북마크
               buildBookmark(ref),
               /// 책내용
-                Expanded(
+              Expanded(
                 child: Center(
                   child: Container(
                     color: ref.watch(bookViewerPageProvider(book))?.bgColor,
@@ -96,7 +93,8 @@ class BookViewerPage extends ConsumerWidget {
                       Container(
                         child: IconButton(
                           onPressed : () {
-                            Navigator.pushNamed(context, Move.bookmarkListPage);
+                            ref.read(bookViewerPageProvider(book).notifier).changeIsBookMark(true);
+                            _scaffoldKey.currentState?.openEndDrawer();
                           },
                            icon: JHicons.bookBox, color: ref.watch(bookViewerPageProvider(book))?.fontColor,
                         ),
@@ -104,6 +102,7 @@ class BookViewerPage extends ConsumerWidget {
                       Container(
                         child: IconButton(
                             onPressed: () {
+                              ref.read(bookViewerPageProvider(book).notifier).changeIsBookMark(false);
                               _scaffoldKey.currentState?.openEndDrawer();
                             },
                             icon: JHicons.hambuger, color: ref.watch(bookViewerPageProvider(book))?.fontColor,

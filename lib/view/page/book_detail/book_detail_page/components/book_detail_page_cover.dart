@@ -61,35 +61,35 @@ class BookDetailPageCover extends ConsumerWidget {
             ),
           ),
         ),
-        model?.user != null
-            ? Container()
-            : Positioned(
-                left: 280,
-                top: 490,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, Move.bookViewerPage,
-                        arguments: model?.book);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 15.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colours.app_sub_white,
-                        width: 3,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Text(
-                      "미리보기",
-                      style: TextStyle(
-                        fontSize: Dimens.font_sp16,
-                        color: Colours.app_sub_white,
-                      ),
-                    ),
-                  ),
-                )),
+        // model?.user != null
+        //     ? Container()
+        //     : Positioned(
+        //         left: 280,
+        //         top: 490,
+        //         child: InkWell(
+        //           onTap: () {
+        //             Navigator.pushNamed(context, Move.bookViewerPage,
+        //                 arguments: model?.book);
+        //           },
+        //           child: Container(
+        //             padding: const EdgeInsets.symmetric(
+        //                 vertical: 8.0, horizontal: 15.0),
+        //             decoration: BoxDecoration(
+        //               border: Border.all(
+        //                 color: Colours.app_sub_white,
+        //                 width: 3,
+        //               ),
+        //               borderRadius: BorderRadius.circular(20),
+        //             ),
+        //             child: const Text(
+        //               "미리보기",
+        //               style: TextStyle(
+        //                 fontSize: Dimens.font_sp16,
+        //                 color: Colours.app_sub_white,
+        //               ),
+        //             ),
+        //           ),
+        //         )),
       ],
     );
   }

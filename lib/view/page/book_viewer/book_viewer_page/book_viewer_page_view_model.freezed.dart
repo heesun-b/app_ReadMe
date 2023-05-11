@@ -15,6 +15,130 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
+mixin _$BookMark {
+  String get title => throw _privateConstructorUsedError;
+  set title(String value) => throw _privateConstructorUsedError;
+  String get link => throw _privateConstructorUsedError;
+  set link(String value) => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $BookMarkCopyWith<BookMark> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BookMarkCopyWith<$Res> {
+  factory $BookMarkCopyWith(BookMark value, $Res Function(BookMark) then) =
+      _$BookMarkCopyWithImpl<$Res, BookMark>;
+  @useResult
+  $Res call({String title, String link});
+}
+
+/// @nodoc
+class _$BookMarkCopyWithImpl<$Res, $Val extends BookMark>
+    implements $BookMarkCopyWith<$Res> {
+  _$BookMarkCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? link = null,
+  }) {
+    return _then(_value.copyWith(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      link: null == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_BookMarkCopyWith<$Res> implements $BookMarkCopyWith<$Res> {
+  factory _$$_BookMarkCopyWith(
+          _$_BookMark value, $Res Function(_$_BookMark) then) =
+      __$$_BookMarkCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String title, String link});
+}
+
+/// @nodoc
+class __$$_BookMarkCopyWithImpl<$Res>
+    extends _$BookMarkCopyWithImpl<$Res, _$_BookMark>
+    implements _$$_BookMarkCopyWith<$Res> {
+  __$$_BookMarkCopyWithImpl(
+      _$_BookMark _value, $Res Function(_$_BookMark) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? link = null,
+  }) {
+    return _then(_$_BookMark(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      link: null == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_BookMark implements _BookMark {
+  _$_BookMark({required this.title, required this.link});
+
+  @override
+  String title;
+  @override
+  String link;
+
+  @override
+  String toString() {
+    return 'BookMark(title: $title, link: $link)';
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_BookMarkCopyWith<_$_BookMark> get copyWith =>
+      __$$_BookMarkCopyWithImpl<_$_BookMark>(this, _$identity);
+}
+
+abstract class _BookMark implements BookMark {
+  factory _BookMark({required String title, required String link}) =
+      _$_BookMark;
+
+  @override
+  String get title;
+  set title(String value);
+  @override
+  String get link;
+  set link(String value);
+  @override
+  @JsonKey(ignore: true)
+  _$$_BookMarkCopyWith<_$_BookMark> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$BookViewerPageModel {
   String get title => throw _privateConstructorUsedError;
   set title(String value) => throw _privateConstructorUsedError;
@@ -46,6 +170,8 @@ mixin _$BookViewerPageModel {
   EpubController get epubReaderController => throw _privateConstructorUsedError;
   set epubReaderController(EpubController value) =>
       throw _privateConstructorUsedError;
+  List<BookMark> get bookmarks => throw _privateConstructorUsedError;
+  set bookmarks(List<BookMark> value) => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookViewerPageModelCopyWith<BookViewerPageModel> get copyWith =>
@@ -72,7 +198,8 @@ abstract class $BookViewerPageModelCopyWith<$Res> {
       String fontFamily,
       Color bgColor,
       TableUser? user,
-      EpubController epubReaderController});
+      EpubController epubReaderController,
+      List<BookMark> bookmarks});
 }
 
 /// @nodoc
@@ -102,6 +229,7 @@ class _$BookViewerPageModelCopyWithImpl<$Res, $Val extends BookViewerPageModel>
     Object? bgColor = null,
     Object? user = freezed,
     Object? epubReaderController = null,
+    Object? bookmarks = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -160,6 +288,10 @@ class _$BookViewerPageModelCopyWithImpl<$Res, $Val extends BookViewerPageModel>
           ? _value.epubReaderController
           : epubReaderController // ignore: cast_nullable_to_non_nullable
               as EpubController,
+      bookmarks: null == bookmarks
+          ? _value.bookmarks
+          : bookmarks // ignore: cast_nullable_to_non_nullable
+              as List<BookMark>,
     ) as $Val);
   }
 }
@@ -186,7 +318,8 @@ abstract class _$$_BookViewerPageModelCopyWith<$Res>
       String fontFamily,
       Color bgColor,
       TableUser? user,
-      EpubController epubReaderController});
+      EpubController epubReaderController,
+      List<BookMark> bookmarks});
 }
 
 /// @nodoc
@@ -214,6 +347,7 @@ class __$$_BookViewerPageModelCopyWithImpl<$Res>
     Object? bgColor = null,
     Object? user = freezed,
     Object? epubReaderController = null,
+    Object? bookmarks = null,
   }) {
     return _then(_$_BookViewerPageModel(
       title: null == title
@@ -272,6 +406,10 @@ class __$$_BookViewerPageModelCopyWithImpl<$Res>
           ? _value.epubReaderController
           : epubReaderController // ignore: cast_nullable_to_non_nullable
               as EpubController,
+      bookmarks: null == bookmarks
+          ? _value.bookmarks
+          : bookmarks // ignore: cast_nullable_to_non_nullable
+              as List<BookMark>,
     ));
   }
 }
@@ -293,7 +431,8 @@ class _$_BookViewerPageModel implements _BookViewerPageModel {
       required this.fontFamily,
       required this.bgColor,
       this.user,
-      required this.epubReaderController});
+      required this.epubReaderController,
+      required this.bookmarks});
 
   @override
   String title;
@@ -323,10 +462,12 @@ class _$_BookViewerPageModel implements _BookViewerPageModel {
   TableUser? user;
   @override
   EpubController epubReaderController;
+  @override
+  List<BookMark> bookmarks;
 
   @override
   String toString() {
-    return 'BookViewerPageModel(title: $title, epubFilePath: $epubFilePath, coverFilePath: $coverFilePath, price: $price, isHeart: $isHeart, isBookMark: $isBookMark, isShowAppBarAndBottomSheet: $isShowAppBarAndBottomSheet, currentSliderValue: $currentSliderValue, fontSize: $fontSize, fontColor: $fontColor, fontFamily: $fontFamily, bgColor: $bgColor, user: $user, epubReaderController: $epubReaderController)';
+    return 'BookViewerPageModel(title: $title, epubFilePath: $epubFilePath, coverFilePath: $coverFilePath, price: $price, isHeart: $isHeart, isBookMark: $isBookMark, isShowAppBarAndBottomSheet: $isShowAppBarAndBottomSheet, currentSliderValue: $currentSliderValue, fontSize: $fontSize, fontColor: $fontColor, fontFamily: $fontFamily, bgColor: $bgColor, user: $user, epubReaderController: $epubReaderController, bookmarks: $bookmarks)';
   }
 
   @JsonKey(ignore: true)
@@ -352,7 +493,8 @@ abstract class _BookViewerPageModel implements BookViewerPageModel {
       required String fontFamily,
       required Color bgColor,
       TableUser? user,
-      required EpubController epubReaderController}) = _$_BookViewerPageModel;
+      required EpubController epubReaderController,
+      required List<BookMark> bookmarks}) = _$_BookViewerPageModel;
 
   @override
   String get title;
@@ -396,6 +538,9 @@ abstract class _BookViewerPageModel implements BookViewerPageModel {
   @override
   EpubController get epubReaderController;
   set epubReaderController(EpubController value);
+  @override
+  List<BookMark> get bookmarks;
+  set bookmarks(List<BookMark> value);
   @override
   @JsonKey(ignore: true)
   _$$_BookViewerPageModelCopyWith<_$_BookViewerPageModel> get copyWith =>
