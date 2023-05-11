@@ -5,15 +5,12 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:logger/logger.dart';
 import 'package:readme_app/core/constants/http.dart';
 import 'package:readme_app/core/constants/secure_storage.dart';
 import 'package:readme_app/core/constants/secure_storage_enum.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/dto/user_memebership_info_dto/user_membership_info_dto.dart';
-import 'package:readme_app/main.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 
 
@@ -32,24 +29,31 @@ class UserRepository {
     try{
       /// 1.구글 로그인
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      //log(googleUser.toString());
+
       if (googleUser == null) {
         // // 로그인 취소
         return null;
       }
       /// 2.구글 로그인 정보로 인증
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+
+      // final AuthCredential credential = GoogleAuthProvider.credential(
+      //   accessToken: googleAuth.accessToken,
+      //   idToken: googleAuth.idToken,
+      // );
 
       /// 3.현재 사용자 가져오기
       final currentUser = _auth.currentUser;
+
       /// 4.사용자 id토큰 가져오기
       final idToken = await currentUser?.getIdToken();
       log("Firebase Token: ${googleAuth.idToken}");
 
       String fcmToken = await SecureStorage.get(SecureStorageEnum.fcmToken) ?? "";
+      log("fcmToken Token: $fcmToken");
+
       /// 5. id토큰을 스프링 서버로 전달
       Response response = await MyHttp.get().post("/login",
           data: {
@@ -57,8 +61,9 @@ class UserRepository {
             'osType:': Platform.isAndroid ? "ANDROID" : "IOS",
             'fcmToken': fcmToken,
           }
-
       ); // 스프링에서 만든 join 로직에 요청
+
+
 
       /// 6.스프링 서버로 부터 받은 토큰을 앱 서버로 전달
       final jwtToken = response.headers.value('Authorization');

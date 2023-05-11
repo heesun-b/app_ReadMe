@@ -1,11 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
-import 'package:readme_app/model/payment_mock_data.dart';
+import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
+
 
 class PaymentPageBody extends StatefulWidget {
-  const PaymentPageBody({Key? key}) : super(key: key);
+  PaymentPageBody({Key? key}) : super(key: key);
 
   @override
   State<PaymentPageBody> createState() => _PaymentPageBodyState();
@@ -20,9 +23,9 @@ class _PaymentPageBodyState extends State<PaymentPageBody> {
     return newPrice.format(price);
   }
 
-  int getSum() {
-    int sum = paymentList
-        .map((e) => e.price)
+  int getSum( List<UseCartDTO> paymentBooks) {
+    int sum = paymentBooks
+        .map((e) => e.cartDTO.book.price)
         .toList()
         .fold(0, (a, b) => a + b);
     return sum;
@@ -36,11 +39,11 @@ class _PaymentPageBodyState extends State<PaymentPageBody> {
           child: Column(
             children: [
               _dateInfo(),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               _bookTile(),
-              Divider(thickness: 1,),
+              const Divider(thickness: 1,),
               _totalPrice(),
-              SizedBox(height: 100,),
+              const SizedBox(height: 100,),
             ],
           ),
         ));
@@ -50,32 +53,39 @@ class _PaymentPageBodyState extends State<PaymentPageBody> {
     return Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text("총 금액 ", style: TextStyle(fontWeight: FontWeight.w700,
+                const Text("총 금액 ", style: TextStyle(fontWeight: FontWeight.w700,
                     fontSize: Dimens.font_sp18),),
-                Text("${priceFormat(getSum())}",
-                  style: TextStyle(fontSize: Dimens.font_sp18),),
+                Text(priceFormat(15000),
+                  style: const TextStyle(fontSize: Dimens.font_sp18),),
               ],
             );
   }
 
   Widget _bookTile() {
     return Column(
-              children: List.generate(paymentList.length, (index) {
+              children: List.generate(1, (index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Color(0xFFD9D9D9))),
+                        border: Border.all(color: const Color(0xFFD9D9D9))),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Image.asset(
-                            "assets/images/${paymentList[index].image}",
+                          CachedNetworkImage(
                             width: 100,
+                            imageUrl: "https://readmecorpbucket.s3.ap-northeast-2.amazonaws.com/bookcover/book1.jpg",
+                            placeholder : (context, url) => Center(
+                              child: LoadingAnimationWidget.twoRotatingArc(
+                                size: 50,
+                                color: Colours.app_main,
+                              ),
+                            ),
+                            fit : BoxFit.fill,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Column(
@@ -83,23 +93,23 @@ class _PaymentPageBodyState extends State<PaymentPageBody> {
                             children: [
                               Row(
                                 children: [
-                                  Container(
+                                  const SizedBox(
+                                    width: 50,
                                     child: Text(
                                       "도서명",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: Dimens.font_sp16),
                                     ),
-                                    width: 50,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Container(
+                                  SizedBox(
                                     width: 130,
-                                    child: Text("${paymentList[index].title}",
+                                    child: Text("성공의 법칙",
                                         overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: Dimens.font_sp16)),
                                   ),
                                 ],
@@ -108,18 +118,18 @@ class _PaymentPageBodyState extends State<PaymentPageBody> {
                                 children: [
                                   Container(
                                     width: 50,
-                                    child: Text(
+                                    child: const Text(
                                       "출판사",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: Dimens.font_sp16),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Text("그린아카데미",
-                                      style: TextStyle(
+                                  Text("제임스 스미스",
+                                      style: const TextStyle(
                                           fontSize: Dimens.font_sp16)),
                                 ],
                               ),
@@ -127,18 +137,18 @@ class _PaymentPageBodyState extends State<PaymentPageBody> {
                                 children: [
                                   Container(
                                     width: 70,
-                                    child: Text(
+                                    child: const Text(
                                       "결제 금액",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: Dimens.font_sp16),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Text(priceFormat(paymentList[index].price),
-                                      style: TextStyle(
+                                  Text("15000",
+                                      style: const TextStyle(
                                           fontSize: Dimens.font_sp16)),
                                 ],
                               ),
@@ -155,25 +165,26 @@ class _PaymentPageBodyState extends State<PaymentPageBody> {
   Widget _dateInfo() {
     return Row(
               children: [
-                Text(
-                  "2023.04.19",
+                const Text(
+                  "2023.05.11",
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: Dimens.font_sp20,
                       color: Colours.app_sub_black),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
-                Text(
+                const Text(
                   "(결제)",
                   style: TextStyle(
                       fontSize: Dimens.font_sp14, color: Colours.app_sub_black),
                 ),
-                Spacer(),
-                Text("총 ${paymentList.length}건", style: TextStyle(
+                const Spacer(),
+                Text("총 1건", style: const TextStyle(
                     fontSize: Dimens.font_sp14, color: Colours.app_sub_blue))
               ],
             );
   }
 }
+//

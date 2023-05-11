@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
+import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/model/qustion/question.dart';
 import 'package:readme_app/view/components/home_navigation_bar.dart';
 import 'package:readme_app/view/page/alarm/alarm_page/alarm_page.dart';
@@ -71,7 +72,7 @@ Map<String, Widget Function(BuildContext)> getRouters(){
       );
     },
     Move.alarmPage: (context) => AlarmPage(),
-    Move.paymentPage: (context) => PaymentPage(paymentId: ModalRoute.of(context)!.settings.arguments as int),
+    Move.paymentPage: (context) => PaymentPage(),
     Move.cartPage: (context) => CartPage(),
     // Move.bookDetailPage: (context) => BookDetailPage(),
     // Move.modalButtonSheet: (context) => ModalButtonSheet(),
@@ -87,9 +88,6 @@ Map<String, Widget Function(BuildContext)> getRouters(){
     Move.questionListPage: (context) => QuestionListPage(),
     Move.bookmarkListPage: (context) => BookmarkListPage(),
     Move.questionDetailPage: (context) => ContentBoxPage(),
-
-
-
     Move.loginPage: (context) => LoginPage(),
     Move.appInfo: (context) => AppInfoPage(),
     Move.notification: (context) => NoticePage(),

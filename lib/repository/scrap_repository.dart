@@ -15,13 +15,12 @@ class ScrapRepository {
     Future<ResponseDTO> addScrap(int bookId) async {
     try{
       Dio dio = await MyHttp.getSecurity();
-      // todo 경로 수정
-      Response response = await dio.post("/경로추가", data: {'bookId' : bookId});
+      Response response = await dio.post("/hearts", data: {'bookId' : bookId});
       if(response.statusCode == 401 || response.statusCode == 403) {
         return ResponseDTO(code: 401, msg: response.statusMessage);
       } else if (response.statusCode == 200 ) {
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      // todo 데이터 파싱
+      // todo 데이터 파싱?
         Book book = Book.fromJson(responseDTO.data);
         responseDTO.data = book;
         return responseDTO;
@@ -36,8 +35,7 @@ class ScrapRepository {
   Future<ResponseDTO> deleteScrap(int id) async {
     try {
       Dio dio = await MyHttp.getSecurity();
-      // todo 경로 수정
-      Response response = await dio.delete("/경로추가", data: {'bookId' : id});
+      Response response = await dio.delete("/hearts", data: {'bookId' : id});
       if(response.statusCode == 401 ||response.statusCode == 403 ) {
         return ResponseDTO(code: 401, msg: response.statusMessage);
       } else if (response.statusCode == 200) {

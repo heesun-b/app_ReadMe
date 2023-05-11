@@ -1,31 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:readme_app/core/constants/colours.dart';
 import 'package:readme_app/core/constants/dimens.dart';
 import 'package:readme_app/core/constants/hs_style_icons.dart';
 import 'package:readme_app/core/constants/move.dart';
-import 'package:readme_app/dto/book_detail_dto/book_detail_dto.dart';
+import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
 import 'package:readme_app/view/page/payment/payment_page/components/payment_page_body.dart';
-import 'package:readme_app/view/page/payment/payment_page/components/payment_page_body_membership.dart';
 
-class PaymentPage extends StatefulWidget {
-  int paymentId;
-   PaymentPage({required this.paymentId, Key? key}) : super(key: key);
+class PaymentPage extends ConsumerWidget {
+  PaymentPage({Key? key}) : super(key: key);
 
-  @override
-  State<PaymentPage> createState() => _PaymentPageState();
-}
-
-class _PaymentPageState extends State<PaymentPage> {
-  bool _expanded = false;
-  
   String priceFormat(int price) {
     var newPrice = NumberFormat('###,###,###,### 원');
     return newPrice.format(price);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton:  Padding(

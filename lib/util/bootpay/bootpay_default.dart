@@ -13,6 +13,7 @@ import 'package:readme_app/core/constants/move.dart';
 import 'package:readme_app/dto/payment_dto/payment_dto.dart';
 import 'package:readme_app/dto/response_dto/response_dto.dart';
 import 'package:readme_app/dto/use_cart/use_cart_dto.dart';
+import 'package:readme_app/model/cart_mock_data.dart';
 import 'package:readme_app/repository/payment_repository.dart';
 import 'package:readme_app/sqflite/sqflite.dart';
 import 'package:readme_app/sqflite/table/table_user.dart';
@@ -50,8 +51,8 @@ class _BootPayDefaultState extends State<BootPayDefault> {
               borderRadius: BorderRadius.circular(20)),
           onPressed: () async {
             PaymentDTO paymentDTO = await paymentRequest(widget.cartBookList);
-            print("체크 1 : $paymentDTO");
-            bootpayDefault(context, paymentDTO);
+            // print("체크 1 : $paymentDTO");
+            bootpayDefault(context, paymentDTO, widget.cartBookList);
           },
           child: const Text(
             "결제하기",
@@ -67,7 +68,7 @@ class _BootPayDefaultState extends State<BootPayDefault> {
     return paymentDTO;
   }
 
-  void bootpayDefault(BuildContext context, PaymentDTO paymentDTO) async {
+  void bootpayDefault(BuildContext context, PaymentDTO paymentDTO, List<UseCartDTO> cartBookList) async {
 
     Payload payload = await getPayload(context, paymentDTO);
 
@@ -83,7 +84,7 @@ class _BootPayDefaultState extends State<BootPayDefault> {
       onCancel: (String data) {
         log('------- onCancel: $data');
         DialogUtil.dialogShow(context, "결제 취소");
-        Navigator.pushNamedAndRemoveUntil(context, Move.navigationBar, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, Move.mainPage, (route) => false);
       },
       onError: (String data) {
         log('------- onCancel: $data');
@@ -118,11 +119,14 @@ class _BootPayDefaultState extends State<BootPayDefault> {
       },
       onDone: (String data) {
         log('------- onDone: $data');
-         Navigator.pushNamedAndRemoveUntil(context, Move.paymentPage, (route) => false);
+        Navigator.popAndPushNamed(
+            context,
+            Move.paymentPage,
+        );
+
       },
     );
   }
-
 
   Future<TableUser?> getUser () async {
     TableUser? user = await MySqfliteInit.getUser();
@@ -143,7 +147,6 @@ class _BootPayDefaultState extends State<BootPayDefault> {
       item.id = widget.cartBookList[index].cartDTO.book.id.toString();
       itemList.add(item);
     });
-
 
     payload.androidApplicationId =
         androidApplicationId; // android application id

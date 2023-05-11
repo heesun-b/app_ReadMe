@@ -18,19 +18,19 @@ class PaymentRepository {
   PaymentRepository._single();
 
   Future<ResponseDTO> payment (List<UseCartDTO> cartBookList) async {
-    print("체크2");
+    // print("체크2");
     List<int> bookIdList  = cartBookList.map((e) => e.cartDTO.book.id).toList();
-    print("체크3 ${bookIdList.toString()}");
+    // print("체크3 ${bookIdList.toString()}");
 
     Dio dio = await MyHttp.getSecurity();
     Response response = await dio.post("/payments/books", data: {'bookIds' : bookIdList});
-    print("체크5 ${response.data.toString()}");
+    // print("체크5 ${response.data.toString()}");
     if(response.statusCode == 401 || response.statusCode == 403) {
       return ResponseDTO(code: 401, msg: response.statusMessage);
     } else if (response.statusCode == 200 ) {
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       PaymentDTO paymentDTO = PaymentDTO.fromJson(responseDTO.data);
-      print("체크6 ${paymentDTO.toString()}");
+      // print("체크6 ${paymentDTO.toString()}");
       responseDTO.data = paymentDTO;
       return responseDTO;
     } else {

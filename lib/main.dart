@@ -35,9 +35,25 @@ void main() async {
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
+  //Android 8 (API 26) 이상부터는 채널설정이 필수.
+  androidNotificationChannel = const AndroidNotificationChannel(
+    'important_channel', // id
+    'Important_Notifications', // name
+    '중요도가 높은 알림을 위한 채널.',
+    // description
+    importance: Importance.high,
+  );
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+      AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(androidNotificationChannel);
+
+
   FirebaseMessaging.onMessage.listen((message) {
     notificationController.fbMsgForegroundHandler(message, flutterLocalNotificationsPlugin, androidNotificationChannel);
   });
+
+
 
   Widget failWidget = const MaterialApp(
     debugShowCheckedModeBanner: false,
