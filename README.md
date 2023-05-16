@@ -2,7 +2,6 @@
 
 ![readme_long](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/cb87d3f4-2a02-47d1-8894-371e7954dd02)
 
-
 # 앱 소개
 `Read Me`는 **최고의 독서 경험을 선사하는 전자책 플랫폼 앱**입니다.</br>
 다양한 장르의 책을 제공하며 편리한 인터페이스로 책 읽기를 더욱 즐겁게 만들어줍니다.</br>
@@ -13,7 +12,6 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 
 # 발표자료
 [3조_파이널_PDF.pdf](https://github.com/ReadMeCorporation/app_ReadMe/files/11448359/3._._PDF.pdf)
-
 
 # 프로젝트 기간
 - 2023-04-10 ~ 2023.05.10
@@ -60,6 +58,18 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 [![GitHub](https://img.shields.io/badge/-GitHub-black?logo=github&logoColor=white)](https://github.com)
 [![JIRA](https://img.shields.io/badge/-JIRA-blue?logo=jira&logoColor=white)](https://www.atlassian.com/software/jira)
 [![Slack](https://img.shields.io/badge/-Slack-purple?logo=slack&logoColor=white)](https://slack.com)
+
+# ????????????
+### sqflite 
+
+### bootpay
+### FCM 
+### epub viewer
+### RiverPod
+### Secure Storage
+### Freezed 
+### OAuth 
+### 페이징 처리 
 
 ## ERD
 **전체**
