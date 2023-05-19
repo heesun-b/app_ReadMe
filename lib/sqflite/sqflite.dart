@@ -195,7 +195,6 @@ class MySqfliteInit {
             createdAt TEXT not null)
     ''');
 
-
     batch.execute('DROP TABLE IF EXISTS ${TableName.books}');
     batch.execute('''
           create table ${TableName.books} (

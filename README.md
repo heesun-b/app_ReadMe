@@ -133,11 +133,19 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/9c2ada18-3b49-4ea2-adc7-4bb09f526ec3)
 1. 앱 실행 시 metadata를 위한 통신 
    - sqflite를 이용해 DB 저장할 데이터 
-   - 카테고리(전체 / 베스트셀러 / 추천 / 신간) 종류
-```agsl
+   - 카테고리 (전체 / 베스트셀러 / 추천 / 신간) 종류
+```agslW
   Response response = await dio.get("/meta");
 ```
-
+```agsl
+    batch.execute('DROP TABLE IF EXISTS ${TableName.mainTab}');
+    batch.execute('''
+          create table ${TableName.mainTab} (
+            requestName text,
+            name text not null)
+          ''');
+```
+2.  
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/89f81900-cacd-4761-b565-b4afdad7bb24)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/7cb39d8d-c7aa-4301-8b32-b8fb518c29f5)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/ea54798f-048a-4d2a-9fa0-563596447c5d)
