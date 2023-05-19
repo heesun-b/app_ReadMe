@@ -145,7 +145,7 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
             name text not null)
           ''');
 ```
-2.  
+
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/89f81900-cacd-4761-b565-b4afdad7bb24)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/7cb39d8d-c7aa-4301-8b32-b8fb518c29f5)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/ea54798f-048a-4d2a-9fa0-563596447c5d)
