@@ -131,22 +131,220 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
       }
 ```
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/9c2ada18-3b49-4ea2-adc7-4bb09f526ec3)
-1. 앱 실행 시 metadata를 위한 통신 
-   - sqflite를 이용해 DB 저장할 데이터 
-   - 카테고리 (전체 / 베스트셀러 / 추천 / 신간) 종류
-```agslW
-  Response response = await dio.get("/meta");
-```
+1. 앱 실행 시 metadata를 위한 통신
+    - sqflite를 이용해 DB 저장할 데이터
+    - 카테고리 (전체 / 베스트셀러 / 추천 / 신간) 종류
 ```agsl
-    batch.execute('DROP TABLE IF EXISTS ${TableName.mainTab}');
-    batch.execute('''
-          create table ${TableName.mainTab} (
+    Response response = await dio.get("/meta");
+    
+    if (response.statusCode == 200) {
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      if (responseDTO.code == 1) {
+        MetaDTO metaDTO = MetaDTO.fromJson(responseDTO.data);
+        await MySqfliteInit.init(metaDTO);
+        if (metaDTO.jwt != null && metaDTO.jwt != "") {
+          SecureStorage.setKey(SecureStorageEnum.jwtToken, metaDTO.jwt!);
+        }
+        await MySqfliteInit.deleteUser();
+        runApp(
+          ProviderScope(
+            child: MyApp(),
+          ),
+        );
+      } else {
+        runApp(
+          failWidget,
+        );
+      }
+```
+2. sqflite를 이용해 DB 저장
+```agsl
+  batch.execute('DROP TABLE IF EXISTS ${TableName.mainTab}');
+  batch.execute('''eName.mainTab} (
             requestName text,
             name text not null)
           ''');
+          
+  await _db!.delete(TableName.mainTab);
+  for (var mainTab in metaDTO.mainTabs) {
+    _db!.insert(TableName.mainTab,
+        {'requestName': mainTab.requestName, 'name': mainTab.name});
+    }
 ```
-2.  
+3. Main Page - View Mode
+    - 카테고리마다 따로 관리
+    - 페이징 처리 위해 카테고리별 현재 페이지와 마지막 페이지 여부 함께 관리
+```agsl
+@unfreezed
+class MainPageModel with _$MainPageModel {
+   factory MainPageModel({
+    required int totalPage,
+    required int bestPage,
+    required int recommendPage,
+    required int latestPage,
+    required bool isTotalLast,
+    required bool isBestLast,
+    required bool isRecommendLast,
+    required bool isLatestLast,
+    required List<FileListDTO> bookBanners,
+    required List<Book> totalBooks,
+    required List<Book> bestBooks,
+    required List<Book> recommendBooks,
+    required List<Book> latestBooks,
+     required List<TableMainTab> mainTabs,
+  }) = _MainPageModel;
+}
+```
+4. 페이징 처리
+    - 기본 size 10으로 고정 
+    - 한 페이지가 끝나면 더보기 버튼으로 다음 페이지 요청하고, 해당 페이지가 마지막 페이지인 경우 더보기 버튼 생략
+```agsl
+isLast != true && count - 1 == idx
+  ? Padding(
+      padding:
+        const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+          child: UseButton(
+          title: "더보기",
+          buttonPressed: () {
+            ref.read(bookControllerProvider).pageSearch(name, page, requestName);
+           }),
+          )
+    : Container()
+```
+- 요청 페이지 넘버와 카테고리 이름 전달 후 해당 카테고리, 해당 페이지의 list 응답 받음
+```agsl
+ Future<void> pageSearch(
+      String name,
+      int page,
+      String requestName
+  ) async {
+    if (!isDuplication) {
+      isDuplication = true;
+      ResponseDTO responseDTO =  await BookRepository().searchMainListPage(page, requestName);
+
+        ref.read(mainPageProvider.notifier).pageSearch(name, responseDTO, page);
+        isDuplication = false;
+    }
+  }
+```
+```agsl
+  Future<ResponseDTO> searchMainListPage(int page, String requestName, {int? bigCategory, int? smallCategory}) async {
+    String endPoint = getEndPoint(requestName, bigCategory, smallCategory);
+    try {
+      Response response = await MyHttp.get()
+          .get("/books$endPoint&page=$page&size=10");
+      if(response.statusCode == 200) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
+        responseDTO.data = mainDTO;
+        return responseDTO;
+      } else {
+        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
+      }
+    } catch (e) {
+      return ResponseDTO(code: -1, msg: "실패 : ${e}");
+    }
+  }
+```
+- 페이지 상태 변화
+```agsl
+  if (name == "전체") {
+        List<Book> newTotalBooks = [...state!.totalBooks];
+        newTotalBooks.addAll(bookList);
+        state = state!.copyWith(totalBooks: newTotalBooks, isTotalLast: responseDTO.data.last,  totalPage: page);
+      }
+```
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/89f81900-cacd-4761-b565-b4afdad7bb24)
+1. PK로 Book Detail 조회 
+```agsl
+  Future<ResponseDTO> getBookDetail (int bookId) async {
+    try{
+      Dio dio = await MyHttp.getCommon();
+      Response response = await dio.get("/books/$bookId/detail?size=3");
+      if(response.statusCode == 200) {
+        log(response.data.toString());
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        BookDetailDTO bookDetailDTO = BookDetailDTO.fromJson(responseDTO.data);
+        responseDTO.data = bookDetailDTO;
+        return responseDTO;
+      } else {
+        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
+      }
+    } catch (e) {
+      return ResponseDTO(code: -1, msg: "실패 : $e");
+    }
+  }
+```
+2. 도서 구매 / 정기권 구매 여부로 노출 버튼 선택
+    - 구매(소장) 시 장바구니로 이동 후 결제 
+```agsl
+ (model.user?.isMembership ?? false) || (model.book.isPurchase ?? false)
+   ?  Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              child: ElevatedButton(
+                 style: ElevatedButton.styleFrom(
+                   backgroundColor: Colors.black,
+                   textStyle: TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
+                   padding: EdgeInsets.all(5),
+                 ),
+                 child: const Text("바로보기"),
+                 onPressed: () {
+                   Navigator.pushNamed(context, Move.bookViewerPage, arguments: model?.book);
+                 }
+              ),
+            ),
+        ),
+      )
+      : Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 150,
+            height: 40,
+            child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              textStyle: TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
+              padding: EdgeInsets.all(5),
+            ),
+            child: const Text("장바구니"),
+            onPressed: () {
+              ref.read(cartControllerProvider).insert(bookId);
+            }
+            ),
+          ),
+          SizedBox(
+            width: 150,
+            height: 40,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                textStyle: const TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
+                padding: const EdgeInsets.all(5),
+               ),
+              child: const Text("구독 / 소장"),
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => BookDetailBottomSheet(
+                    model?.book.title ?? "",
+                    model?.book.author ?? "",
+                    model?.book.price ?? 0,
+                    model?.book.id ?? 0,
+                    model?.book.coverFile.fileUrl ?? "",)
+                );
+              },
+           ),
+          ),
+```
+3. 도서 구매/ 정기권 구독 여부 & 로그인 유무에 따라 review form 노출 선택
+```agsl
+ model?.user != null ? BookDetailReviewForm(bookId) : Container(),
+```
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/7cb39d8d-c7aa-4301-8b32-b8fb518c29f5)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/ea54798f-048a-4d2a-9fa0-563596447c5d)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/0ec6d7c3-ed76-4d22-b560-42c96bdb2101)
