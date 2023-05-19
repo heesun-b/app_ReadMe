@@ -24,25 +24,16 @@ class UserRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-
   Future<ResponseDTO?> fetchJoinAndLogin() async {
     try{
       /// 1.구글 로그인
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-
-      //log(googleUser.toString());
-
       if (googleUser == null) {
         // // 로그인 취소
         return null;
       }
       /// 2.구글 로그인 정보로 인증
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-
-      // final AuthCredential credential = GoogleAuthProvider.credential(
-      //   accessToken: googleAuth.accessToken,
-      //   idToken: googleAuth.idToken,
-      // );
 
       /// 3.현재 사용자 가져오기
       final currentUser = _auth.currentUser;
@@ -62,8 +53,6 @@ class UserRepository {
             'fcmToken': fcmToken,
           }
       ); // 스프링에서 만든 join 로직에 요청
-
-
 
       /// 6.스프링 서버로 부터 받은 토큰을 앱 서버로 전달
       final jwtToken = response.headers.value('Authorization');
