@@ -81,9 +81,9 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 - 각 이슈에 대해 새로운 브랜치를 생성하고, 해당 브랜치에서 작업을 수행
 - 작업이 완료되면 해당 브랜치에서 코드 리뷰 진행. 리뷰어는 변경 사항 확인 후 피드백. 리뷰 완료되면 MERGE.
 
-## 유저 시나리오
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/6ef610ff-c958-415a-ac21-cb409863666f)
+# 유저 시나리오
 ## 회원가입 및 로그인 (OAuth)
+![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/e9cd753c-ff3d-4e9e-b150-fa6a1cc88af6)
 ### Firebase 설정
 1. Firebase 프로젝트 설정
 ![1  프로젝트 생성](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/c944feac-ee42-47a3-81bb-c9ac3372aeb6)
@@ -166,8 +166,8 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
       ));
   }
 ```
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/9c2ada18-3b49-4ea2-adc7-4bb09f526ec3)
 ## 메인 도서 목록
+![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/847f195f-364b-4e98-bea4-21498937fb06)
 ### metadata 통신
 1. 앱 실행 시 metadata를 위한 통신
     - sqflite를 이용해 DB 저장할 데이터
@@ -292,7 +292,8 @@ isLast != true && count - 1 == idx
         state = state!.copyWith(totalBooks: newTotalBooks, isTotalLast: responseDTO.data.last,  totalPage: page);
       }
 ```
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/89f81900-cacd-4761-b565-b4afdad7bb24)
+## 도서 상세 조회
+![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/7238620f-8d8d-4d92-b41e-494e77f8838d)
 1. PK로 Book Detail 조회 
 ```agsl
   Future<ResponseDTO> getBookDetail (int bookId) async {
