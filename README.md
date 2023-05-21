@@ -151,8 +151,8 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
  final jwtToken = response.headers.value('Authorization');
  
  if (jwtToken != null) {
-        SecureStorage.setKey(SecureStorageEnum.jwtToken, jwtToken);
-      }
+    SecureStorage.setKey(SecureStorageEnum.jwtToken, jwtToken);
+}
 ```
 ```agsl
   static Future<Dio> getSecurity() async {
@@ -169,12 +169,13 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 ## 메인 도서 목록
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/847f195f-364b-4e98-bea4-21498937fb06)
 ### metadata 통신
-1. 앱 실행 시 metadata를 위한 통신
+1. 앱 실행 시 최초 1회 metadata를 저장
     - sqflite를 이용해 DB 저장할 데이터
+    - 거의 변하지 않는 데이터(ex: 사용자 기본 정보)를 매통신마다 전달받지 않고 최초 로드 시 전달 받은 후 로컬에 저장한 뒤 사용하기 위해 적용
     - 카테고리 (전체 / 베스트셀러 / 추천 / 신간) 종류
 ```agsl
     Response response = await dio.get("/meta");
-    
+   
     if (response.statusCode == 200) {
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       if (responseDTO.code == 1) {
@@ -209,8 +210,8 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
         {'requestName': mainTab.requestName, 'name': mainTab.name});
     }
 ```
-3. Main Page - View Mode
-    - 카테고리마다 따로 관리
+3. Main Page - View Model
+    - 카테고리마다 도서 목록 따로 관리
     - 페이징 처리 위해 카테고리별 현재 페이지와 마지막 페이지 여부 함께 관리
 ```agsl
 @unfreezed
@@ -234,8 +235,8 @@ class MainPageModel with _$MainPageModel {
 }
 ```
 ### 페이징 처리
-    - 기본 size 10으로 고정 
-    - 한 페이지가 끝나면 더보기 버튼으로 다음 페이지 요청하고, 해당 페이지가 마지막 페이지인 경우 더보기 버튼 생략
+- 기본 size 10으로 고정 (유동적으로 변경 가능)
+- 한 페이지가 끝나면 더보기 버튼으로 다음 페이지 요청하고, 해당 페이지가 마지막 페이지인 경우 더보기 버튼 생략
 ```agsl
 isLast != true && count - 1 == idx
   ? Padding(
@@ -249,7 +250,7 @@ isLast != true && count - 1 == idx
           )
     : Container()
 ```
-- 요청 페이지 넘버와 카테고리 이름 전달 후 해당 카테고리, 해당 페이지의 list 응답 받음
+- 요청 페이지 넘버와 카테고리 이름 전달 후 해당 카테고리, 해당 페이지의 list 응답 받음(sqflite 활용)
 ```agsl
  Future<void> pageSearch(
       String name,
@@ -259,9 +260,8 @@ isLast != true && count - 1 == idx
     if (!isDuplication) {
       isDuplication = true;
       ResponseDTO responseDTO =  await BookRepository().searchMainListPage(page, requestName);
-
-        ref.read(mainPageProvider.notifier).pageSearch(name, responseDTO, page);
-        isDuplication = false;
+      ref.read(mainPageProvider.notifier).pageSearch(name, responseDTO, page);
+      isDuplication = false;
     }
   }
 ```
@@ -271,17 +271,7 @@ isLast != true && count - 1 == idx
     try {
       Response response = await MyHttp.get()
           .get("/books$endPoint&page=$page&size=10");
-      if(response.statusCode == 200) {
-        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-        MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
-        responseDTO.data = mainDTO;
-        return responseDTO;
-      } else {
-        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
-      }
-    } catch (e) {
-      return ResponseDTO(code: -1, msg: "실패 : ${e}");
-    }
+           ...
   }
 ```
 - 페이지 상태 변화
@@ -300,17 +290,7 @@ isLast != true && count - 1 == idx
     try{
       Dio dio = await MyHttp.getCommon();
       Response response = await dio.get("/books/$bookId/detail?size=3");
-      if(response.statusCode == 200) {
-        log(response.data.toString());
-        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-        BookDetailDTO bookDetailDTO = BookDetailDTO.fromJson(responseDTO.data);
-        responseDTO.data = bookDetailDTO;
-        return responseDTO;
-      } else {
-        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
-      }
-    } catch (e) {
-      return ResponseDTO(code: -1, msg: "실패 : $e");
+      ...
     }
   }
 ```
@@ -321,66 +301,19 @@ isLast != true && count - 1 == idx
    ?  Expanded(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 50,
-              child: ElevatedButton(
-                 style: ElevatedButton.styleFrom(
-                   backgroundColor: Colors.black,
-                   textStyle: TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
-                   padding: EdgeInsets.all(5),
-                 ),
-                 child: const Text("바로보기"),
-                 onPressed: () {
-                   Navigator.pushNamed(context, Move.bookViewerPage, arguments: model?.book);
-                 }
-              ),
-            ),
+            ...
         ),
       )
       : Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: 150,
-            height: 40,
-            child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,
-              textStyle: TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
-              padding: EdgeInsets.all(5),
-            ),
-            child: const Text("장바구니"),
-            onPressed: () {
-              ref.read(cartControllerProvider).insert(bookId);
-            }
-            ),
-          ),
-          SizedBox(
-            width: 150,
-            height: 40,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                textStyle: const TextStyle(color: Colors.white, fontSize: Dimens.font_sp20),
-                padding: const EdgeInsets.all(5),
-               ),
-              child: const Text("구독 / 소장"),
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) => BookDetailBottomSheet(
-                    model?.book.title ?? "",
-                    model?.book.author ?? "",
-                    model?.book.price ?? 0,
-                    model?.book.id ?? 0,
-                    model?.book.coverFile.fileUrl ?? "",)
-                );
-              },
-           ),
-          ),
+          ...
+        ]
+      ),
 ```
 3. 도서 구매/ 정기권 구독 여부 & 로그인 유무에 따라 review form 노출 선택
+   - true일 시, 리뷰 내역과 리뷰 폼 노출 
+   - false일 시, 리뷰 내역만 노출
 ```agsl
  model?.user != null ? BookDetailReviewForm(bookId) : Container(),
 ```
@@ -480,25 +413,7 @@ class BookViewerPageModel with _$BookViewerPageModel {
      onTap: () {
        ref.read(bookViewerPageProvider(book).notifier).changeIsShowAppBarAndBottomSheet(model?.isShowAppBarAndBottomSheet ?? false ? false : true);
      },
-     child: Column(
-       mainAxisAlignment: MainAxisAlignment.center,
-       children: [
-         buildBookmark(ref),
-         Expanded(
-           child: Center(
-             child: Container(
-               color: ref.watch(bookViewerPageProvider(book))?.bgColor,
-               child: Padding(
-                   padding: const EdgeInsets.all(10.0),
-                   child: buildEpubView(model?.epubReaderController, ref)),
-               width: MediaQuery.of(context).size.width,
-               height: MediaQuery.of(context).size.height,
-             ),
-           ),
-         ),
-         buildBottomSheet(context, ref),
-       ],
-     ),
+      ...
    ),
 
 ```
@@ -535,30 +450,12 @@ class BookViewerPageModel with _$BookViewerPageModel {
 - 북마크 리스트 추가 후 해당 영역으로 이동 
 ```agsl
  return Container(
-      child: Drawer(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 40.0),
-          child: ListView.builder(
-            padding: EdgeInsets.zero,
-            itemCount: model?.bookmarks.length ?? 0,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () => ref.read(bookViewerPageProvider(book).notifier).goBookMark(model?.bookmarks[index].link ?? ""),
-                child: Card(
-                  child: ListTile(
-                    title: Text(
-                      model?.bookmarks[index].title ?? "",
-                      style: TextStyle(fontSize: 18.0),
-                    ),
-                    trailing: const Icon(Icons.arrow_forward),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ),
-    );
+     ...
+      return InkWell(
+        onTap: () => ref.read(bookViewerPageProvider(book).notifier).goBookMark(model?.bookmarks[index].link ?? ""),
+        ...
+      );
+  );
 ```
 ```agsl
 void goBookMark(String link) async {
@@ -584,8 +481,10 @@ void goBookMark(String link) async {
 ## 카테고리
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/f4cb2799-f8ea-4dbb-b937-67d2dfc65061)
 ### metadata 통신
-1. 앱 실행 시 metadata를 위한 통신
+
+1. 앱 실행 시 최초 1회 metadata를 저장
    - sqflite를 이용해 DB 저장할 데이터
+   - 거의 변하지 않는 데이터(ex: 사용자 기본 정보)를 매통신마다 전달받지 않고 최초 로드 시 전달 받은 후 로컬에 저장한 뒤 사용하기 위해 적용
    - 상위 카테고리(종합 포함 8개) & 하위 카테고리 (상위 카테고리별 종합 포함 6개) 
 ```agsl
     // 테이블 생성
@@ -614,16 +513,7 @@ void goBookMark(String link) async {
     for (var bigCategory in bigCategory) {
       _db!.insert(TableName.bigCategory,
           {'id': bigCategory.id, 'name': bigCategory.name});
-
-      if(bigCategory.smallCategory != null) {
-        for (var smallCategory in bigCategory.smallCategory!) {
-          _db!.insert(TableName.smallCategory, {
-            'id': smallCategory.id,
-            'name': smallCategory.name,
-            'bigCategoryId': bigCategory.id
-          });
-        }
-      }
+          ...
     }
 ```
 - view-model
@@ -640,7 +530,7 @@ class CategoryPageModel with _$CategoryPageModel {
   }) = _CategoryPageModel;
 }
 ```
-- sqflite에 저장된 카테고리 정보를 이용해 state의 categoryTabs 구성
+- sqflite에 저장된 카테고리 정보를 이용해 categoryTabs 구성
 ```agsl
    List<BigCategory> sqlCategoryTabs =  await MySqfliteInit.getBigCategoryList();
 
@@ -655,13 +545,9 @@ class CategoryPageModel with _$CategoryPageModel {
 - 페이지 최초 로드 시 종합(상위) 카테고리 노출 
 ```agsl
 ResponseDTO responseDTO = await BookRepository().mainList("all");
-   if(responseDTO.code == 1) {
      MainDTO total = responseDTO.data;
      books =  books.copyWith(books: total.content , page: 0, isLast: total.last, categoryTabs: categoryTabs);
      state = books;
-   } else {
-     DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
-   }
 ```
 - 카테고리 선택 시 해당 카테고리의 하위 카테고리 노출
 ```agsl
@@ -692,9 +578,6 @@ ResponseDTO responseDTO = await BookRepository().mainList("all");
   ) async {
     if (!isDuplication) {
       isDuplication = true;
-      // 통신 할때 await
-      // responseDTO.data = responseBookList
-      // responseDTO.data.page.isLast = false
       ResponseDTO responseDTO =  await BookRepository().searchMainListPage(page, "all", bigCategory: bigCategory, smallCategory: smallCategory);
       MainDTO mainDTO = responseDTO.data;
       ref.read(categoryPageProvider.notifier).pageSearch(mainDTO, page, bigCategory, smallCategory: smallCategory);
@@ -707,17 +590,7 @@ ResponseDTO responseDTO = await BookRepository().mainList("all");
     String endPoint = getEndPoint(requestName, bigCategory, smallCategory);
     try {
       Response response = await MyHttp.get().get("/books$endPoint&page=0&size=10");
-      if(response.statusCode == 200) {
-        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-        MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
-        responseDTO.data = mainDTO;
-        return responseDTO;
-      } else {
-        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
-      }
-    } catch (e) {
-      return ResponseDTO(code: -1, msg: "실패 : ${e}");
-    }
+      ...
   }
   ```
 - 페이지 상태 변화
@@ -731,12 +604,70 @@ ResponseDTO responseDTO = await BookRepository().mainList("all");
 
 ## 검색
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/f2297450-e74e-4382-a75e-8a0e061db05b)
-### sqflite 
-
-
-
-
-
+### 최근 검색어 노출 - sqflite 사용
+- 검색 시 DB 저장
+```agsl
+  Future<void> search(ResponseDTO responseDTO, String keyword) async{
+      await MySqfliteInit.insertSearchText(keyword);
+      ...
+  }
+```
+```agsl
+  static Future<void> insertSearchText (String searchText) async {
+    List<Map> books = await _db!.query(TableName.search, where: 'searchText = ?', whereArgs: [searchText]);
+    if (books.isEmpty) {
+      await _db!.insert(TableName.search,
+          {'searchText': searchText, 'createdAt': DateTime.now().millisecondsSinceEpoch}
+      );
+    } else {
+      await _db!.delete(TableName.search, where: 'searchText = ?', whereArgs: [searchText]);
+      await _db!.insert(TableName.search,
+          {'searchText': searchText, 'createdAt': DateTime.now().millisecondsSinceEpoch}
+      );
+    }
+  }
+```
+- 버튼 클릭 시 삭제 가능
+```agsl
+  onPressed: () {
+    provider.deleteSearchKeyword(model?.tableSearches[index].searchText ?? "");
+  },
+```
+- 삭제 시 페이지 상태(화면) 변경
+```agsl
+Future<void> deleteSearchKeyword (String keyword) async{
+    await MySqfliteInit.deleteSearchText(keyword);
+    var searchList = await MySqfliteInit.getSearchTextOrderByCreatedAtDesc();
+    state = state!.copyWith (
+      tableSearches: searchList,
+    );
+  }
+```
+- DB Delete
+```agsl
+static Future<void> deleteSearchText (String searchText) async {
+    await _db!.delete(TableName.search, where: 'searchText = ?', whereArgs: [searchText]);
+  }
+```
+### 검색
+- 서버에 검색 키워드 전달
+```agsl
+  Future<void> search(
+      String searchKeyword
+  ) async {
+      ResponseDTO responseDTO =  await BookRepository().searchKeyword(searchKeyword);
+      ref.read(searchListPageProvider.notifier).search(responseDTO, searchKeyword);
+      isDuplication = false;
+  }
+```
+```agsl
+Future<ResponseDTO> searchKeyword(String keyword) async {
+    try {
+      var dio = await MyHttp.getCommon();
+      Response response = await dio.get("/search?keyword=$keyword");
+      ...
+  }
+```
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/78f107ea-1309-4022-ba9e-d6573eb56a80)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/150d0448-230d-4e4c-9fe1-0dde14a07689)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/a949919d-1444-4b9e-a96e-0aafcb18a36d)
