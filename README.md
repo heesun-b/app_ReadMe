@@ -46,8 +46,6 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 
 ## Bootpay
 - 부트페이는 사업자가 PG 이용을 더욱 손쉽게 할 수 있도록 하는 서비스로 PG 가입을 위한 절차를 대행해주고, 결제 연동을 쉽게 할 수 있도록 표준화된 형태의 결제 API를 제공한다.
-- 사용이유
-  - ?????????
   
 ### 결제 흐름
 1. 결제 연동을 위한 키를 발급
@@ -64,17 +62,19 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
    - 서버에도 결제 완료 통지
    - 앱에서도 정상적으로 결제 완료 처리가 되고 done 호출
 
-### epub viewer
-### RiverPod
-### Secure Storage
-### Freezed 
+## epub viewer
+- Flutter 애플리케이션에 전자책 리더기를 추가하는 데 사용할 수 있는 라이브러리
+  - EPUB(electronic publication)은 국제 디지털 출판 포럼(IDPF, International Digital Publishing Forum)에서 제정한 개방형 자유 전자서적 표준이다. HTML과 CSS의 일부분을 차용한 오픈된 파일포맷 표준으로, 기본적으로 인터넷 연결이 끊어진 상태에서 PDA 또는 노트북 등에서 전자책 열람이 자유롭도록 제정된 전자책 포맷이다. 기본적으로는 HTML 로 이뤄진 문서가 ZIP 으로 압축된 모양새이다.
+## RiverPod
+## Secure Storage
+## Freezed 
 ## OAuth 
 - Google OAuth & Firebase 사용
 - Firebase Authentication을 통해 구글 계정으로 사용자 인증을 처리
 - Firebase는 구글이 제공하는 개발 플랫폼으로, 인증, 데이터베이스, 스토리지, 클라우드 함수 등 다양한 기능을 제공
 - 사용이유
   - 구글 OAuth와 Firebase를 통합하여 사용하면, 사용자 인증에 대한 부분을 Firebase가 처리해주기 때문에 구글 OAuth의 복잡한 설정과 통신을 직접 다룰 필요가 없음
-### 페이징 처리 
+## 페이징 처리 
 ## FCM
 ## Jira를 이용한 브랜치 전략
 - Jira를 이용해 작업 항목을 관리하고 이슈 생성
@@ -580,9 +580,163 @@ void goBookMark(String link) async {
     );
   }
 ```
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/ea54798f-048a-4d2a-9fa0-563596447c5d)
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/0ec6d7c3-ed76-4d22-b560-42c96bdb2101)
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/70d909b9-0024-4a06-b12a-f21d4e646179)
+
+## 카테고리
+![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/f4cb2799-f8ea-4dbb-b937-67d2dfc65061)
+### metadata 통신
+1. 앱 실행 시 metadata를 위한 통신
+   - sqflite를 이용해 DB 저장할 데이터
+   - 상위 카테고리(종합 포함 8개) & 하위 카테고리 (상위 카테고리별 종합 포함 6개) 
+```agsl
+    // 테이블 생성
+    batch.execute('DROP TABLE IF EXISTS ${TableName.bigCategory}');
+    batch.execute('''
+          create table ${TableName.bigCategory} (
+            id integer primary key,
+            name text not null)
+          ''');
+
+    batch.execute('DROP TABLE IF EXISTS ${TableName.smallCategory}');
+    batch.execute('''
+          create table ${TableName.smallCategory} (
+            bigCategoryId integer,
+            id integer primary key,
+            name text not null,
+            FOREIGN KEY (bigCategoryId) REFERENCES ${TableName.bigCategory}(id) ON DELETE CASCADE
+            )
+          ''');
+          
+    // insert   
+    await _db!.delete(TableName.bigCategory);
+    await _db!.delete(TableName.smallCategory);
+
+    var bigCategory = metaDTO.bigCategory;
+    for (var bigCategory in bigCategory) {
+      _db!.insert(TableName.bigCategory,
+          {'id': bigCategory.id, 'name': bigCategory.name});
+
+      if(bigCategory.smallCategory != null) {
+        for (var smallCategory in bigCategory.smallCategory!) {
+          _db!.insert(TableName.smallCategory, {
+            'id': smallCategory.id,
+            'name': smallCategory.name,
+            'bigCategoryId': bigCategory.id
+          });
+        }
+      }
+    }
+```
+- view-model
+```agsl
+@unfreezed
+class CategoryPageModel with _$CategoryPageModel {
+  factory CategoryPageModel({
+    required int bigCategoryId,
+    required int smallCategoryId,
+    required List<BigCategory> categoryTabs,
+    required List<Book> books,
+    required int page,
+     required bool isLast
+  }) = _CategoryPageModel;
+}
+```
+- sqflite에 저장된 카테고리 정보를 이용해 state의 categoryTabs 구성
+```agsl
+   List<BigCategory> sqlCategoryTabs =  await MySqfliteInit.getBigCategoryList();
+
+    List<BigCategory> categoryTabs = [];
+    for (var categoryTab in sqlCategoryTabs) {
+      categoryTabs.add(categoryTab.copyWith (
+        smallCategory: [ SmallCategory(id: 0, name: "종합"), ...?categoryTab.smallCategory, ]
+      ));
+    }
+   categoryTabs.insert(0, const BigCategory(id: 0, name: "종합"));
+```
+- 페이지 최초 로드 시 종합(상위) 카테고리 노출 
+```agsl
+ResponseDTO responseDTO = await BookRepository().mainList("all");
+   if(responseDTO.code == 1) {
+     MainDTO total = responseDTO.data;
+     books =  books.copyWith(books: total.content , page: 0, isLast: total.last, categoryTabs: categoryTabs);
+     state = books;
+   } else {
+     DialogUtil.dialogShow(navigatorKey.currentContext!, responseDTO.msg);
+   }
+```
+- 카테고리 선택 시 해당 카테고리의 하위 카테고리 노출
+```agsl
+ onPressed: () {
+   if (bigCategory.id == 0) {
+      ref.read(categoryPageProvider.notifier).categorySearch(bigCategory.id);
+   }
+    ref.read(categoryPageProvider.notifier).bigCategoryIdSelect(bigCategory.id);
+   }
+```
+```agsl
+  Future<void> bigCategoryIdSelect(int bigCategoryId) async {
+    List<SmallCategory> smallCategory = await MySqfliteInit.getSmallCategoryList(bigCategoryId);
+    state = state!.copyWith(smallCategory: smallCategory);
+  }
+```
+```
+ onPressed: () {
+   ref.read(categoryPageProvider.notifier).categorySearch(bigCategoryId, smallCategory: smallCategory[index].id);
+ },
+```
+- 페이지 서치
+  - main 페이지와 동일
+```
+  Future<void> pageCategorySearch(
+      int page, int bigCategory,
+      {int? smallCategory}
+  ) async {
+    if (!isDuplication) {
+      isDuplication = true;
+      // 통신 할때 await
+      // responseDTO.data = responseBookList
+      // responseDTO.data.page.isLast = false
+      ResponseDTO responseDTO =  await BookRepository().searchMainListPage(page, "all", bigCategory: bigCategory, smallCategory: smallCategory);
+      MainDTO mainDTO = responseDTO.data;
+      ref.read(categoryPageProvider.notifier).pageSearch(mainDTO, page, bigCategory, smallCategory: smallCategory);
+      isDuplication = false;
+    }
+  }
+  ```
+```
+ Future<ResponseDTO> mainList(String requestName, {int? bigCategory, int? smallCategory}) async {
+    String endPoint = getEndPoint(requestName, bigCategory, smallCategory);
+    try {
+      Response response = await MyHttp.get().get("/books$endPoint&page=0&size=10");
+      if(response.statusCode == 200) {
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        MainDTO mainDTO = MainDTO.fromJson(responseDTO.data);
+        responseDTO.data = mainDTO;
+        return responseDTO;
+      } else {
+        return ResponseDTO(code: response.statusCode, msg: response.statusMessage);
+      }
+    } catch (e) {
+      return ResponseDTO(code: -1, msg: "실패 : ${e}");
+    }
+  }
+  ```
+- 페이지 상태 변화
+```
+ void pageSearch(MainDTO mainDTO, int page, int bigCategory, {int? smallCategory}) async {
+    state = state!.copyWith(books: [...state!.books, ...mainDTO.content] , page: page, isLast: mainDTO.last, categoryTabs: state!.categoryTabs, bigCategoryId: bigCategory, smallCategoryId: smallCategory ?? 0);
+  }
+  ```
+## 알림
+![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/fed83da0-fb42-4c24-aa50-bbae5de77f0c)
+
+## 검색
+![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/f2297450-e74e-4382-a75e-8a0e061db05b)
+### sqflite 
+
+
+
+
+
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/78f107ea-1309-4022-ba9e-d6573eb56a80)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/150d0448-230d-4e4c-9fe1-0dde14a07689)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/a949919d-1444-4b9e-a96e-0aafcb18a36d)

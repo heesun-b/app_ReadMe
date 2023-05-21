@@ -18,6 +18,8 @@ import 'package:readme_app/view/components/custom_dialog.dart';
 
 
 part 'category_page_view_model.freezed.dart';
+
+
 @unfreezed
 class CategoryPageModel with _$CategoryPageModel {
   factory CategoryPageModel({

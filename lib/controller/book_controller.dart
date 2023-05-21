@@ -58,8 +58,6 @@ class BookController {
       MainDTO mainDTO = responseDTO.data;
       ref.read(categoryPageProvider.notifier).pageSearch(mainDTO, page, bigCategory, smallCategory: smallCategory);
       isDuplication = false;
-
-
     }
   }
 
