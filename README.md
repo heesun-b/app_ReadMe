@@ -83,6 +83,7 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 
 ## 유저 시나리오
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/6ef610ff-c958-415a-ac21-cb409863666f)
+## 회원가입 및 로그인 (OAuth)
 ### Firebase 설정
 1. Firebase 프로젝트 설정
    - Firebase 콘솔에 접속하여 프로젝트를 생성하고 설정한다.
@@ -124,7 +125,7 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
       ); 
 ```
 3. 유저의 ID토큰을 이용하여 서버에서 토큰을 검증하고 검증이 완료되면 JWT 토큰을 만들어 앱으로 전달 (SecureStorage)에 저장하여 사용
-    - 이후 JWT 토큰으로 유저 정보 관리
+    - 이후 JWT 토큰으로 보안 통신(dio) header에 활용
 ```agsl
  final jwtToken = response.headers.value('Authorization');
  
@@ -132,7 +133,22 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
         SecureStorage.setKey(SecureStorageEnum.jwtToken, jwtToken);
       }
 ```
+```agsl
+  static Future<Dio> getSecurity() async {
+    String jwtToken = await SecureStorage.get(SecureStorageEnum.jwtToken) ?? "";
+     return Dio(BaseOptions(
+       headers: {
+         "Authorization": jwtToken
+       },
+        // 주소 변경
+        baseUrl: _baseUrl,
+        contentType: _contentType,
+      ));
+  }
+```
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/9c2ada18-3b49-4ea2-adc7-4bb09f526ec3)
+## 메인 도서 목록
+### metadata 통신
 1. 앱 실행 시 metadata를 위한 통신
     - sqflite를 이용해 DB 저장할 데이터
     - 카테고리 (전체 / 베스트셀러 / 추천 / 신간) 종류
@@ -197,7 +213,7 @@ class MainPageModel with _$MainPageModel {
   }) = _MainPageModel;
 }
 ```
-4. 페이징 처리
+### 페이징 처리
     - 기본 size 10으로 고정 
     - 한 페이지가 끝나면 더보기 버튼으로 다음 페이지 요청하고, 해당 페이지가 마지막 페이지인 경우 더보기 버튼 생략
 ```agsl
