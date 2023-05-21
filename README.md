@@ -384,8 +384,202 @@ isLast != true && count - 1 == idx
 ```agsl
  model?.user != null ? BookDetailReviewForm(bookId) : Container(),
 ```
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/7cb39d8d-c7aa-4301-8b32-b8fb518c29f5)
 
+## 뷰어
+![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/49704bab-b5a4-4321-9f06-3c0967c67c30)
+### epub viewer
+- 도서 상세 페이지에서 도서 정보 전달 
+- 뷰어 페이지 최초 로드 시, 전달 받은 도서 정보에 포함된 파일 url을 이용해 epub 파일을 열람 
+```agsl
+var epubController = EpubController(document: EpubDocument.openUrl(book.epubFile.fileUrl));
+```
+```agsl
+  static Future<EpubBook> openUrl(String url) async {
+    final dio = Dio();
+    final response = await dio.get(
+      url,
+      options: Options(responseType: ResponseType.bytes),
+    );
+    final bytes = response.data as Uint8List;
+
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File('${dir.path}/book.epub');
+    await file.writeAsBytes(bytes);
+
+    return EpubReader.readBook(bytes);
+  }
+```
+- view-model
+  - isShowAppBarAndBottomSheet : 상단바와 하단바 노출 여부
+  - fontSize, fontColor, fontFamily, bgColor : 뷰어 페이지에서 설정한 폰트 사이즈, 폰트 색상, 폰트, 배경색
+  - isBookMark : 북마크 여부
+```
+@unfreezed
+class BookViewerPageModel with _$BookViewerPageModel {
+  factory BookViewerPageModel(
+      {
+        required String title,
+        required String epubFilePath,
+        required String coverFilePath,
+        required int price,
+        required bool isHeart,
+        required bool isBookMark,
+        required bool isShowAppBarAndBottomSheet,
+        required double currentSliderValue,
+        required double fontSize,
+        required Color fontColor,
+        required String fontFamily,
+        required Color bgColor,
+        TableUser? user,
+        required EpubController epubReaderController,
+        required List<BookMark> bookmarks,
+      }) = _BookViewerPageModel;
+}
+```
+- 폰트 사이즈 변경
+```agsl
+ void fontSizeUp() async {
+    state = state!.copyWith(fontSize: state!.fontSize + 2.0);
+  }
+  
+ void fontSizeDown() async {
+    state = state!.copyWith(fontSize: state!.fontSize - 2.0);
+  }
+```
+- 배경색 변경
+```agsl
+  void bgColor(Color value) async {
+    state = state!.copyWith(bgColor: value);
+  }
+
+  void bgColorWhite() async {
+    state = state!.copyWith(bgColor: Colors.white, fontColor: Colours.app_sub_black);
+  }
+
+  void bgColorBlack() async {
+    state = state!.copyWith(bgColor: Colours.app_sub_black, fontColor: Colors.white);
+  }
+
+  void bgColorMain() async {
+    state = state!.copyWith(bgColor: Colours.app_main, fontColor: Colours.app_sub_black);
+  }
+
+  void bgColorGrey() async {
+    state = state!.copyWith(bgColor: Colours.app_sub_grey, fontColor: Colours.app_sub_black);
+  }
+```
+- FontFamily 변경
+```agsl
+ void changeFontFamily(String value) async {
+    state = state!.copyWith(fontFamily: value);
+  }
+```
+- GestureDetector를 통해 Appbar & BottomSheet 노출 결정
+```agsl
+ GestureDetector(
+     onTap: () {
+       ref.read(bookViewerPageProvider(book).notifier).changeIsShowAppBarAndBottomSheet(model?.isShowAppBarAndBottomSheet ?? false ? false : true);
+     },
+     child: Column(
+       mainAxisAlignment: MainAxisAlignment.center,
+       children: [
+         buildBookmark(ref),
+         Expanded(
+           child: Center(
+             child: Container(
+               color: ref.watch(bookViewerPageProvider(book))?.bgColor,
+               child: Padding(
+                   padding: const EdgeInsets.all(10.0),
+                   child: buildEpubView(model?.epubReaderController, ref)),
+               width: MediaQuery.of(context).size.width,
+               height: MediaQuery.of(context).size.height,
+             ),
+           ),
+         ),
+         buildBottomSheet(context, ref),
+       ],
+     ),
+   ),
+
+```
+```agsl
+ void changeIsShowAppBarAndBottomSheet(value) async {
+    state = state!.copyWith(isShowAppBarAndBottomSheet: value);
+  }
+```
+### 북마크
+- 버튼 클릭 시 북마크 추가
+  - _epubViewState의 paragraphIndex, positionIndex로 구분
+```agsl
+  onTap: () {
+     ref.read(bookViewerPageProvider(book).notifier).addBookMark("북마크 ${(model?.bookmarks.length)}", model?.epubReaderController.generateEpubCfi() ?? "");
+  },
+```
+```agsl
+  void addBookMark(String title, String link) async {
+    state = state!.copyWith(bookmarks: [...state!.bookmarks, BookMark(title: title, link: link)]);
+  }
+```
+```agsl
+  String? generateEpubCfi() => _epubViewState?._epubCfiReader?.generateCfi(
+        book: _document,
+        chapter: _epubViewState?._currentValue?.chapter,
+        paragraphIndex: _epubViewState?._getAbsParagraphIndexBy(
+          positionIndex: _epubViewState?._currentValue?.position.index ?? 0,
+          trailingEdge:
+              _epubViewState?._currentValue?.position.itemTrailingEdge,
+          leadingEdge: _epubViewState?._currentValue?.position.itemLeadingEdge,
+        ),
+      );
+```
+- 북마크 리스트 추가 후 해당 영역으로 이동 
+```agsl
+ return Container(
+      child: Drawer(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 40.0),
+          child: ListView.builder(
+            padding: EdgeInsets.zero,
+            itemCount: model?.bookmarks.length ?? 0,
+            itemBuilder: (BuildContext context, int index) {
+              return InkWell(
+                onTap: () => ref.read(bookViewerPageProvider(book).notifier).goBookMark(model?.bookmarks[index].link ?? ""),
+                child: Card(
+                  child: ListTile(
+                    title: Text(
+                      model?.bookmarks[index].title ?? "",
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                    trailing: const Icon(Icons.arrow_forward),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+```
+```agsl
+void goBookMark(String link) async {
+    state!.epubReaderController.gotoEpubCfi(link);
+  }
+```
+```agsl
+  void gotoEpubCfi(
+    String epubCfi, {
+    double alignment = 0,
+    Duration duration = const Duration(milliseconds: 250),
+    Curve curve = Curves.linear,
+  }) {
+    _epubViewState?._gotoEpubCfi(
+      epubCfi,
+      alignment: alignment,
+      duration: duration,
+      curve: curve,
+    );
+  }
+```
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/ea54798f-048a-4d2a-9fa0-563596447c5d)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/0ec6d7c3-ed76-4d22-b560-42c96bdb2101)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/70d909b9-0024-4a06-b12a-f21d4e646179)

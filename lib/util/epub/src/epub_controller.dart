@@ -53,8 +53,6 @@ class EpubController {
       alignment: alignment,
       duration: duration,
       curve: curve,
-    );
-  }
 
   String? generateEpubCfi() => _epubViewState?._epubCfiReader?.generateCfi(
         book: _document,
