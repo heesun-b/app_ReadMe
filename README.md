@@ -95,6 +95,9 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 ### 구현
 1. 구글 로그인 인증
 ```
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
    // 1. 구글 로그인 
    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
@@ -116,13 +119,12 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
   Response response = await MyHttp.get().post("/login",
           data: {
             'idToken': googleAuth.idToken,
-            'osType:': Platform.isAndroid ? "ANDROID" : "IOS",
-            'fcmToken': fcmToken,
+            'osType:': Platform.isAndroid ? "ANDROID" : "IOS"
           }
       ); 
 ```
-3. JWT 토큰 응답 받고 저장
-   - 이후 JWT 토큰으로 유저 정보 관리
+3. 유저의 ID토큰을 이용하여 서버에서 토큰을 검증하고 검증이 완료되면 JWT 토큰을 만들어 앱으로 전달 (SecureStorage)에 저장하여 사용
+    - 이후 JWT 토큰으로 유저 정보 관리
 ```agsl
  final jwtToken = response.headers.value('Authorization');
  
@@ -346,6 +348,7 @@ isLast != true && count - 1 == idx
  model?.user != null ? BookDetailReviewForm(bookId) : Container(),
 ```
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/7cb39d8d-c7aa-4301-8b32-b8fb518c29f5)
+
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/ea54798f-048a-4d2a-9fa0-563596447c5d)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/0ec6d7c3-ed76-4d22-b560-42c96bdb2101)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/70d909b9-0024-4a06-b12a-f21d4e646179)
