@@ -66,16 +66,43 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 - Flutter 애플리케이션에 전자책 리더기를 추가하는 데 사용할 수 있는 라이브러리
   - EPUB(electronic publication)은 국제 디지털 출판 포럼(IDPF, International Digital Publishing Forum)에서 제정한 개방형 자유 전자서적 표준이다. HTML과 CSS의 일부분을 차용한 오픈된 파일포맷 표준으로, 기본적으로 인터넷 연결이 끊어진 상태에서 PDA 또는 노트북 등에서 전자책 열람이 자유롭도록 제정된 전자책 포맷이다. 기본적으로는 HTML 로 이뤄진 문서가 ZIP 으로 압축된 모양새이다.
 ## RiverPod
+- Flutter용 상태 관리 라이브러리
+- Flutter의 Provider 패턴을 기반으로 하며, 단순하고 직관적인 API를 제공하여 애플리케이션의 상태 관리를 용이하게 한다.
+- Riverpod은 상태를 관리하기 위해 StateNotifier와 ProviderContainer를 사용하는데,  StateNotifier는 상태를 변경하고 관리하는 컨트롤러 역할을 수행하며, ProviderContainer는 상태를 저장하고 제공하는 컨테이너이다.
+- Riverpod은 상태 변화를 감지하고 이에 따라 UI를 업데이트하는 기능을 제공한다. Consumer 위젯을 사용하여 Provider의 상태를 구독하고, 상태가 변경될 때마다 UI를 자동으로 업데이트할 수 있다.
+- 보통 MVVM(Model-View-ViewModel) 아키텍처 패턴과 함께 사용하지만 프로젝트에서는 해당 아키텍처를 변경한 MVCS(Model-view-controller-store) 사용했다.
+- MVCS
+  ![riverpod-mvcs](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/68f87c6d-125d-4df8-b7b5-de15cc259ba9)
+    - view가 controller의 provider를 통해 상태 변경을 요청하면 controller가 repository를 호출한다. repository에서 통신이 이루어지고 반환된 response를 통해 controller가 provider에 상태를 변경하고, provider에서 변경된 값을 state에 저장한다. view는 provider를 구독하고 있기 때문에 상태값이 변함에 따라 UI가 업데이트 된다.
+      1. view - provider 구독
+      ![1  view-provider 구독](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/66aa2276-46ce-4ed7-aafb-be9a17dd4ae0)
+      2. view-controller
+      ![2  view-controller](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/4847368b-9d3d-4298-a856-923f67ec39fa)
+      3. controller-repository & controller-provider
+      ![3  controller-repository and controller-provider](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/57d7530a-9264-4db8-89c7-bfd30fb4c0fc)
+      4. provider 상태 변경
+      ![4  provider - 상태값](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/ea209056-7c35-4e5d-a7c0-506d6718eb51)
+
 ## Secure Storage
+- Flutter 애플리케이션에서 안전하고 보안된 방식으로 데이터를 저장하고 관리하는 라이브러리 
+- 사용자의 중요한 정보(개인정보, 인증 토큰, API 키 등)를 안전하게 보호하기 위해 데이터를 암호화하여 저장하고, 데이터를 보호하기 위해 암호화 키를 사용한다. 안드로이드의 Keystore나 iOS의 Keychain과 같은 안전한 저장소를 사용하여 데이터를 저장하기 때문에 외부 공격으로부터 데이터를 보호하고, 데이터 유출 및 변경을 방지한다. 또한 인가되지 않은 사용자가 데이터에 접근하거나 수정하는 것을 방지하기 위해 암호화와 권한 관리를 사용하고, 사용자 인증 및 권한 검사를 통해 데이터의 무단 액세스를 방지한다.
 ## Freezed 
+- Freezed는 Dart 언어에서 사용되는 코드 생성 도구로 코드 생성을 통해 데이터 모델의 필드, 생성자, 메서드 등을 자동으로 생성한다. 이는 반복적이고 지루한 작업을 줄여주며, 개발자가 직접 작성하는 코드의 양을 줄여준다. 또한 불변성(Immu`tability)을 갖춘 데이터 모델을 생성하는 데 도움을 준다.
+    - 불변성(Immutability)은 객체나 데이터가 생성된 이후에 그 값을 변경할 수 없는 상태를 말한다. 이는 객체의 상태를 보호하여 예기치 않은 변경이 발생하는 것을 방지하고, 데이터의 일관성과 예측 가능성을 높여준다.
+- 사용 이유
+  1. JSON 직렬화와 역직렬화
+     -  freezed는 자동으로 JSON 직렬화 및 역직렬화를 지원한다. Spring과 달리 Flutter에서는 fromJson, toJson을 직접 만들어 통신을 해야 했는데 freezed를 이용해 해당 과정을 간결화했다.
+  2. copywith 메서드를 이용한 간편한 객체 생성
+     - copywith 메서드는 특정 값 변경 시 새로운 객체를 반환하기 때문에 riverpod에서 state 값을 변경할 때의 번거로움을 줄여준다. state(model)은 객체의 참조값이 바뀌어야 변경을 감지하기 때문에 freezed를 사용하지 않았다면 하나의 값만 변경되어도 매번 객체를 복사해서 새로운 객체를 생성한 뒤 특정 값을 추가/변경 하는 번거로움이 있다.
 ## OAuth 
 - Google OAuth & Firebase 사용
 - Firebase Authentication을 통해 구글 계정으로 사용자 인증을 처리
+  - 사용자 인증에 대한 부분을 Firebase가 처리해주기 때문에 구글 OAuth의 복잡한 설정과 통신을 직접 다룰 필요가 없다는 장점이 있지만, Firebase Authentication은 Google, Facebook, Twitter, GitHub 등과 같은 제휴 ID 공급업체를 통해 인증을 제공하기 때문에 데이터의 완전한 제어나 데이터 소유권을 중요시하는 경우에는 Firebase Authentication을 사용하는 것이 적합하지 않을 수 있다. 예를 들어, Google 로그인을 사용하고자 하지만 Google이 서비스를 중단하면 Firebase Authentication을 사용할 수 없게 된다.
 - Firebase는 구글이 제공하는 개발 플랫폼으로, 인증, 데이터베이스, 스토리지, 클라우드 함수 등 다양한 기능을 제공
 - 사용이유
-  - 구글 OAuth와 Firebase를 통합하여 사용하면, 사용자 인증에 대한 부분을 Firebase가 처리해주기 때문에 구글 OAuth의 복잡한 설정과 통신을 직접 다룰 필요가 없음
-## 페이징 처리 
+  - 구글 OAuth와 Firebase를 통합하여 사용하면, 사용자 인증에 대한 부분을 Firebase가 처리해주기 때문에 구글 OAuth의 복잡한 설정과 통신을 직접 다룰 필요가 없음 
 ## FCM
+
 ## Jira를 이용한 브랜치 전략
 - Jira를 이용해 작업 항목을 관리하고 이슈 생성
 - 각 이슈에 대해 새로운 브랜치를 생성하고, 해당 브랜치에서 작업을 수행
@@ -274,7 +301,8 @@ isLast != true && count - 1 == idx
            ...
   }
 ```
-- 페이지 상태 변화
+-  freezed의 copyWith를 이용한 페이지 상태 변화
+   - copywith 메서드는 객체의 속성을 변경한 새로운 객체를 반환한다. 상태 변화를 위해서 state 값을 변경해야 하는 riverpod에서 특정 값만 변경하고 싶을 때 객체를 쉽게 업데이트 할 수 있다.
 ```agsl
   if (name == "전체") {
         List<Book> newTotalBooks = [...state!.totalBooks];
@@ -284,17 +312,7 @@ isLast != true && count - 1 == idx
 ```
 ## 도서 상세 조회
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/7238620f-8d8d-4d92-b41e-494e77f8838d)
-1. PK로 Book Detail 조회 
-```agsl
-  Future<ResponseDTO> getBookDetail (int bookId) async {
-    try{
-      Dio dio = await MyHttp.getCommon();
-      Response response = await dio.get("/books/$bookId/detail?size=3");
-      ...
-    }
-  }
-```
-2. 도서 구매 / 정기권 구매 여부로 노출 버튼 선택
+1. 도서 구매 / 정기권 구매 여부로 노출 버튼 선택
     - 구매(소장) 시 장바구니로 이동 후 결제 
 ```agsl
  (model.user?.isMembership ?? false) || (model.book.isPurchase ?? false)
@@ -311,7 +329,7 @@ isLast != true && count - 1 == idx
         ]
       ),
 ```
-3. 도서 구매/ 정기권 구독 여부 & 로그인 유무에 따라 review form 노출 선택
+2. 도서 구매/ 정기권 구독 여부 & 로그인 유무에 따라 review form 노출 선택
    - true일 시, 리뷰 내역과 리뷰 폼 노출 
    - false일 시, 리뷰 내역만 노출
 ```agsl
@@ -320,28 +338,6 @@ isLast != true && count - 1 == idx
 
 ## 뷰어
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/49704bab-b5a4-4321-9f06-3c0967c67c30)
-### epub viewer
-- 도서 상세 페이지에서 도서 정보 전달 
-- 뷰어 페이지 최초 로드 시, 전달 받은 도서 정보에 포함된 파일 url을 이용해 epub 파일을 열람 
-```agsl
-var epubController = EpubController(document: EpubDocument.openUrl(book.epubFile.fileUrl));
-```
-```agsl
-  static Future<EpubBook> openUrl(String url) async {
-    final dio = Dio();
-    final response = await dio.get(
-      url,
-      options: Options(responseType: ResponseType.bytes),
-    );
-    final bytes = response.data as Uint8List;
-
-    final dir = await getApplicationDocumentsDirectory();
-    final file = File('${dir.path}/book.epub');
-    await file.writeAsBytes(bytes);
-
-    return EpubReader.readBook(bytes);
-  }
-```
 - view-model
   - isShowAppBarAndBottomSheet : 상단바와 하단바 노출 여부
   - fontSize, fontColor, fontFamily, bgColor : 뷰어 페이지에서 설정한 폰트 사이즈, 폰트 색상, 폰트, 배경색
@@ -407,46 +403,8 @@ class BookViewerPageModel with _$BookViewerPageModel {
     state = state!.copyWith(fontFamily: value);
   }
 ```
-- GestureDetector를 통해 Appbar & BottomSheet 노출 결정
-```agsl
- GestureDetector(
-     onTap: () {
-       ref.read(bookViewerPageProvider(book).notifier).changeIsShowAppBarAndBottomSheet(model?.isShowAppBarAndBottomSheet ?? false ? false : true);
-     },
-      ...
-   ),
 
-```
-```agsl
- void changeIsShowAppBarAndBottomSheet(value) async {
-    state = state!.copyWith(isShowAppBarAndBottomSheet: value);
-  }
-```
 ### 북마크
-- 버튼 클릭 시 북마크 추가
-  - _epubViewState의 paragraphIndex, positionIndex로 구분
-```agsl
-  onTap: () {
-     ref.read(bookViewerPageProvider(book).notifier).addBookMark("북마크 ${(model?.bookmarks.length)}", model?.epubReaderController.generateEpubCfi() ?? "");
-  },
-```
-```agsl
-  void addBookMark(String title, String link) async {
-    state = state!.copyWith(bookmarks: [...state!.bookmarks, BookMark(title: title, link: link)]);
-  }
-```
-```agsl
-  String? generateEpubCfi() => _epubViewState?._epubCfiReader?.generateCfi(
-        book: _document,
-        chapter: _epubViewState?._currentValue?.chapter,
-        paragraphIndex: _epubViewState?._getAbsParagraphIndexBy(
-          positionIndex: _epubViewState?._currentValue?.position.index ?? 0,
-          trailingEdge:
-              _epubViewState?._currentValue?.position.itemTrailingEdge,
-          leadingEdge: _epubViewState?._currentValue?.position.itemLeadingEdge,
-        ),
-      );
-```
 - 북마크 리스트 추가 후 해당 영역으로 이동 
 ```agsl
  return Container(
@@ -482,9 +440,7 @@ void goBookMark(String link) async {
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/f4cb2799-f8ea-4dbb-b937-67d2dfc65061)
 ### metadata 통신
 
-1. 앱 실행 시 최초 1회 metadata를 저장
-   - sqflite를 이용해 DB 저장할 데이터
-   - 거의 변하지 않는 데이터(ex: 사용자 기본 정보)를 매통신마다 전달받지 않고 최초 로드 시 전달 받은 후 로컬에 저장한 뒤 사용하기 위해 적용
+1. sqflite 활용
    - 상위 카테고리(종합 포함 8개) & 하위 카테고리 (상위 카테고리별 종합 포함 6개) 
 ```agsl
     // 테이블 생성
@@ -649,26 +605,15 @@ static Future<void> deleteSearchText (String searchText) async {
     await _db!.delete(TableName.search, where: 'searchText = ?', whereArgs: [searchText]);
   }
 ```
-### 검색
-- 서버에 검색 키워드 전달
-```agsl
-  Future<void> search(
-      String searchKeyword
-  ) async {
-      ResponseDTO responseDTO =  await BookRepository().searchKeyword(searchKeyword);
-      ref.read(searchListPageProvider.notifier).search(responseDTO, searchKeyword);
-      isDuplication = false;
-  }
-```
-```agsl
-Future<ResponseDTO> searchKeyword(String keyword) async {
-    try {
-      var dio = await MyHttp.getCommon();
-      Response response = await dio.get("/search?keyword=$keyword");
-      ...
-  }
-```
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/78f107ea-1309-4022-ba9e-d6573eb56a80)
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/150d0448-230d-4e4c-9fe1-0dde14a07689)
+
+## 유저 정보
+![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/7021a183-7c70-4e56-9026-30c7d7cdc6d8)
+- sqflite 활용
+    - 비로그인 시 : 로그인 버튼 노출
+    - 로그인 시 
+      - 정기권 구독 시 : 정기권 구독 정보 노출
+      - 정기권 미구독 시 : 정기권 구독 버튼 노출
+      
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/a949919d-1444-4b9e-a96e-0aafcb18a36d)
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/d943b57d-1b26-44ad-9c13-0ab84027e8ac)
