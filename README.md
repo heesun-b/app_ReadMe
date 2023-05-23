@@ -43,6 +43,8 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 - 사용이유
   - 거의 변하지 않는 데이터(ex: 사용자 기본 정보)를 매통신마다 전달받지 않고 최초 로드 시 전달 받은 후 로컬에 저장한 뒤 사용하기 위해 적용
   - 프로젝트에서 카테고리 정보, 유저정보, 검색이로 활용해서 사용함
+  
+    <br/>
 
 ## Bootpay
 - 부트페이는 사업자가 PG 이용을 더욱 손쉽게 할 수 있도록 하는 서비스로 PG 가입을 위한 절차를 대행해주고, 결제 연동을 쉽게 할 수 있도록 표준화된 형태의 결제 API를 제공한다.
@@ -62,9 +64,14 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
    - 서버에도 결제 완료 통지
    - 앱에서도 정상적으로 결제 완료 처리가 되고 done 호출
 
+    <br/>
+
 ## epub viewer
 - Flutter 애플리케이션에 전자책 리더기를 추가하는 데 사용할 수 있는 라이브러리
   - EPUB(electronic publication)은 국제 디지털 출판 포럼(IDPF, International Digital Publishing Forum)에서 제정한 개방형 자유 전자서적 표준이다. HTML과 CSS의 일부분을 차용한 오픈된 파일포맷 표준으로, 기본적으로 인터넷 연결이 끊어진 상태에서 PDA 또는 노트북 등에서 전자책 열람이 자유롭도록 제정된 전자책 포맷이다. 기본적으로는 HTML 로 이뤄진 문서가 ZIP 으로 압축된 모양새이다.
+
+    <br/>
+    
 ## RiverPod
 - Flutter용 상태 관리 라이브러리
 - Flutter의 Provider 패턴을 기반으로 하며, 단순하고 직관적인 API를 제공하여 애플리케이션의 상태 관리를 용이하게 한다.
@@ -91,9 +98,14 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
         <br/>
    ![4  provider - 상태값](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/ea209056-7c35-4e5d-a7c0-506d6718eb51)
 
+    <br/>
+
 ## Secure Storage
 - Flutter 애플리케이션에서 안전하고 보안된 방식으로 데이터를 저장하고 관리하는 라이브러리 
 - 사용자의 중요한 정보(개인정보, 인증 토큰, API 키 등)를 안전하게 보호하기 위해 데이터를 암호화하여 저장하고, 데이터를 보호하기 위해 암호화 키를 사용한다. 안드로이드의 Keystore나 iOS의 Keychain과 같은 안전한 저장소를 사용하여 데이터를 저장하기 때문에 외부 공격으로부터 데이터를 보호하고, 데이터 유출 및 변경을 방지한다. 또한 인가되지 않은 사용자가 데이터에 접근하거나 수정하는 것을 방지하기 위해 암호화와 권한 관리를 사용하고, 사용자 인증 및 권한 검사를 통해 데이터의 무단 액세스를 방지한다.
+
+    <br/>
+
 ## Freezed 
 - Freezed는 Dart 언어에서 사용되는 코드 생성 도구로 코드 생성을 통해 데이터 모델의 필드, 생성자, 메서드 등을 자동으로 생성한다. 이는 반복적이고 지루한 작업을 줄여주며, 개발자가 직접 작성하는 코드의 양을 줄여준다. 또한 불변성(Immu`tability)을 갖춘 데이터 모델을 생성하는 데 도움을 준다.
     - 불변성(Immutability)은 객체나 데이터가 생성된 이후에 그 값을 변경할 수 없는 상태를 말한다. 이는 객체의 상태를 보호하여 예기치 않은 변경이 발생하는 것을 방지하고, 데이터의 일관성과 예측 가능성을 높여준다.
@@ -102,6 +114,9 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
      -  freezed는 자동으로 JSON 직렬화 및 역직렬화를 지원한다. Spring과 달리 Flutter에서는 fromJson, toJson을 직접 만들어 통신을 해야 했는데 freezed를 이용해 해당 과정을 간결화했다.
   2. copywith 메서드를 이용한 간편한 객체 생성
      - copywith 메서드는 특정 값 변경 시 새로운 객체를 반환하기 때문에 riverpod에서 state 값을 변경할 때의 번거로움을 줄여준다. state(model)은 객체의 참조값이 바뀌어야 변경을 감지하기 때문에 freezed를 사용하지 않았다면 하나의 값만 변경되어도 매번 객체를 복사해서 새로운 객체를 생성한 뒤 특정 값을 추가/변경 하는 번거로움이 있다.
+
+    <br/>
+
 ## OAuth 
 - Google OAuth & Firebase 사용
 - Firebase Authentication을 통해 구글 계정으로 사용자 인증을 처리
@@ -109,15 +124,22 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 - Firebase는 구글이 제공하는 개발 플랫폼으로, 인증, 데이터베이스, 스토리지, 클라우드 함수 등 다양한 기능을 제공
 - 사용이유
   - 구글 OAuth와 Firebase를 통합하여 사용하면, 사용자 인증에 대한 부분을 Firebase가 처리해주기 때문에 구글 OAuth의 복잡한 설정과 통신을 직접 다룰 필요가 없음 
+
+    <br/>
+    
 ## FCM
 - Firebase Cloud Messaging
 - 앱 개발자가 서버 또는 사용자 장치에 알림을 보낼 수 있는 크로스 플랫폼 메시징 솔루션이다. FCM을 사용하면 클라우드 서버에서 간편하게 사용자에게 푸시 알림을 보낼 수 있으며, 사용자 장치에 알림을 표시하거나 데이터 메시지를 전송할 수 있다.
+
+    <br/>
 
 ## Jira를 이용한 브랜치 전략
 ![Screenshot_1](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/58bded76-4e62-4ba9-ad0a-613e213f0077)
 - Jira를 이용해 작업 항목을 관리하고 이슈 생성
 - 각 이슈에 대해 새로운 브랜치를 생성하고, 해당 브랜치에서 작업을 수행
 - 작업이 완료되면 해당 브랜치에서 코드 리뷰 진행. 리뷰어는 변경 사항 확인 후 피드백. 리뷰 완료되면 MERGE.
+
+    <br/>
 
 # 유저 시나리오
 ## 회원가입 및 로그인 (OAuth)
