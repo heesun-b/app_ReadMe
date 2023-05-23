@@ -175,10 +175,10 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
    
    ![3-3  json 파일 추가](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/366b18cb-d7b4-495b-8755-16ede2dec260)
    
-   3) build.gradle에 buildscript 추가
+   2) build.gradle에 buildscript 추가
     ![3-4 buildscript 추가](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/00f14113-3124-4351-85aa-0020036d5b59)
    
-   4) Gradle 추가
+   3) Gradle 추가
        - 애플리케이션에 Firebase SDK를 설치하고, Firebase 프로젝트의 구성 정보를 애플리케이션에 추가한다.
         ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/0ed62c1c-9bb9-4ed1-b75b-67a4ded87c45)
    
