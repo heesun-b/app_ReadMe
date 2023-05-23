@@ -143,34 +143,42 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 
 # 유저 시나리오
 ## 회원가입 및 로그인 (OAuth)
+<br/>
+
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/e9cd753c-ff3d-4e9e-b150-fa6a1cc88af6)
 ### Firebase 설정
 1. Firebase 프로젝트 설정
+<br/>
 ![1  프로젝트 생성](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/c944feac-ee42-47a3-81bb-c9ac3372aeb6)
    - Firebase 콘솔에 접속하여 프로젝트를 생성하고 설정한다.
-   
 
 2. Firebase Authentication 활성화
+<br/>
    ![2  authentication](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/bb28ed02-fcfe-4b86-97bd-a932a076b4e2)
    - Firebase 콘솔에서 Authentication 서비스를 활성화하고, 로그인 제공 업체 목록에서 Google을 선택한다. 이를 통해 Firebase는 사용자 인증을 관리하고 구글 OAuth를 통해 로그인할 수 있는 기능을 제공한다.
    
 
 3. 구글 OAuth 설정
+   <br/>
    ![3-1](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/3d099c68-ef09-4aad-8c1f-05853fa5d5f7)
    - 구글 개발자 콘솔에서 클라이언트 ID와 클라이언트 시크릿을 생성하고, Firebase에 등록한다.
 
    
 4. firebase에 앱 등록
+   <br/>
    ![3-2  앱 등록](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/3fd79b62-763c-47a9-a92a-2a4d400757a9)
     - 프로젝트의 applicationId를 이용하여 Firebase 콘솔에서 앱을 등록한다.
    
 
 5. 애플리케이션 설정
     1) 프로젝트에 json 파일 추가
+   <br/>
    ![3-3  json 파일 추가](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/366b18cb-d7b4-495b-8755-16ede2dec260)
     2) build.gradle에 buildscript 추가
+       <br/>
     ![3-4 buildscript 추가](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/00f14113-3124-4351-85aa-0020036d5b59)
-    3) Gradle 추가 
+    3) Gradle 추가
+       <br/>
     ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/0ed62c1c-9bb9-4ed1-b75b-67a4ded87c45)
     - 애플리케이션에 Firebase SDK를 설치하고, Firebase 프로젝트의 구성 정보를 애플리케이션에 추가한다.
 
@@ -719,6 +727,7 @@ state = state!.copyWith(cartBooks: newCartList);
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/fed83da0-fb42-4c24-aa50-bbae5de77f0c)
 1. Firebase 앱 등록
 2. FCM 플러그인 설치
+   <br/>
    ![gradle 추가 2](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/3cc5d38c-6f17-42f8-80bd-78f55909272c)
 3. 등록 토큰 액세스
  - 특정 기기로 메시지를 보내려면 기기의 등록 토큰을 알아야 한다. FCM SDK는 앱을 처음 시작할 때 클라이언트 앱 인스턴스용 등록 토큰을 생성한다.
@@ -738,12 +747,16 @@ SecureStorage.setKey(SecureStorageEnum.fcmToken, token ?? "");
 ```
 5. Firebase console에서 알림 보내기
     1. 알림 유형 설정
+       <br/>
     ![1  프로젝트 메시지 유형 설정](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/f1996b2c-719d-4c62-8b1e-f0994bf8ba23)
-    2. 알림 내용 설정 
+    2. 알림 내용 설정
+       <br/>
     ![2  알림 설정](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/c82ed204-5b42-4477-9d62-a685190b0a76)
-    3. 타겟 설정 
+    3. 타겟 설정
+       <br/>
     ![2-1  타겟 설정](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/cf6d2995-d0bf-4020-8c30-a42d32842e77)
     4. 알림 전송
+       <br/>
     ![3  메시지 전송](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/6e7e6bf3-a1b0-4f29-b472-6364e91d02c1)
 6. 푸시 알림이 오는 상황 
    - Foreground : 앱 실행 중일 때 알림
