@@ -34,7 +34,6 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 [![Slack](https://img.shields.io/badge/-Slack-purple?logo=slack&logoColor=white)](https://slack.com)
 
 <br/>
-<br/>
 
 ## sqflite 
 - Flutter 용 SQLite 플러그인
