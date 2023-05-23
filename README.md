@@ -236,6 +236,8 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
       ));
   }
 ```
+<br/>
+
 ## 메인 도서 목록
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/847f195f-364b-4e98-bea4-21498937fb06)
 ### metadata 통신
@@ -353,6 +355,8 @@ isLast != true && count - 1 == idx
         state = state!.copyWith(totalBooks: newTotalBooks, isTotalLast: responseDTO.data.last,  totalPage: page);
       }
 ```
+<br/>
+
 ## 도서 상세 조회
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/7238620f-8d8d-4d92-b41e-494e77f8838d)
 1. 도서 구매 / 정기권 구매 여부로 노출 버튼 선택
@@ -378,6 +382,7 @@ isLast != true && count - 1 == idx
 ```dart
  model?.user != null ? BookDetailReviewForm(bookId) : Container(),
 ```
+<br/>
 
 ## 뷰어
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/49704bab-b5a4-4321-9f06-3c0967c67c30)
@@ -423,6 +428,7 @@ void goBookMark(String link) async {
     );
   }
 ```
+<br/>
 
 ## 카테고리
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/f4cb2799-f8ea-4dbb-b937-67d2dfc65061)
@@ -543,6 +549,7 @@ ResponseDTO responseDTO = await BookRepository().mainList("all");
     state = state!.copyWith(books: [...state!.books, ...mainDTO.content] , page: page, isLast: mainDTO.last, categoryTabs: state!.categoryTabs, bigCategoryId: bigCategory, smallCategoryId: smallCategory ?? 0);
   }
   ```
+<br/>
 
 ## 검색
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/f2297450-e74e-4382-a75e-8a0e061db05b)
@@ -591,6 +598,7 @@ static Future<void> deleteSearchText (String searchText) async {
     await _db!.delete(TableName.search, where: 'searchText = ?', whereArgs: [searchText]);
   }
 ```
+<br/>
 
 ## 유저 정보
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/7021a183-7c70-4e56-9026-30c7d7cdc6d8)
@@ -602,6 +610,8 @@ static Future<void> deleteSearchText (String searchText) async {
 - 구매도서 : 보관함 - 구매 도서 목록으로 이동 
 - 결제내역 : 정기권 구매 / 도서 구매 내역 확인 가능
 - 리뷰관리 : 내가 작성한 리뷰 확인/삭제 가능
+
+<br/>
 
 ## 결제
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/844b28d2-0f53-4d92-b22a-3d3c9f26959f)
@@ -668,6 +678,8 @@ onDone: (String data) {
   Navigator.popAndPushNamed(context, Move.paymentPage,);
 }
 ```
+<br/>
+
 ## 장바구니
   ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/c9a01e04-be8a-4818-94d5-89d907fdead6)
 1. 장바구니 추가
@@ -724,6 +736,8 @@ state!.cartBooks.where((e) => e.cartDTO.id != id).toList();
 state = state!.copyWith(cartBooks: newCartList);
 ```
 3. 결제 버튼 클릭 시 부트페이 결제창 호출
+
+<br/>
 
 ## 알림
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/fed83da0-fb42-4c24-aa50-bbae5de77f0c)
