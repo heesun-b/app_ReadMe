@@ -153,22 +153,22 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/e9cd753c-ff3d-4e9e-b150-fa6a1cc88af6)
 ### Firebase 설정
 1. Firebase 프로젝트 설정
-- Firebase 콘솔에 접속하여 프로젝트를 생성하고 설정한다.
-![1  프로젝트 생성](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/c944feac-ee42-47a3-81bb-c9ac3372aeb6)
+   - Firebase 콘솔에 접속하여 프로젝트를 생성하고 설정한다.
+   ![1  프로젝트 생성](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/c944feac-ee42-47a3-81bb-c9ac3372aeb6)
  
 
 2. Firebase Authentication 활성화
-- Firebase 콘솔에서 Authentication 서비스를 활성화하고, 로그인 제공 업체 목록에서 Google을 선택한다. 이를 통해 Firebase는 사용자 인증을 관리하고 구글 OAuth를 통해 로그인할 수 있는 기능을 제공한다.
-   ![2  authentication](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/bb28ed02-fcfe-4b86-97bd-a932a076b4e2)
+   - Firebase 콘솔에서 Authentication 서비스를 활성화하고, 로그인 제공 업체 목록에서 Google을 선택한다. 이를 통해 Firebase는 사용자 인증을 관리하고 구글 OAuth를 통해 로그인할 수 있는 기능을 제공한다.
+      ![2  authentication](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/bb28ed02-fcfe-4b86-97bd-a932a076b4e2)
 
 
 3. 구글 OAuth 설정
-- 구글 개발자 콘솔에서 클라이언트 ID와 클라이언트 시크릿을 생성하고, Firebase에 등록한다.
-   ![3-1](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/3d099c68-ef09-4aad-8c1f-05853fa5d5f7)
+   - 구글 개발자 콘솔에서 클라이언트 ID와 클라이언트 시크릿을 생성하고, Firebase에 등록한다.
+      ![3-1](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/3d099c68-ef09-4aad-8c1f-05853fa5d5f7)
 
 4. firebase에 앱 등록
-- 프로젝트의 applicationId를 이용하여 Firebase 콘솔에서 앱을 등록한다.
-   ![3-2  앱 등록](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/3fd79b62-763c-47a9-a92a-2a4d400757a9)
+   - 프로젝트의 applicationId를 이용하여 Firebase 콘솔에서 앱을 등록한다.
+      ![3-2  앱 등록](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/3fd79b62-763c-47a9-a92a-2a4d400757a9)
 
 5. 애플리케이션 설정
     1) 프로젝트에 json 파일 추가
