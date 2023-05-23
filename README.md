@@ -74,15 +74,17 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 - MVCS
   ![riverpod-mvcs](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/68f87c6d-125d-4df8-b7b5-de15cc259ba9)
     - view가 controller의 provider를 통해 상태 변경을 요청하면 controller가 repository를 호출한다. repository에서 통신이 이루어지고 반환된 response를 통해 controller가 provider에 상태를 변경하고, provider에서 변경된 값을 state에 저장한다. view는 provider를 구독하고 있기 때문에 상태값이 변함에 따라 UI가 업데이트 된다.
-    1. view - provider 구독
-    ![1  view-provider 구독](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/66aa2276-46ce-4ed7-aafb-be9a17dd4ae0)
-    2. view-controller
+  1. view - provider 구독
+  ![1  view-provider 구독](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/66aa2276-46ce-4ed7-aafb-be9a17dd4ae0)
   
-    ![2  view-controller](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/4847368b-9d3d-4298-a856-923f67ec39fa)
-    3. controller-repository & controller-provider
-    ![3  controller-repository and controller-provider](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/57d7530a-9264-4db8-89c7-bfd30fb4c0fc)
-    4. provider 상태 변경
-    ![4  provider - 상태값](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/ea209056-7c35-4e5d-a7c0-506d6718eb51)
+  2. view-controller
+   ![2  view-controller](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/4847368b-9d3d-4298-a856-923f67ec39fa)
+  
+  3. controller-repository & controller-provider
+   ![3  controller-repository and controller-provider](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/57d7530a-9264-4db8-89c7-bfd30fb4c0fc)
+  
+  4. provider 상태 변경
+   ![4  provider - 상태값](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/ea209056-7c35-4e5d-a7c0-506d6718eb51)
 
 ## Secure Storage
 - Flutter 애플리케이션에서 안전하고 보안된 방식으로 데이터를 저장하고 관리하는 라이브러리 
