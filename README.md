@@ -181,7 +181,7 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
    
    3) Gradle 추가
        - 애플리케이션에 Firebase SDK를 설치하고, Firebase 프로젝트의 구성 정보를 애플리케이션에 추가한다.
-        ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/0ed62c1c-9bb9-4ed1-b75b-67a4ded87c45)
+   ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/0ed62c1c-9bb9-4ed1-b75b-67a4ded87c45)
    
 
 ### 구현
