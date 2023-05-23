@@ -84,7 +84,7 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 
     <br/>
   
-  1. view - provider 구독  
+    1. view - provider 구독  
   
   ![1  view-provider 구독](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/66aa2276-46ce-4ed7-aafb-be9a17dd4ae0)
   
