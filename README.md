@@ -171,7 +171,8 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
       ![3-2  앱 등록](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/3fd79b62-763c-47a9-a92a-2a4d400757a9)
 
 5. 애플리케이션 설정
-    1) 프로젝트에 json 파일 추가
+    1) 프로젝트에 json 파일 추가  
+   
    ![3-3  json 파일 추가](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/366b18cb-d7b4-495b-8755-16ede2dec260)
     2) build.gradle에 buildscript 추가
     ![3-4 buildscript 추가](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/00f14113-3124-4351-85aa-0020036d5b59)
