@@ -26,9 +26,6 @@ class BookController {
   ) async {
     if (!isDuplication) {
       isDuplication = true;
-      // 통신 할때 await
-      // responseDTO.data = responseBookList
-      // responseDTO.data.page.isLast = false
       ResponseDTO responseDTO =  await BookRepository().searchMainListPage(page, requestName);
 
         ref.read(mainPageProvider.notifier).pageSearch(name, responseDTO, page);

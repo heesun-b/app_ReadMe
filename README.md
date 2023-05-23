@@ -39,6 +39,10 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 - Flutter 용 SQLite 플러그인
 - SQLite란 경량의 관계형 데이터베이스 관리 시스템(RDBMS)으로 표준 SQL 쿼리 언어를 사용하여 데이터를 저장, 검색, 수정, 삭제할 수 있다. 내장형 데이터베이스로서 별도의 서버 프로세스가 필요하지 않으며, 단일 파일 형태(.db)로 데이터를 저장한다. 따라서 메모리와 디스크 공간을 적게 차지하며, 빠르고 효율적인 데이터 액세스를 제공한다. 또한 트랜잭션/배치를 지원하기 때문에 데이터 무결성에 탁월하다.  
   - 트랜잭션은 여러 개의 데이터베이스 작업을 하나의 논리적인 작업 단위로 묶어서 원자성(Atomicity), 일관성(Consistency), 격리성(Isolation), 지속성(Durability)을 보장하는데 사용한다.
+    - 원자성(Atomicity) : 트랜잭션의 모든 연산들이 정상적으로 실행되거나, 아니면 전혀 실행되지 않아야 한다는 것을 의미한다. 즉, 트랜잭션 내의 모든 명령은 반드시 완벽하게 수행되어야 한다.
+    - 일관성(Consistency) : 데이터베이스의 상태가 트랜잭션 이전과 이후에도 일관되어야 함을 의미한다. 즉, 트랜잭션 실행 전에 유효한 제약 조건이 유지되고, 트랜잭션 실행 후에도 제약 조건이 유지되어야 한다.
+    - 격리성(Isolation) : 동시에 실행되는 여러 트랜잭션들이 서로에게 영향을 미치지 않고 독립적으로 실행되어야 함을 의미한다.
+    - 지속성(Durability) : 트랜잭션이 성공적으로 완료되었을 경우, 결과는 영구적으로 반영되어야 한다는 것을 의미한다. 즉, 트랜잭션이 완료되면 그 결과는 시스템 오류가 발생하더라도 손실되어서는 안 된다.
   - 배치 작업은 여러 개의 쿼리를 한 번에 실행하여 데이터베이스 작업을 효율적으로 처리하는 기능이다. sqflite에서 batch 메서드는 트랜잭션을 자동으로 관리한다.
 - 사용이유
   - 거의 변하지 않는 데이터(ex: 사용자 기본 정보)를 매통신마다 전달받지 않고 최초 로드 시 전달 받은 후 로컬에 저장한 뒤 사용하기 위해 적용
@@ -106,10 +110,19 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
     <br/>
 
 ## Secure Storage
-- Flutter 애플리케이션에서 안전하고 보안된 방식으로 데이터를 저장하고 관리하는 라이브러리 
-- 사용자의 중요한 정보(개인정보, 인증 토큰, API 키 등)를 안전하게 보호하기 위해 데이터를 암호화하여 저장하고, 데이터를 보호하기 위해 암호화 키를 사용한다. 안드로이드의 Keystore나 iOS의 Keychain과 같은 안전한 저장소를 사용하여 데이터를 저장하기 때문에 외부 공격으로부터 데이터를 보호하고, 데이터 유출 및 변경을 방지한다. 또한 인가되지 않은 사용자가 데이터에 접근하거나 수정하는 것을 방지하기 위해 암호화와 권한 관리를 사용하고, 사용자 인증 및 권한 검사를 통해 데이터의 무단 액세스를 방지한다.
-
-    <br/>
+- Flutter 애플리케이션에서 안전하고 보안된 방식으로 데이터를 저장하고 관리하는 라이브러리
+- Secure Storage 와 shared preferences 차이
+  1. 데이터 보안
+     - Secure Storage : 데이터를 암호화하여 저장하고, 데이터를 보호하기 위해 암호화 키를 사용하기 때문에  외부 공격으로부터 데이터를 보호하고, 데이터 유출 및 변경을 방지한다. 또한 인가되지 않은 사용자가 데이터에 접근하거나 수정하는 것을 방지하기 위해 암호화와 권한 관리를 사용하고, 사용자 인증 및 권한 검사를 통해 데이터의 무단 액세스를 방지한다.
+     - Shared Preferences : 데이터를 암호화하지 않고 저장하기 때문에 데이터 유출 및 변경을 방지할 수 없다.
+  2. 저장 위치
+     - Secure Storage : 안드로이드의 Keystore나 iOS의 Keychain과 같은 안전한 저장소를 사용하여 데이터를 저장한다.
+     - Shared Preferences : 안드로이드의 Shared Preferences와 iOS의 NSUserDefaults와 같은 간단한 키-값 저장소를 사용한다.앱의 파일 시스템에 저장되므로 루트 권한을 가진 사용자에게서 접근이 가능할 수 있다.
+  3. 용도 
+     - Secure Storage : 사용자의 중요한 정보(개인정보, 인증 토큰, API 키 등)를 저장하는 데에 적합하다.
+     - Shared Preferences : 애플리케이션의 상태, 사용자 환경 설정, 앱의 일시적인 데이터 저장 등에 적합하다.
+  
+<br/>
 
 ## Freezed 
 - Freezed는 Dart 언어에서 사용되는 코드 생성 도구로 코드 생성을 통해 데이터 모델의 필드, 생성자, 메서드 등을 자동으로 생성한다. 이는 반복적이고 지루한 작업을 줄여주며, 개발자가 직접 작성하는 코드의 양을 줄여준다. 또한 불변성(Immu`tability)을 갖춘 데이터 모델을 생성하는 데 도움을 준다.
@@ -386,16 +399,24 @@ isLast != true && count - 1 == idx
 
 ## 뷰어
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/49704bab-b5a4-4321-9f06-3c0967c67c30)
-- 배경색 변경
-  ![bgcolor](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/e0304cd9-169a-4c34-98bf-90d57dad8440)
-
-- 폰트 사이즈 변경
-  ![fontsizedown](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/6b4b061b-831c-47d1-8b95-6d5d8cff5123)
-  ![fontsizeup](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/e2f40f31-2541-47df-a14b-f77273470972)
-
-- 폰트 변경
-  ![fontfamily](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/45fa3c84-2024-4440-a8ef-13ff0622848b)
-
+- 배경색 / 폰트 사이즈 / 폰트 변경
+```dart
+  EpubView buildEpubView(epubReaderController, WidgetRef ref) {
+    return EpubView(
+      controller: epubReaderController,
+      builders: EpubViewBuilders<DefaultBuilderOptions>(
+        options: DefaultBuilderOptions(
+          textStyle: TextStyle(
+            height: 1.25,
+            fontSize: ref.watch(bookViewerPageProvider(book))?.fontSize,
+            color: ref.watch(bookViewerPageProvider(book))?.fontColor,
+            fontFamily: ref.watch(bookViewerPageProvider(book))?.fontFamily,
+          ),
+        ),
+      ),
+    );
+  }
+```
 
 ### 북마크
 - 북마크 리스트 추가 후 해당 영역으로 이동 
@@ -413,6 +434,9 @@ void goBookMark(String link) async {
     state!.epubReaderController.gotoEpubCfi(link);
   }
 ```
+- EpubCfi 
+    - EPUB(전자 출판 형식) 문서에서 특정 위치를 식별하는 데 사용되는 CFI(Content-Filtering Infrastructure) 표기법으로 EPUB 문서의 내용 구조를 세분화하여 접근 가능한 위치를 표현하는 데 사용된다. 챕터 번호, 섹션 번호 및 페이지 번호와 같은 속성을 사용하여 책의 현재 위치를 나타낸다.
+    - EpubCfi 객체를 만들려면 EpubDocument 클래스의 generateEpubCfi() 메서드를 사용할 수 있다. 이 메서드는 epub 문서의 현재 위치를 나타내는 EpubCfi 객체를 반환한다. 또한  getCurrentEpubCfi() 메서드를 사용하여 epub 문서 내에서 현재 위치를 추적하는 데 사용할 수도 있다.
 ```dart
   void gotoEpubCfi(
     String epubCfi, {
@@ -428,6 +452,7 @@ void goBookMark(String link) async {
     );
   }
 ```
+
 <br/>
 
 ## 카테고리
@@ -772,7 +797,9 @@ SecureStorage.setKey(SecureStorageEnum.fcmToken, token ?? "");
 6. 푸시 알림이 오는 상황 
    - Foreground : 앱 실행 중일 때 알림
    - Background : 앱이 꺼져있거나 Background로 실행 중일 때 알림
-   - Background의 경우 따로 핸들러 처리 해주지 않고 initializing 만으로 컨트롤 가능하지만, Foreground의 경우 별도의 핸들러 구현해주어야 한다. 또한  안드로이드의 경우 정책 상 Foreground 상태에서 알림을 보내지 않도록 되어있기 때문에 알림 중요도를 설정해주어야 한다. 
+7. AndroidNotificationChannel 설정
+    - Android 8.0(API 수준 26)부터는 모든 알림을 채널에 할당해야 한다.채널마다 채널의 모든 알림에 적용되는 시각적/음향적 동작을 설정할 수 있다.그런 다음 사용자는 이 설정을 변경하고 앱에서 차단하거나 표시해야 하는 알림 채널을 결정할 수 있다.
+    - 애플리케이션이 포그라운드에 있는 동안에 도착하는 알림 메시지는 기본적으로 Android와 iOS에 보이는 알림을 표시하지 않는다. 그러나 이 동작을 재정의할 수 있는데, Android에서는 '높은 우선순위' 알림 채널을 만들어야 한다.
 ```dart
 androidNotificationChannel = const AndroidNotificationChannel(
   'important_channel', // id
@@ -781,7 +808,7 @@ androidNotificationChannel = const AndroidNotificationChannel(
   importance: Importance.high,
 );
 ```
-7. FlutterLocalNotificationsPlugin 설정
+8. FlutterLocalNotificationsPlugin 설정
 - Flutter 애플리케이션에서 로컬 알림을 생성하고 관리하기 위한 플러그인
 - Flutter 앱에서 안드로이드와 iOS 플랫폼의 로컬 알림 기능에 접근할 수 있게 해준다.
 - 사용 방법
@@ -811,16 +838,16 @@ androidNotificationChannel = const AndroidNotificationChannel(
           ...
         }
         ```
-  3. 알림을 예약하거나 즉시 전송
+  3. 앱이 활성 상태일 때 FCM으로부터 전송된 메시지를 수신하고 처리
      - FirebaseMessaging.onMessage.listen 이용
        - FCM을 사용하여 앱으로 수신된 메시지를 처리하는 데 사용되는 메소드
-       - 앱이 활성 상태일 때 FCM으로부터 전송된 메시지를 수신하고 처리할 수 있다.
+       - 스트림에는 페이로드의 출처, 고유 ID, 보낸 시간, 알림 포함 여부와 같이 페이로드에 대한 다양한 정보를 상세히 설명하는 RemoteMessage가 포함된다.
        ```dart
           FirebaseMessaging.onMessage.listen((message) {
           notificationController.fbMsgForegroundHandler(message, flutterLocalNotificationsPlugin, androidNotificationChannel);
           });
        ```     
-       - 즉시 전송 
+       - notification 띄우기
        ```dart
        flutterLocalNotificationsPlugin.show(
         message.hashCode,
@@ -838,6 +865,11 @@ androidNotificationChannel = const AndroidNotificationChannel(
        );
        ```
   4. 알람 종류별 페이지 이동
+     - 알림 종류 
+       - ADVERTISEMENT(광고)
+         - 도서 출간, 도서 홍보와 관련된 알람으로 도서의 PK 데이터를 가지고 있어 해당 도서의 상세 페이지로 이동한다.
+       - NOTICE(공지사항)
+         - 앱에 대한 공지사항으로 공지사항의 PK 데이터를 가지고 있어 해당 공지사항의 상세 페이지로 이동한다.
   ```dart
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
