@@ -83,6 +83,7 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
     - view가 controller의 provider를 통해 상태 변경을 요청하면 controller가 repository를 호출한다. repository에서 통신이 이루어지고 반환된 response를 통해 controller가 provider에 상태를 변경하고, provider에서 변경된 값을 state에 저장한다. view는 provider를 구독하고 있기 때문에 상태값이 변함에 따라 UI가 업데이트 된다.  
 
     <br/>
+  
   1. view - provider 구독  
   
   ![1  view-provider 구독](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/66aa2276-46ce-4ed7-aafb-be9a17dd4ae0)
