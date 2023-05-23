@@ -39,7 +39,7 @@ class CategoryPageBody extends ConsumerWidget {
                         if (bigCategory.id == 0) {
                           ref.read(categoryPageProvider.notifier).categorySearch(bigCategory.id);
                         }
-                        ref.read(categoryPageProvider.notifier).bigCategoryIdSelect(bigCategory.id);
+                          ref.read(categoryPageProvider.notifier).bigCategoryIdSelect(bigCategory.id);
                       },
                       style: ElevatedButton.styleFrom(
                       shape: const ContinuousRectangleBorder(

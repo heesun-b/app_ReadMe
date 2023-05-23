@@ -51,7 +51,6 @@ class _BootPayDefaultState extends State<BootPayDefault> {
               borderRadius: BorderRadius.circular(20)),
           onPressed: () async {
             PaymentDTO paymentDTO = await paymentRequest(widget.cartBookList);
-            // print("체크 1 : $paymentDTO");
             bootpayDefault(context, paymentDTO, widget.cartBookList);
           },
           child: const Text(
@@ -123,7 +122,6 @@ class _BootPayDefaultState extends State<BootPayDefault> {
             context,
             Move.paymentPage,
         );
-
       },
     );
   }

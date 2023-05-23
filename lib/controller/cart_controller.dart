@@ -37,7 +37,6 @@ class CartController {
     } else {
       ref.read(cartPageProvider.notifier).insert(responseDTO);
     }
-
   }
 
 }

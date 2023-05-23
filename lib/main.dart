@@ -43,11 +43,11 @@ void main() async {
     // description
     importance: Importance.high,
   );
+
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
       AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(androidNotificationChannel);
-
 
   FirebaseMessaging.onMessage.listen((message) {
     notificationController.fbMsgForegroundHandler(message, flutterLocalNotificationsPlugin, androidNotificationChannel);

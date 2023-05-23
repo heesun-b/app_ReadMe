@@ -68,20 +68,20 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 ## RiverPod
 - Flutter용 상태 관리 라이브러리
 - Flutter의 Provider 패턴을 기반으로 하며, 단순하고 직관적인 API를 제공하여 애플리케이션의 상태 관리를 용이하게 한다.
-- Riverpod은 상태를 관리하기 위해 StateNotifier와 ProviderContainer를 사용하는데,  StateNotifier는 상태를 변경하고 관리하는 컨트롤러 역할을 수행하며, ProviderContainer는 상태를 저장하고 제공하는 컨테이너이다.
+- Riverpod은 상태를 관리하기 위해 StateNotifier와 StateNotifierProvider를 사용하는데, StateNotifier는 상태를 변경하고 관리하는 컨트롤러 역할을 수행하며, StateNotifierProvider는 상태를 저장하고 제공하는 컨테이너이다.
 - Riverpod은 상태 변화를 감지하고 이에 따라 UI를 업데이트하는 기능을 제공한다. Consumer 위젯을 사용하여 Provider의 상태를 구독하고, 상태가 변경될 때마다 UI를 자동으로 업데이트할 수 있다.
 - 보통 MVVM(Model-View-ViewModel) 아키텍처 패턴과 함께 사용하지만 프로젝트에서는 해당 아키텍처를 변경한 MVCS(Model-view-controller-store) 사용했다.
 - MVCS
   ![riverpod-mvcs](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/68f87c6d-125d-4df8-b7b5-de15cc259ba9)
     - view가 controller의 provider를 통해 상태 변경을 요청하면 controller가 repository를 호출한다. repository에서 통신이 이루어지고 반환된 response를 통해 controller가 provider에 상태를 변경하고, provider에서 변경된 값을 state에 저장한다. view는 provider를 구독하고 있기 때문에 상태값이 변함에 따라 UI가 업데이트 된다.
-      1. view - provider 구독
-      ![1  view-provider 구독](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/66aa2276-46ce-4ed7-aafb-be9a17dd4ae0)
-      2. view-controller
-      ![2  view-controller](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/4847368b-9d3d-4298-a856-923f67ec39fa)
-      3. controller-repository & controller-provider
-      ![3  controller-repository and controller-provider](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/57d7530a-9264-4db8-89c7-bfd30fb4c0fc)
-      4. provider 상태 변경
-      ![4  provider - 상태값](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/ea209056-7c35-4e5d-a7c0-506d6718eb51)
+    1. view - provider 구독
+    ![1  view-provider 구독](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/66aa2276-46ce-4ed7-aafb-be9a17dd4ae0)
+    2. view-controller
+    ![2  view-controller](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/4847368b-9d3d-4298-a856-923f67ec39fa)
+    3. controller-repository & controller-provider
+    ![3  controller-repository and controller-provider](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/57d7530a-9264-4db8-89c7-bfd30fb4c0fc)
+    4. provider 상태 변경
+    ![4  provider - 상태값](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/ea209056-7c35-4e5d-a7c0-506d6718eb51)
 
 ## Secure Storage
 - Flutter 애플리케이션에서 안전하고 보안된 방식으로 데이터를 저장하고 관리하는 라이브러리 
@@ -102,8 +102,11 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 - 사용이유
   - 구글 OAuth와 Firebase를 통합하여 사용하면, 사용자 인증에 대한 부분을 Firebase가 처리해주기 때문에 구글 OAuth의 복잡한 설정과 통신을 직접 다룰 필요가 없음 
 ## FCM
+- Firebase Cloud Messaging
+- 앱 개발자가 서버 또는 사용자 장치에 알림을 보낼 수 있는 크로스 플랫폼 메시징 솔루션이다. FCM을 사용하면 클라우드 서버에서 간편하게 사용자에게 푸시 알림을 보낼 수 있으며, 사용자 장치에 알림을 표시하거나 데이터 메시지를 전송할 수 있다.
 
 ## Jira를 이용한 브랜치 전략
+![Screenshot_1](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/58bded76-4e62-4ba9-ad0a-613e213f0077)
 - Jira를 이용해 작업 항목을 관리하고 이슈 생성
 - 각 이슈에 대해 새로운 브랜치를 생성하고, 해당 브랜치에서 작업을 수행
 - 작업이 완료되면 해당 브랜치에서 코드 리뷰 진행. 리뷰어는 변경 사항 확인 후 피드백. 리뷰 완료되면 MERGE.
@@ -143,7 +146,7 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 
 ### 구현
 1. 구글 로그인 인증
-```
+```dart
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
@@ -164,7 +167,7 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 ```
 
 2. 유저의 ID토큰을 서버에 전달
-```agsl
+```dart
   Response response = await MyHttp.get().post("/login",
           data: {
             'idToken': googleAuth.idToken,
@@ -174,14 +177,14 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 ```
 3. 유저의 ID토큰을 이용하여 서버에서 토큰을 검증하고 검증이 완료되면 JWT 토큰을 만들어 앱으로 전달 (SecureStorage)에 저장하여 사용
     - 이후 JWT 토큰으로 보안 통신(dio) header에 활용
-```agsl
+```dart
  final jwtToken = response.headers.value('Authorization');
  
  if (jwtToken != null) {
     SecureStorage.setKey(SecureStorageEnum.jwtToken, jwtToken);
 }
 ```
-```agsl
+```dart
   static Future<Dio> getSecurity() async {
     String jwtToken = await SecureStorage.get(SecureStorageEnum.jwtToken) ?? "";
      return Dio(BaseOptions(
@@ -200,7 +203,7 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
     - sqflite를 이용해 DB 저장할 데이터
     - 거의 변하지 않는 데이터(ex: 사용자 기본 정보)를 매통신마다 전달받지 않고 최초 로드 시 전달 받은 후 로컬에 저장한 뒤 사용하기 위해 적용
     - 카테고리 (전체 / 베스트셀러 / 추천 / 신간) 종류
-```agsl
+```dart
     Response response = await dio.get("/meta");
    
     if (response.statusCode == 200) {
@@ -224,7 +227,7 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
       }
 ```
 2. sqflite를 이용해 DB 저장
-```agsl
+```dart
   batch.execute('DROP TABLE IF EXISTS ${TableName.mainTab}');
   batch.execute('''eName.mainTab} (
             requestName text,
@@ -240,7 +243,7 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
 3. Main Page - View Model
     - 카테고리마다 도서 목록 따로 관리
     - 페이징 처리 위해 카테고리별 현재 페이지와 마지막 페이지 여부 함께 관리
-```agsl
+```dart
 @unfreezed
 class MainPageModel with _$MainPageModel {
    factory MainPageModel({
@@ -264,7 +267,7 @@ class MainPageModel with _$MainPageModel {
 ### 페이징 처리
 - 기본 size 10으로 고정 (유동적으로 변경 가능)
 - 한 페이지가 끝나면 더보기 버튼으로 다음 페이지 요청하고, 해당 페이지가 마지막 페이지인 경우 더보기 버튼 생략
-```agsl
+```dart
 isLast != true && count - 1 == idx
   ? Padding(
       padding:
@@ -278,7 +281,7 @@ isLast != true && count - 1 == idx
     : Container()
 ```
 - 요청 페이지 넘버와 카테고리 이름 전달 후 해당 카테고리, 해당 페이지의 list 응답 받음(sqflite 활용)
-```agsl
+```dart
  Future<void> pageSearch(
       String name,
       int page,
@@ -292,7 +295,7 @@ isLast != true && count - 1 == idx
     }
   }
 ```
-```agsl
+```dart
   Future<ResponseDTO> searchMainListPage(int page, String requestName, {int? bigCategory, int? smallCategory}) async {
     String endPoint = getEndPoint(requestName, bigCategory, smallCategory);
     try {
@@ -303,7 +306,7 @@ isLast != true && count - 1 == idx
 ```
 -  freezed의 copyWith를 이용한 페이지 상태 변화
    - copywith 메서드는 객체의 속성을 변경한 새로운 객체를 반환한다. 상태 변화를 위해서 state 값을 변경해야 하는 riverpod에서 특정 값만 변경하고 싶을 때 객체를 쉽게 업데이트 할 수 있다.
-```agsl
+```dart
   if (name == "전체") {
         List<Book> newTotalBooks = [...state!.totalBooks];
         newTotalBooks.addAll(bookList);
@@ -314,7 +317,7 @@ isLast != true && count - 1 == idx
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/7238620f-8d8d-4d92-b41e-494e77f8838d)
 1. 도서 구매 / 정기권 구매 여부로 노출 버튼 선택
     - 구매(소장) 시 장바구니로 이동 후 결제 
-```agsl
+```dart
  (model.user?.isMembership ?? false) || (model.book.isPurchase ?? false)
    ?  Expanded(
         child: Padding(
@@ -332,81 +335,26 @@ isLast != true && count - 1 == idx
 2. 도서 구매/ 정기권 구독 여부 & 로그인 유무에 따라 review form 노출 선택
    - true일 시, 리뷰 내역과 리뷰 폼 노출 
    - false일 시, 리뷰 내역만 노출
-```agsl
+```dart
  model?.user != null ? BookDetailReviewForm(bookId) : Container(),
 ```
 
 ## 뷰어
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/49704bab-b5a4-4321-9f06-3c0967c67c30)
-- view-model
-  - isShowAppBarAndBottomSheet : 상단바와 하단바 노출 여부
-  - fontSize, fontColor, fontFamily, bgColor : 뷰어 페이지에서 설정한 폰트 사이즈, 폰트 색상, 폰트, 배경색
-  - isBookMark : 북마크 여부
-```
-@unfreezed
-class BookViewerPageModel with _$BookViewerPageModel {
-  factory BookViewerPageModel(
-      {
-        required String title,
-        required String epubFilePath,
-        required String coverFilePath,
-        required int price,
-        required bool isHeart,
-        required bool isBookMark,
-        required bool isShowAppBarAndBottomSheet,
-        required double currentSliderValue,
-        required double fontSize,
-        required Color fontColor,
-        required String fontFamily,
-        required Color bgColor,
-        TableUser? user,
-        required EpubController epubReaderController,
-        required List<BookMark> bookmarks,
-      }) = _BookViewerPageModel;
-}
-```
-- 폰트 사이즈 변경
-```agsl
- void fontSizeUp() async {
-    state = state!.copyWith(fontSize: state!.fontSize + 2.0);
-  }
-  
- void fontSizeDown() async {
-    state = state!.copyWith(fontSize: state!.fontSize - 2.0);
-  }
-```
 - 배경색 변경
-```agsl
-  void bgColor(Color value) async {
-    state = state!.copyWith(bgColor: value);
-  }
+  ![bgcolor](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/e0304cd9-169a-4c34-98bf-90d57dad8440)
 
-  void bgColorWhite() async {
-    state = state!.copyWith(bgColor: Colors.white, fontColor: Colours.app_sub_black);
-  }
+- 폰트 사이즈 변경
+  ![fontsizedown](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/6b4b061b-831c-47d1-8b95-6d5d8cff5123)
+  ![fontsizeup](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/e2f40f31-2541-47df-a14b-f77273470972)
 
-  void bgColorBlack() async {
-    state = state!.copyWith(bgColor: Colours.app_sub_black, fontColor: Colors.white);
-  }
+- 폰트 변경
+  ![fontfamily](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/45fa3c84-2024-4440-a8ef-13ff0622848b)
 
-  void bgColorMain() async {
-    state = state!.copyWith(bgColor: Colours.app_main, fontColor: Colours.app_sub_black);
-  }
-
-  void bgColorGrey() async {
-    state = state!.copyWith(bgColor: Colours.app_sub_grey, fontColor: Colours.app_sub_black);
-  }
-```
-- FontFamily 변경
-```agsl
- void changeFontFamily(String value) async {
-    state = state!.copyWith(fontFamily: value);
-  }
-```
 
 ### 북마크
 - 북마크 리스트 추가 후 해당 영역으로 이동 
-```agsl
+```dart
  return Container(
      ...
       return InkWell(
@@ -415,12 +363,12 @@ class BookViewerPageModel with _$BookViewerPageModel {
       );
   );
 ```
-```agsl
+```dart
 void goBookMark(String link) async {
     state!.epubReaderController.gotoEpubCfi(link);
   }
 ```
-```agsl
+```dart
   void gotoEpubCfi(
     String epubCfi, {
     double alignment = 0,
@@ -442,7 +390,7 @@ void goBookMark(String link) async {
 
 1. sqflite 활용
    - 상위 카테고리(종합 포함 8개) & 하위 카테고리 (상위 카테고리별 종합 포함 6개) 
-```agsl
+```dart
     // 테이블 생성
     batch.execute('DROP TABLE IF EXISTS ${TableName.bigCategory}');
     batch.execute('''
@@ -473,7 +421,7 @@ void goBookMark(String link) async {
     }
 ```
 - view-model
-```agsl
+```dart
 @unfreezed
 class CategoryPageModel with _$CategoryPageModel {
   factory CategoryPageModel({
@@ -487,7 +435,7 @@ class CategoryPageModel with _$CategoryPageModel {
 }
 ```
 - sqflite에 저장된 카테고리 정보를 이용해 categoryTabs 구성
-```agsl
+```dart
    List<BigCategory> sqlCategoryTabs =  await MySqfliteInit.getBigCategoryList();
 
     List<BigCategory> categoryTabs = [];
@@ -499,14 +447,14 @@ class CategoryPageModel with _$CategoryPageModel {
    categoryTabs.insert(0, const BigCategory(id: 0, name: "종합"));
 ```
 - 페이지 최초 로드 시 종합(상위) 카테고리 노출 
-```agsl
+```dart
 ResponseDTO responseDTO = await BookRepository().mainList("all");
      MainDTO total = responseDTO.data;
      books =  books.copyWith(books: total.content , page: 0, isLast: total.last, categoryTabs: categoryTabs);
      state = books;
 ```
 - 카테고리 선택 시 해당 카테고리의 하위 카테고리 노출
-```agsl
+```dart
  onPressed: () {
    if (bigCategory.id == 0) {
       ref.read(categoryPageProvider.notifier).categorySearch(bigCategory.id);
@@ -514,7 +462,7 @@ ResponseDTO responseDTO = await BookRepository().mainList("all");
     ref.read(categoryPageProvider.notifier).bigCategoryIdSelect(bigCategory.id);
    }
 ```
-```agsl
+```dart
   Future<void> bigCategoryIdSelect(int bigCategoryId) async {
     List<SmallCategory> smallCategory = await MySqfliteInit.getSmallCategoryList(bigCategoryId);
     state = state!.copyWith(smallCategory: smallCategory);
@@ -555,20 +503,18 @@ ResponseDTO responseDTO = await BookRepository().mainList("all");
     state = state!.copyWith(books: [...state!.books, ...mainDTO.content] , page: page, isLast: mainDTO.last, categoryTabs: state!.categoryTabs, bigCategoryId: bigCategory, smallCategoryId: smallCategory ?? 0);
   }
   ```
-## 알림
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/fed83da0-fb42-4c24-aa50-bbae5de77f0c)
 
 ## 검색
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/f2297450-e74e-4382-a75e-8a0e061db05b)
-### 최근 검색어 노출 - sqflite 사용
+### 최근 검색어 노출 - sqflite 활용
 - 검색 시 DB 저장
-```agsl
+```dart
   Future<void> search(ResponseDTO responseDTO, String keyword) async{
       await MySqfliteInit.insertSearchText(keyword);
       ...
   }
 ```
-```agsl
+```dart
   static Future<void> insertSearchText (String searchText) async {
     List<Map> books = await _db!.query(TableName.search, where: 'searchText = ?', whereArgs: [searchText]);
     if (books.isEmpty) {
@@ -584,13 +530,13 @@ ResponseDTO responseDTO = await BookRepository().mainList("all");
   }
 ```
 - 버튼 클릭 시 삭제 가능
-```agsl
+```dart
   onPressed: () {
     provider.deleteSearchKeyword(model?.tableSearches[index].searchText ?? "");
   },
 ```
 - 삭제 시 페이지 상태(화면) 변경
-```agsl
+```dart
 Future<void> deleteSearchKeyword (String keyword) async{
     await MySqfliteInit.deleteSearchText(keyword);
     var searchList = await MySqfliteInit.getSearchTextOrderByCreatedAtDesc();
@@ -600,20 +546,264 @@ Future<void> deleteSearchKeyword (String keyword) async{
   }
 ```
 - DB Delete
-```agsl
+```dart
 static Future<void> deleteSearchText (String searchText) async {
     await _db!.delete(TableName.search, where: 'searchText = ?', whereArgs: [searchText]);
   }
 ```
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/78f107ea-1309-4022-ba9e-d6573eb56a80)
 
 ## 유저 정보
 ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/7021a183-7c70-4e56-9026-30c7d7cdc6d8)
-- sqflite 활용
-    - 비로그인 시 : 로그인 버튼 노출
+- sqflite 활용 (정기권 구독 여부)
+    - 비로그인 시 : 로그인 버튼 노출 - 로그인 페이지로 이동
     - 로그인 시 
-      - 정기권 구독 시 : 정기권 구독 정보 노출
-      - 정기권 미구독 시 : 정기권 구독 버튼 노출
-      
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/a949919d-1444-4b9e-a96e-0aafcb18a36d)
-![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/68271830/d943b57d-1b26-44ad-9c13-0ab84027e8ac)
+      - 정기권 구독 시 : 정기권 구독 정보 노출 (최근 결제일, 만료일)
+      - 정기권 미구독 시 : 정기권 구독 버튼 노출 - 결제 페이지로 이동
+- 구매도서 : 보관함 - 구매 도서 목록으로 이동 
+- 결제내역 : 정기권 구매 / 도서 구매 내역 확인 가능
+- 리뷰관리 : 내가 작성한 리뷰 확인/삭제 가능
+
+## 결제
+![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/844b28d2-0f53-4d92-b22a-3d3c9f26959f)
+1. bootpay payload 호출 전 통신
+   - 구매 도서 목록을 통해 결제 정보 생성
+   - 이후 서버 검증을 위한 데이터(response)를 payload에 담아 bootpay 호출 
+```dart
+onPressed: () async {
+  PaymentDTO paymentDTO = await paymentRequest(widget.cartBookList);
+  bootpayDefault(context, paymentDTO, widget.cartBookList);
+  }
+```
+2. bootpay payload 호출
+- 구매 아이템 정보 입력
+```dart
+    List<Item> itemList = [];
+    List.generate(widget.cartBookList.length, (index) {
+      Item item = Item();
+      item.name = widget.cartBookList[index].cartDTO.book.title;
+      item.qty = 1;
+      item.price = widget.cartBookList[index].cartDTO.book.price.toDouble();
+      item.id = widget.cartBookList[index].cartDTO.book.id.toString();
+      itemList.add(item);
+    });
+```
+- AndroidApplicationId 입력
+```dart
+payload.androidApplicationId = androidApplicationId; 
+```
+- 유저 정보 입력
+```dart
+User user = User(); // 구매자 정보
+TableUser? tableUser = await MySqfliteInit.getUser();
+
+user.email= tableUser?.username ?? "";
+user.id = tableUser?.id.toString() ?? "";
+```
+- 서버 검증을 위한 데이터 입력
+    - 부트페이 결제창 호출 전 통신 후 응답 받은 데이터
+```dart
+payload.metadata = {
+  "paymentId" : paymentDTO.id,
+  "type" : paymentDTO.type,
+};
+```
+- 서버 승인을 위한 설정 
+```dart
+Extra extra = Extra(); 
+extra.separatelyConfirmed = true;
+```
+3. 결제 결과
+- 결제 취소 시 메인 페이지로 이동
+```dart
+onCancel: (String data) {
+    log('------- onCancel: $data');
+    DialogUtil.dialogShow(context, "결제 취소");
+    Navigator.pushNamedAndRemoveUntil(context, Move.mainPage, (route) => false);
+  },
+```
+- 결제 완료 시 결제 내역 페이지로 이동
+```dart
+onDone: (String data) {
+  log('------- onDone: $data');
+  Navigator.popAndPushNamed(context, Move.paymentPage,);
+}
+```
+## 장바구니
+  ![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/c9a01e04-be8a-4818-94d5-89d907fdead6)
+1. 장바구니 추가
+  - 추가 시 장바구니 페이지 이동 여부 묻기 (Dialog)
+```dart
+ BookCardView(book:books[index], addCart: () =>  ref.read(cartControllerProvider).insert(books[index].id),
+```
+```dart
+  Future<void> insert (int bookId) async {
+    ResponseDTO responseDTO = await BookRepository().addCart(bookId);
+    if(responseDTO.code == 401) {
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.loginPage, (route) => false);
+    } else {
+      ref.read(cartPageProvider.notifier).insert(responseDTO);
+    }
+  }
+```
+```dart
+showDialog(
+     context: context,
+     builder: (context) {
+       return   CustomDialog(
+           title: "장바구니 담기 완료",
+           content: "장바구니로 이동하시겠습니까?",
+           callback: () => Navigator.pushNamed(context, Move.cartPage)
+       );
+     },
+   );
+```
+2. 장바구니 페이지
+- 체크 박스 widget 이용한 전체 / 개별 선택 
+```dart
+onChanged: (value) {
+   isAllChecked = value!;
+   ref.read(cartPageProvider.notifier).changeAllChecked(value);
+}
+```
+```dart
+onChanged: (value) {
+   ref.read(cartPageProvider.notifier)
+      .changedOneCheck(value, index);
+}
+```
+- 선택된 도서 삭제
+```dart
+onPressed: () {
+   ref.read(cartControllerProvider)
+      .deleteCartBook(cartBooks[index].cartDTO.id);
+}
+```
+- 삭제 시 state 변경
+```dart
+state!.cartBooks.where((e) => e.cartDTO.id != id).toList();
+state = state!.copyWith(cartBooks: newCartList);
+```
+3. 결제 버튼 클릭 시 부트페이 결제창 호출
+
+## 알림
+![image](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/fed83da0-fb42-4c24-aa50-bbae5de77f0c)
+1. Firebase 앱 등록
+2. FCM 플러그인 설치
+   ![gradle 추가 2](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/3cc5d38c-6f17-42f8-80bd-78f55909272c)
+3. 등록 토큰 액세스
+ - 특정 기기로 메시지를 보내려면 기기의 등록 토큰을 알아야 한다. FCM SDK는 앱을 처음 시작할 때 클라이언트 앱 인스턴스용 등록 토큰을 생성한다.
+   - 알림 권한이 부여되지 않은 경우 아래 메서드는 사용자에게 알림 권한을 요청하고, 그렇지 않은 경우 토큰을 반환하거나 오류가 있으면 예정을 거부한다.
+```dart
+class NotificationController {
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  ...
+}
+```
+```dart
+var token = await notificationController.messaging.getToken();
+```
+4. 토큰을 secure storage에 저장
+```dart
+SecureStorage.setKey(SecureStorageEnum.fcmToken, token ?? "");
+```
+5. Firebase console에서 알림 보내기
+    1. 알림 유형 설정
+    ![1  프로젝트 메시지 유형 설정](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/f1996b2c-719d-4c62-8b1e-f0994bf8ba23)
+    2. 알림 내용 설정 
+    ![2  알림 설정](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/c82ed204-5b42-4477-9d62-a685190b0a76)
+    3. 타겟 설정 
+    ![2-1  타겟 설정](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/cf6d2995-d0bf-4020-8c30-a42d32842e77)
+    4. 알림 전송
+    ![3  메시지 전송](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/6e7e6bf3-a1b0-4f29-b472-6364e91d02c1)
+6. 푸시 알림이 오는 상황 
+   - Foreground : 앱 실행 중일 때 알림
+   - Background : 앱이 꺼져있거나 Background로 실행 중일 때 알림
+   - Background의 경우 따로 핸들러 처리 해주지 않고 initializing 만으로 컨트롤 가능하지만, Foreground의 경우 별도의 핸들러 구현해주어야 한다. 또한  안드로이드의 경우 정책 상 Foreground 상태에서 알림을 보내지 않도록 되어있기 때문에 알림 중요도를 설정해주어야 한다. 
+```dart
+androidNotificationChannel = const AndroidNotificationChannel(
+  'important_channel', // id
+  'Important_Notifications', // name
+  '중요도가 높은 알림을 위한 채널.',
+  importance: Importance.high,
+);
+```
+7. FlutterLocalNotificationsPlugin 설정
+- Flutter 애플리케이션에서 로컬 알림을 생성하고 관리하기 위한 플러그인
+- Flutter 앱에서 안드로이드와 iOS 플랫폼의 로컬 알림 기능에 접근할 수 있게 해준다.
+- 사용 방법
+  1. 인스턴스를 생성하고 초기화
+    ```dart
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    ```
+  2. 플러그인 설정 및 알림 채널 생성
+        ```dart
+          await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(androidNotificationChannel);
+        ```
+      - Android 설정
+        ```dart
+        Future<void> fbMsgForegroundHandler(
+           RemoteMessage message,
+          FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
+          AndroidNotificationChannel? channel) async {
+
+          const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+          final InitializationSettings initializationSettings =
+          const InitializationSettings(
+           android: androidInitializationSettings,
+          );
+          ...
+        }
+        ```
+  3. 알림을 예약하거나 즉시 전송
+     - FirebaseMessaging.onMessage.listen 이용
+       - FCM을 사용하여 앱으로 수신된 메시지를 처리하는 데 사용되는 메소드
+       - 앱이 활성 상태일 때 FCM으로부터 전송된 메시지를 수신하고 처리할 수 있다.
+       ```dart
+          FirebaseMessaging.onMessage.listen((message) {
+          notificationController.fbMsgForegroundHandler(message, flutterLocalNotificationsPlugin, androidNotificationChannel);
+          });
+       ```     
+       - 즉시 전송 
+       ```dart
+       flutterLocalNotificationsPlugin.show(
+        message.hashCode,
+        message.data['title'],
+        message.data['body'],
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            channel!.id,
+            channel.name,
+            channel.description,
+            icon: '@mipmap/ic_launcher',
+          )
+        ),
+        payload: message.data['notificationType']
+       );
+       ```
+  4. 알람 종류별 페이지 이동
+  ```dart
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onSelectNotification: (playgroud) async {
+        if (message.data['notificationType'] == 'ADVERTISEMENT') {
+          Navigator.push(
+              navigatorKey.currentContext!,
+              MaterialPageRoute(
+                builder: (context) =>
+                    BookDetailPage(bookId: int.parse(message.data['notificationData'])),
+              )
+          );
+        } else if (message.data['notificationType'] == 'NOTICE') {
+          Navigator.push(
+              navigatorKey.currentContext!,
+              MaterialPageRoute(
+                builder: (context) => NoticePageDetail(id: int.parse(message.data['notificationData'])),
+              ));
+        }
+        print(playgroud);
+      }
+    );
+    ``` 
