@@ -77,7 +77,8 @@ https://www.youtube.com/watch?v=MDKwmzJHqKE
     1. view - provider 구독
     ![1  view-provider 구독](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/66aa2276-46ce-4ed7-aafb-be9a17dd4ae0)
     2. view-controller
-![2  view-controller](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/4847368b-9d3d-4298-a856-923f67ec39fa)
+  
+    ![2  view-controller](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/4847368b-9d3d-4298-a856-923f67ec39fa)
     3. controller-repository & controller-provider
     ![3  controller-repository and controller-provider](https://github.com/ReadMeCorporation/app_ReadMe/assets/116797781/57d7530a-9264-4db8-89c7-bfd30fb4c0fc)
     4. provider 상태 변경
