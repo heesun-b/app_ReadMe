@@ -336,6 +336,8 @@ isLast != true && count - 1 == idx
     : Container()
 ```
 - 요청 페이지 넘버와 카테고리 이름 전달 후 해당 카테고리, 해당 페이지의 list 응답 받음(sqflite 활용)
+- isDuplication 변수를 이용해 중복 요청 방지
+  - 더보기 버튼을 누르면 해당 버튼이 사라지고, 다시 더보기 버튼이 나타나기 전까지 중복 요청 방지
 ```dart
  Future<void> pageSearch(
       String name,
@@ -798,7 +800,7 @@ SecureStorage.setKey(SecureStorageEnum.fcmToken, token ?? "");
    - Foreground : 앱 실행 중일 때 알림
    - Background : 앱이 꺼져있거나 Background로 실행 중일 때 알림
 7. AndroidNotificationChannel 설정
-    - Android 8.0(API 수준 26)부터는 모든 알림을 채널에 할당해야 한다.채널마다 채널의 모든 알림에 적용되는 시각적/음향적 동작을 설정할 수 있다.그런 다음 사용자는 이 설정을 변경하고 앱에서 차단하거나 표시해야 하는 알림 채널을 결정할 수 있다.
+    - Android 8.0(API 수준 26)부터는 모든 알림을 채널에 할당해야 한다. 채널을 통해 알림을 분류하고, 채널별로 설정을 다르게 지정할 수 있다.그런 다음 사용자는 이 설정을 변경하고 앱에서 차단하거나 표시해야 하는 알림 채널을 결정할 수 있다.
     - 애플리케이션이 포그라운드에 있는 동안에 도착하는 알림 메시지는 기본적으로 Android와 iOS에 보이는 알림을 표시하지 않는다. 그러나 이 동작을 재정의할 수 있는데, Android에서는 '높은 우선순위' 알림 채널을 만들어야 한다.
 ```dart
 androidNotificationChannel = const AndroidNotificationChannel(
