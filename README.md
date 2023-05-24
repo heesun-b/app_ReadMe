@@ -338,6 +338,7 @@ isLast != true && count - 1 == idx
 - 요청 페이지 넘버와 카테고리 이름 전달 후 해당 카테고리, 해당 페이지의 list 응답 받음(sqflite 활용)
 - isDuplication 변수를 이용해 중복 요청 방지
   - 더보기 버튼을 누르면 해당 버튼이 사라지고, 다시 더보기 버튼이 나타나기 전까지 중복 요청 방지
+  - 또한 카테고리를 빠르게 클릭하면 통신이 계속 중복 되기때문에, 그런 상황에서의 중복 요청을 방지
 ```dart
  Future<void> pageSearch(
       String name,
@@ -839,7 +840,7 @@ androidNotificationChannel = const AndroidNotificationChannel(
           );
           ...
         }
-        ```
+        ```ㅁ
   3. 앱이 활성 상태일 때 FCM으로부터 전송된 메시지를 수신하고 처리
      - FirebaseMessaging.onMessage.listen
        - FCM을 사용하여 앱으로 수신된 메시지를 처리하는 데 사용되는 메소드
