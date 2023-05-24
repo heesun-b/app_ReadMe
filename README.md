@@ -841,7 +841,7 @@ androidNotificationChannel = const AndroidNotificationChannel(
         }
         ```
   3. 앱이 활성 상태일 때 FCM으로부터 전송된 메시지를 수신하고 처리
-     - FirebaseMessaging.onMessage.listen 이용
+     - FirebaseMessaging.onMessage.listen
        - FCM을 사용하여 앱으로 수신된 메시지를 처리하는 데 사용되는 메소드
        - 스트림에는 페이로드의 출처, 고유 ID, 보낸 시간, 알림 포함 여부와 같이 페이로드에 대한 다양한 정보를 상세히 설명하는 RemoteMessage가 포함된다.
        ```dart
